@@ -1,0 +1,93 @@
+rem ** Create Conditions **
+
+aiStrategy.createConstantCondition Four_Or_Less_Owned_CP_Cond Crisp EqualSmaller Friendly ControlPoint 4
+aiStrategy.setConditionStrength Required
+
+aiStrategy.createConstantCondition One_Or_More_Neutral_CP_Cond Crisp EqualGreater Friendly NumberOfNeutralAreas 1
+aiStrategy.setConditionStrength Required
+
+aiStrategy.createConstantCondition Two_Or_Less_Owned_CP_Cond Crisp EqualSmaller Friendly ControlPoint 2
+aiStrategy.setConditionStrength Required
+
+aiStrategy.createConstantCondition One_Owned_CP_Cond Crisp Equal Friendly ControlPoint 1
+aiStrategy.setConditionStrength Required
+
+aiStrategy.createConstantCondition No_Neutral_CP_Cond Crisp Equal Friendly NumberOfNeutralAreas 0
+aiStrategy.setConditionStrength Required
+
+aiStrategy.createConstantCondition Three_Or_More_Hostile_CP_Cond Crisp EqualGreater Enemy ControlPoint 3
+aiStrategy.setConditionStrength Required
+
+aiStrategy.createHomogenousCondition More_Carrier_Cond Crisp EqualGreater Both LCVP
+aiStrategy.setConditionStrength Required
+
+aiStrategy.createHomogenousCondition Less_Carrier_Cond Crisp EqualSmaller Both LCVP
+aiStrategy.setConditionStrength Required
+
+
+rem *** Create Prerequisites ***
+
+aiStrategy.createPrerequisite Attack_Neutral_CP_Prereq
+aiStrategy.addCondition Four_Or_Less_Owned_CP_Cond 20.0
+aiStrategy.addCondition One_Or_More_Neutral_CP_Cond 20.0
+
+aiStrategy.createPrerequisite Defend_Owned_CP_Attack_One_CP_Prereq
+aiStrategy.addCondition Two_Or_Less_Owned_CP_Cond 15.0
+aiStrategy.addCondition No_Neutral_CP_Cond 15.0
+
+aiStrategy.createPrerequisite Attack_One_CP_Prereq
+aiStrategy.addCondition Three_Or_More_Hostile_CP_Cond 20.0
+aiStrategy.addCondition Less_Carrier_Cond 25.0
+
+aiStrategy.createPrerequisite Attack_All_CP_Prereq
+aiStrategy.addCondition Three_Or_More_Hostile_CP_Cond 15.0
+aiStrategy.addCondition More_Carrier_Cond 20.0
+
+
+rem *** Create Strategies ***
+
+aiStrategy.createStrategy Attack_Neutral_CP
+aiStrategy.Aggression 1
+aiStrategy.NumberOfAttacks 5
+aiStrategy.NumberOfDefences 0
+aiStrategy.setStrategicObjectsModifier ControlPoint 20.0 Neutral
+aiStrategy.setPrerequisite Attack_Neutral_CP_Prereq
+
+aiStrategy.createStrategy Defend_Owned_CP_Attack_One_CP
+aiStrategy.Aggression 0.6
+aiStrategy.NumberOfAttacks 1
+aiStrategy.NumberOfDefences 1
+aiStrategy.setStrategicObjectsModifier ControlPoint 10.0 Owned
+aiStrategy.setStrategicObjectsModifier ControlPoint 15.0 Neutral
+aiStrategy.setStrategicObjectsModifier ControlPoint 5.0 Hostile
+aiStrategy.setPrerequisite Defend_Owned_CP_Attack_One_CP_Prereq
+
+aiStrategy.createStrategy Attack_One_CP
+aiStrategy.Aggression 1
+aiStrategy.NumberOfAttacks 1
+aiStrategy.NumberOfDefences 0
+aiStrategy.setStrategicObjectsModifier ControlPoint 20.0 Hostile
+aiStrategy.setPrerequisite Attack_One_CP_Prereq
+
+aiStrategy.createStrategy Attack_All_CP
+aiStrategy.Aggression 1
+aiStrategy.NumberOfAttacks 7
+aiStrategy.NumberOfDefences 0
+aiStrategy.setStrategicObjectsModifier ControlPoint 10.0 Neutral
+aiStrategy.setStrategicObjectsModifier ControlPoint 15.0 Hostile
+aiStrategy.setPrerequisite Attack_All_CP_Prereq
+
+
+rem *** Add strategies ***
+
+rem --- MEC ---
+ai.addSAIStrategy 1 Attack_Neutral_CP
+ai.addSAIStrategy 1 Defend_Owned_CP_Attack_One_CP
+ai.addSAIStrategy 1 Attack_One_CP
+ai.addSAIStrategy 1 Attack_All_CP
+
+rem --- US ---
+ai.addSAIStrategy 2 Attack_Neutral_CP
+ai.addSAIStrategy 2 Defend_Owned_CP_Attack_One_CP
+ai.addSAIStrategy 2 Attack_One_CP
+ai.addSAIStrategy 2 Attack_All_CP

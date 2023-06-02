@@ -1,0 +1,14 @@
+rem ESAI Strategy: mediumMap
+
+rem -= load Enhanced SAI core =-
+run /mods/xpack_alt/ESAI/Core/esaicore.ai
+
+rem -= load Enhanced SAI default plugins =-
+run /mods/xpack_alt/ESAI/Plugin/default/grabNeutrals.ai
+run /mods/xpack_alt/ESAI/Plugin/default/endGame.ai
+
+rem -= load user plugins =-
+rem run /mods/xpack_alt/ESAI/Plugin/user/yourPluginName.ai
+
+rem -= load strategy =-
+run /mods/xpack_alt/ESAI/Strategy/default/mediumMap.ai

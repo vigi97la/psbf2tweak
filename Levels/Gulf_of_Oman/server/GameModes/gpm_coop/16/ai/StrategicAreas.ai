@@ -1,0 +1,71 @@
+rem *** Create strategic areas ***
+aiStrategicArea.createFromControlPoint CPNAME_GO_SP16_beach 601 50
+aiStrategicArea.layer 7
+
+aiStrategicArea.createFromControlPoint CPNAME_GO_SP16_city 602 50
+aiStrategicArea.layer 7
+
+aiStrategicArea.createFromControlPoint CPNAME_go_SP16_constructionsite 604 50
+aiStrategicArea.layer 7
+
+aiStrategicArea.createFromControlPoint cpname_go_sp16_village 603 50
+aiStrategicArea.layer 7
+
+aiStrategicArea.setActive CPNAME_GO_SP16_beach
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_city
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 33.5332/37.5998/-294.295
+AIStrategicArea.setOrderPosition Vehicle 36.4937/37.5998/-294.028
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 8.48528
+
+aiStrategicArea.setActive CPNAME_GO_SP16_city
+AIStrategicArea.addNeighbour CPNAME_go_SP16_constructionsite
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_beach
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 122.529/37.8/-48.5203
+AIStrategicArea.setOrderPosition Vehicle 126.094/37.8/-42.726
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 7.07107
+
+aiStrategicArea.setActive CPNAME_go_SP16_constructionsite
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_city
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 50.387/40.389/33.504
+AIStrategicArea.setOrderPosition Vehicle 63.7815/40.3998/16.4939
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 14.1421
+
+aiStrategicArea.setActive cpname_go_sp16_village
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_beach
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_city
+AIStrategicArea.addNeighbour CPNAME_go_SP16_constructionsite
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 6.27625/33.1002/-135.771
+AIStrategicArea.setOrderPosition Vehicle 15.483/33.1002/-136.015
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 4.24264
+
+aiStrategicArea.addWayPoint 72.9525/36.8033/-51.501 Infantry CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 95.4967/37.8/-46.1993 Infantry CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 114.845/37.8/-55.7356 Infantry CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 146.662/37.8/-55.7756 Infantry CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 94.031/37.6513/-51.9108 Vehicle CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 149.478/37.8/-57.3231 Vehicle CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 68.0122/35.9996/-109.921 Vehicle CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 35.2356/37.6754/-183.769 Infantry CPNAME_GO_SP16_beach cpname_go_sp16_village
+aiStrategicArea.addWayPoint 12.3705/39.1615/-198.327 Infantry CPNAME_GO_SP16_beach cpname_go_sp16_village
+aiStrategicArea.addWayPoint -39.2008/31.6642/-172.295 Infantry CPNAME_GO_SP16_beach cpname_go_sp16_village
+aiStrategicArea.addWayPoint 89.8022/40.3998/8.58557 Infantry CPNAME_GO_SP16_city CPNAME_go_SP16_constructionsite
+aiStrategicArea.addWayPoint 135.067/40.3998/60.189 Infantry CPNAME_GO_SP16_city CPNAME_go_SP16_constructionsite
+aiStrategicArea.addWayPoint 157.629/40.4013/-0.461182 Infantry CPNAME_GO_SP16_city CPNAME_go_SP16_constructionsite
+aiStrategicArea.addWayPoint 44.2458/41.237/-3.39209 Infantry CPNAME_GO_SP16_city CPNAME_go_SP16_constructionsite
+aiStrategicArea.addWayPoint 70.5585/36.0248/-54.6942 Infantry CPNAME_GO_SP16_city cpname_go_sp16_village
+
+rem aiStrategicArea.addWayPoint 94.9628/37.8/-47.8914 Infantry CPNAME_GO_SP16_city cpname_go_sp16_village
+aiStrategicArea.addWayPoint 95.4967/37.8/-46.1993 Infantry CPNAME_GO_SP16_city cpname_go_sp16_village
+
+aiStrategicArea.addWayPoint 115.438/37.8/-57.5997 Infantry CPNAME_GO_SP16_city cpname_go_sp16_village

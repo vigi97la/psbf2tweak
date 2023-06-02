@@ -1,0 +1,300 @@
+rem *** Create strategic areas ***
+aiStrategicArea.createFromControlPoint cpname_go_64_airfieldbase 2 100
+aiStrategicArea.layer 1
+
+aiStrategicArea.createFromControlPoint cpname_go_64_constructionsite 11 200
+aiStrategicArea.layer 1
+
+aiStrategicArea.createFromControlPoint cpname_go_64_hotel 6 1000
+aiStrategicArea.layer 1
+
+aiStrategicArea.createFromControlPoint cpname_go_64_olivefort 13 100
+aiStrategicArea.layer 1
+
+aiStrategicArea.createFromControlPoint cpname_go_64_riverfort 14 200
+aiStrategicArea.layer 1
+
+aiStrategicArea.createFromControlPoint cpname_go_64_rockfort 12 200
+aiStrategicArea.layer 1
+
+aiStrategicArea.createFromControlPoint cpname_go_64_uscarrier 1 5000
+aiStrategicArea.layer 1
+
+aiStrategicArea.createFromControlPoint cpname_go_64_village 7 75
+aiStrategicArea.layer 1
+
+aiStrategicArea.createFromControlPoint cpname_go_64_villagefort 8 200
+aiStrategicArea.layer 1
+
+aiStrategicArea.createFromControlPoint CPNAME_GO_SP16_beach 601 50
+aiStrategicArea.layer 7
+
+aiStrategicArea.createFromControlPoint CPNAME_GO_SP16_city 602 50
+aiStrategicArea.layer 7
+
+aiStrategicArea.createFromControlPoint cpname_go_sp16_village 603 50
+aiStrategicArea.layer 7
+
+aiStrategicArea.setActive cpname_go_64_airfieldbase
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+AIStrategicArea.addNeighbour cpname_go_64_hotel
+AIStrategicArea.addNeighbour cpname_go_64_village
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_city
+aiStrategicArea.addObjectTypeFlag Base
+aiStrategicArea.addObjectTypeFlag AirSpawner
+aiStrategicArea.addObjectTypeFlag LandSpawner
+aiStrategicArea.addObjectTypeFlag SoldierSpawner
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 285.125/24.5/216.05
+AIStrategicArea.setOrderPosition Vehicle 297.672/24.5/220.796
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 280
+
+aiStrategicArea.setActive cpname_go_64_constructionsite
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_city
+AIStrategicArea.addNeighbour cpname_go_64_hotel
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+AIStrategicArea.addNeighbour cpname_go_64_villagefort
+AIStrategicArea.addNeighbour cpname_go_64_rockfort
+AIStrategicArea.addNeighbour cpname_go_64_airfieldbase
+AIStrategicArea.addNeighbour cpname_go_64_village
+AIStrategicArea.addNeighbour cpname_go_64_olivefort
+AIStrategicArea.addNeighbour cpname_go_64_riverfort
+aiStrategicArea.addObjectTypeFlag LandSpawner
+aiStrategicArea.addObjectTypeFlag SoldierSpawner
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 51.7455/40.3998/32.9364
+AIStrategicArea.setOrderPosition Vehicle 49.7743/40.1546/14.5448
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 28.2843
+
+aiStrategicArea.setActive cpname_go_64_hotel
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_city
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+AIStrategicArea.addNeighbour cpname_go_64_villagefort
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+AIStrategicArea.addNeighbour cpname_go_64_rockfort
+AIStrategicArea.addNeighbour cpname_go_64_uscarrier
+AIStrategicArea.addNeighbour cpname_go_64_airfieldbase
+aiStrategicArea.addObjectTypeFlag LandSpawner
+aiStrategicArea.addObjectTypeFlag SoldierSpawner
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 276.598/37.0006/-98.3837
+AIStrategicArea.setOrderPosition Vehicle 278.787/35.6872/-114.562
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 33.9411
+
+aiStrategicArea.setActive cpname_go_64_olivefort
+AIStrategicArea.addNeighbour cpname_go_64_riverfort
+AIStrategicArea.addNeighbour cpname_go_64_rockfort
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_beach
+AIStrategicArea.addNeighbour cpname_go_64_uscarrier
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+aiStrategicArea.addObjectTypeFlag LandSpawner
+aiStrategicArea.addObjectTypeFlag SoldierSpawner
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -205.482/33.3004/-139.667
+AIStrategicArea.setOrderPosition Vehicle -195.284/33.3004/-134.261
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 19.799
+
+aiStrategicArea.setActive cpname_go_64_riverfort
+AIStrategicArea.addNeighbour cpname_go_64_olivefort
+AIStrategicArea.addNeighbour cpname_go_64_uscarrier
+AIStrategicArea.addNeighbour cpname_go_64_village
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+aiStrategicArea.addObjectTypeFlag LandSpawner
+aiStrategicArea.addObjectTypeFlag SoldierSpawner
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -332.113/30.1994/32.0054
+AIStrategicArea.setOrderPosition Vehicle -315.417/30.1994/35.129
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 28.2843
+
+aiStrategicArea.setActive cpname_go_64_rockfort
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_beach
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+AIStrategicArea.addNeighbour cpname_go_64_olivefort
+AIStrategicArea.addNeighbour cpname_go_64_villagefort
+AIStrategicArea.addNeighbour cpname_go_64_uscarrier
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+AIStrategicArea.addNeighbour cpname_go_64_riverfort
+aiStrategicArea.addObjectTypeFlag LandSpawner
+aiStrategicArea.addObjectTypeFlag SoldierSpawner
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -59.5824/33.3993/-201.74
+AIStrategicArea.setOrderPosition Vehicle -45.2498/32.054/-187.419
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 28.2843
+
+aiStrategicArea.setActive cpname_go_64_uscarrier
+AIStrategicArea.addNeighbour cpname_go_64_riverfort
+AIStrategicArea.addNeighbour cpname_go_64_olivefort
+AIStrategicArea.addNeighbour cpname_go_64_rockfort
+AIStrategicArea.addNeighbour cpname_go_64_villagefort
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_beach
+aiStrategicArea.addObjectTypeFlag Base
+aiStrategicArea.addObjectTypeFlag AirSpawner
+aiStrategicArea.addObjectTypeFlag LandSpawner
+aiStrategicArea.addObjectTypeFlag SoldierSpawner
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -336.9/24.3622/-233.335
+AIStrategicArea.setOrderPosition Vehicle -329.635/24.5402/-239.191
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 28.2843
+
+aiStrategicArea.setActive cpname_go_64_village
+AIStrategicArea.addNeighbour cpname_go_64_riverfort
+AIStrategicArea.addNeighbour cpname_go_64_uscarrier
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+AIStrategicArea.addNeighbour cpname_go_64_airfieldbase
+aiStrategicArea.addObjectTypeFlag LandSpawner
+aiStrategicArea.addObjectTypeFlag SoldierSpawner
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -131.877/26.08/176.392
+AIStrategicArea.setOrderPosition Vehicle -120.366/25.7351/187.864
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 11.3137
+
+aiStrategicArea.setActive cpname_go_64_villagefort
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_beach
+AIStrategicArea.addNeighbour cpname_go_64_rockfort
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+AIStrategicArea.addNeighbour cpname_go_64_hotel
+AIStrategicArea.addNeighbour cpname_go_64_uscarrier
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+AIStrategicArea.addNeighbour cpname_go_64_airfieldbase
+aiStrategicArea.addObjectTypeFlag LandSpawner
+aiStrategicArea.addObjectTypeFlag SoldierSpawner
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 118.036/38.4762/-255.612
+AIStrategicArea.setOrderPosition Vehicle 118.351/38.0223/-247.664
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 28.2843
+
+aiStrategicArea.setActive CPNAME_GO_SP16_beach
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+AIStrategicArea.addNeighbour cpname_go_64_rockfort
+AIStrategicArea.addNeighbour cpname_go_64_villagefort
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_city
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+AIStrategicArea.addNeighbour cpname_go_64_hotel
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 33.5332/37.5998/-294.295
+AIStrategicArea.setOrderPosition Vehicle 36.4937/37.5998/-294.028
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 8.48528
+
+aiStrategicArea.setActive CPNAME_GO_SP16_city
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+AIStrategicArea.addNeighbour cpname_go_sp16_village
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_beach
+AIStrategicArea.addNeighbour cpname_go_64_hotel
+AIStrategicArea.addNeighbour cpname_go_64_villagefort
+AIStrategicArea.addNeighbour cpname_go_64_rockfort
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 122.529/37.8/-48.5203
+AIStrategicArea.setOrderPosition Vehicle 126.094/37.8/-42.726
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 7.07107
+
+aiStrategicArea.setActive cpname_go_sp16_village
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_beach
+AIStrategicArea.addNeighbour CPNAME_GO_SP16_city
+AIStrategicArea.addNeighbour cpname_go_64_rockfort
+AIStrategicArea.addNeighbour cpname_go_64_villagefort
+AIStrategicArea.addNeighbour cpname_go_64_constructionsite
+AIStrategicArea.addNeighbour cpname_go_64_hotel
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry 6.27625/33.1002/-135.771
+AIStrategicArea.setOrderPosition Vehicle 15.483/33.1002/-136.015
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 4.24264
+
+aiStrategicArea.addWayPoint 143.227/27.5002/179.767 Vehicle cpname_go_64_airfieldbase cpname_go_64_constructionsite
+aiStrategicArea.addWayPoint 129.571/27.5002/141.589 Vehicle cpname_go_64_airfieldbase cpname_go_64_constructionsite
+aiStrategicArea.addWayPoint 17.0094/27.5002/95.5807 Vehicle cpname_go_64_airfieldbase cpname_go_64_constructionsite
+aiStrategicArea.addWayPoint -5.68133/27.4946/137.882 Vehicle cpname_go_64_airfieldbase cpname_go_64_constructionsite
+aiStrategicArea.addWayPoint 99.6294/24.5/224.097 Vehicle cpname_go_64_airfieldbase cpname_go_64_constructionsite
+aiStrategicArea.addWayPoint 298.552/25.1751/185.103 Vehicle cpname_go_64_airfieldbase cpname_go_64_hotel
+aiStrategicArea.addWayPoint 309.618/31.5909/104.18 Vehicle cpname_go_64_airfieldbase cpname_go_64_hotel
+aiStrategicArea.addWayPoint 267.918/32.9328/32.8966 Vehicle cpname_go_64_airfieldbase cpname_go_64_hotel
+aiStrategicArea.addWayPoint 227.657/30.8702/13.6689 Vehicle cpname_go_64_airfieldbase cpname_go_64_hotel
+aiStrategicArea.addWayPoint 140.633/36.9473/-107.114 Vehicle cpname_go_64_airfieldbase cpname_go_64_hotel
+aiStrategicArea.addWayPoint 158.766/35.602/-119.801 Vehicle cpname_go_64_airfieldbase cpname_go_64_hotel
+aiStrategicArea.addWayPoint 235.534/34.9034/-101.101 Vehicle cpname_go_64_airfieldbase cpname_go_64_hotel
+aiStrategicArea.addWayPoint -50.5842/29.6744/172.156 Vehicle cpname_go_64_airfieldbase cpname_go_64_rockfort
+aiStrategicArea.addWayPoint 99.4448/24.5/224.492 Vehicle cpname_go_64_airfieldbase cpname_go_64_villagefort
+aiStrategicArea.addWayPoint 179.716/35.6593/-124.594 Vehicle cpname_go_64_constructionsite cpname_go_64_hotel
+aiStrategicArea.addWayPoint 139.816/36.9648/-108.344 Vehicle cpname_go_64_constructionsite cpname_go_64_hotel
+aiStrategicArea.addWayPoint 149.611/37.8/-53.649 Vehicle cpname_go_64_constructionsite cpname_go_64_hotel
+aiStrategicArea.addWayPoint -15.1851/35.6621/-41.0577 Vehicle cpname_go_64_constructionsite cpname_go_64_hotel
+aiStrategicArea.addWayPoint 75.2316/36.1998/-101.353 Vehicle cpname_go_64_constructionsite cpname_go_64_hotel
+aiStrategicArea.addWayPoint -195.376/27.9615/6.9043 Vehicle cpname_go_64_constructionsite cpname_go_64_olivefort
+aiStrategicArea.addWayPoint -37.2642/30.5493/-155.376 Vehicle cpname_go_64_constructionsite cpname_go_64_rockfort
+aiStrategicArea.addWayPoint -6.40094/27.5004/137.44 Vehicle cpname_go_64_constructionsite cpname_go_64_village
+aiStrategicArea.addWayPoint 17.7363/27.5002/97.4302 Vehicle cpname_go_64_constructionsite cpname_go_64_village
+aiStrategicArea.addWayPoint 88.9207/34.0769/-215.461 Vehicle cpname_go_64_constructionsite cpname_go_64_villagefort
+aiStrategicArea.addWayPoint 157.144/34.002/-226.233 Vehicle cpname_go_64_constructionsite cpname_go_64_villagefort
+aiStrategicArea.addWayPoint -196.855/27.9804/7.03772 Vehicle cpname_go_64_hotel cpname_go_64_riverfort
+aiStrategicArea.addWayPoint -580.709/7.6006/-300.549 Vehicle cpname_go_64_olivefort cpname_go_64_uscarrier
+aiStrategicArea.addWayPoint -397.703/7.6006/-330.017 Vehicle cpname_go_64_olivefort cpname_go_64_uscarrier
+aiStrategicArea.addWayPoint -250.246/7.6006/-486.931 Vehicle cpname_go_64_olivefort cpname_go_64_uscarrier
+aiStrategicArea.addWayPoint -527.575/7.6006/-334.241 Vehicle cpname_go_64_riverfort cpname_go_64_uscarrier
+aiStrategicArea.addWayPoint -445.527/7.6006/-393.171 Vehicle cpname_go_64_riverfort cpname_go_64_uscarrier
+aiStrategicArea.addWayPoint -310.212/7.6006/-481.193 Vehicle cpname_go_64_riverfort cpname_go_64_uscarrier
+aiStrategicArea.addWayPoint -462.168/7.6006/-241.713 Vehicle cpname_go_64_rockfort cpname_go_64_uscarrier
+aiStrategicArea.addWayPoint -387.376/7.6006/-416.748 Vehicle cpname_go_64_rockfort cpname_go_64_uscarrier
+aiStrategicArea.addWayPoint -206.99/9.35224/-423.828 Vehicle cpname_go_64_rockfort cpname_go_64_uscarrier
+
+rem From Damocles mod
+rem aiStrategicArea.addWayPoint 143.368/27.498/182.948 Vehicle cpname_go_64_airfieldbase cpname_go_64_constructionsite
+rem aiStrategicArea.addWayPoint -6.39282/27.4905/139.806 Vehicle cpname_go_64_airfieldbase cpname_go_64_constructionsite
+rem aiStrategicArea.addWayPoint -108.722/27.8053/114.403 Vehicle cpname_go_64_airfieldbase cpname_go_64_constructionsite
+rem aiStrategicArea.addWayPoint 305.447/27.7996/152.2 Vehicle cpname_go_64_airfieldbase cpname_go_64_constructionsite
+rem aiStrategicArea.addWayPoint -339.867/23.7268/-217.652 Vehicle cpname_go_64_airfieldbase cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -372.084/23.8273/-174.467 Vehicle cpname_go_64_airfieldbase cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -142.042/23.8711/-374.029 Vehicle cpname_go_64_airfieldbase cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -339.844/23.7565/-218.007 Vehicle cpname_go_64_constructionsite cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -372.376/23.788/-174.433 Vehicle cpname_go_64_constructionsite cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -142.239/23.851/-374.234 Vehicle cpname_go_64_constructionsite cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -339.879/23.7667/-218.119 Vehicle cpname_go_64_hotel cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -372.357/23.7658/-174.158 Vehicle cpname_go_64_hotel cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -142.55/23.8154/-374.25 Vehicle cpname_go_64_hotel cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -340.248/23.7087/-217.881 Vehicle cpname_go_64_olivefort cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -372.509/23.7653/-174.363 Vehicle cpname_go_64_olivefort cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -142.2/23.8559/-374.271 Vehicle cpname_go_64_olivefort cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -340.203/23.7165/-217.946 Vehicle cpname_go_64_riverfort cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -372.384/23.7721/-174.266 Vehicle cpname_go_64_riverfort cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -142.625/23.8123/-374.717 Vehicle cpname_go_64_riverfort cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -340.222/23.7349/-218.232 Vehicle cpname_go_64_rockfort cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -372.341/23.7977/-174.493 Vehicle cpname_go_64_rockfort cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -142.665/23.8046/-374.45 Vehicle cpname_go_64_rockfort cpname_go_64_uscarrier
+rem aiStrategicArea.addWayPoint -339.901/23.7353/-217.765 Vehicle cpname_go_64_uscarrier cpname_go_64_village
+rem aiStrategicArea.addWayPoint -372.438/23.7846/-174.481 Vehicle cpname_go_64_uscarrier cpname_go_64_village
+rem aiStrategicArea.addWayPoint -142.394/23.8351/-374.398 Vehicle cpname_go_64_uscarrier cpname_go_64_village
+rem aiStrategicArea.addWayPoint -340.382/23.6851/-217.685 Vehicle cpname_go_64_uscarrier cpname_go_64_villagefort
+rem aiStrategicArea.addWayPoint -372.076/23.8432/-174.634 Vehicle cpname_go_64_uscarrier cpname_go_64_villagefort
+rem aiStrategicArea.addWayPoint -142.511/23.8222/-374.442 Vehicle cpname_go_64_uscarrier cpname_go_64_villagefort
+
+aiStrategicArea.addWayPoint 72.9525/36.8033/-51.501 Infantry CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 95.4967/37.8/-46.1993 Infantry CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 114.845/37.8/-55.7356 Infantry CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 146.662/37.8/-55.7756 Infantry CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 94.031/37.6513/-51.9108 Vehicle CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 149.478/37.8/-57.3231 Vehicle CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 68.0122/35.9996/-109.921 Vehicle CPNAME_GO_SP16_beach CPNAME_GO_SP16_city
+aiStrategicArea.addWayPoint 35.2356/37.6754/-183.769 Infantry CPNAME_GO_SP16_beach cpname_go_sp16_village
+aiStrategicArea.addWayPoint 12.3705/39.1615/-198.327 Infantry CPNAME_GO_SP16_beach cpname_go_sp16_village
+aiStrategicArea.addWayPoint -39.2008/31.6642/-172.295 Infantry CPNAME_GO_SP16_beach cpname_go_sp16_village
+aiStrategicArea.addWayPoint 89.8022/40.3998/8.58557 Infantry CPNAME_GO_SP16_city cpname_go_64_constructionsite
+aiStrategicArea.addWayPoint 135.067/40.3998/60.189 Infantry CPNAME_GO_SP16_city cpname_go_64_constructionsite
+aiStrategicArea.addWayPoint 157.629/40.4013/-0.461182 Infantry CPNAME_GO_SP16_city cpname_go_64_constructionsite
+aiStrategicArea.addWayPoint 44.2458/41.237/-3.39209 Infantry CPNAME_GO_SP16_city cpname_go_64_constructionsite
+aiStrategicArea.addWayPoint 70.5585/36.0248/-54.6942 Infantry CPNAME_GO_SP16_city cpname_go_sp16_village
+
+rem aiStrategicArea.addWayPoint 94.9628/37.8/-47.8914 Infantry CPNAME_GO_SP16_city cpname_go_sp16_village
+aiStrategicArea.addWayPoint 95.4967/37.8/-46.1993 Infantry CPNAME_GO_SP16_city cpname_go_sp16_village
+
+aiStrategicArea.addWayPoint 115.438/37.8/-57.5997 Infantry CPNAME_GO_SP16_city cpname_go_sp16_village

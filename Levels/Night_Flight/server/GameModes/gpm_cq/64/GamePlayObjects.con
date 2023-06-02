@@ -1,0 +1,1336 @@
+rem ********** Object Spawner **********
+rem [ObjectSpawnerTemplate: CP_64p_NF_AirControlTower_APC]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_AirControlTower_APC
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_AirControlTower_APC
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_bmp3
+ObjectTemplate.setObjectTemplate 2 xpak_hummertow
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_AirControlTower_LightJeep]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_AirControlTower_LightJeep
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_AirControlTower_LightJeep
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_civ2
+ObjectTemplate.setObjectTemplate 2 xpak_ailraider
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Helipad_ATV]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Helipad_ATV
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Helipad_ATV
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_TerminalComplex_ATV]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_TerminalComplex_ATV
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_TerminalComplex_ATV
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Gate_LightJeep]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Gate_LightJeep
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Gate_LightJeep
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_ailraider
+ObjectTemplate.setObjectTemplate 2 XPAK_AILRAIDER
+ObjectTemplate.maxNrOfObjectSpawned 2
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Gate_0_0]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Gate_0_0
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Gate_0_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_hummertow
+ObjectTemplate.setObjectTemplate 2 xpak_hummertow
+ObjectTemplate.maxNrOfObjectSpawned 2
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Helipad_0]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Helipad_0
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Helipad_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_TerminalComplex_0_1]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_TerminalComplex_0_1
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_TerminalComplex_0_1
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_atv
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_CargoDepot_ATV]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_CargoDepot_ATV
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_CargoDepot_ATV
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_CargoDepot_0]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_CargoDepot_0
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_CargoDepot_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_CargoPlane_ATV]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_CargoPlane_ATV
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_CargoPlane_ATV
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+ObjectTemplate.maxNrOfObjectSpawned 2
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_CargoPlane_0]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_CargoPlane_0
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_CargoPlane_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_AirControlTower_LightJeep_0]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_AirControlTower_LightJeep_0
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_AirControlTower_LightJeep_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_civ2
+ObjectTemplate.setObjectTemplate 2 XPAK_AILRAIDER
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_CargoPlane_0_0]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_CargoPlane_0_0
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_CargoPlane_0_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_atv
+ObjectTemplate.setObjectTemplate 2 xpak_atv
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_CargoDepot_Forklift]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_CargoDepot_Forklift
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_CargoDepot_Forklift
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_atv
+ObjectTemplate.setObjectTemplate 2 xpak_atv
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_CargoDepot_1_1]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_CargoDepot_1_1
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_CargoDepot_1_1
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_atv
+ObjectTemplate.setObjectTemplate 2 xpak_atv
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_TerminalComplex_Forklift]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_TerminalComplex_Forklift
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_TerminalComplex_Forklift
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_forklift
+ObjectTemplate.setObjectTemplate 2 xpak_forklift
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Helipad_Forklift]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Helipad_Forklift
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Helipad_Forklift
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_atv
+ObjectTemplate.setObjectTemplate 2 xpak_atv
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Helipad_0_0]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Helipad_0_0
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Helipad_0_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_atv
+ObjectTemplate.setObjectTemplate 2 xpak_atv
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Gate_UAV]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Gate_UAV
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Gate_UAV
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 aircontroltower
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Gate_radar]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Gate_radar
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Gate_radar
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 mobileradar_us_dest
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Gate_ART]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Gate_ART
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Gate_ART
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 USART_LW155
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Gate_0_1]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Gate_0_1
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Gate_0_1
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 USART_LW155
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_AirControlTower_radar]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_AirControlTower_radar
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_AirControlTower_radar
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 mobileradar_mech_dest
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_AirControlTower_UAV]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_AirControlTower_UAV
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_AirControlTower_UAV
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 aircontroltower_mec
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_AirControlTower_ART]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_AirControlTower_ART
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_AirControlTower_ART
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 ars_d30
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_AirControlTower_0_0]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_AirControlTower_0_0
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_AirControlTower_0_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 ARS_D30
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_AirControlTower_ATV_01]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_AirControlTower_ATV_01
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_AirControlTower_ATV_01
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_AirControlTower_ATV_02]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_AirControlTower_ATV_02
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_AirControlTower_ATV_02
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Gate_ATV_01]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Gate_ATV_01
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Gate_ATV_01
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Gate_ATV_02]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Gate_ATV_02
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Gate_ATV_02
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_CargoPlane_Pickup_01]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_CargoPlane_Pickup_01
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_CargoPlane_Pickup_01
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_civ2
+ObjectTemplate.setObjectTemplate 2 xpak_civ2
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_CargoPlane_Pickup_02]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_CargoPlane_Pickup_02
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_CargoPlane_Pickup_02
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_civ2
+ObjectTemplate.setObjectTemplate 2 xpak_civ2
+
+rem [ObjectSpawnerTemplate: CP_64p_NF_Gate_RI_SP_ATV]
+ObjectTemplate.create ObjectSpawner CP_64p_NF_Gate_RI_SP_ATV
+ObjectTemplate.activeSafe ObjectSpawner CP_64p_NF_Gate_RI_SP_ATV
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 XPAK_ATV
+ObjectTemplate.setObjectTemplate 2 XPAK_ATV
+ObjectTemplate.maxNrOfObjectSpawned 2
+
+if v_arg1 == host
+
+   rem [ObjectSpawner: CP_64p_NF_AirControlTower_APC]
+   Object.create CP_64p_NF_AirControlTower_APC
+   Object.absolutePosition -150.843/19.568/-162.427
+   Object.rotation -32.160/0.000/0.000
+   Object.setControlPointId 36
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_AirControlTower_LightJeep]
+   Object.create CP_64p_NF_AirControlTower_LightJeep
+   Object.absolutePosition -155.676/19.209/-188.407
+   Object.rotation -32.130/0.000/0.000
+   Object.setControlPointId 36
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Helipad_ATV]
+   Object.create CP_64p_NF_Helipad_ATV
+   Object.absolutePosition -21.289/19.562/261.080
+   Object.rotation -143.609/0.000/0.000
+   Object.setControlPointId 32
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_TerminalComplex_ATV]
+   Object.create CP_64p_NF_TerminalComplex_ATV
+   Object.absolutePosition -33.098/19.462/126.668
+   Object.rotation 176.552/0.000/0.000
+   Object.setControlPointId 33
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Gate_LightJeep]
+   Object.create CP_64p_NF_Gate_LightJeep
+   Object.absolutePosition 186.383/19.398/298.849
+   Object.rotation -180.000/0.000/0.000
+   Object.setControlPointId 31
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Gate_0_0]
+   Object.create CP_64p_NF_Gate_0_0
+   Object.absolutePosition 172.649/19.398/307.956
+   Object.rotation -179.032/0.000/0.000
+   Object.setControlPointId 31
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Helipad_0]
+   Object.create CP_64p_NF_Helipad_0
+   Object.absolutePosition -21.318/19.793/279.862
+   Object.rotation -62.403/0.000/0.000
+   Object.setControlPointId 32
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_TerminalComplex_0_1]
+   Object.create CP_64p_NF_TerminalComplex_0_1
+   Object.absolutePosition -59.278/19.422/130.958
+   Object.rotation -167.445/0.000/0.000
+   Object.setControlPointId 33
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_CargoDepot_ATV]
+   Object.create CP_64p_NF_CargoDepot_ATV
+   Object.absolutePosition -98.366/19.380/10.481
+   Object.rotation 29.576/0.000/0.000
+   Object.setControlPointId 34
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_CargoDepot_0]
+   Object.create CP_64p_NF_CargoDepot_0
+   Object.absolutePosition -144.253/19.381/2.457
+   Object.rotation 90.000/0.000/0.000
+   Object.setControlPointId 34
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_CargoPlane_ATV]
+   Object.create CP_64p_NF_CargoPlane_ATV
+   Object.absolutePosition -219.250/19.398/72.963
+   Object.rotation 120.550/0.000/0.000
+   Object.setControlPointId 35
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_CargoPlane_0]
+   Object.create CP_64p_NF_CargoPlane_0
+   Object.absolutePosition -235.403/19.398/143.447
+   Object.rotation -16.129/0.000/0.000
+   Object.setControlPointId 35
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_AirControlTower_LightJeep_0]
+   Object.create CP_64p_NF_AirControlTower_LightJeep_0
+   Object.absolutePosition -125.592/19.499/-174.638
+   Object.rotation 10.472/0.000/0.000
+   Object.setControlPointId 36
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_CargoPlane_0_0]
+   Object.create CP_64p_NF_CargoPlane_0_0
+   Object.absolutePosition -231.189/19.398/156.617
+   Object.rotation -9.544/0.000/0.000
+   Object.setControlPointId 35
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_CargoDepot_Forklift]
+   Object.create CP_64p_NF_CargoDepot_Forklift
+   Object.absolutePosition -144.292/19.385/-0.654
+   Object.rotation 90.000/0.000/0.000
+   Object.setControlPointId 34
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_CargoDepot_1_1]
+   Object.create CP_64p_NF_CargoDepot_1_1
+   Object.absolutePosition -167.316/19.398/6.252
+   Object.rotation -75.503/0.000/0.000
+   Object.setControlPointId 34
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_TerminalComplex_Forklift]
+   Object.create CP_64p_NF_TerminalComplex_Forklift
+   Object.absolutePosition -61.571/19.446/73.061
+   Object.rotation -1.735/0.000/0.000
+   Object.setControlPointId 33
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Helipad_Forklift]
+   Object.create CP_64p_NF_Helipad_Forklift
+   Object.absolutePosition -7.526/19.398/244.292
+   Object.rotation 107.452/0.000/0.000
+   Object.setControlPointId 32
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Helipad_0_0]
+   Object.create CP_64p_NF_Helipad_0_0
+   Object.absolutePosition -37.986/19.398/229.340
+   Object.rotation -120.525/0.000/0.000
+   Object.setControlPointId 32
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Gate_UAV]
+   Object.create CP_64p_NF_Gate_UAV
+   Object.absolutePosition 176.735/19.398/332.361
+   Object.rotation -134.903/0.000/0.000
+   Object.setControlPointId 31
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Gate_radar]
+   Object.create CP_64p_NF_Gate_radar
+   Object.absolutePosition 255.412/33.140/282.889
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 31
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Gate_ART]
+   Object.create CP_64p_NF_Gate_ART
+   Object.absolutePosition 189.755/19.380/223.059
+   Object.rotation -93.653/0.000/0.000
+   Object.setControlPointId 31
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Gate_0_1]
+   Object.create CP_64p_NF_Gate_0_1
+   Object.absolutePosition 228.503/23.101/329.592
+   Object.rotation -106.282/0.000/0.000
+   Object.setControlPointId 31
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_AirControlTower_radar]
+   Object.create CP_64p_NF_AirControlTower_radar
+   Object.absolutePosition -209.959/20.285/-209.996
+   Object.rotation -125.813/0.000/0.000
+   Object.setControlPointId 36
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_AirControlTower_UAV]
+   Object.create CP_64p_NF_AirControlTower_UAV
+   Object.absolutePosition -165.147/19.380/-205.739
+   Object.rotation 20.270/0.000/0.000
+   Object.setControlPointId 36
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_AirControlTower_ART]
+   Object.create CP_64p_NF_AirControlTower_ART
+   Object.absolutePosition -145.649/19.698/-265.066
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 36
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_AirControlTower_0_0]
+   Object.create CP_64p_NF_AirControlTower_0_0
+   Object.absolutePosition -175.006/19.398/-253.014
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 36
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_AirControlTower_ATV_01]
+   Object.create CP_64p_NF_AirControlTower_ATV_01
+   Object.absolutePosition -153.786/19.423/-174.556
+   Object.rotation -35.725/0.000/0.000
+   Object.setControlPointId 36
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_AirControlTower_ATV_02]
+   Object.create CP_64p_NF_AirControlTower_ATV_02
+   Object.absolutePosition -137.626/19.398/-192.850
+   Object.rotation -180.000/0.000/0.000
+   Object.setControlPointId 36
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Gate_ATV_01]
+   Object.create CP_64p_NF_Gate_ATV_01
+   Object.absolutePosition 100.737/19.398/309.455
+   Object.rotation -103.165/0.000/0.000
+   Object.setControlPointId 31
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Gate_ATV_02]
+   Object.create CP_64p_NF_Gate_ATV_02
+   Object.absolutePosition 109.693/23.460/319.710
+   Object.rotation -84.294/0.000/0.000
+   Object.setControlPointId 31
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_CargoPlane_Pickup_01]
+   Object.create CP_64p_NF_CargoPlane_Pickup_01
+   Object.absolutePosition -247.798/19.398/86.560
+   Object.rotation 167.665/0.000/0.000
+   Object.setControlPointId 35
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_CargoPlane_Pickup_02]
+   Object.create CP_64p_NF_CargoPlane_Pickup_02
+   Object.absolutePosition -250.109/19.399/152.447
+   Object.rotation 71.366/0.000/0.000
+   Object.setControlPointId 35
+   Object.layer 4
+
+   rem [ObjectSpawner: CP_64p_NF_Gate_RI_SP_ATV]
+   Object.create CP_64p_NF_Gate_RI_SP_ATV
+   Object.absolutePosition 179.297/19.403/271.203
+   Object.rotation -144.690/0.000/0.000
+   Object.setControlPointId 31
+   Object.layer 4
+
+endIf
+
+rem ********** Spawn Points **********
+rem [SpawnPointTemplate: CP_64p_NF_Gate_1_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Gate_1_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Gate_1_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 31
+
+rem [SpawnPoint: CP_64p_NF_Gate_1_0]
+Object.create CP_64p_NF_Gate_1_0
+Object.absolutePosition 187.703/19.398/295.656
+Object.rotation -110.592/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Gate_2_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Gate_2_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Gate_2_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setGroup 2
+ObjectTemplate.setControlPointId 31
+
+rem [SpawnPoint: CP_64p_NF_Gate_2_0]
+Object.create CP_64p_NF_Gate_2_0
+Object.absolutePosition 111.058/23.460/322.018
+Object.rotation -126.523/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Gate_3_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Gate_3_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Gate_3_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setGroup 2
+ObjectTemplate.setControlPointId 31
+
+rem [SpawnPoint: CP_64p_NF_Gate_3_0]
+Object.create CP_64p_NF_Gate_3_0
+Object.absolutePosition 110.758/23.460/316.172
+Object.rotation -64.212/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Gate_4_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Gate_4_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Gate_4_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 31
+
+rem [SpawnPoint: CP_64p_NF_Gate_4_0]
+Object.create CP_64p_NF_Gate_4_0
+Object.absolutePosition 196.234/19.398/290.862
+Object.rotation -136.295/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Gate_5_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Gate_5_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Gate_5_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 31
+
+rem [SpawnPoint: CP_64p_NF_Gate_5_0]
+Object.create CP_64p_NF_Gate_5_0
+Object.absolutePosition 188.902/19.398/313.004
+Object.rotation -111.771/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Gate_6_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Gate_6_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Gate_6_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setGroup 2
+ObjectTemplate.setControlPointId 31
+
+rem [SpawnPoint: CP_64p_NF_Gate_6_0]
+Object.create CP_64p_NF_Gate_6_0
+Object.absolutePosition 105.708/19.587/312.902
+Object.rotation -111.289/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Gate_7_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Gate_7_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Gate_7_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 31
+
+rem [SpawnPoint: CP_64p_NF_Gate_7_0]
+Object.create CP_64p_NF_Gate_7_0
+Object.absolutePosition 189.996/19.392/277.608
+Object.rotation -60.750/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Helipad_1_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Helipad_1_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Helipad_1_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 32
+
+rem [SpawnPoint: CP_64p_NF_Helipad_1_0]
+Object.create CP_64p_NF_Helipad_1_0
+Object.absolutePosition -43.560/19.398/295.716
+Object.rotation -115.809/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Helipad_2_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Helipad_2_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Helipad_2_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 32
+
+rem [SpawnPoint: CP_64p_NF_Helipad_2_0]
+Object.create CP_64p_NF_Helipad_2_0
+Object.absolutePosition -21.467/20.132/271.810
+Object.rotation -26.910/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Helipad_3_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Helipad_3_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Helipad_3_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 32
+
+rem [SpawnPoint: CP_64p_NF_Helipad_3_0]
+Object.create CP_64p_NF_Helipad_3_0
+Object.absolutePosition -22.000/19.904/303.000
+Object.rotation -165.822/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_TerminalComplex_2_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_TerminalComplex_2_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_TerminalComplex_2_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 33
+
+rem [SpawnPoint: CP_64p_NF_TerminalComplex_2_0]
+Object.create CP_64p_NF_TerminalComplex_2_0
+Object.absolutePosition -50.737/20.830/133.693
+Object.rotation 16.118/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_TerminalComplex_3_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_TerminalComplex_3_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_TerminalComplex_3_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 33
+
+rem [SpawnPoint: CP_64p_NF_TerminalComplex_3_0]
+Object.create CP_64p_NF_TerminalComplex_3_0
+Object.absolutePosition -55.943/24.962/131.070
+Object.rotation 44.725/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_TerminalComplex_4_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_TerminalComplex_4_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_TerminalComplex_4_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 33
+
+rem [SpawnPoint: CP_64p_NF_TerminalComplex_4_0]
+Object.create CP_64p_NF_TerminalComplex_4_0
+Object.absolutePosition -51.052/30.090/130.440
+Object.rotation 89.350/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_TerminalComplex_5_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_TerminalComplex_5_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_TerminalComplex_5_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 33
+
+rem [SpawnPoint: CP_64p_NF_TerminalComplex_5_0]
+Object.create CP_64p_NF_TerminalComplex_5_0
+Object.absolutePosition -11.415/24.959/132.672
+Object.rotation 85.716/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoDepot_1_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoDepot_1_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoDepot_1_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 34
+
+rem [SpawnPoint: CP_64p_NF_CargoDepot_1_0]
+Object.create CP_64p_NF_CargoDepot_1_0
+Object.absolutePosition -122.309/19.380/-8.862
+Object.rotation 64.068/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoDepot_2_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoDepot_2_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoDepot_2_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 34
+
+rem [SpawnPoint: CP_64p_NF_CargoDepot_2_0]
+Object.create CP_64p_NF_CargoDepot_2_0
+Object.absolutePosition -126.438/19.380/-1.471
+Object.rotation -84.322/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoDepot_3_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoDepot_3_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoDepot_3_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 34
+
+rem [SpawnPoint: CP_64p_NF_CargoDepot_3_0]
+Object.create CP_64p_NF_CargoDepot_3_0
+Object.absolutePosition -115.389/19.385/10.559
+Object.rotation 40.736/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoDepot_4_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoDepot_4_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoDepot_4_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 34
+
+rem [SpawnPoint: CP_64p_NF_CargoDepot_4_0]
+Object.create CP_64p_NF_CargoDepot_4_0
+Object.absolutePosition -104.757/19.380/-0.433
+Object.rotation -139.041/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoDepot_5_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoDepot_5_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoDepot_5_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 34
+
+rem [SpawnPoint: CP_64p_NF_CargoDepot_5_0]
+Object.create CP_64p_NF_CargoDepot_5_0
+Object.absolutePosition -115.847/19.380/4.563
+Object.rotation 145.925/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoDepot_6_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoDepot_6_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoDepot_6_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 34
+
+rem [SpawnPoint: CP_64p_NF_CargoDepot_6_0]
+Object.create CP_64p_NF_CargoDepot_6_0
+Object.absolutePosition -111.498/19.380/-14.686
+Object.rotation -24.185/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoPlane_1_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoPlane_1_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoPlane_1_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 35
+
+rem [SpawnPoint: CP_64p_NF_CargoPlane_1_0]
+Object.create CP_64p_NF_CargoPlane_1_0
+Object.absolutePosition -233.356/19.666/158.897
+Object.rotation 25.052/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoPlane_2_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoPlane_2_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoPlane_2_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 35
+
+rem [SpawnPoint: CP_64p_NF_CargoPlane_2_0]
+Object.create CP_64p_NF_CargoPlane_2_0
+Object.absolutePosition -225.231/26.749/124.646
+Object.rotation -11.035/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoPlane_3_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoPlane_3_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoPlane_3_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 35
+
+rem [SpawnPoint: CP_64p_NF_CargoPlane_3_0]
+Object.create CP_64p_NF_CargoPlane_3_0
+Object.absolutePosition -231.784/19.426/111.639
+Object.rotation 169.312/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoPlane_4_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoPlane_4_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoPlane_4_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 35
+
+rem [SpawnPoint: CP_64p_NF_CargoPlane_4_0]
+Object.create CP_64p_NF_CargoPlane_4_0
+Object.absolutePosition -236.143/19.398/83.700
+Object.rotation 149.683/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_CargoPlane_5_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_CargoPlane_5_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_CargoPlane_5_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 35
+
+rem [SpawnPoint: CP_64p_NF_CargoPlane_5_0]
+Object.create CP_64p_NF_CargoPlane_5_0
+Object.absolutePosition -237.971/19.736/138.970
+Object.rotation 30.974/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_AirControlTower_1_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_AirControlTower_1_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_AirControlTower_1_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 36
+
+rem [SpawnPoint: CP_64p_NF_AirControlTower_1_0]
+Object.create CP_64p_NF_AirControlTower_1_0
+Object.absolutePosition -130.828/20.812/-158.463
+Object.rotation -58.083/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_AirControlTower_2_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_AirControlTower_2_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_AirControlTower_2_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 36
+
+rem [SpawnPoint: CP_64p_NF_AirControlTower_2_0]
+Object.create CP_64p_NF_AirControlTower_2_0
+Object.absolutePosition -141.812/20.932/-171.564
+Object.rotation 27.316/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_AirControlTower_3_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_AirControlTower_3_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_AirControlTower_3_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 36
+
+rem [SpawnPoint: CP_64p_NF_AirControlTower_3_0]
+Object.create CP_64p_NF_AirControlTower_3_0
+Object.absolutePosition -133.814/29.028/-164.592
+Object.rotation -121.969/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_AirControlTower_4_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_AirControlTower_4_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_AirControlTower_4_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 36
+
+rem [SpawnPoint: CP_64p_NF_AirControlTower_4_0]
+Object.create CP_64p_NF_AirControlTower_4_0
+Object.absolutePosition -145.154/33.088/-169.072
+Object.rotation 95.893/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_AirControlTower_5_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_AirControlTower_5_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_AirControlTower_5_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 36
+
+rem [SpawnPoint: CP_64p_NF_AirControlTower_5_0]
+Object.create CP_64p_NF_AirControlTower_5_0
+Object.absolutePosition -141.191/33.087/-181.662
+Object.rotation 27.265/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Helipad_4_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Helipad_4_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Helipad_4_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 32
+
+rem [SpawnPoint: CP_64p_NF_Helipad_4_0]
+Object.create CP_64p_NF_Helipad_4_0
+Object.absolutePosition -18.086/19.398/241.944
+Object.rotation -39.411/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Helipad_5_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Helipad_5_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Helipad_5_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 32
+
+rem [SpawnPoint: CP_64p_NF_Helipad_5_0]
+Object.create CP_64p_NF_Helipad_5_0
+Object.absolutePosition -66.408/19.398/270.941
+Object.rotation 85.083/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_TerminalComplex_0_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_TerminalComplex_0_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_TerminalComplex_0_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 33
+
+rem [SpawnPoint: CP_64p_NF_TerminalComplex_0_0]
+Object.create CP_64p_NF_TerminalComplex_0_0
+Object.absolutePosition -79.364/24.788/137.267
+Object.rotation 98.407/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_AirControlTower_6_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_AirControlTower_6_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_AirControlTower_6_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 36
+
+rem [SpawnPoint: CP_64p_NF_AirControlTower_6_0]
+Object.create CP_64p_NF_AirControlTower_6_0
+Object.absolutePosition -136.234/20.872/-184.254
+Object.rotation -57.572/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Helipad_6_0]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Helipad_6_0
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Helipad_6_0
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 32
+
+rem [SpawnPoint: CP_64p_NF_Helipad_6_0]
+Object.create CP_64p_NF_Helipad_6_0
+Object.absolutePosition -5.288/19.398/275.160
+Object.rotation -122.975/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Gate_8]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Gate_8
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Gate_8
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 31
+
+rem [SpawnPoint: CP_64p_NF_Gate_8]
+Object.create CP_64p_NF_Gate_8
+Object.absolutePosition 192.896/19.398/322.613
+Object.rotation -161.439/0.000/0.000
+Object.layer 4
+
+rem [SpawnPointTemplate: CP_64p_NF_Gate_9]
+ObjectTemplate.create SpawnPoint CP_64p_NF_Gate_9
+ObjectTemplate.activeSafe SpawnPoint CP_64p_NF_Gate_9
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setGroup 2
+ObjectTemplate.setControlPointId 31
+
+rem [SpawnPoint: CP_64p_NF_Gate_9]
+Object.create CP_64p_NF_Gate_9
+Object.absolutePosition 102.002/19.398/304.924
+Object.rotation -109.244/0.000/0.000
+Object.layer 4
+
+rem ********** Control Points **********
+rem [ControlPointTemplate: CP_64p_NF_Gate]
+ObjectTemplate.create ControlPoint CP_64p_NF_Gate
+ObjectTemplate.activeSafe ControlPoint CP_64p_NF_Gate
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CP_64p_NF_Gate
+ObjectTemplate.radius 0
+ObjectTemplate.team 2
+ObjectTemplate.controlPointId 31
+ObjectTemplate.areaValueTeam1 25
+ObjectTemplate.areaValueTeam2 25
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+ObjectTemplate.loseControlWhenEnemyClose 0
+ObjectTemplate.unableToChangeTeam 1
+ObjectTemplate.hoistMinMax 0.2/0.9
+
+rem [ControlPointTemplate: CP_64p_NF_Helipad]
+ObjectTemplate.create ControlPoint CP_64p_NF_Helipad
+ObjectTemplate.activeSafe ControlPoint CP_64p_NF_Helipad
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CP_64p_NF_Helipad
+ObjectTemplate.radius 5
+ObjectTemplate.controlPointId 32
+ObjectTemplate.areaValueTeam1 25
+ObjectTemplate.areaValueTeam2 25
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+ObjectTemplate.loseControlWhenEnemyClose 0
+ObjectTemplate.hoistMinMax 0.2/0.9
+
+rem [ControlPointTemplate: CP_64p_NF_TerminalComplex]
+ObjectTemplate.create ControlPoint CP_64p_NF_TerminalComplex
+ObjectTemplate.activeSafe ControlPoint CP_64p_NF_TerminalComplex
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CP_64p_NF_TerminalComplex
+ObjectTemplate.radius 5
+ObjectTemplate.team 1
+ObjectTemplate.controlPointId 33
+ObjectTemplate.areaValueTeam1 25
+ObjectTemplate.areaValueTeam2 25
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+ObjectTemplate.loseControlWhenEnemyClose 0
+ObjectTemplate.isHemisphere 1
+ObjectTemplate.hoistMinMax 0.2/0.9
+
+rem [ControlPointTemplate: CP_64p_NF_CargoDepot]
+ObjectTemplate.create ControlPoint CP_64p_NF_CargoDepot
+ObjectTemplate.activeSafe ControlPoint CP_64p_NF_CargoDepot
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.setControlPointName CP_64p_NF_CargoDepot
+ObjectTemplate.radius 10
+ObjectTemplate.radiusOffset 0/-10/0
+ObjectTemplate.team 1
+ObjectTemplate.controlPointId 34
+ObjectTemplate.areaValueTeam1 25
+ObjectTemplate.areaValueTeam2 25
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+ObjectTemplate.loseControlWhenEnemyClose 0
+ObjectTemplate.hasGreyCapturingState 1
+ObjectTemplate.hoistMinMax 0.2/0.9
+ObjectTemplate.flagTemplateTeam0 Flag_neutral_wall
+ObjectTemplate.flagTemplateTeam1 Flag_in_wall
+ObjectTemplate.flagTemplateTeam2 Flag_uk_wall
+
+rem [ControlPointTemplate: CP_64p_NF_CargoPlane]
+ObjectTemplate.create ControlPoint CP_64p_NF_CargoPlane
+ObjectTemplate.activeSafe ControlPoint CP_64p_NF_CargoPlane
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setControlPointName CP_64p_NF_CargoPlane
+ObjectTemplate.radius 5
+ObjectTemplate.radiusOffset 0/-5.4/0
+ObjectTemplate.team 1
+ObjectTemplate.controlPointId 35
+ObjectTemplate.areaValueTeam1 25
+ObjectTemplate.areaValueTeam2 25
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+ObjectTemplate.loseControlWhenEnemyClose 0
+ObjectTemplate.isHemisphere 1
+ObjectTemplate.hasGreyCapturingState 1
+ObjectTemplate.hoistFlag 0
+ObjectTemplate.hoistMinMax 0.2/0.9
+ObjectTemplate.flagTemplateTeam0 flag_neutral_wall
+ObjectTemplate.flagTemplateTeam1 flag_in_wall
+ObjectTemplate.flagTemplateTeam2 flag_uk_wall
+
+rem [ControlPointTemplate: CP_64p_NF_AirControlTower]
+ObjectTemplate.create ControlPoint CP_64p_NF_AirControlTower
+ObjectTemplate.activeSafe ControlPoint CP_64p_NF_AirControlTower
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CP_64p_NF_AirControlTower
+ObjectTemplate.radius 5
+ObjectTemplate.team 1
+ObjectTemplate.controlPointId 36
+ObjectTemplate.areaValueTeam1 25
+ObjectTemplate.areaValueTeam2 25
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+ObjectTemplate.loseControlWhenEnemyClose 0
+ObjectTemplate.isHemisphere 1
+ObjectTemplate.hoistMinMax 0.2/0.9
+
+if v_arg1 == host
+
+   rem [ControlPoint: CP_64p_NF_Gate]
+   Object.create CP_64p_NF_Gate
+   Object.absolutePosition 179.329/19.398/282.206
+   Object.layer 4
+
+   rem [ControlPoint: CP_64p_NF_Helipad]
+   Object.create CP_64p_NF_Helipad
+   Object.absolutePosition -32.465/19.398/275.487
+   Object.layer 4
+
+   rem [ControlPoint: CP_64p_NF_TerminalComplex]
+   Object.create CP_64p_NF_TerminalComplex
+   Object.absolutePosition -35.684/30.027/138.222
+   Object.layer 4
+
+   rem [ControlPoint: CP_64p_NF_CargoDepot]
+   Object.create CP_64p_NF_CargoDepot
+   Object.absolutePosition -112.293/24.354/0.664
+   Object.layer 4
+
+   rem [ControlPoint: CP_64p_NF_CargoPlane]
+   Object.create CP_64p_NF_CargoPlane
+   Object.absolutePosition -225.107/26.727/114.514
+   Object.layer 4
+
+   rem [ControlPoint: CP_64p_NF_AirControlTower]
+   Object.create CP_64p_NF_AirControlTower
+   Object.absolutePosition -133.365/33.050/-175.027
+   Object.layer 4
+
+endIf
+
+CombatAreaManager.use 1
+CombatAreaManager.timeAllowedOutside 10.000000
+CombatArea.create CombatArea_54_64_players
+CombatArea.min 0.000000/0.000000
+CombatArea.max 0.000000/0.000000
+CombatArea.addAreaPoint 66.154785/349.128662
+CombatArea.addAreaPoint 66.113770/361.084839
+CombatArea.addAreaPoint -41.976807/360.933472
+CombatArea.addAreaPoint -42.113159/325.043091
+CombatArea.addAreaPoint -125.736206/325.185059
+CombatArea.addAreaPoint -125.802795/361.053711
+CombatArea.addAreaPoint -179.702454/360.944214
+CombatArea.addAreaPoint -182.482422/359.310669
+CombatArea.addAreaPoint -184.579163/355.356201
+CombatArea.addAreaPoint -185.226990/315.842407
+CombatArea.addAreaPoint -190.165588/309.540039
+CombatArea.addAreaPoint -197.961487/305.247070
+CombatArea.addAreaPoint -268.751709/301.210205
+CombatArea.addAreaPoint -295.677185/294.888794
+CombatArea.addAreaPoint -321.572388/282.506836
+CombatArea.addAreaPoint -341.808655/263.312866
+CombatArea.addAreaPoint -349.462280/241.418701
+CombatArea.addAreaPoint -347.547058/-102.827515
+CombatArea.addAreaPoint -338.618469/-118.825256
+CombatArea.addAreaPoint -327.999939/-127.264709
+CombatArea.addAreaPoint -265.316528/-131.648499
+CombatArea.addAreaPoint -251.542114/-137.475891
+CombatArea.addAreaPoint -239.825806/-154.100159
+CombatArea.addAreaPoint -235.600220/-179.457397
+CombatArea.addAreaPoint -235.342834/-241.231262
+CombatArea.addAreaPoint -231.398071/-281.173584
+CombatArea.addAreaPoint -211.238159/-305.572876
+CombatArea.addAreaPoint -182.037415/-322.583923
+CombatArea.addAreaPoint -148.164307/-326.041260
+CombatArea.addAreaPoint -124.448303/-314.499390
+CombatArea.addAreaPoint -109.639038/-298.805969
+CombatArea.addAreaPoint -109.029663/-148.065735
+CombatArea.addAreaPoint -98.958923/-146.789978
+CombatArea.addAreaPoint -87.074402/-137.982910
+CombatArea.addAreaPoint -78.337341/-125.434082
+CombatArea.addAreaPoint -74.590454/-115.146606
+CombatArea.addAreaPoint -73.890503/-79.899170
+CombatArea.addAreaPoint 5.754395/-79.281067
+CombatArea.addAreaPoint 7.114624/-19.789612
+CombatArea.addAreaPoint 90.358154/-19.705566
+CombatArea.addAreaPoint 90.142822/40.464844
+CombatArea.addAreaPoint 60.158203/40.442383
+CombatArea.addAreaPoint 60.097778/94.091919
+CombatArea.addAreaPoint 66.218018/94.138184
+CombatArea.addAreaPoint 110.567139/107.394897
+CombatArea.addAreaPoint 154.042725/128.661499
+CombatArea.addAreaPoint 208.247070/166.906494
+CombatArea.addAreaPoint 247.027344/201.551392
+CombatArea.addAreaPoint 275.394653/249.568726
+CombatArea.addAreaPoint 281.364624/292.718750
+CombatArea.addAreaPoint 273.457886/339.304077
+CombatArea.addAreaPoint 255.669067/380.354858
+CombatArea.addAreaPoint 226.479248/409.883057
+CombatArea.addAreaPoint 187.346558/424.827393
+CombatArea.addAreaPoint 149.529175/431.071655
+CombatArea.addAreaPoint 150.033325/349.035767
+CombatArea.team 0
+CombatArea.vehicles 4
+CombatArea.layer 4
+

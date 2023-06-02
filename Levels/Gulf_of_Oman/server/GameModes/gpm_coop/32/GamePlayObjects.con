@@ -1,0 +1,1986 @@
+rem ********** Object Spawner **********
+
+rem Beach
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_SMG]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_SMG
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_SMG
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 MEC_BIPOD
+ObjectTemplate.setObjectTemplate 2 US_BIPOD
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_AAS]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_AAS
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_AAS
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 IGLA_DJIGIT
+ObjectTemplate.setObjectTemplate 2 USAAS_STINGER
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_jeep]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_jeep
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_jeep
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 kobra
+ObjectTemplate.setObjectTemplate 2 lav25a2
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_tank]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_tank
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_tank
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 apc_bmd_2
+ObjectTemplate.setObjectTemplate 2 ustnk_m1a2
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_tank2]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_tank2
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_tank2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 apc_btr90
+ObjectTemplate.setObjectTemplate 2 usapc_lav25
+
+
+rem Construction Site
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_AAS]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_AAS
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_AAS
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 IGLA_DJIGIT
+ObjectTemplate.setObjectTemplate 2 USAAS_STINGER
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_APC]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_APC
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_APC
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_bmp3
+ObjectTemplate.setObjectTemplate 2 VBCI
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_tank]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_tank
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_tank
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 mbt_t80u
+ObjectTemplate.setObjectTemplate 2 xpak2_tnkl2a6
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_tank2]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_tank2
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_tank2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 rutnk_t90
+ObjectTemplate.setObjectTemplate 2 xpak2_tnkc2
+
+
+rem Village
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_village_SMG]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_village_SMG
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_village_SMG
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 MEC_BIPOD
+ObjectTemplate.setObjectTemplate 2 US_BIPOD
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_village_ATS]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_village_ATS
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_village_ATS
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 ATS_HJ8
+ObjectTemplate.setObjectTemplate 2 ATS_TOW
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_village_jeep]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_village_jeep
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_village_jeep
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_atv
+ObjectTemplate.setObjectTemplate 2 xpak_atv
+
+
+rem City
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_city_SMG]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_city_SMG
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_city_SMG
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 MEC_BIPOD
+ObjectTemplate.setObjectTemplate 2 US_BIPOD
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_city_jeep]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_city_jeep
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_city_jeep
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 jep_mec_paratrooper
+ObjectTemplate.setObjectTemplate 2 jeep_faav
+
+
+rem Rock Fort
+
+rem [ObjectSpawnerTemplate: cpname_go_32_rockfort_SMG]
+ObjectTemplate.create ObjectSpawner cpname_go_32_rockfort_SMG
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_rockfort_SMG
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 MEC_BIPOD
+ObjectTemplate.setObjectTemplate 2 US_BIPOD
+
+rem [ObjectSpawnerTemplate: cpname_go_32_rockfort_AAS]
+ObjectTemplate.create ObjectSpawner cpname_go_32_rockfort_AAS
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_rockfort_AAS
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 IGLA_DJIGIT
+ObjectTemplate.setObjectTemplate 2 USAAS_STINGER
+
+rem [ObjectSpawnerTemplate: cpname_go_32_rockfort_jeep]
+ObjectTemplate.create ObjectSpawner cpname_go_32_rockfort_jeep
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_rockfort_jeep
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 jep_mec_paratrooper
+ObjectTemplate.setObjectTemplate 2 jeep_faav
+
+rem [ObjectSpawnerTemplate: cpname_go_32_rockfort_jeep2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_rockfort_jeep2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_rockfort_jeep2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 jep_vodnik
+ObjectTemplate.setObjectTemplate 2 usjep_hmmwv
+
+
+rem Villagefort
+
+rem [ObjectSpawnerTemplate: cpname_go_64_Villagefort_AAS]
+ObjectTemplate.create ObjectSpawner cpname_go_64_Villagefort_AAS
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_64_Villagefort_AAS
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 IGLA_DJIGIT
+ObjectTemplate.setObjectTemplate 2 USAAS_STINGER
+
+rem [ObjectSpawnerTemplate: cpname_go_64_Villagefort_APC]
+ObjectTemplate.create ObjectSpawner cpname_go_64_Villagefort_APC
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_64_Villagefort_APC
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 kobra
+ObjectTemplate.setObjectTemplate 2 xpak_ailraider
+
+rem [ObjectSpawnerTemplate: cpname_go_64_Villagefort_tank]
+ObjectTemplate.create ObjectSpawner cpname_go_64_Villagefort_tank
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_64_Villagefort_tank
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 mbt_t72b1
+ObjectTemplate.setObjectTemplate 2 leoclerc
+
+
+rem Hotel
+
+rem [ObjectSpawnerTemplate: cpname_go_32_hotel_AAS]
+ObjectTemplate.create ObjectSpawner cpname_go_32_hotel_AAS
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_hotel_AAS
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 apc_btr_t
+ObjectTemplate.setObjectTemplate 2 VBCI
+
+rem [ObjectSpawnerTemplate: cpname_go_32_hotel_ATS]
+ObjectTemplate.create ObjectSpawner cpname_go_32_hotel_ATS
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_hotel_ATS
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 ATS_HJ8
+ObjectTemplate.setObjectTemplate 2 ATS_TOW
+
+rem [ObjectSpawnerTemplate: cpname_go_32_hotel_jeep]
+ObjectTemplate.create ObjectSpawner cpname_go_32_hotel_jeep
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_hotel_jeep
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 jep_vodnik
+ObjectTemplate.setObjectTemplate 2 Bushmaster
+
+rem [ObjectSpawnerTemplate: cpname_go_32_hotel_tank]
+ObjectTemplate.create ObjectSpawner cpname_go_32_hotel_tank
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_hotel_tank
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 mbt_t72b1
+ObjectTemplate.setObjectTemplate 2 ifv_spz_puma
+
+
+rem uscarrier
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_artillery1]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_artillery1
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_artillery1
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 USART_LW155
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_artillery2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_artillery2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_artillery2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 USART_LW155
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_artillery3]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_artillery3
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_artillery3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 USART_LW155
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_Radar]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_Radar
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_Radar
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 mobileradar_us_dest
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_UAV]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_UAV
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_UAV
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 aircontroltower
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_jet]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_jet
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_jet
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 RUAIR_MIG29
+ObjectTemplate.setObjectTemplate 2 air_f35b
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_Hjet]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_Hjet
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_Hjet
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 RUAIR_SU34
+ObjectTemplate.setObjectTemplate 2 USAIR_F15
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_heli]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_heli
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_heli
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 AHE_HAVOC
+ObjectTemplate.setObjectTemplate 2 AHE_AH1Z
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_theli]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_theli
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_theli
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 sa342f
+ObjectTemplate.setObjectTemplate 2 ah6j
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_theli2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_theli2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_theli2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 the_mi17
+ObjectTemplate.setObjectTemplate 2 usthe_uh60
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_heli2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_heli2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_heli2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_hind
+rem ObjectTemplate.setObjectTemplate 1 AHE_HAVOC
+ObjectTemplate.setObjectTemplate 2 xpak_apache
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_theli3]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_theli3
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_theli3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 sa342a
+ObjectTemplate.setObjectTemplate 2 ah6c
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_theli4]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_theli4
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_theli4
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 AHE_HAVOC
+ObjectTemplate.setObjectTemplate 2 xpak2_tiger
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_jet2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_jet2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_jet2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 RUAIR_MIG29
+ObjectTemplate.setObjectTemplate 2 air_f35b
+
+rem [ObjectSpawnerTemplate: cpname_go_32_uscarrier_Hjet2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_uscarrier_Hjet2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_uscarrier_Hjet2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 RUAIR_SU34
+rem ObjectTemplate.setObjectTemplate 2 USAIR_F15
+ObjectTemplate.setObjectTemplate 2 b52
+
+
+rem airfieldbase
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_artillery1]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_artillery1
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_artillery1
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 ARS_D30
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_artillery2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_artillery2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_artillery2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 ARS_D30
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_artillery3]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_artillery3
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_artillery3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 ARS_D30
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_Radar]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_Radar
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_Radar
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 mobileradar_mech_dest
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_UAV]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_UAV
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_UAV
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 aircontroltower_mec
+ObjectTemplate.minSpawnDelay 360
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_SMG]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_SMG
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_SMG
+ObjectTemplate.modifiedByUser "tomga"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 MEC_BIPOD
+ObjectTemplate.setObjectTemplate 2 US_BIPOD
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_ME_US_AAS]
+rem ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_ME_US_AAS
+rem ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_ME_US_AAS
+rem ObjectTemplate.modifiedByUser "tomga"
+rem ObjectTemplate.isNotSaveable 1
+rem ObjectTemplate.hasMobilePhysics 0
+rem ObjectTemplate.setObjectTemplate 1 IGLA_DJIGIT
+rem ObjectTemplate.setObjectTemplate 2 USAAS_STINGER
+rem ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_jet]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_jet
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_jet
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 RUAIR_MIG29
+ObjectTemplate.setObjectTemplate 2 air_f35b
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_jet2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_jet2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_jet2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 RUAIR_MIG29
+ObjectTemplate.setObjectTemplate 2 air_f35b
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_heli]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_heli
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_heli
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 AHE_HAVOC
+ObjectTemplate.setObjectTemplate 2 AHE_AH1Z
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_theli]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_theli
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_theli
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 sa342f
+ObjectTemplate.setObjectTemplate 2 ah6j
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_theli2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_theli2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_theli2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 the_mi17
+ObjectTemplate.setObjectTemplate 2 usthe_uh60
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_heli2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_heli2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_heli2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 xpak_hind
+rem ObjectTemplate.setObjectTemplate 1 AHE_HAVOC
+ObjectTemplate.setObjectTemplate 2 xpak_apache
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_theli3]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_theli3
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_theli3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 the_mi17
+ObjectTemplate.setObjectTemplate 2 usthe_uh60
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_theli4]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_theli4
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_theli4
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 sa342a
+ObjectTemplate.setObjectTemplate 2 ah6c
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_Hjet]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_Hjet
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_Hjet
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 RUAIR_SU34
+ObjectTemplate.setObjectTemplate 2 USAIR_F15
+
+rem [ObjectSpawnerTemplate: cpname_go_32_airfieldbase_Hjet2]
+ObjectTemplate.create ObjectSpawner cpname_go_32_airfieldbase_Hjet2
+ObjectTemplate.activeSafe ObjectSpawner cpname_go_32_airfieldbase_Hjet2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 RUAIR_SU34
+ObjectTemplate.setObjectTemplate 2 USAIR_F15
+
+
+if v_arg1 == host
+
+rem Beach
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_SMG]
+   Object.create CPNAME_GO_SP16_beach_SMG
+   Object.absolutePosition 25.390/38.561/-272.283
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_AAS]
+   Object.create CPNAME_GO_SP16_beach_AAS
+   Object.absolutePosition 20.600/37.700/-290.500
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_jeep]
+   Object.create CPNAME_GO_SP16_beach_jeep
+   Object.absolutePosition 46.340/37.527/-266.689
+   Object.rotation -51.853/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_tank]
+   Object.create CPNAME_GO_SP16_beach_tank
+   Object.absolutePosition 26.000/37.600/-285.000
+   Object.rotation 80.000/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_tank2]
+   Object.create CPNAME_GO_SP16_beach_tank2
+   Object.absolutePosition 45.114/37.600/-285.670
+   Object.rotation -51.146/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 1
+
+
+rem Construction Site
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_AAS]
+   Object.create CPNAME_go_SP16_constructionsite_AAS
+   Object.absolutePosition 75.000/40.500/47.000
+   Object.rotation -90.000/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_APC]
+   Object.create CPNAME_go_SP16_constructionsite_APC
+   Object.absolutePosition 65.906/40.400/4.308
+   Object.rotation 50.626/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_tank]
+   Object.create CPNAME_go_SP16_constructionsite_tank
+   Object.absolutePosition 102.788/40.400/40.524
+   Object.rotation 179.557/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_tank2]
+   Object.create CPNAME_go_SP16_constructionsite_tank2
+   Object.absolutePosition 120.872/40.400/36.636
+   Object.rotation -90.079/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 1
+
+
+rem Village
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_village_SMG]
+   Object.create CPNAME_GO_SP16_village_SMG
+   Object.absolutePosition 12.202/34.199/-140.701
+   Object.rotation 37.169/0.000/0.000
+   Object.setControlPointId 603
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_village_ATS]
+   Object.create CPNAME_GO_SP16_village_ATS
+   Object.absolutePosition 48.920/37.622/-130.661
+   Object.rotation 40.169/0.000/0.000
+   Object.setControlPointId 603
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_village_jeep]
+   Object.create CPNAME_GO_SP16_village_jeep
+   Object.absolutePosition 18.000/34.100/-120.000
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 603
+   Object.layer 1
+
+
+rem City
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_city_SMG]
+   Object.create CPNAME_GO_SP16_city_SMG
+   Object.absolutePosition 89.541/41.572/-28.278
+   Object.rotation 180.000/0.000/0.000
+   Object.setControlPointId 602
+   Object.layer 1
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_city_jeep]
+   Object.create CPNAME_GO_SP16_city_jeep
+   Object.absolutePosition 120.000/39.100/-30.000
+   Object.rotation 90.000/0.000/0.000
+   Object.setControlPointId 602
+   Object.layer 1
+
+
+rem Rock Fort
+
+   rem [ObjectSpawner: cpname_go_32_rockfort_SMG]
+   Object.create cpname_go_32_rockfort_SMG
+   Object.absolutePosition -50.098/33.208/-171.271
+   Object.rotation -20.000/0.000/0.000
+   Object.setControlPointId 9
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_rockfort_AAS]
+   Object.create cpname_go_32_rockfort_AAS
+   Object.absolutePosition -68.594/34.000/-192.453
+   Object.rotation 27.977/0.000/0.000
+   Object.setControlPointId 9
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_rockfort_jeep]
+   Object.create cpname_go_32_rockfort_jeep
+   Object.absolutePosition -49.333/33.150/-200.116
+   Object.rotation 56.140/0.000/0.000
+   Object.setControlPointId 9
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_rockfort_jeep2]
+   Object.create cpname_go_32_rockfort_jeep2
+   Object.absolutePosition -56.154/32.095/-192.242
+   Object.rotation 86.462/0.000/0.000
+   Object.setControlPointId 9
+   Object.layer 1
+
+
+rem Villagefort
+
+   rem [ObjectSpawner: cpname_go_64_Villagefort_AAS]
+   Object.create cpname_go_64_Villagefort_AAS
+   Object.absolutePosition 87.684/39.998/-263.237
+   Object.rotation 20.051/0.000/0.000
+   Object.setControlPointId 8
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_64_Villagefort_APC]
+   Object.create cpname_go_64_Villagefort_APC
+   Object.absolutePosition 128.020/39.998/-265.587
+   Object.rotation -20.000/0.000/0.000
+   Object.setControlPointId 8
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_64_Villagefort_TANK]
+   Object.create cpname_go_64_Villagefort_TANK
+   Object.absolutePosition 107.589/38.456/-249.529
+   Object.rotation 109.790/0.000/0.000
+   Object.setControlPointId 8
+   Object.layer 1
+
+
+rem Hotel
+
+   rem [ObjectSpawner: cpname_go_32_hotel_AAS]
+   Object.create cpname_go_32_hotel_AAS
+   Object.absolutePosition 150.000/36.000/-96.000
+   Object.rotation -75.000/0.000/0.000
+   Object.setControlPointId 16
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_hotel_ATS]
+   Object.create cpname_go_32_hotel_ATS
+   Object.absolutePosition 171.710/35.689/-110.250
+   Object.rotation -85.000/0.000/0.000
+   Object.setControlPointId 16
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_hotel_jeep]
+   Object.create cpname_go_32_hotel_jeep
+   Object.absolutePosition 170.000/37.100/-86.000
+   Object.rotation -135.000/0.000/0.000
+   Object.setControlPointId 16
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_hotel_tank]
+   Object.create cpname_go_32_hotel_tank
+   Object.absolutePosition 164.000/36.100/-118.000
+   Object.rotation -85.000/0.000/0.000
+   Object.setControlPointId 16
+   Object.layer 1
+
+
+rem uscarrier
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_artillery1]
+   Object.create cpname_go_32_uscarrier_artillery1
+   Object.absolutePosition -336.798/28.300/-82.435
+   Object.rotation 64.186/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_artillery2]
+   Object.create cpname_go_32_uscarrier_artillery2
+   Object.absolutePosition -349.148/28.300/-68.896
+   Object.rotation 70.794/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_artillery3]
+   Object.create cpname_go_32_uscarrier_artillery3
+   Object.absolutePosition -324.114/28.300/-99.600
+   Object.rotation 64.988/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_Radar]
+   Object.create cpname_go_32_uscarrier_Radar
+   Object.absolutePosition -650.818/51.870/-574.304
+   Object.rotation 142.917/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_UAV]
+   Object.create cpname_go_32_uscarrier_UAV
+   Object.absolutePosition -623.075/43.400/-609.458
+   Object.rotation 57.816/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_jet]
+   Object.create cpname_go_32_uscarrier_jet
+   Object.absolutePosition -648.243/43.400/-517.377
+   Object.rotation 58.693/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_Hjet]
+   Object.create cpname_go_32_uscarrier_Hjet
+   Object.absolutePosition -692.000/43.400/-474.000
+   Object.rotation 148.392/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_heli]
+   Object.create cpname_go_32_uscarrier_heli
+   Object.absolutePosition -706.000/43.400/-507.000
+   Object.rotation 70.000/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_theli]
+   Object.create cpname_go_32_uscarrier_theli
+   Object.absolutePosition -684.000/43.400/-521.000
+   Object.rotation 25.000/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_theli2]
+   Object.create cpname_go_32_uscarrier_theli2
+   Object.absolutePosition -707.000/43.400/-489.000
+   Object.rotation 90.000/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_heli2]
+   Object.create cpname_go_32_uscarrier_heli2
+   Object.absolutePosition -597.000/43.400/-661.000
+   Object.rotation 60.000/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_theli3]
+   Object.create cpname_go_32_uscarrier_theli3
+   Object.absolutePosition -615.000/43.400/-626.000
+   Object.rotation 60.000/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_theli4]
+   Object.create cpname_go_32_uscarrier_theli4
+   Object.absolutePosition -608.000/43.400/-643.000
+   Object.rotation 60.000/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_jet2]
+   Object.create cpname_go_32_uscarrier_jet2
+   Object.absolutePosition -590.000/43.400/-678.000
+   Object.rotation 148.392/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_uscarrier_Hjet2]
+   Object.create cpname_go_32_uscarrier_Hjet2
+   Object.absolutePosition 622.000/43.400/581.000
+   Object.rotation 148.392/0.000/0.000
+   Object.setControlPointId 606
+   Object.layer 1
+
+
+rem airfieldbase
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_artillery1]
+   Object.create cpname_go_32_airfieldbase_artillery1
+   Object.absolutePosition 215.082/24.700/241.037
+   Object.rotation -149.257/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_artillery2]
+   Object.create cpname_go_32_airfieldbase_artillery2
+   Object.absolutePosition 172.636/24.700/253.232
+   Object.rotation -166.555/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_artillery3]
+   Object.create cpname_go_32_airfieldbase_artillery3
+   Object.absolutePosition 197.402/24.700/253.871
+   Object.rotation -165.021/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_Radar]
+   Object.create cpname_go_32_airfieldbase_Radar
+   Object.absolutePosition 265.009/25.441/191.211
+   Object.rotation -123.341/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_UAV]
+   Object.create cpname_go_32_airfieldbase_UAV
+   Object.absolutePosition 234.509/24.500/297.666
+   Object.rotation -163.271/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_SMG]
+   Object.create cpname_go_32_airfieldbase_SMG
+   Object.absolutePosition 293.826/30.639/160.087
+   Object.rotation 165.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_ME_US_AAS]
+   rem Object.create cpname_go_32_airfieldbase_ME_US_AAS
+   rem Object.absolutePosition 317.490/24.500/219.557
+   rem Object.rotation -134.000/0.000/0.000
+   rem Object.setControlPointId 605
+   rem Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_jet]
+   Object.create cpname_go_32_airfieldbase_jet
+   Object.absolutePosition 343.000/26.252/259.000
+   Object.rotation -77.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_jet2]
+   Object.create cpname_go_32_airfieldbase_jet2
+   Object.absolutePosition 349.000/26.252/241.000
+   Object.rotation -77.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_heli]
+   Object.create cpname_go_32_airfieldbase_heli
+   Object.absolutePosition 299.000/24.500/226.000
+   Object.rotation -80.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_theli]
+   Object.create cpname_go_32_airfieldbase_theli
+   Object.absolutePosition 318.000/24.500/205.000
+   Object.rotation -80.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_theli2]
+   Object.create cpname_go_32_airfieldbase_theli2
+   Object.absolutePosition 327.000/24.500/226.000
+   Object.rotation -80.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_heli2]
+   Object.create cpname_go_32_airfieldbase_heli2
+   Object.absolutePosition 150.000/24.500/253.000
+   Object.rotation -160.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_theli3]
+   Object.create cpname_go_32_airfieldbase_theli3
+   Object.absolutePosition 127.000/24.500/258.000
+   Object.rotation -160.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_theli4]
+   Object.create cpname_go_32_airfieldbase_theli4
+   Object.absolutePosition 106.000/26.252/261.000
+   Object.rotation -160.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_Hjet]
+   Object.create cpname_go_32_airfieldbase_Hjet
+   Object.absolutePosition 210.000/26.252/290.000
+   Object.rotation -77.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+   rem [ObjectSpawner: cpname_go_32_airfieldbase_Hjet2]
+   Object.create cpname_go_32_airfieldbase_Hjet2
+   Object.absolutePosition 205.000/26.252/275.000
+   Object.rotation -77.000/0.000/0.000
+   Object.setControlPointId 605
+   Object.layer 1
+
+endIf
+
+
+rem ********** Spawn Points **********
+
+rem Beach
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_beach_1]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_beach_1
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_beach_1
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 601
+rem [SpawnPoint: CPNAME_GO_SP16_beach_1]
+Object.create CPNAME_GO_SP16_beach_1
+Object.absolutePosition 20.125/37.600/-298.475
+Object.rotation 0.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_beach_2]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_beach_2
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_beach_2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 601
+rem [SpawnPoint: CPNAME_GO_SP16_beach_2]
+Object.create CPNAME_GO_SP16_beach_2
+Object.absolutePosition 50.334/37.600/-277.389
+Object.rotation -88.984/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_beach_3]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_beach_3
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_beach_3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 601
+rem [SpawnPoint: CPNAME_GO_SP16_beach_3]
+Object.create CPNAME_GO_SP16_beach_3
+Object.absolutePosition 19.458/37.600/-310.056
+Object.rotation 88.901/0.000/0.000
+Object.layer 1
+
+
+rem Construction Site
+
+rem [SpawnPointTemplate: CPNAME_go_SP16_constructionsite_1]
+ObjectTemplate.create SpawnPoint CPNAME_go_SP16_constructionsite_1
+ObjectTemplate.activeSafe SpawnPoint CPNAME_go_SP16_constructionsite_1
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 604
+rem [SpawnPoint: CPNAME_go_SP16_constructionsite_1]
+Object.create CPNAME_go_SP16_constructionsite_1
+Object.absolutePosition 77.525/40.400/33.348
+Object.rotation 0.595/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_go_SP16_constructionsite_2]
+ObjectTemplate.create SpawnPoint CPNAME_go_SP16_constructionsite_2
+ObjectTemplate.activeSafe SpawnPoint CPNAME_go_SP16_constructionsite_2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 604
+rem [SpawnPoint: CPNAME_go_SP16_constructionsite_2]
+Object.create CPNAME_go_SP16_constructionsite_2
+Object.absolutePosition 15.598/40.400/37.344
+Object.rotation 89.696/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_go_SP16_constructionsite_3]
+ObjectTemplate.create SpawnPoint CPNAME_go_SP16_constructionsite_3
+ObjectTemplate.activeSafe SpawnPoint CPNAME_go_SP16_constructionsite_3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 604
+rem [SpawnPoint: CPNAME_go_SP16_constructionsite_3]
+Object.create CPNAME_go_SP16_constructionsite_3
+Object.absolutePosition 87.097/40.400/40.083
+Object.rotation -17.742/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_go_SP16_constructionsite_4]
+ObjectTemplate.create SpawnPoint CPNAME_go_SP16_constructionsite_4
+ObjectTemplate.activeSafe SpawnPoint CPNAME_go_SP16_constructionsite_4
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 604
+rem [SpawnPoint: CPNAME_go_SP16_constructionsite_4]
+Object.create CPNAME_go_SP16_constructionsite_4
+Object.absolutePosition 16.636/40.567/26.725
+Object.rotation 39.187/0.000/0.000
+Object.layer 1
+
+
+rem Village
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_1]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_1
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_1
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+rem [SpawnPoint: CPNAME_GO_SP16_village_1]
+Object.create CPNAME_GO_SP16_village_1
+Object.absolutePosition 59.943/37.600/-174.967
+Object.rotation -60.273/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_2]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_2
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+rem [SpawnPoint: CPNAME_GO_SP16_village_2]
+Object.create CPNAME_GO_SP16_village_2
+Object.absolutePosition 27.569/37.627/-178.079
+Object.rotation -62.849/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_3]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_3
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+rem [SpawnPoint: CPNAME_GO_SP16_village_3]
+Object.create CPNAME_GO_SP16_village_3
+Object.absolutePosition 40.050/37.600/-150.128
+Object.rotation 85.318/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_4]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_4
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_4
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+rem [SpawnPoint: CPNAME_GO_SP16_village_4]
+Object.create CPNAME_GO_SP16_village_4
+Object.absolutePosition 7.038/33.100/-120.767
+Object.rotation 76.558/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_5]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_5
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_5
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+rem [SpawnPoint: CPNAME_GO_SP16_village_5]
+Object.create CPNAME_GO_SP16_village_5
+Object.absolutePosition 7.000/33.200/-120.700
+Object.rotation 75.000/0.000/0.000
+Object.layer 1
+
+
+rem City
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_city_1]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_city_1
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_city_1
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 602
+rem [SpawnPoint: CPNAME_GO_SP16_city_1]
+Object.create CPNAME_GO_SP16_city_1
+Object.absolutePosition 119.404/40.400/-16.740
+Object.rotation -88.429/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_city_2]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_city_2
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_city_2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 602
+rem [SpawnPoint: CPNAME_GO_SP16_city_2]
+Object.create CPNAME_GO_SP16_city_2
+Object.absolutePosition 79.378/40.400/-22.052
+Object.rotation 91.554/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_city_3]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_city_3
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_city_3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 602
+rem [SpawnPoint: CPNAME_GO_SP16_city_3]
+Object.create CPNAME_GO_SP16_city_3
+Object.absolutePosition 114.651/37.800/-51.211
+Object.rotation 124.817/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_city_4]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_city_4
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_city_4
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 602
+rem [SpawnPoint: CPNAME_GO_SP16_city_4]
+Object.create CPNAME_GO_SP16_city_4
+Object.absolutePosition 138.965/40.400/-9.568
+Object.rotation 176.200/0.000/0.000
+Object.layer 1
+
+
+rem Rock Fort
+
+rem [SpawnPointTemplate: cpname_go_32_rockfort_1]
+ObjectTemplate.create SpawnPoint cpname_go_32_rockfort_1
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_rockfort_1
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 9
+rem [SpawnPoint: cpname_go_32_rockfort_1]
+Object.create cpname_go_32_rockfort_1
+Object.absolutePosition -49.541/32.099/-177.839
+Object.rotation 171.800/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_rockfort_2]
+ObjectTemplate.create SpawnPoint cpname_go_32_rockfort_2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_rockfort_2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 9
+rem [SpawnPoint: cpname_go_32_rockfort_2]
+Object.create cpname_go_32_rockfort_2
+Object.absolutePosition -74.162/33.999/-196.333
+Object.rotation 25.944/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_rockfort_3]
+ObjectTemplate.create SpawnPoint cpname_go_32_rockfort_3
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_rockfort_3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 9
+rem [SpawnPoint: cpname_go_32_rockfort_3]
+Object.create cpname_go_32_rockfort_3
+Object.absolutePosition -32.141/33.932/-222.237
+Object.rotation -41.701/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_rockfort_4]
+ObjectTemplate.create SpawnPoint cpname_go_32_rockfort_4
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_rockfort_4
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 9
+rem [SpawnPoint: cpname_go_32_rockfort_4]
+Object.create cpname_go_32_rockfort_4
+Object.absolutePosition -50.000/32.100/-173.000
+Object.rotation -20.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_rockfort_5]
+ObjectTemplate.create SpawnPoint cpname_go_32_rockfort_5
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_rockfort_5
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 9
+rem [SpawnPoint: cpname_go_32_rockfort_5]
+Object.create cpname_go_32_rockfort_5
+Object.absolutePosition -75.000/35.100/-199.000
+Object.rotation -35.000/0.000/0.000
+Object.layer 1
+
+
+rem Villagefort
+
+rem [SpawnPointTemplate: cpname_go_64_Villagefort_2]
+ObjectTemplate.create SpawnPoint cpname_go_64_Villagefort_2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_64_Villagefort_2
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setControlPointId 8
+rem [SpawnPoint: cpname_go_64_Villagefort_2]
+Object.create cpname_go_64_Villagefort_2
+Object.absolutePosition 105.146/40.719/-267.342
+Object.rotation 26.604/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_64_Villagefort_3]
+ObjectTemplate.create SpawnPoint cpname_go_64_Villagefort_3
+ObjectTemplate.activeSafe SpawnPoint cpname_go_64_Villagefort_3
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setControlPointId 8
+rem [SpawnPoint: cpname_go_64_Villagefort_3]
+Object.create cpname_go_64_Villagefort_3
+Object.absolutePosition 129.977/39.315/-272.721
+Object.rotation -35.264/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_64_Villagefort_5]
+ObjectTemplate.create SpawnPoint cpname_go_64_Villagefort_5
+ObjectTemplate.activeSafe SpawnPoint cpname_go_64_Villagefort_5
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 8
+rem [SpawnPoint: cpname_go_64_Villagefort_5]
+Object.create cpname_go_64_Villagefort_5
+Object.absolutePosition 89.891/39.456/-270.234
+Object.rotation 52.746/0.000/0.000
+Object.layer 1
+
+
+rem Hotel
+
+rem [SpawnPointTemplate: cpname_go_32_hotel_1]
+ObjectTemplate.create SpawnPoint cpname_go_32_hotel_1
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_hotel_1
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 16
+rem [SpawnPoint: cpname_go_32_hotel_1]
+Object.create cpname_go_32_hotel_1
+Object.absolutePosition 150.000/37.100/-150.000
+Object.rotation 65.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_hotel_2]
+ObjectTemplate.create SpawnPoint cpname_go_32_hotel_2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_hotel_2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 16
+rem [SpawnPoint: cpname_go_32_hotel_2]
+Object.create cpname_go_32_hotel_2
+Object.absolutePosition 192.000/37.100/-101.700
+Object.rotation -120.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_hotel_3]
+ObjectTemplate.create SpawnPoint cpname_go_32_hotel_3
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_hotel_3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 16
+rem [SpawnPoint: cpname_go_32_hotel_3]
+Object.create cpname_go_32_hotel_3
+Object.absolutePosition 186.500/37.100/-115.600
+Object.rotation 60.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_hotel_4]
+ObjectTemplate.create SpawnPoint cpname_go_32_hotel_4
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_hotel_4
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 16
+rem [SpawnPoint: cpname_go_32_hotel_4]
+Object.create cpname_go_32_hotel_4
+Object.absolutePosition 150.000/37.100/-172.000
+Object.rotation -20.000/0.000/0.000
+Object.layer 1
+
+
+rem uscarrier
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_jet]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_jet
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_jet
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_jet]
+Object.create cpname_go_32_uscarrier_sp_jet
+Object.absolutePosition -645.100/45.600/-513.500
+Object.rotation 60.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_Hjet]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_Hjet
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_Hjet
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_Hjet]
+Object.create cpname_go_32_uscarrier_sp_Hjet
+Object.absolutePosition -688.100/45.600/-477.500
+Object.rotation 150.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_heli]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_heli
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_heli
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_heli]
+Object.create cpname_go_32_uscarrier_sp_heli
+Object.absolutePosition -705.100/45.600/-504.500
+Object.rotation 70.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_theli]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_theli
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_theli
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_theli]
+Object.create cpname_go_32_uscarrier_sp_theli
+Object.absolutePosition -681.100/45.600/-520.500
+Object.rotation 25.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_theli2]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_theli2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_theli2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_theli2]
+Object.create cpname_go_32_uscarrier_sp_theli2
+Object.absolutePosition -705.100/45.600/-491.500
+Object.rotation 90.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_heli2]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_heli2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_heli2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 2
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_heli2]
+Object.create cpname_go_32_uscarrier_sp_heli2
+Object.absolutePosition -597.100/45.600/-658.500
+Object.rotation 60.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_theli3]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_theli3
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_theli3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 2
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_theli3]
+Object.create cpname_go_32_uscarrier_sp_theli3
+Object.absolutePosition -612.100/45.600/-626.500
+Object.rotation 60.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_theli4]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_theli4
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_theli4
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 2
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_theli4]
+Object.create cpname_go_32_uscarrier_sp_theli4
+Object.absolutePosition -605.100/45.600/-643.500
+Object.rotation 60.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_jet2]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_jet2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_jet2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 2
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_jet2]
+Object.create cpname_go_32_uscarrier_sp_jet2
+Object.absolutePosition -586.100/45.600/-681.500
+Object.rotation 150.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_uscarrier_sp_Hjet2]
+ObjectTemplate.create SpawnPoint cpname_go_32_uscarrier_sp_Hjet2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_uscarrier_sp_Hjet2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 3
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 606
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_uscarrier_sp_Hjet2]
+Object.create cpname_go_32_uscarrier_sp_Hjet2
+Object.absolutePosition 630/50/567
+Object.rotation 150.000/0.000/0.000
+Object.layer 1
+
+
+rem airfieldbase
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_jet]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_jet
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_jet
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_jet]
+Object.create cpname_go_32_airfieldbase_sp_jet
+Object.absolutePosition 339.100/28.300/258.500
+Object.rotation -80.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_jet2]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_jet2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_jet2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_jet2]
+Object.create cpname_go_32_airfieldbase_sp_jet2
+Object.absolutePosition 345.100/28.300/240.500
+Object.rotation -80.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_heli]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_heli
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_heli
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_heli]
+Object.create cpname_go_32_airfieldbase_sp_heli
+Object.absolutePosition 297.100/28.300/224.500
+Object.rotation -80.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_theli]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_theli
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_theli
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_theli]
+Object.create cpname_go_32_airfieldbase_sp_theli
+Object.absolutePosition 314.100/28.300/204.500
+Object.rotation -80.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_theli2]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_theli2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_theli2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_theli2]
+Object.create cpname_go_32_airfieldbase_sp_theli2
+Object.absolutePosition 323.100/28.300/225.500
+Object.rotation -80.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_heli2]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_heli2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_heli2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 2
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_heli2]
+Object.create cpname_go_32_airfieldbase_sp_heli2
+Object.absolutePosition 151.100/28.300/251.500
+Object.rotation -160.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_theli3]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_theli3
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_theli3
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 2
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_theli3]
+Object.create cpname_go_32_airfieldbase_sp_theli3
+Object.absolutePosition 128.100/28.300/254.500
+Object.rotation -160.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_theli4]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_theli4
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_theli4
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 2
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_theli4]
+Object.create cpname_go_32_airfieldbase_sp_theli4
+Object.absolutePosition 107.100/28.300/257.500
+Object.rotation -160.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_Hjet]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_Hjet
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_Hjet
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 2
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_Hjet]
+Object.create cpname_go_32_airfieldbase_sp_Hjet
+Object.absolutePosition 204.100/28.300/289.500
+Object.rotation -80.000/0.000/0.000
+Object.layer 1
+
+rem [SpawnPointTemplate: cpname_go_32_airfieldbase_sp_Hjet2]
+ObjectTemplate.create SpawnPoint cpname_go_32_airfieldbase_sp_Hjet2
+ObjectTemplate.activeSafe SpawnPoint cpname_go_32_airfieldbase_sp_Hjet2
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setGroup 2
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 605
+ObjectTemplate.setAllowSpawnCloseToVehicle 1
+ObjectTemplate.setAIEnterOnSpawn 1
+rem [SpawnPoint: cpname_go_32_airfieldbase_sp_Hjet2]
+Object.create cpname_go_32_airfieldbase_sp_Hjet2
+Object.absolutePosition 199.100/28.300/274.500
+Object.rotation -80.000/0.000/0.000
+Object.layer 1
+
+
+rem ********** Control Points **********
+
+rem [ControlPointTemplate: CPNAME_GO_SP16_beach]
+ObjectTemplate.create ControlPoint CPNAME_GO_SP16_beach
+ObjectTemplate.activeSafe ControlPoint CPNAME_GO_SP16_beach
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CPNAME_GO_SP16_beach
+ObjectTemplate.radius 6
+rem ObjectTemplate.team 1
+ObjectTemplate.controlPointId 601
+ObjectTemplate.areaValueTeam1 34
+ObjectTemplate.areaValueTeam2 34
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+rem ObjectTemplate.unableToChangeTeam 1
+
+rem [ControlPointTemplate: CPNAME_go_SP16_constructionsite]
+ObjectTemplate.create ControlPoint CPNAME_go_SP16_constructionsite
+ObjectTemplate.activeSafe ControlPoint CPNAME_go_SP16_constructionsite
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CPNAME_go_SP16_constructionsite
+ObjectTemplate.radius 10
+ObjectTemplate.team 1
+ObjectTemplate.controlPointId 604
+ObjectTemplate.areaValueTeam1 34
+ObjectTemplate.areaValueTeam2 34
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+rem ObjectTemplate.unableToChangeTeam 1
+
+rem [ControlPointTemplate: CPNAME_GO_SP16_village]
+ObjectTemplate.create ControlPoint CPNAME_GO_SP16_village
+ObjectTemplate.activeSafe ControlPoint CPNAME_GO_SP16_village
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CPNAME_GO_SP16_village
+ObjectTemplate.radius 6.5
+rem ObjectTemplate.team 1
+ObjectTemplate.controlPointId 603
+ObjectTemplate.areaValueTeam1 34
+ObjectTemplate.areaValueTeam2 34
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+rem ObjectTemplate.unableToChangeTeam 1
+
+rem [ControlPointTemplate: CPNAME_GO_SP16_city]
+ObjectTemplate.create ControlPoint CPNAME_GO_SP16_city
+ObjectTemplate.activeSafe ControlPoint CPNAME_GO_SP16_city
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CPNAME_GO_SP16_city
+ObjectTemplate.radius 5
+rem ObjectTemplate.team 1
+ObjectTemplate.controlPointId 602
+ObjectTemplate.areaValueTeam1 34
+ObjectTemplate.areaValueTeam2 34
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+rem ObjectTemplate.unableToChangeTeam 1
+
+rem [ControlPointTemplate: cpname_go_32_rockfort]
+ObjectTemplate.create ControlPoint cpname_go_32_rockfort
+ObjectTemplate.activeSafe ControlPoint cpname_go_32_rockfort
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName cpname_go_32_rockfort
+ObjectTemplate.radius 10
+rem ObjectTemplate.team 1
+ObjectTemplate.controlPointId 9
+ObjectTemplate.areaValueTeam1 25
+ObjectTemplate.areaValueTeam2 25
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+rem ObjectTemplate.unableToChangeTeam 1
+
+rem [ControlPointTemplate: cpname_go_64_Villagefort]
+ObjectTemplate.create ControlPoint cpname_go_64_Villagefort
+ObjectTemplate.activeSafe ControlPoint cpname_go_64_Villagefort
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName cpname_go_64_Villagefort
+ObjectTemplate.radius 10
+rem ObjectTemplate.team 1
+ObjectTemplate.controlPointId 8
+ObjectTemplate.areaValueTeam1 20
+ObjectTemplate.areaValueTeam2 20
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+
+rem [ControlPointTemplate: cpname_go_32_hotel]
+ObjectTemplate.create ControlPoint cpname_go_32_hotel
+ObjectTemplate.activeSafe ControlPoint cpname_go_32_hotel
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName cpname_go_32_hotel
+ObjectTemplate.radius 12
+rem ObjectTemplate.team 1
+ObjectTemplate.controlPointId 16
+ObjectTemplate.areaValueTeam1 25
+ObjectTemplate.areaValueTeam2 25
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+rem ObjectTemplate.unableToChangeTeam 1
+
+rem [ControlPointTemplate: cpname_go_32_uscarrier]
+ObjectTemplate.create ControlPoint cpname_go_32_uscarrier
+ObjectTemplate.activeSafe ControlPoint cpname_go_32_uscarrier
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName cpname_go_32_uscarrier
+ObjectTemplate.radius 10
+ObjectTemplate.team 2
+ObjectTemplate.controlPointId 606
+ObjectTemplate.timeToGetControl 0
+ObjectTemplate.timeToLoseControl 0
+ObjectTemplate.unableToChangeTeam 1
+
+rem [ControlPointTemplate: cpname_go_32_airfieldbase]
+ObjectTemplate.create ControlPoint cpname_go_32_airfieldbase
+ObjectTemplate.activeSafe ControlPoint cpname_go_32_airfieldbase
+ObjectTemplate.modifiedByUser esj
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName cpname_go_32_airfieldbase
+ObjectTemplate.radius 10
+ObjectTemplate.team 1
+ObjectTemplate.controlPointId 605
+ObjectTemplate.timeToGetControl 0
+ObjectTemplate.timeToLoseControl 0
+ObjectTemplate.unableToChangeTeam 1
+
+
+if v_arg1 == host
+
+
+   rem [ControlPoint: CPNAME_GO_SP16_beach]
+   Object.create CPNAME_GO_SP16_beach
+   Object.absolutePosition 33.951/37.589/-296.224
+   Object.layer 1
+
+   rem [ControlPoint: CPNAME_go_SP16_constructionsite]
+   Object.create CPNAME_go_SP16_constructionsite
+   Object.absolutePosition 49.387/40.389/33.504
+   Object.layer 1
+
+   rem [ControlPoint: CPNAME_GO_SP16_village]
+   Object.create CPNAME_GO_SP16_village
+   Object.absolutePosition 10.234/33.090/-136.374
+   Object.layer 1
+
+   rem [ControlPoint: CPNAME_GO_SP16_city]
+   Object.create CPNAME_GO_SP16_city
+   Object.absolutePosition 124.774/37.790/-46.131
+   Object.layer 1
+
+   rem [ControlPoint: cpname_go_32_rockfort]
+   Object.create cpname_go_32_rockfort
+   Object.absolutePosition -65.236/33.921/-202.097
+   Object.layer 1
+
+   rem [ControlPoint: cpname_go_64_Villagefort]
+   Object.create cpname_go_64_Villagefort
+   Object.absolutePosition 118.020/38.196/-255.587
+   Object.layer 1
+
+   rem [ControlPoint: cpname_go_32_hotel]
+   Object.create cpname_go_32_hotel
+   Object.absolutePosition 159.000/35.500/-95.100
+   Object.layer 1
+
+   rem [ControlPoint: cpname_go_32_uscarrier]
+   Object.create cpname_go_32_uscarrier
+   Object.absolutePosition -664.560/66.273/-553.522
+   Object.layer 1
+
+   rem [ControlPoint: cpname_go_32_airfieldbase]
+   Object.create cpname_go_32_airfieldbase
+   Object.absolutePosition 281.960/24.490/215.582
+   Object.layer 1
+
+
+endIf
+
+CombatAreaManager.use 1
+CombatAreaManager.timeAllowedOutside 60.000000
+CombatArea.create CombatArea_20_64
+CombatArea.min 0.000000/0.000000
+CombatArea.max 0.000000/0.000000
+CombatArea.team 0
+CombatArea.vehicles 4
+CombatArea.layer 1
+
+CombatArea.create CombatArea_0_SP16
+CombatArea.min 0.000000/0.000000
+CombatArea.max 0.000000/0.000000
+CombatArea.addAreaPoint -1000/-1000
+CombatArea.addAreaPoint 1000/-1000
+CombatArea.addAreaPoint 1000/1000
+CombatArea.addAreaPoint -1000/1000
+CombatArea.team 0
+CombatArea.vehicles 4
+CombatArea.layer 1
+CombatArea.usedByPathFinding 1
+
+CombatArea.create CombatArea_40_SP16
+CombatArea.min 0.000000/0.000000
+CombatArea.max 0.000000/0.000000
+CombatArea.addAreaPoint -1000/-1000
+CombatArea.addAreaPoint 1000/-1000
+CombatArea.addAreaPoint 1000/1000
+CombatArea.addAreaPoint -1000/1000
+CombatArea.team 0
+CombatArea.vehicles 2
+CombatArea.layer 1

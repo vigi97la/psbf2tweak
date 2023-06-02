@@ -1,0 +1,18 @@
+rem For standard Battlefield 2 only
+rem ObjectTemplate.setObjectTemplate 1 apc_btr90
+rem For standard Battlefield 2 only
+rem ObjectTemplate.setObjectTemplate 2 usapc_lav25
+
+
+rem Need additional vehicle pack
+
+rem For standard Battlefield 2 only
+ObjectTemplate.setObjectTemplate 1 apc_btr90
+ObjectTemplate.setObjectTemplate 2 usapc_lav25
+rem Need additional vehicle pack
+
+rem For standard Battlefield 2 only
+ObjectTemplate.setObjectTemplate 1 jep_vodnik
+ObjectTemplate.setObjectTemplate 2 usjep_hmmwv
+rem Need additional vehicle pack
+

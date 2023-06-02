@@ -1,0 +1,63 @@
+rem *** Create strategic areas ***
+aiStrategicArea.createFromControlPoint CP_32p_NF_AirControlTower 26 50
+aiStrategicArea.layer 3
+
+aiStrategicArea.createFromControlPoint CP_32p_NF_CargoDepot 24 50
+aiStrategicArea.layer 3
+
+aiStrategicArea.createFromControlPoint CP_32p_NF_CargoPlane 25 50
+aiStrategicArea.layer 3
+
+aiStrategicArea.createFromControlPoint CP_32p_NF_Helipad 22 50
+aiStrategicArea.layer 3
+
+aiStrategicArea.createFromControlPoint CP_32p_NF_TerminalComplex 23 50
+aiStrategicArea.layer 3
+
+aiStrategicArea.setActive CP_32p_NF_AirControlTower
+AIStrategicArea.addNeighbour CP_32p_NF_CargoPlane
+AIStrategicArea.addNeighbour CP_32p_NF_CargoDepot
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -155.621/19.2187/-175.609
+AIStrategicArea.setOrderPosition Vehicle -159.833/19.1712/-176.798
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 14.1421
+
+aiStrategicArea.setActive CP_32p_NF_CargoDepot
+AIStrategicArea.addNeighbour CP_32p_NF_TerminalComplex
+AIStrategicArea.addNeighbour CP_32p_NF_CargoPlane
+AIStrategicArea.addNeighbour CP_32p_NF_AirControlTower
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -117.469/19.3799/-2.72302
+AIStrategicArea.setOrderPosition Vehicle -105.039/19.3853/-23.4065
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 28.2843
+
+aiStrategicArea.setActive CP_32p_NF_CargoPlane
+AIStrategicArea.addNeighbour CP_32p_NF_Helipad
+AIStrategicArea.addNeighbour CP_32p_NF_TerminalComplex
+AIStrategicArea.addNeighbour CP_32p_NF_CargoDepot
+AIStrategicArea.addNeighbour CP_32p_NF_AirControlTower
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -224.107/22.127/114.514
+AIStrategicArea.setOrderPosition Vehicle -241.228/19.3982/148.597
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 14.1421
+
+aiStrategicArea.setActive CP_32p_NF_Helipad
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -36.0049/19.3982/271.33
+AIStrategicArea.setOrderPosition Vehicle -44.67/19.3982/278.845
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 28.2843
+
+aiStrategicArea.setActive CP_32p_NF_TerminalComplex
+AIStrategicArea.addNeighbour CP_32p_NF_Helipad
+AIStrategicArea.addNeighbour CP_32p_NF_CargoDepot
+AIStrategicArea.addNeighbour CP_32p_NF_CargoPlane
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -38.4199/30.027/136.849
+AIStrategicArea.setOrderPosition Vehicle -42.6629/19.3982/162.179
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 14.1421
+

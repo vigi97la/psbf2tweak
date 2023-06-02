@@ -1,0 +1,64 @@
+rem *** Create strategic areas ***
+aiStrategicArea.createFromControlPoint singleplayer_16p_NF_CargoDepot 803 50
+aiStrategicArea.layer 9
+
+aiStrategicArea.createFromControlPoint singleplayer_16p_NF_CargoPlane 804 50
+aiStrategicArea.layer 9
+
+aiStrategicArea.createFromControlPoint singleplayer_16p_NF_Helipad 801 0
+aiStrategicArea.layer 9
+
+aiStrategicArea.createFromControlPoint singleplayer_16p_NF_TerminalComplex 802 50
+aiStrategicArea.layer 9
+
+aiStrategicArea.setActive singleplayer_16p_NF_CargoDepot
+AIStrategicArea.addNeighbour singleplayer_16p_NF_TerminalComplex
+AIStrategicArea.addNeighbour singleplayer_16p_NF_CargoPlane
+AIStrategicArea.addNeighbour singleplayer_16p_NF_Helipad
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -107.671/19.3799/-0.400696
+AIStrategicArea.setOrderPosition Vehicle -95.2483/19.3799/14.8765
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 28.2843
+
+aiStrategicArea.setActive singleplayer_16p_NF_CargoPlane
+AIStrategicArea.addNeighbour singleplayer_16p_NF_CargoDepot
+AIStrategicArea.addNeighbour singleplayer_16p_NF_TerminalComplex
+AIStrategicArea.addNeighbour singleplayer_16p_NF_Helipad
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -224.525/22.3982/114.678
+AIStrategicArea.setOrderPosition Vehicle -240.015/19.3982/145.121
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 19.799
+
+aiStrategicArea.setActive singleplayer_16p_NF_Helipad
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -34.155/19.3982/283.948
+AIStrategicArea.setOrderPosition Vehicle -43.003/19.3982/276.365
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 19.799
+
+aiStrategicArea.setActive singleplayer_16p_NF_TerminalComplex
+AIStrategicArea.addNeighbour singleplayer_16p_NF_CargoDepot
+AIStrategicArea.addNeighbour singleplayer_16p_NF_CargoPlane
+AIStrategicArea.addNeighbour singleplayer_16p_NF_Helipad
+aiStrategicArea.addObjectTypeFlag ControlPoint
+AIStrategicArea.setOrderPosition Infantry -33.797/30.3982/140.973
+AIStrategicArea.setOrderPosition Vehicle -35.4997/19.3649/159.327
+aiStrategicArea.setSide 0
+aiStrategicArea.vehicleSearchRadius 20
+
+aiStrategicArea.addWayPoint -155.793/19.3982/37.374 Infantry singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_CargoPlane
+aiStrategicArea.addWayPoint -149.521/19.3982/74.0779 Infantry singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_CargoPlane
+aiStrategicArea.addWayPoint -154.603/19.3128/-27.3565 Vehicle singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_CargoPlane
+aiStrategicArea.addWayPoint -145.848/19.3799/-24.4896 Vehicle singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_CargoPlane
+aiStrategicArea.addWayPoint -35.5125/19.3982/79.7664 Infantry singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_Helipad
+aiStrategicArea.addWayPoint -62.3306/19.142/119.039 Vehicle singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_Helipad
+aiStrategicArea.addWayPoint -31.8964/19.1922/41.6422 Infantry singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_TerminalComplex
+aiStrategicArea.addWayPoint -133.056/19.3982/75.3729 Infantry singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_TerminalComplex
+aiStrategicArea.addWayPoint -97.22/19.0098/73.1061 Vehicle singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_TerminalComplex
+aiStrategicArea.addWayPoint -97.0481/19.0091/70.5833 Vehicle singleplayer_16p_NF_CargoDepot singleplayer_16p_NF_TerminalComplex
+aiStrategicArea.addWayPoint -57.9309/19.4305/202.033 Vehicle singleplayer_16p_NF_CargoPlane singleplayer_16p_NF_Helipad
+aiStrategicArea.addWayPoint -136.097/19.1199/112.111 Infantry singleplayer_16p_NF_CargoPlane singleplayer_16p_NF_TerminalComplex
+aiStrategicArea.addWayPoint -148.065/19.4001/87.422 Infantry singleplayer_16p_NF_CargoPlane singleplayer_16p_NF_TerminalComplex
+aiStrategicArea.addWayPoint -126.561/19.3982/167.177 Vehicle singleplayer_16p_NF_CargoPlane singleplayer_16p_NF_TerminalComplex

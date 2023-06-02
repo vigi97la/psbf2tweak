@@ -1,0 +1,674 @@
+gameLogic.setTeamDropVehicle 1 "jep_vodnik"
+gameLogic.setTeamDropVehicle 2 "usjep_hmmwv"
+
+rem ********** Object Spawner **********
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_0_1]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_0_1
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_0_1
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 jep_vodnik
+ObjectTemplate.setObjectTemplate 2 usjep_hmmwv
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_1_1]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_1_1
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_1_1
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 ustnk_m1a2
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_jeep]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_jeep
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_jeep
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 jep_vodnik
+ObjectTemplate.setObjectTemplate 2 usjep_hmmwv
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_ART]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_ART
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_ART
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 USART_LW155
+ObjectTemplate.minSpawnDelay 260
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.holdObject 1
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_Radar]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_Radar
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_Radar
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 mobileradar_us_dest
+ObjectTemplate.minSpawnDelay 260
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_UAV]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_UAV
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_UAV
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 2 aircontroltower
+ObjectTemplate.minSpawnDelay 260
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_beach_SMG]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_beach_SMG
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_beach_SMG
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 MEC_BIPOD
+ObjectTemplate.setObjectTemplate 2 US_BIPOD
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_heavytank]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_heavytank
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_heavytank
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 rutnk_t90
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_jeep]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_jeep
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_jeep
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 jep_vodnik
+ObjectTemplate.setObjectTemplate 2 usjep_hmmwv
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_heavyjeep]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_heavyjeep
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_heavyjeep
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 JEP_VODNIK
+ObjectTemplate.setObjectTemplate 2 USJEP_HMMWV
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_artillery]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_artillery
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_artillery
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 ARS_D30
+ObjectTemplate.minSpawnDelay 260
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_radar]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_radar
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_radar
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 mobileradar_mech_dest
+ObjectTemplate.minSpawnDelay 260
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CPNAME_go_SP16_constructionsite_uav]
+ObjectTemplate.create ObjectSpawner CPNAME_go_SP16_constructionsite_uav
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_go_SP16_constructionsite_uav
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 aircontroltower_mec
+ObjectTemplate.minSpawnDelay 260
+ObjectTemplate.maxSpawnDelay 360
+ObjectTemplate.teamOnVehicle 1
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_city_SMG]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_city_SMG
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_city_SMG
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 MEC_BIPOD
+ObjectTemplate.setObjectTemplate 2 US_BIPOD
+
+rem [ObjectSpawnerTemplate: CPNAME_GO_SP16_village_SMG]
+ObjectTemplate.create ObjectSpawner CPNAME_GO_SP16_village_SMG
+ObjectTemplate.activeSafe ObjectSpawner CPNAME_GO_SP16_village_SMG
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setObjectTemplate 1 MEC_BIPOD
+ObjectTemplate.setObjectTemplate 2 US_BIPOD
+
+if v_arg1 == host
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_0_1]
+   Object.create CPNAME_GO_SP16_beach_0_1
+   Object.absolutePosition 45.051/37.600/-303.295
+   Object.rotation -27.685/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_1_1]
+   Object.create CPNAME_GO_SP16_beach_1_1
+   Object.absolutePosition 46.340/37.527/-266.689
+   Object.rotation -51.853/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_jeep]
+   Object.create CPNAME_GO_SP16_beach_jeep
+   Object.absolutePosition 45.114/37.600/-285.670
+   Object.rotation -51.146/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_ART]
+   Object.create CPNAME_GO_SP16_beach_ART
+   Object.absolutePosition 59.449/37.600/-294.472
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_Radar]
+   Object.create CPNAME_GO_SP16_beach_Radar
+   Object.absolutePosition 11.127/39.415/-291.079
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_UAV]
+   Object.create CPNAME_GO_SP16_beach_UAV
+   Object.absolutePosition 36.130/37.600/-314.130
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_beach_SMG]
+   Object.create CPNAME_GO_SP16_beach_SMG
+   Object.absolutePosition 25.390/38.561/-272.283
+   Object.rotation 0.000/0.000/0.000
+   Object.setControlPointId 601
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_heavytank]
+   Object.create CPNAME_go_SP16_constructionsite_heavytank
+   Object.absolutePosition 65.906/40.400/4.308
+   Object.rotation 50.626/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_jeep]
+   Object.create CPNAME_go_SP16_constructionsite_jeep
+   Object.absolutePosition 102.788/40.400/40.524
+   Object.rotation 179.557/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_heavyjeep]
+   Object.create CPNAME_go_SP16_constructionsite_heavyjeep
+   Object.absolutePosition 120.872/40.400/36.636
+   Object.rotation -90.079/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_artillery]
+   Object.create CPNAME_go_SP16_constructionsite_artillery
+   Object.absolutePosition 34.817/42.099/-16.081
+   Object.rotation -175.709/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_radar]
+   Object.create CPNAME_go_SP16_constructionsite_radar
+   Object.absolutePosition 51.458/41.532/55.924
+   Object.rotation -89.817/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_go_SP16_constructionsite_uav]
+   Object.create CPNAME_go_SP16_constructionsite_uav
+   Object.absolutePosition 88.021/40.400/56.000
+   Object.rotation -90.000/0.000/0.000
+   Object.setControlPointId 604
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_city_SMG]
+   Object.create CPNAME_GO_SP16_city_SMG
+   Object.absolutePosition 89.541/41.572/-28.278
+   Object.rotation 180.000/0.000/0.000
+   Object.setControlPointId 602
+   Object.layer 7
+
+   rem [ObjectSpawner: CPNAME_GO_SP16_village_SMG]
+   Object.create CPNAME_GO_SP16_village_SMG
+   Object.absolutePosition 12.202/34.199/-140.701
+   Object.rotation 37.169/0.000/0.000
+   Object.setControlPointId 603
+   Object.layer 7
+
+endIf
+
+rem ********** Spawn Points **********
+rem [SpawnPointTemplate: CPNAME_GO_SP16_beach_1_0]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_beach_1_0
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_beach_1_0
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 601
+
+rem [SpawnPoint: CPNAME_GO_SP16_beach_1_0]
+Object.create CPNAME_GO_SP16_beach_1_0
+Object.absolutePosition 20.125/37.600/-298.475
+Object.rotation 0.000/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_beach_3_0]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_beach_3_0
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_beach_3_0
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 601
+ObjectTemplate.setOnlyForHuman 1
+
+rem [SpawnPoint: CPNAME_GO_SP16_beach_3_0]
+Object.create CPNAME_GO_SP16_beach_3_0
+Object.absolutePosition 50.334/37.600/-277.389
+Object.rotation -88.984/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_beach_0_0]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_beach_0_0
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_beach_0_0
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 601
+
+rem [SpawnPoint: CPNAME_GO_SP16_beach_0_0]
+Object.create CPNAME_GO_SP16_beach_0_0
+Object.absolutePosition 19.458/37.600/-310.056
+Object.rotation 88.901/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_city_3_0]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_city_3_0
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_city_3_0
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 602
+
+rem [SpawnPoint: CPNAME_GO_SP16_city_3_0]
+Object.create CPNAME_GO_SP16_city_3_0
+Object.absolutePosition 119.404/40.400/-16.740
+Object.rotation -88.429/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_city_4_0]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_city_4_0
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_city_4_0
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 602
+
+rem [SpawnPoint: CPNAME_GO_SP16_city_4_0]
+Object.create CPNAME_GO_SP16_city_4_0
+Object.absolutePosition 79.378/40.400/-22.052
+Object.rotation 91.554/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_city_6_0]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_city_6_0
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_city_6_0
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 602
+
+rem [SpawnPoint: CPNAME_GO_SP16_city_6_0]
+Object.create CPNAME_GO_SP16_city_6_0
+Object.absolutePosition 114.651/37.800/-51.211
+Object.rotation 124.817/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_1_0]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_1_0
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_1_0
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+
+rem [SpawnPoint: CPNAME_GO_SP16_village_1_0]
+Object.create CPNAME_GO_SP16_village_1_0
+Object.absolutePosition 59.943/37.600/-174.967
+Object.rotation -60.273/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_2_0]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_2_0
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_2_0
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+
+rem [SpawnPoint: CPNAME_GO_SP16_village_2_0]
+Object.create CPNAME_GO_SP16_village_2_0
+Object.absolutePosition 27.569/37.627/-178.079
+Object.rotation -62.849/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_3_0]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_3_0
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_3_0
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+
+rem [SpawnPoint: CPNAME_GO_SP16_village_3_0]
+Object.create CPNAME_GO_SP16_village_3_0
+Object.absolutePosition 1.617/33.179/-148.691
+Object.rotation 3.378/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_go_SP16_constructionsite_1]
+ObjectTemplate.create SpawnPoint CPNAME_go_SP16_constructionsite_1
+ObjectTemplate.activeSafe SpawnPoint CPNAME_go_SP16_constructionsite_1
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 604
+
+rem [SpawnPoint: CPNAME_go_SP16_constructionsite_1]
+Object.create CPNAME_go_SP16_constructionsite_1
+Object.absolutePosition 77.525/40.400/33.348
+Object.rotation 0.595/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_go_SP16_constructionsite_4]
+ObjectTemplate.create SpawnPoint CPNAME_go_SP16_constructionsite_4
+ObjectTemplate.activeSafe SpawnPoint CPNAME_go_SP16_constructionsite_4
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 604
+
+rem [SpawnPoint: CPNAME_go_SP16_constructionsite_4]
+Object.create CPNAME_go_SP16_constructionsite_4
+Object.absolutePosition 15.598/40.400/37.344
+Object.rotation 89.696/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_go_SP16_constructionsite_7]
+ObjectTemplate.create SpawnPoint CPNAME_go_SP16_constructionsite_7
+ObjectTemplate.activeSafe SpawnPoint CPNAME_go_SP16_constructionsite_7
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 604
+
+rem [SpawnPoint: CPNAME_go_SP16_constructionsite_7]
+Object.create CPNAME_go_SP16_constructionsite_7
+Object.absolutePosition 87.097/40.400/40.083
+Object.rotation -17.742/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_4]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_4
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_4
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+
+rem [SpawnPoint: CPNAME_GO_SP16_village_4]
+Object.create CPNAME_GO_SP16_village_4
+Object.absolutePosition 40.050/37.600/-150.128
+Object.rotation 85.318/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_village_5]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_village_5
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_village_5
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 603
+
+rem [SpawnPoint: CPNAME_GO_SP16_village_5]
+Object.create CPNAME_GO_SP16_village_5
+Object.absolutePosition 7.038/33.100/-120.767
+Object.rotation 76.558/0.000/0.000
+Object.layer 7
+
+rem [SpawnPointTemplate: CPNAME_GO_SP16_city_4]
+ObjectTemplate.create SpawnPoint CPNAME_GO_SP16_city_4
+ObjectTemplate.activeSafe SpawnPoint CPNAME_GO_SP16_city_4
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.setSpawnPositionOffset 0/1.25/0
+ObjectTemplate.setControlPointId 602
+
+rem [SpawnPoint: CPNAME_GO_SP16_city_4]
+Object.create CPNAME_GO_SP16_city_4
+Object.absolutePosition 138.965/40.400/-9.568
+Object.rotation 176.200/0.000/0.000
+Object.layer 7
+
+rem ********** Control Points **********
+rem [ControlPointTemplate: CPNAME_GO_SP16_beach]
+ObjectTemplate.create ControlPoint CPNAME_GO_SP16_beach
+ObjectTemplate.activeSafe ControlPoint CPNAME_GO_SP16_beach
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CPNAME_GO_SP16_beach
+ObjectTemplate.radius 6
+ObjectTemplate.team 2
+ObjectTemplate.controlPointId 601
+ObjectTemplate.areaValueTeam1 34
+ObjectTemplate.areaValueTeam2 34
+ObjectTemplate.timeToGetControl 40
+ObjectTemplate.timeToLoseControl 40
+
+rem [ControlPointTemplate: CPNAME_GO_SP16_city]
+ObjectTemplate.create ControlPoint CPNAME_GO_SP16_city
+ObjectTemplate.activeSafe ControlPoint CPNAME_GO_SP16_city
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CPNAME_GO_SP16_city
+ObjectTemplate.radius 5
+ObjectTemplate.controlPointId 602
+ObjectTemplate.areaValueTeam1 34
+ObjectTemplate.areaValueTeam2 34
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+
+rem [ControlPointTemplate: CPNAME_GO_SP16_village]
+ObjectTemplate.create ControlPoint CPNAME_GO_SP16_village
+ObjectTemplate.activeSafe ControlPoint CPNAME_GO_SP16_village
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CPNAME_GO_SP16_village
+ObjectTemplate.radius 6.5
+ObjectTemplate.controlPointId 603
+ObjectTemplate.areaValueTeam1 34
+ObjectTemplate.areaValueTeam2 34
+ObjectTemplate.timeToGetControl 20
+ObjectTemplate.timeToLoseControl 20
+
+rem [ControlPointTemplate: CPNAME_go_SP16_constructionsite]
+ObjectTemplate.create ControlPoint CPNAME_go_SP16_constructionsite
+ObjectTemplate.activeSafe ControlPoint CPNAME_go_SP16_constructionsite
+ObjectTemplate.modifiedByUser nla
+ObjectTemplate.setNetworkableInfo ControlPointInfo
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate flagpole
+rem -------------------------------------
+ObjectTemplate.setControlPointName CPNAME_go_SP16_constructionsite
+ObjectTemplate.radius 10
+ObjectTemplate.team 1
+ObjectTemplate.controlPointId 604
+ObjectTemplate.areaValueTeam1 34
+ObjectTemplate.areaValueTeam2 34
+ObjectTemplate.timeToGetControl 40
+ObjectTemplate.timeToLoseControl 40
+
+if v_arg1 == host
+
+   rem [ControlPoint: CPNAME_GO_SP16_beach]
+   Object.create CPNAME_GO_SP16_beach
+   Object.absolutePosition 33.951/37.589/-296.224
+   Object.layer 7
+
+   rem [ControlPoint: CPNAME_GO_SP16_city]
+   Object.create CPNAME_GO_SP16_city
+   Object.absolutePosition 124.774/37.790/-46.131
+   Object.layer 7
+
+   rem [ControlPoint: CPNAME_GO_SP16_village]
+   Object.create CPNAME_GO_SP16_village
+   Object.absolutePosition 10.234/33.090/-136.374
+   Object.layer 7
+
+   rem [ControlPoint: CPNAME_go_SP16_constructionsite]
+   Object.create CPNAME_go_SP16_constructionsite
+   Object.absolutePosition 49.387/40.389/33.504
+   Object.layer 7
+
+endIf
+
+CombatAreaManager.use 1
+CombatAreaManager.timeAllowedOutside 10.000000
+CombatArea.create CombatArea_20_64
+CombatArea.min 0.000000/0.000000
+CombatArea.max 0.000000/0.000000
+CombatArea.team 0
+CombatArea.vehicles 4
+CombatArea.layer 1
+
+CombatArea.create CombatArea_0_SP16
+CombatArea.min 0.000000/0.000000
+CombatArea.max 0.000000/0.000000
+CombatArea.addAreaPoint 61.157227/-348.936768
+CombatArea.addAreaPoint 105.219849/-322.685425
+CombatArea.addAreaPoint 139.591431/-293.388489
+CombatArea.addAreaPoint 161.153687/-265.517700
+CombatArea.addAreaPoint 176.879028/-225.927429
+CombatArea.addAreaPoint 203.642700/-118.685547
+CombatArea.addAreaPoint 204.027466/-107.193909
+CombatArea.addAreaPoint 190.917480/-94.490723
+CombatArea.addAreaPoint 189.973145/-82.320862
+CombatArea.addAreaPoint 193.456177/-67.464478
+CombatArea.addAreaPoint 217.824219/-23.050476
+CombatArea.addAreaPoint 221.453125/-8.182190
+CombatArea.addAreaPoint 219.157227/11.405518
+CombatArea.addAreaPoint 199.505737/31.693970
+CombatArea.addAreaPoint 186.958130/46.563599
+CombatArea.addAreaPoint 164.025391/69.969116
+CombatArea.addAreaPoint 145.233276/83.938965
+CombatArea.addAreaPoint 128.725464/91.965942
+CombatArea.addAreaPoint 109.425537/97.719727
+CombatArea.addAreaPoint 78.208008/100.808105
+CombatArea.addAreaPoint 46.537109/94.552612
+CombatArea.addAreaPoint 18.824097/78.459961
+CombatArea.addAreaPoint -1.067444/62.567505
+CombatArea.addAreaPoint -19.835938/44.030640
+CombatArea.addAreaPoint -42.973389/17.937378
+CombatArea.addAreaPoint -58.643677/-8.947510
+CombatArea.addAreaPoint -59.756958/-29.944580
+CombatArea.addAreaPoint -54.641174/-48.279724
+CombatArea.addAreaPoint -49.360657/-63.706177
+CombatArea.addAreaPoint -49.721924/-80.253174
+CombatArea.addAreaPoint -58.250488/-101.113098
+CombatArea.addAreaPoint -88.962097/-157.706238
+CombatArea.addAreaPoint -94.463806/-175.732727
+CombatArea.addAreaPoint -96.518982/-202.740967
+CombatArea.addAreaPoint -91.102905/-230.452332
+CombatArea.addAreaPoint -74.882751/-266.448242
+CombatArea.addAreaPoint -52.538696/-300.637878
+CombatArea.addAreaPoint -24.074524/-325.351929
+CombatArea.addAreaPoint 6.905518/-342.699402
+CombatArea.addAreaPoint 31.278320/-349.381836
+CombatArea.team 0
+CombatArea.vehicles 4
+CombatArea.layer 7
+CombatArea.usedByPathFinding 1
+
+CombatArea.create CombatArea_40_SP16
+CombatArea.min 0.000000/0.000000
+CombatArea.max 0.000000/0.000000
+CombatArea.addAreaPoint -794.929199/-666.762085
+CombatArea.addAreaPoint -742.598633/-735.698608
+CombatArea.addAreaPoint -689.337036/-781.181030
+CombatArea.addAreaPoint -623.627686/-819.062744
+CombatArea.addAreaPoint -561.334656/-830.273865
+CombatArea.addAreaPoint -489.834290/-832.246948
+CombatArea.addAreaPoint -414.050171/-817.535095
+CombatArea.addAreaPoint -311.894470/-797.473328
+CombatArea.addAreaPoint -189.016296/-740.194214
+CombatArea.addAreaPoint -49.115845/-644.352539
+CombatArea.addAreaPoint 232.871704/-409.870178
+CombatArea.addAreaPoint 270.258911/-372.821411
+CombatArea.addAreaPoint 323.838623/-299.216858
+CombatArea.addAreaPoint 374.302246/-213.533020
+CombatArea.addAreaPoint 417.095581/-101.175720
+CombatArea.addAreaPoint 464.516235/114.786255
+CombatArea.addAreaPoint 492.841919/317.974487
+CombatArea.addAreaPoint 483.147339/375.254639
+CombatArea.addAreaPoint 455.943848/412.171387
+CombatArea.addAreaPoint 416.199341/431.760010
+CombatArea.addAreaPoint 350.426392/455.316406
+CombatArea.addAreaPoint 140.600464/510.462891
+CombatArea.addAreaPoint -52.935120/529.145264
+CombatArea.addAreaPoint -112.560974/499.798462
+CombatArea.addAreaPoint -226.833008/407.109131
+CombatArea.addAreaPoint -309.836182/291.532349
+CombatArea.addAreaPoint -510.813416/69.373535
+CombatArea.addAreaPoint -810.302185/-222.645630
+CombatArea.addAreaPoint -860.985474/-293.309937
+CombatArea.addAreaPoint -886.071411/-377.082825
+CombatArea.addAreaPoint -890.259277/-465.643616
+CombatArea.addAreaPoint -859.987488/-567.727173
+CombatArea.team 0
+CombatArea.vehicles 2
+CombatArea.layer 7
+
