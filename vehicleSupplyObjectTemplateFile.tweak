@@ -1,0 +1,26 @@
+
+
+
+ObjectTemplate.addTemplate apc_btr_t_SupplyObject
+ObjectTemplate.setPosition 0/0/-1
+
+
+
+
+
+
+ObjectTemplate.create SupplyObject apc_btr_t_SupplyObject
+ObjectTemplate.modifiedByUser "sofad"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.teamOnVehicle 1
+ObjectTemplate.radius 4
+ObjectTemplate.workOnSoldiers 1
+ObjectTemplate.workOnVehicles 1
+ObjectTemplate.healSpeed 1
+ObjectTemplate.refillAmmoSpeed 3.5
+ObjectTemplate.sharedStorageSize 10000
+
+
+

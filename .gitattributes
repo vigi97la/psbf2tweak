@@ -1,2 +1,29 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Common Windows files
+*.txt eol=crlf
+*.TXT eol=crlf
+*.bat eol=crlf
+*.BAT eol=crlf
+*.cmd eol=crlf
+*.CMD eol=crlf
+*.PS1 eol=crlf
+*.ps1 eol=crlf
+# Might contain binary data but should try to be displayed as text...
+*.csv -text
+*.CSV -text
+# Reg files are UTF-16 and this might cause problems...
+*.reg binary
+*.REG binary
+
+#
+*.con eol=crlf
+*.CON eol=crlf
+*.tweak eol=crlf
+*.TWEAK eol=crlf
+*.ai eol=crlf
+*.AI eol=crlf
+*.desc eol=crlf
+*.DESC eol=crlf
+*.py eol=crlf
+*.PY eol=crlf
+*.xml eol=crlf
+*.XML eol=crlf

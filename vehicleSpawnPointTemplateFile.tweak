@@ -1,0 +1,16 @@
+
+
+
+ObjectTemplate.addTemplate apc_btr_t_SpawnPoint
+
+
+
+
+
+
+ObjectTemplate.create SpawnPoint apc_btr_t_SpawnPoint
+ObjectTemplate.modifiedByUser "egg"
+ObjectTemplate.isNotSaveable 1
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.setEnterOnSpawn 1
+ObjectTemplate.setAIEnterOnSpawn 1

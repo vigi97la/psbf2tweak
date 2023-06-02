@@ -1,0 +1,13 @@
+
+
+ObjectTemplate.armor.addArmorEffect 9 e_dstate_land_fire 0/0.373439/-2.05691 0/0/0
+ObjectTemplate.armor.addArmorEffect 2 e_dstate_static_fire 0.401428/0.444168/-1.41347 0/0/0
+ObjectTemplate.armor.addArmorEffect 2 e_sAmb_wreckfire -0.390331/0.429387/1.24622 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_sAmb_wreckfire 0.44/0.148/-1.645 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_sAmb_wreckfire -0.257/0.663/-1.721 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_dstate_static_fire 0/0.5/1.748 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_dstate_static_fire 0.324/0.618/-0.968 0/0/0
+ObjectTemplate.armor.addArmorEffect -1 e_dstate_static_fire 0.401428/0.444168/-1.41347 0/0/0
+ObjectTemplate.armor.addArmorEffect -1 e_sAmb_wreckfire -0.390331/0.429387/1.24622 0/0/0
+
+
