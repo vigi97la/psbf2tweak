@@ -69,14 +69,14 @@ idair_rafale;4;;EU;1;0;0;0;0;;;
 ruair_mig144;4;;MEC,MECSF,Spetz;1;0;0;0;0;;;
 su75;4;;MEC,MECSF,Spetz;1;0;0;0;0;;;
 ;;;;;;;;;;;
-apc_acv_15;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;1;1;0;1;;;https://en.wikipedia.org/wiki/FNSS_ACV-15
+apc_acv_15;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;https://en.wikipedia.org/wiki/FNSS_ACV-15
 apc_bmd_2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;
 apc_btr_t;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 ARMA3_Boxer;1.2;;EU,SAS;0;1;1;0;0;;;https://en.wikipedia.org/wiki/Boxer_(armoured_fighting_vehicle)
 BF3_BMP2M;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;0;0;0;0;;;
 bf3_m1128_stryker;1;;US,SEAL,EU,SAS;0;0;0;0;0;;;
 BMD4;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;
-bmp1_kliver;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
+bmp1_kliver;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 bmp2m_berezhok;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 BMW_E32;3.3;;ALL;0;0;0;0;0;;;
 Bushmaster;3;;EU,SAS;0;0;0;0;0;;;https://fr.wikipedia.org/wiki/V%C3%A9hicule_blind%C3%A9_Bushmaster

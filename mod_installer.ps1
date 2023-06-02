@@ -92,9 +92,9 @@ function AddNewVehicle($vehicleName, $vehicleType, $vehicleTeams, $downloadLink,
 	$downloadLink=$ln.IHTMLAnchorElement_href
 
 	wget $downloadLink -UseBasicParsing -OutFile "C:\tmp\download.zip"
-	7z x "C:\tmp\download.zip" -o"C:\tmp\download" -y
+	7z x -y "C:\tmp\download.zip" -o"C:\tmp\download"
 	Get-ChildItem "C:\tmp\download\*" -R -Include *.zip,*.rar,*.7z | ForEach-Object {
-		7z x $_.FullName -o"$($_.DirectoryName)/$($_.Basename)" -y
+		7z x -y $_.FullName -o"$($_.DirectoryName)/$($_.Basename)"
 		Remove-Item $_.FullName
 	}
 
