@@ -1,4 +1,4 @@
-vehicleName;vehicleType (tank: 0.0, mobile artillery: 0.1, heavily-armed APC: 1.0, anti-tank APC: 1.1, light-armed APC: 1.2, attack heli: 2.0, transport heli: 2.1, heavy armed car: 3.0, light armed car: 3.1, light ground vehicle: 3.2, light civilian car: 3.3, heavy civilian car: 3.4, spy car: 3.5, multi-purpose plane: 4.0, AA plane: 4.1, bombing plane: 4.2, spy plane: 4.3, light civilian plane: 4.4, heavy civilian plane: 4.5, AA: 5, light boat: 6.0, medium boat: 6.1, heavy boat: 6.2, light submarine: 6.3, heavy submarine: 6.4);preferredTeams;compatibleTeams (ALL,US,MEC,CH,SEAL,MECSF,Spetz,SAS,Chinsurgent,MEInsurgent,EU);bDisabled;bAmphibious;bFloating;bVTOL;bCanBeAirDropped;shortDescription;downloadLink;wikiLink
+vehicleName;vehicleType;preferredTeams;compatibleTeams;bDisabled;bAmphibious;bFloating;bVTOL;bCanBeAirDropped;shortDescription;downloadLink;wikiLink
 aav_tunguska;5;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 aav_type95;5;CH;CH;0;0;0;0;0;;;
 apc_btr90;1;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;1;1;0;0;;;
@@ -44,12 +44,12 @@ xpak_M1A2;0;SEAL;US,SEAL,EU,SAS;0;0;0;0;0;;;
 ;;;;;;;;;;;
 air_a10;4.2;US;US,SEAL,EU,SAS;0;0;0;0;0;;;
 air_su39;4.2;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
-che_wz11;2;CH;CH;0;0;0;1;0;;;
-she_ec635;2;SAS;EU,SAS;0;0;0;1;0;;;https://en.wikipedia.org/wiki/Eurocopter_EC635
-she_littlebird;2;SEAL;US,SEAL;0;0;0;1;0;;;https://en.wikipedia.org/wiki/MD_Helicopters_MH-6_Little_Bird
-xpak2_fantan;4.2;CH;CH;0;0;0;0;0;;;
-xpak2_musclecar;3.3;ALL;ALL;0;0;0;0;0;;;
-xpak2_semi;3.4;ALL;ALL;0;0;0;0;0;;;
+che_wz11;2;CH;CH;1;0;0;1;0;;;
+she_ec635;2;SAS;EU,SAS;1;0;0;1;0;;;https://en.wikipedia.org/wiki/Eurocopter_EC635
+she_littlebird;2;SEAL;US,SEAL;1;0;0;1;0;;;https://en.wikipedia.org/wiki/MD_Helicopters_MH-6_Little_Bird
+xpak2_fantan;4.2;CH;CH;1;0;0;0;0;;;
+xpak2_musclecar;3.3;ALL;ALL;1;0;0;0;0;;;
+xpak2_semi;3.4;ALL;ALL;1;0;0;0;0;;;
 ;;;;;;;;;;;
 xpak2_eurofighter;4.1;EU;EU,SAS;0;0;0;0;0;;;https://en.wikipedia.org/wiki/Eurofighter_Typhoon
 xpak2_faav;3.1;;US,SEAL,EU,SAS;0;0;0;0;1;;;
@@ -61,19 +61,19 @@ xpak2_tnkl2a6;0;EU;EU;0;0;0;0;0;;;
 ;;;;;;;;;;;
 kobra;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 ah6c;2.1;;US,SEAL,EU,SAS;0;0;0;1;0;;;https://en.wikipedia.org/wiki/MD_Helicopters_MH-6_Little_Bird
-ah6j;2;;US,SEAL;0;0;0;1;0;;;https://en.wikipedia.org/wiki/MD_Helicopters_MH-6_Little_Bird
+ah6j;2;;US,SEAL,EU,SAS;0;0;0;1;0;;;https://en.wikipedia.org/wiki/MD_Helicopters_MH-6_Little_Bird
 sa342a;2;;MEC,MECSF,Spetz;0;0;0;1;0;;;
 sa342f;2.1;;MEC,MECSF,Spetz;0;0;0;1;0;;;
 B52;4.2;;US,SEAL,EU,SAS;0;0;0;0;0;;;
-idair_rafale;4;;EU;0;0;0;0;0;;;
-ruair_mig144;4;;MEC,MECSF,Spetz;0;0;0;0;0;;;
-su75;4;;MEC,MECSF,Spetz;0;0;0;0;0;;;
+idair_rafale;4;;EU;1;0;0;0;0;;;
+ruair_mig144;4;;MEC,MECSF,Spetz;1;0;0;0;0;;;
+su75;4;;MEC,MECSF,Spetz;1;0;0;0;0;;;
 ;;;;;;;;;;;
 apc_acv_15;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;1;1;0;1;;;https://en.wikipedia.org/wiki/FNSS_ACV-15
 apc_bmd_2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;
 apc_btr_t;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 ARMA3_Boxer;1.2;;EU,SAS;0;1;1;0;0;;;https://en.wikipedia.org/wiki/Boxer_(armoured_fighting_vehicle)
-BF3_BMP2M;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
+BF3_BMP2M;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;0;0;0;0;;;
 bf3_m1128_stryker;1;;US,SEAL,EU,SAS;0;0;0;0;0;;;
 BMD4;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;
 bmp1_kliver;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
@@ -87,7 +87,7 @@ gaz_2975_tiger;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;
 ifv_spz_puma;1.2;;EU;0;0;0;0;0;;;https://en.wikipedia.org/wiki/Puma_(German_infantry_fighting_vehicle)
 lav25a2;1.2;;US,SEAL,EU,SAS;0;0;0;0;0;;;
 leoclerc;0;;EU;0;0;0;0;0;;;
-leopard_2a7;0;;EU;0;0;0;0;0;;;
+leopard_2a7;0;;EU;1;0;0;0;0;;;
 mbt_c1_ariete;0;;EU;0;0;0;0;0;;;
 mbt_t72b1;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 mbt_t80bv;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
@@ -95,7 +95,7 @@ mbt_t80u;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 meat_niva;3.3;;ALL;0;0;0;0;0;;;
 mercedes_560sel_w126;3.3;;ALL;0;0;0;0;0;;;
 mrap_maxxpro;3;;US,SEAL,EU,SAS;0;0;0;0;0;;;https://en.wikipedia.org/wiki/International_MaxxPro
-MSTA-S;0.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
+MSTA-S;0.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;0;0;0;0;;;
 P4_ASPIC;3;;EU;0;0;0;0;1;;;
 patria_amv;1.2;;EU;0;1;1;0;0;;;https://en.wikipedia.org/wiki/Patria_AMV
 RUTNK_T14;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
