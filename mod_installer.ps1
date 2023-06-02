@@ -72,8 +72,8 @@ function main()
 	#FindAllVehicles, check ServerArchives.con, fileManager.mountArchive XXX.zip Objects, if mods/bf2/Objects_server.zip or mods/xpack/Objects_server.zip, should make a copy of the .tweak and add the ref to the new efserv.zip, vehserv.zip, stsgarageserv.zip in ServerArchives.con
 	$objectsFolder="C:\tmp\Objects"
 	#ArmorEffectUpdate $objectsFolder $null
-	BasicTempUpdate $objectsFolder 0.01
-	TimeToStayAsWreckUpdate $objectsFolder $timeToStayAsWreck
+	BasicTempUpdate "$objectsFolder" 0.01
+	TimeToStayAsWreckUpdate "$objectsFolder" $timeToStayAsWreck
 	#all apcs get supplyobject and spawnpoints
 	#Use git to create a repo and make commits inside...
 
@@ -141,7 +141,7 @@ exit
 
 
 function CreateNewModFromTemplate($modFolder) {
-	If (Test-Path -Path $modFolder\..\xpack) {
+	If (Test-Path -Path "$modFolder\..\xpack") {
 		$bxpack=$true
 	}
 	Else {
@@ -149,7 +149,7 @@ function CreateNewModFromTemplate($modFolder) {
 		"Error: Missing Special Forces"
 		exit
 	}
-	If (Test-Path -Path $modFolder\..\bf2\Booster_server.zip) {
+	If (Test-Path -Path "$modFolder\..\bf2\Booster_server.zip") {
 		$bbooster=$true
 	}
 	Else {
@@ -157,7 +157,7 @@ function CreateNewModFromTemplate($modFolder) {
 		"Error: Missing Armored Fury"
 		exit
 	}
-	If (Test-Path -Path $modFolder\..\bf2\Levels\OperationSmokeScreen) {
+	If (Test-Path -Path "$modFolder\..\bf2\Levels\OperationSmokeScreen") {
 		$bef=$true
 	}
 	Else {
@@ -166,20 +166,20 @@ function CreateNewModFromTemplate($modFolder) {
 		exit
 	}
 
-	New-Item $modFolder\Levels -ItemType directory -Force
-	Copy-Item -Path python\game\scoringCommon.py,FS.bat,WINDOWED.bat -Destination $modFolder\ -Force -Recurse
-	Copy-Item -Path $modFolder\..\xpack\*  -Include AI,Localization,Logs,menu,movies,Objects,python,Settings,shaders,Common_client.zip,Common_server.zip,Fonts_client.zip,Menu_client.zip,Menu_server.zip,Objects_client.zip,Objects_server.zip,Shaders_client.zip,ClientArchives.con,GameLogicInit.con,ServerArchives.con,Mod.desc,bf2xpack.ico,mod.jpg,mod_icon.jpg,bst_archive.md5,bst_archive_mod.md5,std_archive.md5,std_archive_mod.md5,mod.png,mod_icon.png,WINDOWED.bat -Destination $modFolder\ -Force -Recurse
-	Copy-Item -Path $modFolder\..\xpack\Levels\Gulf_of_Oman -Destination $modFolder\Levels\ -Force -Recurse
+	New-Item "$modFolder\Levels" -ItemType directory -Force
+	Copy-Item -Path python\game\scoringCommon.py,FS.bat,WINDOWED.bat -Destination "$modFolder\" -Force -Recurse
+	Copy-Item -Path "$modFolder\..\xpack\*"  -Include AI,Localization,Logs,menu,movies,Objects,python,Settings,shaders,Common_client.zip,Common_server.zip,Fonts_client.zip,Menu_client.zip,Menu_server.zip,Objects_client.zip,Objects_server.zip,Shaders_client.zip,ClientArchives.con,GameLogicInit.con,ServerArchives.con,Mod.desc,bf2xpack.ico,mod.jpg,mod_icon.jpg,bst_archive.md5,bst_archive_mod.md5,std_archive.md5,std_archive_mod.md5,mod.png,mod_icon.png,WINDOWED.bat -Destination "$modFolder\" -Force -Recurse
+	Copy-Item -Path "$modFolder\..\xpack\Levels\Gulf_of_Oman" -Destination "$modFolder\Levels\" -Force -Recurse
 
 	# Need to replace xpack_alt (which is a template)
-	(Get-Content $modFolder\FS.bat) -replace "xpack_alt",(Get-Item $modFolder).Name | Set-Content $modFolder\FS.bat
-	(Get-Content $modFolder\WINDOWED.bat) -replace "xpack_alt",(Get-Item $modFolder).Name | Set-Content $modFolder\WINDOWED.bat
+	(Get-Content "$modFolder\FS.bat") -replace "xpack_alt",(Get-Item $modFolder).Name | Set-Content "$modFolder\FS.bat"
+	(Get-Content "$modFolder\WINDOWED.bat") -replace "xpack_alt",(Get-Item $modFolder).Name | Set-Content "$modFolder\WINDOWED.bat"
 
 	# Specific...
-	Copy-Item -Path ServerArchives.con -Destination $modFolder\ -Force -Recurse
-	Copy-Item -Path ClientArchives.con -Destination $modFolder\ -Force -Recurse
-	Copy-Item -Path Levels\Gulf_of_Oman -Destination $modFolder\Levels\ -Force -Recurse
-	cmd.exe /c $modFolder\Levels\update_server.bat # Need 7z
+	Copy-Item -Path ServerArchives.con -Destination "$modFolder\" -Force -Recurse
+	Copy-Item -Path ClientArchives.con -Destination "$modFolder\" -Force -Recurse
+	Copy-Item -Path Levels\Gulf_of_Oman -Destination "$modFolder\Levels\" -Force -Recurse
+	cmd.exe /c "$modFolder\Levels\update_server.bat" # Need 7z
 	#if $bef OperationSmokeScreen, Taraba_Quarry need specific fixes to avoid vehicles conflicts...
 
 

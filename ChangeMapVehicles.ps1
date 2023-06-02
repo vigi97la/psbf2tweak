@@ -4,7 +4,7 @@
 
 # Due to the fact some vehicles have more specificities (e.g. bAmphibious) than others from the same vehicleType, it is better to reset GamePlayObjects.con to its original before running again the script...
 
-# Should make an automatic backup of GamePlayObjects.con and use it as starting point automatically as option...?
+# need gui to list detected maps, gamemodes...
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
@@ -23,9 +23,7 @@ $db=Import-Csv -Path ".\vehicles_db.csv" -Delimiter ";"
 $team="EU"
 $vehicle="air_f35b"
 
-#.\ChangeMapVehicles.ps1 C:\Users\Administrator\Downloads
-#function ChangeMapVehicles($levelFolder,$gameMode="",$mapSize="",$forcedTeam1="",$forcedTeam2="",[bool]$bRandomizeTeam1Vehicles=$true,[bool]$bRandomizeTeam2Vehicles=$true,[bool]$bEnforcePreferredTeams=$false,[bool]$bEnforceAmphibious=$true,[bool]$bEnforceFloating=$true,[bool]$bEnforceVTOL=$true,[bool]$bEnforceCanBeAirDropped=$true) {
-function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTeam1="Spetz",$forcedTeam2="EU",[bool]$bRandomizeTeam1Vehicles=$true,[bool]$bRandomizeTeam2Vehicles=$true,[bool]$bEnforcePreferredTeams=$false,[bool]$bEnforceAmphibious=$true,[bool]$bEnforceFloating=$true,[bool]$bEnforceVTOL=$true,[bool]$bEnforceCanBeAirDropped=$true) {
+function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTeam1="Spetz",$forcedTeam2="EU",[bool]$bRandomizeTeam1Vehicles=$true,[bool]$bRandomizeTeam2Vehicles=$true,[bool]$bUseAutoBackup=$true,[bool]$bEnforcePreferredTeams=$false,[bool]$bEnforceAmphibious=$true,[bool]$bEnforceFloating=$true,[bool]$bEnforceVTOL=$true,[bool]$bEnforceCanBeAirDropped=$true) {
 
 	#params gamemode=sp1,gpm_coop..., mapsize=16,32,64,128...
 
@@ -40,6 +38,15 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 	#should get which team is 1 or 2 in $levelFolder\server\Init.con
 
 	$file="$levelFolder\server\GameModes\$gameMode\$mapSize\GamePlayObjects.con"
+	If ($bUseAutoBackup) {
+		If (Test-Path -Path "$file.bak") {
+			Copy-Item -Path "$file.bak" -Destination "$file" -Force -Recurse		
+		}
+		Else {
+			Copy-Item -Path "$file" -Destination "$file.bak" -Force -Recurse		
+		}
+	}
+
 	$regexpr="(?<=ObjectTemplate.setObjectTemplate)(\s+)([1-2])(\s+)(.*?)\s+?\r?\n"
 	Get-ChildItem "$file" -R | ForEach-Object {
 		$m=[regex]::Matches((Get-Content -Raw $_.FullName), $regexpr)

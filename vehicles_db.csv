@@ -1,8 +1,8 @@
 vehicleName;vehicleType;preferredTeams;compatibleTeams;bDisabled;bAmphibious;bFloating;bVTOL;bCanBeAirDropped;shortDescription;downloadLink;wikiLink
 aav_tunguska;5;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
-aav_type95;5;CH;CH;0;0;0;0;0;;;
+aav_type95;5;CH;CH;0;0;0;0;0;;;https://en.wikipedia.org/wiki/Type_95_SPAAA
 apc_btr90;1;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;1;1;0;0;;;
-apc_wz551;1;CH;CH;0;1;1;0;0;;;
+apc_wz551;1;CH;CH;0;1;1;0;0;;;https://en.wikipedia.org/wiki/WZ-551
 JEEP_FAAV;3.1;US;US,SEAL,EU,SAS;0;0;0;0;1;;;
 jep_mec_paratrooper;3.1;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;
 jep_nanjing;3;CH;CH;0;0;0;0;1;;;
@@ -17,11 +17,11 @@ USTNK_M1A2;0;US;US,SEAL,EU,SAS;0;0;0;0;0;;;
 boat_rib;6.1;ALL;ALL;0;0;1;0;1;;;
 ahe_ah1z;2;US;US,SEAL,EU,SAS;0;0;0;1;0;;;
 ahe_havoc;2;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;1;0;;;
-ahe_z10;2;CH;CH;0;0;0;1;0;;;
+ahe_z10;2;CH;CH;0;0;0;1;0;;;https://en.wikipedia.org/wiki/Changhe_Z-10
 air_f35b;4.1;US;US,SEAL,EU,SAS;0;0;0;1;0;;;
-air_j10;4.1;CH;CH;0;0;0;0;0;;;
-air_su30mkk;4;CH;CH;0;0;0;0;0;;;
-chthe_z8;2.1;CH;CH;0;0;0;1;0;;;
+air_j10;4.1;CH;CH;0;0;0;0;0;;;https://en.wikipedia.org/wiki/Chengdu_J-10
+air_su30mkk;4;CH;CH,MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;https://en.wikipedia.org/wiki/Sukhoi_Su-30
+chthe_z8;2.1;CH;CH,EU;0;0;0;1;0;;;https://en.wikipedia.org/wiki/A%C3%A9rospatiale_SA_321_Super_Frelon
 ruair_mig29;4.1;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 RUAIR_SU34;4;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 the_mi17;2.1;MEC;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;1;0;;;
@@ -36,7 +36,7 @@ xpak_atv;3.2;ALL;ALL;0;0;0;0;1;;;
 xpak_bmp3;1;Spetz;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 xpak_civ1;3.3;ALL;ALL;0;0;0;0;0;;;
 xpak_civ2;3.3;ALL;ALL;0;0;0;0;0;;;
-xpak_forklift;3.2;ALL;ALL;0;0;0;0;0;;;
+xpak_forklift;3.2;ALL;ALL;1;0;0;0;0;;;
 xpak_hind;2;Spetz;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;1;0;;;
 xpak_hummerTOW;3;SEAL;US,SEAL,EU,SAS;0;0;0;0;1;;;
 xpak_jetski;6;ALL;ALL;0;0;1;0;1;;;
@@ -69,8 +69,9 @@ idair_rafale;4;;EU;1;0;0;0;0;;;
 ruair_mig144;4;;MEC,MECSF,Spetz;1;0;0;0;0;;;
 su75;4;;MEC,MECSF,Spetz;1;0;0;0;0;;;
 ;;;;;;;;;;;
-apc_acv_15;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;https://en.wikipedia.org/wiki/FNSS_ACV-15
+apc_acv_15;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;https://en.wikipedia.org/wiki/FNSS_ACV-15
 apc_bmd_2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;
+apc_btr_4e;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;1;1;0;0;;;
 apc_btr_t;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 ARMA3_Boxer;1.2;;EU,SAS;0;1;1;0;0;;;https://en.wikipedia.org/wiki/Boxer_(armoured_fighting_vehicle)
 BF3_BMP2M;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;0;0;0;0;;;
@@ -86,8 +87,8 @@ gaz_24_volga;3.3;;ALL;0;0;0;0;0;;;
 gaz_2975_tiger;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;1;;;
 ifv_spz_puma;1.2;;EU;0;0;0;0;0;;;https://en.wikipedia.org/wiki/Puma_(German_infantry_fighting_vehicle)
 lav25a2;1.2;;US,SEAL,EU,SAS;0;0;0;0;0;;;
-leoclerc;0;;EU;0;0;0;0;0;;;
-leopard_2a7;0;;EU;1;0;0;0;0;;;
+leoclerc;0;;EU;0;0;0;0;0;;;https://www.edrmagazine.eu/the-leo-clerc-shows-french-german-cooperation-within-knds
+leopard_2a7;0;;EU;1;0;0;0;0;;;https://en.wikipedia.org/wiki/Leopard_2
 mbt_c1_ariete;0;;EU;0;0;0;0;0;;;
 mbt_t72b1;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
 mbt_t80bv;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;;;
