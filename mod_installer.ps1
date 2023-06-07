@@ -19,7 +19,6 @@ $vehicleSpawnPointTemplateFile=$null
 #{ 
 #   "Please install 7z.exe (7-Zip) and ensure it is in Windows PATH, and reboot"
 #}
-# Use expand-archive instead? 7z might still be necessary for vehicle packs from the Internet...
 
 #Read-Host -Prompt "Commands such as wget.exe, 7z.exe are necessary please comment the following line and relaunch the script if you already have them or press Enter to continue"
 #Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')); choco feature enable -n useRememberedArgumentsForUpgrades ; choco upgrade -y -r --no-progress 7zip Wget ; refreshenv
@@ -83,6 +82,8 @@ function AddNewVehicle($vehicleName, $vehicleType, $vehicleTeams, $downloadLink,
 	$preCustomScript
 
 	#first should try to download directly from $downloadLink (how to get wget error code?), if it fails assumes it is moddb, how to do without ie...
+
+	# or if not easy to download auto, ask to manually download and gather in a folder, then extract all *.zip,*.rar,*.7z...
 
 	$ie = new-object -ComObject InternetExplorer.Application
 	$ie.Navigate($downloadLink)
