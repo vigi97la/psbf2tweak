@@ -17,4 +17,4 @@ function TimeToStayAsWreckUpdate($objectsFolder, [int]$time=10, [bool]$bIncludeS
 	}
 }
 
-TimeToStayAsWreckUpdate $args
+TimeToStayAsWreckUpdate @args

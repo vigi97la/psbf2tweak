@@ -12,4 +12,4 @@ function SetBots($modFolder, [int]$nbBots=47, [int]$maxBotsIncludeHumans=0, [dou
 	(Get-Content $modFolder\AI\AIDefault.ai) -replace "rem aiSettings","aiSettings" | Set-Content $modFolder\AI\AIDefault.ai
 }
 
-SetBots $args
+SetBots @args

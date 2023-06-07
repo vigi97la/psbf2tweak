@@ -84,4 +84,4 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 	#recycle extracted server folder?
 }
 
-ChangeMapVehicles $args
+ChangeMapVehicles @args

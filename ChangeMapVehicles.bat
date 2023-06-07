@@ -9,9 +9,9 @@ set args=%1
 :More
 shift
 if '%1'=='' goto Done
-set args=%args%, %1
+set args=%args% %1
 goto More
 :Done
-powershell.exe -NoExit -Command "& '%PSScript%' '%args%'"
+powershell.exe -NoExit -Command "& '%PSScript%' %args%"
 
 exit

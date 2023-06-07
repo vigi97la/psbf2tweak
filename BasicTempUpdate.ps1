@@ -16,4 +16,4 @@ function BasicTempUpdate($objectsFolder, [double]$tempMultiplier=10, [bool]$bInc
 	}
 }
 
-BasicTempUpdate $args
+BasicTempUpdate @args
