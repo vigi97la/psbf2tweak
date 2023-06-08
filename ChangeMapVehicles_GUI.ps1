@@ -136,6 +136,14 @@ $bEnforceVTOLCheckbox.Checked = $true
 $form.Controls.Add($bEnforceVTOLCheckbox) 
 
 $offset += 20
+$bEnforceNeedAirfieldCheckbox = new-object System.Windows.Forms.checkbox
+$bEnforceNeedAirfieldCheckbox.Location = new-object System.Drawing.Size(10,$offset)
+$bEnforceNeedAirfieldCheckbox.Size = new-object System.Drawing.Size(250,20)
+$bEnforceNeedAirfieldCheckbox.Text = "bEnforceNeedAirfield"
+$bEnforceNeedAirfieldCheckbox.Checked = $true
+$form.Controls.Add($bEnforceNeedAirfieldCheckbox) 
+
+$offset += 20
 $bEnforceNeedLargeAirfieldCheckbox = new-object System.Windows.Forms.checkbox
 $bEnforceNeedLargeAirfieldCheckbox.Location = new-object System.Drawing.Size(10,$offset)
 $bEnforceNeedLargeAirfieldCheckbox.Size = new-object System.Drawing.Size(250,20)
@@ -181,7 +189,7 @@ $applyButton.Location = new-object System.Drawing.Size(500,$offset)
 $applyButton.Size = new-object System.Drawing.Size(100,40)
 $applyButton.Text = "Apply"
 $applyButton.Add_Click({
-	.\ChangeMapVehicles.ps1 $levelFolder $gameModeTextBox.Text $mapSizeTextBox.Text $forcedTeam1TextBox.Text $forcedTeam2TextBox.Text $bEnforceVehicleTypeCheckbox.Checked $bEnforceCompatibleTeamsCheckbox.Checked $bEnforcePreferredTeamsCheckbox.Checked $bEnforceAmphibiousCheckbox.Checked $bEnforceFloatingCheckbox.Checked $bEnforceFlyingCheckbox.Checked $bEnforceVTOLCheckbox.Checked $bEnforceNeedLargeAirfieldCheckbox.Checked $bEnforceCanBeAirDroppedCheckbox.Checked $bRandomizeTeam1VehiclesCheckbox.Checked $bRandomizeTeam2VehiclesCheckbox.Checked $bUseAutoBackupCheckbox.Checked | Write-Host
+	.\ChangeMapVehicles.ps1 $levelFolderTextBox.Text $gameModeTextBox.Text $mapSizeTextBox.Text $forcedTeam1TextBox.Text $forcedTeam2TextBox.Text $bEnforceVehicleTypeCheckbox.Checked $bEnforceCompatibleTeamsCheckbox.Checked $bEnforcePreferredTeamsCheckbox.Checked $bEnforceAmphibiousCheckbox.Checked $bEnforceFloatingCheckbox.Checked $bEnforceFlyingCheckbox.Checked $bEnforceVTOLCheckbox.Checked $bEnforceNeedAirfieldCheckbox.Checked $bEnforceNeedLargeAirfieldCheckbox.Checked $bEnforceCanBeAirDroppedCheckbox.Checked $bRandomizeTeam1VehiclesCheckbox.Checked $bRandomizeTeam2VehiclesCheckbox.Checked $bUseAutoBackupCheckbox.Checked | Write-Host
 })
 $form.Controls.Add($applyButton)
 

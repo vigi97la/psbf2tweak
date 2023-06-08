@@ -15,7 +15,7 @@ $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
 #params $gameMode=sp1,sp2,sp3,gpm_coop,gpm_cq, $mapSize=16,32,64,128...
 
-function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTeam1="Spetz",$forcedTeam2="EU",[bool]$bEnforceVehicleType=$true,[bool]$bEnforceCompatibleTeams=$true,[bool]$bEnforcePreferredTeams=$false,[bool]$bEnforceAmphibious=$true,[bool]$bEnforceFloating=$true,[bool]$bEnforceFlying=$true,[bool]$bEnforceVTOL=$true,[bool]$bEnforceNeedLargeAirfield=$true,[bool]$bEnforceCanBeAirDropped=$true,[bool]$bRandomizeTeam1Vehicles=$true,[bool]$bRandomizeTeam2Vehicles=$true,[bool]$bUseAutoBackup=$true) {
+function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTeam1="Spetz",$forcedTeam2="EU",[bool]$bEnforceVehicleType=$true,[bool]$bEnforceCompatibleTeams=$true,[bool]$bEnforcePreferredTeams=$false,[bool]$bEnforceAmphibious=$true,[bool]$bEnforceFloating=$true,[bool]$bEnforceFlying=$true,[bool]$bEnforceVTOL=$true,[bool]$bEnforceNeedAirfield=$true,[bool]$bEnforceNeedLargeAirfield=$true,[bool]$bEnforceCanBeAirDropped=$true,[bool]$bRandomizeTeam1Vehicles=$true,[bool]$bRandomizeTeam2Vehicles=$true,[bool]$bUseAutoBackup=$true) {
 	
 	#$knownTeams="EU","Spetz"
 
@@ -56,10 +56,11 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 				$bFloating=[int]$val[0].bFloating
 				$bFlying=[int]$val[0].bFlying
 				$bVTOL=[int]$val[0].bVTOL
+				$bNeedAirfield=[int]$val[0].bNeedAirfield
 				$bNeedLargeAirfield=[int]$val[0].bNeedLargeAirfield
 				$bCanBeAirDropped=[int]$val[0].bCanBeAirDropped
 
-				$compatibleVehicles=@($db|Where-Object -Property "bDisabled" -notlike "1"|Where-Object {!$bEnforceCompatibleTeams -or ($bEnforceCompatibleTeams -and (($_.compatibleTeams -like "*$team*") -or ($_.compatibleTeams -like "ALL")))}|Where-Object {!$bEnforcePreferredTeams -or ($bEnforcePreferredTeams -and (($_.preferredTeams -like "*$team*") -or ($_.preferredTeams -like "ALL")))}|Where-Object {!$bEnforceVehicleType -or ($bEnforceVehicleType -and ($_.vehicleType -like $vehicleType))}|Where-Object {!$bEnforceAmphibious -or ($bEnforceAmphibious -and ($_.bAmphibious -eq $bAmphibious))}|Where-Object {!$bEnforceFloating -or ($bEnforceFloating -and ($_.bFloating -eq $bFloating))}|Where-Object {!$bEnforceFlying -or ($bEnforceFlying -and ($_.bFlying -eq $bFlying))}|Where-Object {!$bEnforceVTOL -or ($bEnforceVTOL -and ($_.bVTOL -eq $bVTOL))}|Where-Object {!$bEnforceNeedLargeAirfield -or ($bEnforceNeedLargeAirfield -and ($_.bNeedLargeAirfield -eq $bNeedLargeAirfield))}|Where-Object {!$bEnforceCanBeAirDropped -or ($bEnforceCanBeAirDropped -and ($_.bCanBeAirDropped -eq $bCanBeAirDropped))})
+				$compatibleVehicles=@($db|Where-Object -Property "bDisabled" -notlike "1"|Where-Object {!$bEnforceCompatibleTeams -or ($bEnforceCompatibleTeams -and (($_.compatibleTeams -like "*$team*") -or ($_.compatibleTeams -like "ALL")))}|Where-Object {!$bEnforcePreferredTeams -or ($bEnforcePreferredTeams -and (($_.preferredTeams -like "*$team*") -or ($_.preferredTeams -like "ALL")))}|Where-Object {!$bEnforceVehicleType -or ($bEnforceVehicleType -and ($_.vehicleType -like $vehicleType))}|Where-Object {!$bEnforceAmphibious -or ($bEnforceAmphibious -and ($_.bAmphibious -eq $bAmphibious))}|Where-Object {!$bEnforceFloating -or ($bEnforceFloating -and ($_.bFloating -eq $bFloating))}|Where-Object {!$bEnforceFlying -or ($bEnforceFlying -and ($_.bFlying -eq $bFlying))}|Where-Object {!$bEnforceVTOL -or ($bEnforceVTOL -and ($_.bVTOL -eq $bVTOL))}|Where-Object {!$bEnforceNeedAirfield -or ($bEnforceNeedAirfield -and ($_.bNeedAirfield -eq $bNeedAirfield))}|Where-Object {!$bEnforceNeedLargeAirfield -or ($bEnforceNeedLargeAirfield -and ($_.bNeedLargeAirfield -eq $bNeedLargeAirfield))}|Where-Object {!$bEnforceCanBeAirDropped -or ($bEnforceCanBeAirDropped -and ($_.bCanBeAirDropped -eq $bCanBeAirDropped))})
 					
 				# Should check if vehicle is available from $modFolder...
 
@@ -68,6 +69,9 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 					$newVehicle=$compatibleVehicles[$RandomNumber].vehicleName
 
 					"$teamNumber, $vehicle -> $newVehicle"
+
+					# To improve, this might replace the wrong line...
+
 					$regexpr2="(?<=ObjectTemplate.setObjectTemplate)(\s+)($teamNumber)(\s+)($vehicle)\s+?\r?\n"
 					(Get-Content -Raw $_.FullName) -replace $regexpr2," $teamNumber $newVehicle`r`n" | Set-Content $_.FullName
 				}
