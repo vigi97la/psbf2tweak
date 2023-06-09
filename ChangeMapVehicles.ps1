@@ -23,7 +23,7 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 	
 	# Compress-Archive produces files not recognized by BF2...
 	#Expand-Archive -Force -Path "$levelFolder\server.zip" -DestinationPath "$levelFolder\server"
-	7z x -y "$levelFolder\server.zip" -o"$levelFolder\server"
+	& 7z x -y "$levelFolder\server.zip" `-o"$levelFolder\server"
 
 	#should get which team is 1 or 2 in $levelFolder\server\Init.con...?
 
@@ -39,7 +39,8 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 
 	$regexpr="(?<=ObjectTemplate.setObjectTemplate)(\s+)([1-2])(\s+)(.*?)\s+?\r?\n"
 	Get-ChildItem "$file" -R | ForEach-Object {
-		$m=[regex]::Matches((Get-Content -Raw $_.FullName), $regexpr)
+		#$m=[regex]::Matches((Get-Content -Raw $_.FullName), $regexpr)
+		$m=[regex]::Matches(([System.IO.File]::ReadAllText($_.FullName)), $regexpr)
 		ForEach ($mi in $m) {
 			$teamNumber=[int]($mi.Groups[2].value)
 			$vehicle=($mi.Groups[4].value)
@@ -49,7 +50,7 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 
 			$team=if ($teamNumber -eq 1) {$forcedTeam1} else {$forcedTeam2}
 			
-			$val=$db|Where-Object "vehicleName" -ieq "$vehicle"
+			$val=@($db|Where-Object {$_.vehicleName -ieq "$vehicle"})
 			if ($val -ne $null) {
 				$vehicleType=[double]$val[0].vehicleType
 				$bAmphibious=[int]$val[0].bAmphibious
@@ -60,7 +61,7 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 				$bNeedLargeAirfield=[int]$val[0].bNeedLargeAirfield
 				$bCanBeAirDropped=[int]$val[0].bCanBeAirDropped
 
-				$compatibleVehicles=@($db|Where-Object -Property "bDisabled" -notlike "1"|Where-Object {!$bEnforceCompatibleTeams -or ($bEnforceCompatibleTeams -and (($_.compatibleTeams -like "*$team*") -or ($_.compatibleTeams -like "ALL")))}|Where-Object {!$bEnforcePreferredTeams -or ($bEnforcePreferredTeams -and (($_.preferredTeams -like "*$team*") -or ($_.preferredTeams -like "ALL")))}|Where-Object {!$bEnforceVehicleType -or ($bEnforceVehicleType -and ($_.vehicleType -like $vehicleType))}|Where-Object {!$bEnforceAmphibious -or ($bEnforceAmphibious -and ($_.bAmphibious -eq $bAmphibious))}|Where-Object {!$bEnforceFloating -or ($bEnforceFloating -and ($_.bFloating -eq $bFloating))}|Where-Object {!$bEnforceFlying -or ($bEnforceFlying -and ($_.bFlying -eq $bFlying))}|Where-Object {!$bEnforceVTOL -or ($bEnforceVTOL -and ($_.bVTOL -eq $bVTOL))}|Where-Object {!$bEnforceNeedAirfield -or ($bEnforceNeedAirfield -and ($_.bNeedAirfield -eq $bNeedAirfield))}|Where-Object {!$bEnforceNeedLargeAirfield -or ($bEnforceNeedLargeAirfield -and ($_.bNeedLargeAirfield -eq $bNeedLargeAirfield))}|Where-Object {!$bEnforceCanBeAirDropped -or ($bEnforceCanBeAirDropped -and ($_.bCanBeAirDropped -eq $bCanBeAirDropped))})
+				$compatibleVehicles=@($db|Where-Object {$_.bDisabled -notlike "1"}|Where-Object {!$bEnforceCompatibleTeams -or ($bEnforceCompatibleTeams -and (($_.compatibleTeams -like "*$team*") -or ($_.compatibleTeams -like "ALL")))}|Where-Object {!$bEnforcePreferredTeams -or ($bEnforcePreferredTeams -and (($_.preferredTeams -like "*$team*") -or ($_.preferredTeams -like "ALL")))}|Where-Object {!$bEnforceVehicleType -or ($bEnforceVehicleType -and ($_.vehicleType -like $vehicleType))}|Where-Object {!$bEnforceAmphibious -or ($bEnforceAmphibious -and ($_.bAmphibious -eq $bAmphibious))}|Where-Object {!$bEnforceFloating -or ($bEnforceFloating -and ($_.bFloating -eq $bFloating))}|Where-Object {!$bEnforceFlying -or ($bEnforceFlying -and ($_.bFlying -eq $bFlying))}|Where-Object {!$bEnforceVTOL -or ($bEnforceVTOL -and ($_.bVTOL -eq $bVTOL))}|Where-Object {!$bEnforceNeedAirfield -or ($bEnforceNeedAirfield -and ($_.bNeedAirfield -eq $bNeedAirfield))}|Where-Object {!$bEnforceNeedLargeAirfield -or ($bEnforceNeedLargeAirfield -and ($_.bNeedLargeAirfield -eq $bNeedLargeAirfield))}|Where-Object {!$bEnforceCanBeAirDropped -or ($bEnforceCanBeAirDropped -and ($_.bCanBeAirDropped -eq $bCanBeAirDropped))})
 					
 				# Should check if vehicle is available from $modFolder...
 
@@ -73,7 +74,8 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 					# To improve, this might replace the wrong line...
 
 					$regexpr2="(?<=ObjectTemplate.setObjectTemplate)(\s+)($teamNumber)(\s+)($vehicle)\s+?\r?\n"
-					(Get-Content -Raw $_.FullName) -replace $regexpr2," $teamNumber $newVehicle`r`n" | Set-Content $_.FullName
+					#(Get-Content -Raw $_.FullName) -replace $regexpr2," $teamNumber $newVehicle`r`n" | Set-Content $_.FullName
+					([System.IO.File]::ReadAllText($_.FullName)) -replace $regexpr2," $teamNumber $newVehicle`r`n" | Set-Content $_.FullName
 				}
 				else {
 					# Should try automatically to determine from name (tank: tank,tnk,mbt; Apc,amv,ifv; civilian,civ;jeep,jep;car;heli,the,ahe,che,the;plane,jet,air;flag: ru;us;ch;mec;eu)...?
@@ -81,11 +83,11 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 				}
 			}
 		}
-	}	
+	}
 
 	# Compress-Archive produces files not recognized by BF2...
 	#Compress-Archive -Force -Path "$levelFolder\server\*" -DestinationPath "$levelFolder\server.zip"
-	7z a -y "$levelFolder\server.zip" "$levelFolder\server\*"
+	& 7z a -y "$levelFolder\server.zip" "$levelFolder\server\*"
 
 	# Recycle extracted server folder?
 }
