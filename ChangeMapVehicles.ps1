@@ -13,7 +13,7 @@ $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
 #params $gameMode=sp1,sp2,sp3,gpm_coop,gpm_cq, $mapSize=16,32,64,128...
 
-function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTeam1="Spetz",$forcedTeam2="EU",[bool]$bEnforceVehicleType=$true,[bool]$bEnforceCompatibleTeams=$true,[bool]$bEnforcePreferredTeams=$false,[bool]$bEnforceAmphibious=$true,[bool]$bEnforceFloating=$true,[bool]$bEnforceFlying=$true,[bool]$bEnforceVTOL=$true,[bool]$bEnforceNeedAirfield=$true,[bool]$bEnforceNeedLargeAirfield=$true,[bool]$bEnforceCanBeAirDropped=$false,[bool]$bRandomizeTeam1Vehicles=$true,[bool]$bRandomizeTeam2Vehicles=$true,[bool]$bUseAutoBackup=$true) {
+function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTeam1="Spetz",$forcedTeam2="EU",[bool]$bEnforceVehicleType=$true,[bool]$bEnforceCompatibleTeams=$true,[bool]$bEnforcePreferredTeams=$false,[bool]$bEnforceAmphibious=$true,[bool]$bEnforceFloating=$true,[bool]$bEnforceFlying=$true,[bool]$bEnforceVTOL=$true,[bool]$bEnforceNeedAirfield=$true,[bool]$bEnforceNeedLargeAirfield=$true,[bool]$bEnforceCanBeAirDropped=$false,[bool]$bRemoveIncompatible=$false,[bool]$bRandomizeTeam1Vehicles=$true,[bool]$bRandomizeTeam2Vehicles=$true,[bool]$bUseAutoBackup=$true) {
 
 	#$knownTeams="EU","Spetz"
 
@@ -96,13 +96,18 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 				"$teamNumber, $vehicle -> $newVehicle"
 			}
 			else {
-				# Should try automatically to determine from name (tank: tank,tnk,mbt; Apc,amv,ifv; civilian,civ;jeep,jep;car;heli,the,ahe,che,the;plane,jet,air;flag: ru;us;ch;mec;eu)...?
-				Write-Warning "Could not find a compatible vehicle, please check vehicles_db.csv"
+				if ($bRemoveIncompatible) {
+					Write-Warning "Removed $vehicle (team $teamNumber): could not find a compatible vehicle, please check vehicles_db.csv"
+					Continue
+				}
+				else {
+					Write-Warning "Could not find a vehicle compatible with $vehicle (team $teamNumber), please check vehicles_db.csv"
+				}
 			}
 		}
 		else {
 			# Should try automatically to determine from name (tank: tank,tnk,mbt; Apc,amv,ifv; civilian,civ;jeep,jep;car;heli,the,ahe,che,the;plane,jet,air;flag: ru;us;ch;mec;eu)...?
-			Write-Warning "Could not find $vehicle vehicle, please check vehicles_db.csv"
+			Write-Warning "Could not find $vehicle (team $teamNumber), please check vehicles_db.csv"
 		}
 		$sw.WriteLine("ObjectTemplate.setObjectTemplate $teamNumber $newVehicle")
 	}
