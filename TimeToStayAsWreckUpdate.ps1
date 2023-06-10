@@ -1,8 +1,8 @@
 
 function TimeToStayAsWreckUpdate($objectsFolder, [int]$time=10, [bool]$bIncludeStationaryWeapons=$false, [bool]$bIncludeAll=$false) {
 	Get-ChildItem "$objectsFolder\*" -R -Include "*.tweak" | ForEach-Object {
-		$bVehicle=[regex]::Match($_.FullName, "(.*Vehicles)").Success
-		$bStationaryWeapon=[regex]::Match($_.FullName, "(.*Weapons\\stationary)").Success
+		$bVehicle=[regex]::Match($_.FullName, "(.*Vehicles.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
+		$bStationaryWeapon=[regex]::Match($_.FullName, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
 		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
 			$regexpr="(?<=ObjectTemplate.armor.timeToStayAsWreck)(\s+)(-?\d+)"
 			$m=[regex]::Match((Get-Content $_.FullName), $regexpr)
