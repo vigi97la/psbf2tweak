@@ -76,7 +76,7 @@ apc_btr_t;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;1;;;
 ARMA3_Boxer;1.2;;EU,SAS;0;1;1;0;0;0;0;0;0;1;;;https://en.wikipedia.org/wiki/Boxer_(armoured_fighting_vehicle)
 BF3_BMP2M;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;0;0;0;0;0;0;0;0;1;;;
 bf3_m1128_stryker;1;;US,SEAL,EU,SAS;0;0;0;0;0;0;0;0;0;1;;;
-BMD4;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;1;0;1;ObjectTemplate.armor.timeToStayAsWreck need to be set to 0?;;
+BMD4;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;1;0;1;ObjectTemplate.armor.timeToStayAsWreck need to be set to 0 in bmd4.tweak?;;
 bmp1_kliver;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;1;;;
 bmp2m_berezhok;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;1;;;
 BMW_E32;3.3;;ALL;0;0;0;0;0;0;0;0;0;0;;;
@@ -93,14 +93,15 @@ mbt_c1_ariete;0;;EU;0;0;0;0;0;0;0;0;0;0;;;
 mbt_t72b1;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;0;;;
 mbt_t80bv;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;0;;;
 mbt_t80u;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;0;;;
-RU_T80UK;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;0;to test;;
-RU_T90MS;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;0;to test;;
+RU_T80UK;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;0;to test more;;
+RU_T90MS;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;0;to test more;;
 meat_niva;3.3;;ALL;0;0;0;0;0;0;0;0;0;0;;;
 mercedes_560sel_w126;3.3;;ALL;0;0;0;0;0;0;0;0;0;0;;;
 mrap_maxxpro;3;;US,SEAL,EU,SAS;0;0;0;0;0;0;0;0;0;1;;;https://en.wikipedia.org/wiki/International_MaxxPro
 MSTA-S;0.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;0;0;0;0;0;0;0;0;0;;;
 P4_ASPIC;3;;EU;0;0;0;0;0;0;0;1;0;1;;;
 patria_amv;1.2;;EU;0;1;1;0;0;0;0;0;0;1;;;https://en.wikipedia.org/wiki/Patria_AMV
+kto_rosomak;1.2;;EU;0;1;1;0;0;0;0;0;0;1;;;https://en.wikipedia.org/wiki/KTO_Rosomak
 RUTNK_T14;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;0;;;
 ru_apc_k17a;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;1;;;
 ru_apc_k25a;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;0;0;0;0;0;0;0;0;1;;;
