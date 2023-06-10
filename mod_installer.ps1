@@ -1,4 +1,6 @@
-#"Modern vehicle pack mainly from https://www.moddb.com/games/battlefield-2/addons, with some modified maps"
+# DO NOT USE, TEMPORARY
+
+$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
 #"Please ensure Battlefield 2 is installed (tested with Complete Collection)."
 
@@ -15,7 +17,7 @@ $vehicleSpawnPointTemplateFile=$null
 #...
 
 # Should show that only if user has chosen options that requires it...
-#if ((Get-Command "7z.exe" -ErrorAction SilentlyContinue) -eq $null) 
+#if ((Get-Command "7z.exe" -ErrorAction SilentlyContinue) -eq $null)
 #{ 
 #   "Please install 7z.exe (7-Zip) and ensure it is in Windows PATH, and reboot"
 #}
@@ -56,8 +58,6 @@ $vehicleSpawnPointTemplateFile=$null
 
 function main()
 {
-	$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
-
 	$vehicleName="apc_btr_t"
 	$vehicleType=1
 	$downloadLink="https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-btr-t-ifv-puma-and-toyota-rocket-launcher"
@@ -73,7 +73,6 @@ function main()
 	#ArmorEffectUpdate $objectsFolder $null
 	BasicTempUpdate "$objectsFolder" 0.01
 	TimeToStayAsWreckUpdate "$objectsFolder" $timeToStayAsWreck
-	#all apcs get supplyobject and spawnpoints
 	#Use git to create a repo and make commits inside...
 
 }
@@ -92,7 +91,7 @@ function AddNewVehicle($vehicleName, $vehicleType, $vehicleTeams, $downloadLink,
 	$ln=$IE.Document.getElementsByTagName('a') | Where-Object {$_.href -match "/downloads/mirror"}
 	$downloadLink=$ln.IHTMLAnchorElement_href
 
-	wget $downloadLink -UseBasicParsing -OutFile "C:\tmp\download.zip"
+	Invoke-WebRequest $downloadLink -UseBasicParsing -OutFile "C:\tmp\download.zip"
 	& 7z x -y "C:\tmp\download.zip" `-o"C:\tmp\download"
 	Get-ChildItem "C:\tmp\download\*" -R -Include *.zip,*.rar,*.7z | ForEach-Object {
 		& 7z x -y $_.FullName `-o"$($_.DirectoryName)/$($_.Basename)"
@@ -104,33 +103,54 @@ function AddNewVehicle($vehicleName, $vehicleType, $vehicleTeams, $downloadLink,
 	$postCustomScript
 }
 
-function ArmorEffectUpdate($objectsFolder, $armorEffectTemplateFile) {
-	Get-ChildItem "$objectsFolder\*" -R -Include "*.tweak" | ForEach-Object {
-		$bVehicle=[regex]::Match($_.FullName, "(.*Vehicles)").Success
-		If ($bVehicle) {
-			$regexpr="(?<=ObjectTemplate.armor.addArmorEffect)(\s+)(-?\d+)"
-			#$m=Select-String $regexpr "C:\tmp\download\Objects_server\Vehicles\Land\apc_btr_t\apc_btr_t.tweak"
-			#$m.Matches[0].value
+#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\GitHub\psbf2tweak"
+function ExtractModServerArchives($modFolder) {
 
-			#$mc=[regex]::Matches((Get-Content "C:\tmp\download\Objects_server\Vehicles\Land\apc_btr_t\apc_btr_t.tweak"), $regexpr)
-			#$mc[0].Groups[2].value
+	#$extractionFolder="."
 
-			#$m=[regex]::Matches((Get-Content "C:\tmp\download\Objects_server\Vehicles\Land\apc_btr_t\apc_btr_t.tweak"), $regexpr)
-			$m=[regex]::Matches((Get-Content $_.FullName), $regexpr)
-			ForEach ($mi in $m) {
-				$val=[int]($mi.Groups[2].value)
-				If ($val -ge 9) {
-					$mi.Groups[2].value
-					#"$_ : updating aiTemplate.basicTemp from $val to $temp"
-					continue
-				}
-				Else {
-					#match and replace the line with $armorEffectTemplateFile + itself...
-					break
-				}
+	$serverArchives="$modFolder\ServerArchives.con"
+
+	#Objects, Menu, Common, Fonts, Shaders, Scripts
+
+	# First lines have more priority over the last in ServerArchives.con?
+
+	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
+	$archiveregexpr="^\s*fileManager.mountArchive\s+(.+)`.zip\s+(.+)\s*"
+	$sr=[System.IO.StreamReader]$serverArchives
+	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+		$line=$sr.ReadLine()
+		$m=[regex]::Matches($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if ($m.Groups.Count -ne 0) {
+			Continue
+		}
+		$m=[regex]::Matches($line, $archiveregexpr)
+		if ($m.Groups.Count -ne 3) {
+			Continue
+		}
+		$file=$m.Groups[1].value #filename without .zip
+		$folder=$m.Groups[2].value
+		"$file -> $folder"
+		If (Test-Path -Path "$modFolder\$file.zip") {
+			$zipfile="$modFolder\$file.zip"
+		}
+		else {
+			If (Test-Path -Path "$modFolder\..\..\$file.zip") {
+				# Should add option to choose what to do with files outside current mod...?
+				$zipfile="$modFolder\..\..\$file.zip"
+				Write-Output "Skipping $zipfile since it is outside current mod"
+				Continue
+			}
+			else {
+				Write-Error "Could not find $modFolder\$file.zip or $modFolder\..\..\$file.zip"
 			}
 		}
+		& 7z x -y "$zipfile" `-o"$modFolder\$file"
 	}
+	$sr.close()
+}
+
+function CompressModServerArchives($modFolder) {
+
 }
 
 main
@@ -185,7 +205,8 @@ function CreateNewModFromTemplate($modFolder) {
 
 
 
-
+	# For standard Battlefield 2 only (US vs MEC)
+	# For standard Battlefield 2 Complete Collection only (allows some Chinese vehicles, EURO vs RU, but will need to move specific vehicles from euro and armored fury)
 
 }
 
