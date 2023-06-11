@@ -10,6 +10,8 @@ function SetBots($modFolder, [int]$nbBots=47, [int]$maxBotsIncludeHumans=0, [dou
 	(Get-Content $modFolder\AI\AIDefault.ai) -replace $regexpr," $botSkill" | Set-Content $modFolder\AI\AIDefault.ai
 
 	(Get-Content $modFolder\AI\AIDefault.ai) -replace "rem aiSettings","aiSettings" | Set-Content $modFolder\AI\AIDefault.ai
+
+	"$modFolder\AI\AIDefault.ai updated with $nbBots bots (maxBotsIncludeHumans $maxBotsIncludeHumans) with skill $botSkill"
 }
 
 SetBots @args
