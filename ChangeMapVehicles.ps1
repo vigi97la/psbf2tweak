@@ -51,12 +51,12 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 	$sw=[System.IO.StreamWriter]"$file.tmp"
 	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 		$line=$sr.ReadLine()
-		$m=[regex]::Matches($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-		if ($m.Groups.Count -ne 0) {
+		$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if ($m.Success) {
 			$sw.WriteLine($line)
 			Continue
 		}
-		$m=[regex]::Matches($line, $regexpr)
+		$m=[regex]::Match($line, $regexpr)
 		if ($m.Groups.Count -ne 3) {
 			$sw.WriteLine($line)
 			Continue

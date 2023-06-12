@@ -13,8 +13,8 @@ function AddVehicleSupplyObject($objectsFolder, [bool]$bUseVehiclesDB=$true, [bo
 		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
 			$bHasSupplies=$false
 			$regexpr="\s*ObjectTemplate.activeSafe\s+PlayerControlObject\s+(\S+)\s*\r?\n"
-			$m=[regex]::Matches(([System.IO.File]::ReadAllText($file)), $regexpr)
-			If ($m.Groups.Count -ne 0) {
+			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
+			If ($m.Groups.Count -eq 2) {
 				$vehicleName=$m.Groups[1].value
 				If ($bUseVehiclesDB) {
 					$val=@($db|Where-Object {$_.vehicleName -ieq "$vehicleName"})
@@ -37,7 +37,7 @@ function AddVehicleSupplyObject($objectsFolder, [bool]$bUseVehiclesDB=$true, [bo
 						$sw.WriteLine($line)
 						Continue
 					}
-					$m=[regex]::Matches($line, $regexpr)
+					$m=[regex]::Match($line, $regexpr)
 					if ($m.Groups.Count -ne 2) {
 						$sw.WriteLine($line)
 						Continue

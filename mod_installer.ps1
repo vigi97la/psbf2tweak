@@ -119,11 +119,11 @@ function ExtractModServerArchives($modFolder) {
 	$sr=[System.IO.StreamReader]$serverArchives
 	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 		$line=$sr.ReadLine()
-		$m=[regex]::Matches($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-		if ($m.Groups.Count -ne 0) {
+		$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if ($m.Success) {
 			Continue
 		}
-		$m=[regex]::Matches($line, $archiveregexpr)
+		$m=[regex]::Match($line, $archiveregexpr)
 		if ($m.Groups.Count -ne 3) {
 			Continue
 		}
