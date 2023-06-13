@@ -7,7 +7,7 @@ $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 #$levelFolder="C:\Users\Administrator\Downloads"
 #$db=Import-Csv -Path ".\vehicles_db.csv" -Delimiter ";"
 #$db|Format-Table
-#$db|Where-Object -Property "bDisabled" -notlike "1"|Where-Object "compatibleTeams" -like "*EU*"
+#$db|Where-Object -Property "Disabled" -notlike "1"|Where-Object "compatibleTeams" -like "*EU*"
 #$team="EU"
 #$vehicle="air_f35b"
 
@@ -90,13 +90,25 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 			$bHasManyPassengers=[int]$val[0].bHasManyPassengers
 			$bCanBeAirDropped=[int]$val[0].bCanBeAirDropped
 
-			$compatibleVehicles=@($db|Where-Object {$_.bDisabled -notlike "1"}|Where-Object {!$bEnforceCompatibleTeams -or ($bEnforceCompatibleTeams -and (($_.compatibleTeams -like "*$team*") -or ($_.compatibleTeams -like "ALL")))}|Where-Object {!$bEnforcePreferredTeams -or ($bEnforcePreferredTeams -and (($_.preferredTeams -like "*$team*") -or ($_.preferredTeams -like "ALL")))}|Where-Object {!$bEnforceVehicleType -or ($bEnforceVehicleType -and ($_.vehicleType -like $vehicleType))}|Where-Object {!$bEnforceSizeCategory -or ($bEnforceSizeCategory -and ($_.sizeCategory -like $sizeCategory))}|Where-Object {!$bEnforceAmphibious -or ($bEnforceAmphibious -and ($_.bAmphibious -eq $bAmphibious))}|Where-Object {!$bEnforceFloating -or ($bEnforceFloating -and ($_.bFloating -eq $bFloating))}|Where-Object {!$bEnforceFlying -or ($bEnforceFlying -and ($_.bFlying -eq $bFlying))}|Where-Object {!$bEnforceVTOL -or ($bEnforceVTOL -and ($_.bVTOL -eq $bVTOL))}|Where-Object {!$bEnforceNeedWater -or ($bEnforceNeedWater -and ($_.bNeedWater -eq $bNeedWater))}|Where-Object {!$bEnforceNeedAirfield -or ($bEnforceNeedAirfield -and ($_.bNeedAirfield -eq $bNeedAirfield))}|Where-Object {!$bEnforceNeedLargeAirfield -or ($bEnforceNeedLargeAirfield -and ($_.bNeedLargeAirfield -eq $bNeedLargeAirfield))}|Where-Object {!$bEnforceHeavilyArmored -or ($bEnforceHeavilyArmored -and ($_.bHeavilyArmored -eq $bHeavilyArmored))}|Where-Object {!$bEnforceHeavilyArmed -or ($bEnforceHeavilyArmed -and ($_.bHeavilyArmed -eq $bHeavilyArmed))}|Where-Object {!$bEnforceHasManyPassengers -or ($bEnforceHasManyPassengers -and ($_.bHasManyPassengers -eq $bHasManyPassengers))}|Where-Object {!$bEnforceCanBeAirDropped -or ($bEnforceCanBeAirDropped -and ($_.bCanBeAirDropped -eq $bCanBeAirDropped))})
+			$compatibleVehicles=@($db|Where-Object {[double]$_.Disabled -lt 1.0}|Where-Object {!$bEnforceCompatibleTeams -or ($bEnforceCompatibleTeams -and (($_.compatibleTeams -like "*$team*") -or ($_.compatibleTeams -like "ALL")))}|Where-Object {!$bEnforcePreferredTeams -or ($bEnforcePreferredTeams -and (($_.preferredTeams -like "*$team*") -or ($_.preferredTeams -like "ALL")))}|Where-Object {!$bEnforceVehicleType -or ($bEnforceVehicleType -and ($_.vehicleType -like $vehicleType))}|Where-Object {!$bEnforceSizeCategory -or ($bEnforceSizeCategory -and ($_.sizeCategory -like $sizeCategory))}|Where-Object {!$bEnforceAmphibious -or ($bEnforceAmphibious -and ($_.bAmphibious -eq $bAmphibious))}|Where-Object {!$bEnforceFloating -or ($bEnforceFloating -and ($_.bFloating -eq $bFloating))}|Where-Object {!$bEnforceFlying -or ($bEnforceFlying -and ($_.bFlying -eq $bFlying))}|Where-Object {!$bEnforceVTOL -or ($bEnforceVTOL -and ($_.bVTOL -eq $bVTOL))}|Where-Object {!$bEnforceNeedWater -or ($bEnforceNeedWater -and ($_.bNeedWater -eq $bNeedWater))}|Where-Object {!$bEnforceNeedAirfield -or ($bEnforceNeedAirfield -and ($_.bNeedAirfield -eq $bNeedAirfield))}|Where-Object {!$bEnforceNeedLargeAirfield -or ($bEnforceNeedLargeAirfield -and ($_.bNeedLargeAirfield -eq $bNeedLargeAirfield))}|Where-Object {!$bEnforceHeavilyArmored -or ($bEnforceHeavilyArmored -and ($_.bHeavilyArmored -eq $bHeavilyArmored))}|Where-Object {!$bEnforceHeavilyArmed -or ($bEnforceHeavilyArmed -and ($_.bHeavilyArmed -eq $bHeavilyArmed))}|Where-Object {!$bEnforceHasManyPassengers -or ($bEnforceHasManyPassengers -and ($_.bHasManyPassengers -eq $bHasManyPassengers))}|Where-Object {!$bEnforceCanBeAirDropped -or ($bEnforceCanBeAirDropped -and ($_.bCanBeAirDropped -eq $bCanBeAirDropped))})
 
 			# Should check if vehicle is available from $modFolder...
 
 			if ($compatibleVehicles.Count -ge 1) {
-				$RandomNumber=[int](Get-Random -Minimum 0 -Maximum $compatibleVehicles.Count)
-				$newVehicle=$compatibleVehicles[$RandomNumber].vehicleName
+				#$RandomNumber=[int](Get-Random -Minimum 0 -Maximum $compatibleVehicles.Count)
+				#$newVehicle=$compatibleVehicles[$RandomNumber].vehicleName
+
+				$best=0.0
+				$i_best=0
+				for ($i=0; $i -lt $compatibleVehicles.Count; $i++) {
+					$RandomNumber=[double](Get-Random -Minimum 0.0 -Maximum 1.0)
+					$cur=(1.0-[double]$compatibleVehicles[$i].Disabled)*$RandomNumber
+					if ($cur -gt $best) {
+						$best=$cur
+						$i_best=$i
+					}
+				}
+				$newVehicle=$compatibleVehicles[$i_best].vehicleName
 
 				"$teamNumber, $vehicle -> $newVehicle"
 			}
