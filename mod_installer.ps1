@@ -5,10 +5,6 @@ $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 #"Please ensure Battlefield 2 is installed (tested with Complete Collection)."
 
 # Change or set to $null if you do not need/want.
-$timeToStayAsWreck=240 # Vehicles wrecks stay longer (in s).
-$armorEffectTemplateFile=$null # It will try to add additional smoke and fire effect depending on damages.
-$vehicleSupplyObjectTemplateFile=$null
-$vehicleSpawnPointTemplateFile=$null
 
 #$bforceStandardBF2Only
 #$bforceStandardBF2CompleteCollectionOnly
@@ -70,9 +66,7 @@ function main()
 	#Check xpack and bf2 existence...
 	#FindAllVehicles, check ServerArchives.con, fileManager.mountArchive XXX.zip Objects, if mods/bf2/Objects_server.zip or mods/xpack/Objects_server.zip, should make a copy of the .tweak and add the ref to the new efserv.zip, vehserv.zip, stsgarageserv.zip in ServerArchives.con
 	$objectsFolder="C:\tmp\Objects"
-	#ArmorEffectUpdate $objectsFolder $null
-	BasicTempUpdate "$objectsFolder" 0.01
-	TimeToStayAsWreckUpdate "$objectsFolder" $timeToStayAsWreck
+
 	#Use git to create a repo and make commits inside...
 
 }
@@ -101,6 +95,40 @@ function AddNewVehicle($vehicleName, $vehicleType, $vehicleTeams, $downloadLink,
 #search for .bundlemesh, .collisionmesh, .tweak, .con, then move sounds
 	#sometimes also there are weapons, effects, for that use $postCustomScript?...
 	$postCustomScript
+}
+
+function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSeparateServerClient=$true,[bool]$bFixVehicleHudNameInconsistencies=$false,[bool]$bFixVehicleTypeInconsistencies=$false,[bool]$bConfirmEachFix=$false) {
+
+	#$modFolder optional, would be to check the existence of includes...
+	#if downloadsFolder empty, only use modFolder and use Server/ClientArchives.con
+
+	#$bSeparateServerClient: Objects, Menu folders or Objects_server, Objects_client, etc.
+
+	# TODO: There might be other archives inside the archives, and their extracted name might conflict with existing folders...
+
+	Get-ChildItem "$downloadsFolder\*" -R -Include *.zip,*.rar,*.7z | ForEach-Object {
+		& 7z x -y $_.FullName `-o"$($_.DirectoryName)/$($_.Basename)"
+
+		#first assume it follows std dir struct of objects_server/client.zip
+
+		#first should find a .tweak which appears to correspond to a vehicle by checking its content...
+		#then in its folder there should be a .con and potentially other .tweak and .con for subparts, as well as ai, meshes, textures, sound folders
+		#.con, .tweak, ai should go to server, textures, sound to client. Directory structure?: vehicles\???\vehicleName?
+		#should look for any remaining .dds, .tga which might be necessary for Menu... Should read vehicleName.tweak and check for menuicon, etc.
+		#effects\vehicles...
+		# meshes folder should be copied to server, and its sudirectory structure copied to client with only the .bundlemesh
+
+	}
+
+
+
+
+
+	#use vehicleHudName to correct killname...
+
+	#parses and get includes (including  menuincon to put in correct folder, propose lines to copy for the db using vehicletype, etc.) to help extracting from other mods
+
+
 }
 
 #$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\GitHub\psbf2tweak"
