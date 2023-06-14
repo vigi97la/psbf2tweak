@@ -29,7 +29,7 @@ uav_pred;4.3;ALL;ALL;0;;0;0;1;0;0;0;0;0;0;0;1;0;0;;;;
 usair_f15;4;US;US,SEAL,EU,SAS;0;;0;0;1;0;0;1;0;0;1;0;0;1;0;;;;
 usair_f18;4.1;US;US,SEAL,EU,SAS;0;;0;0;1;0;0;1;0;0;1;0;0;0;0;;;;
 usthe_uh60;2.1;US;US,SEAL,EU,SAS;0;;0;0;1;1;0;0;0;1;0;1;0;0;1;;;;
-;;;;;;;;;;0;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;
 xpak_ailraider;3.1;SAS;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;0;0;0;1;0;0;;;;
 xpak_apache;2;SEAL;US,SEAL,EU,SAS;0;;0;0;1;1;0;0;0;0;1;0;0;0;0;;;;
 xpak_atv;3.2;ALL;ALL;0;;0;0;0;0;0;0;0;0;0;0;1;0;0;;;;
@@ -51,7 +51,7 @@ xpak2_fantan;4.2;CH;CH;1;;0;0;1;0;0;1;1;0;1;0;0;0;0;;to check;;
 xpak2_musclecar;3.3;ALL;ALL;1;;0;0;0;0;0;0;0;0;0;0;0;0;0;;to check;;
 xpak2_semi;3.4;ALL;ALL;1;;0;0;0;0;0;0;0;0;0;0;0;0;0;;to check;;
 ;;;;;;;;;;;;;;;;;;;;;;
-xpak2_eurofighter;4.1;EU;EU,SAS;0;;0;0;1;0;0;1;0;0;1;0;0;0;0;;;;https://en.wikipedia.org/wiki/Eurofighter_Typhoon
+xpak2_eurofighter;4.1;EU;EU,SAS;0;;0;0;1;0;0;1;0;0;1;0;0;0;0;;Get from OperationSmokeScreen and Taraba_Quarry, remove them from the server.zip/client.zip of these maps to avoid duplicates if the vehicles are put in objects_server.zip/objects_clients.zip;;https://en.wikipedia.org/wiki/Eurofighter_Typhoon
 xpak2_faav;3.1;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;0;0;0;1;0;0;;;;
 xpak2_hmmwv;3;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;0;0;1;1;0;1;;;;
 xpak2_lav25;1;;US,SEAL,EU,SAS;0;;1;1;0;0;0;0;0;1;1;1;0;0;1;;;;
@@ -64,48 +64,48 @@ ah6c;2.1;;US,SEAL,EU,SAS;0;;0;0;1;1;0;0;0;0;0;1;0;0;0;;;;https://en.wikipedia.or
 ah6j;2;;US,SEAL,EU,SAS;0;;0;0;1;1;0;0;0;0;1;0;0;0;0;;;;https://en.wikipedia.org/wiki/MD_Helicopters_MH-6_Little_Bird
 sa342a;2;;MEC,MECSF,Spetz;0;;0;0;1;1;0;0;0;0;1;0;0;0;0;;;;
 sa342f;2.1;;MEC,MECSF,Spetz;0;;0;0;1;1;0;0;0;0;0;1;0;0;0;;;;
-B52;4.2;;US,SEAL,EU,SAS;0;;0;0;1;0;0;1;1;1;1;0;0;1;1;;;;
+B52;4.2;;US,SEAL,EU,SAS;0;;0;0;1;0;0;1;1;1;1;0;0;1;1;;;https://www.moddb.com/games/battlefield-2/addons/b52;
 idair_rafale;4;;EU;1;;0;0;1;0;0;1;0;0;1;0;0;0;0;;Dynamics or controls to check;;
 ruair_mig144;4;;MEC,MECSF,Spetz;1;;0;0;1;0;0;1;0;0;1;0;0;0;0;;;;
 su75;4;;MEC,MECSF,Spetz;1;;0;0;1;0;0;1;0;0;1;0;0;0;0;;;;
 ;;;;;;;;;;;;;;;;;;;;;;
 apc_acv_15;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;0;0;1;1;0;1;;;;https://en.wikipedia.org/wiki/FNSS_ACV-15
-apc_bmd_2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;1;0;1;;;;
+apc_bmd_2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;1;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-bmd-2-and-lav-25a2-texture-pack;
 apc_btr_4e;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;1;1;0;0;0;0;0;1;1;1;0;0;1;;;;
-apc_btr_t;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
-ARMA3_Boxer;1.2;;EU,SAS;0;;1;1;0;0;0;0;0;1;0;1;0;0;1;;;;https://en.wikipedia.org/wiki/Boxer_(armoured_fighting_vehicle)
+apc_btr_t;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-btr-t-ifv-puma-and-toyota-rocket-launcher;
+ARMA3_Boxer;1.2;;EU,SAS;0;;1;1;0;0;0;0;0;1;0;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-vt-5-boxer-crv-texture-pack;https://en.wikipedia.org/wiki/Boxer_(armoured_fighting_vehicle)
 BF3_BMP2M;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;;0;0;0;0;0;0;0;1;0;1;0;0;1;;;;
 bf3_m1128_stryker;1;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
 BMD4;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;1;0;1;;ObjectTemplate.armor.timeToStayAsWreck need to be set to 0 in bmd4.tweak?;;
-bmp1_kliver;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
+bmp1_kliver;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bmp-1;
 bmp2m_berezhok;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
 BMW_E32;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;0;0;;;;
-Bushmaster;3;;EU,SAS;0;;0;0;0;0;0;0;0;0;0;1;0;0;1;;;;https://fr.wikipedia.org/wiki/V%C3%A9hicule_blind%C3%A9_Bushmaster
-civ_dacia;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;0;0;;;;
+Bushmaster;3;;EU,SAS;0;;0;0;0;0;0;0;0;0;0;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bushmasters;https://fr.wikipedia.org/wiki/V%C3%A9hicule_blind%C3%A9_Bushmaster
+civ_dacia;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-mrap-maxxpro-and-dacia;
 cod_bmp2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
 gaz_24_volga;3.3;;ALL;0;;0;0;0;0;0;0;0;1;0;0;0;0;0;;;;
 gaz_2975_tiger;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;0;0;1;1;0;0;;;;
 ifv_spz_puma;1.2;;EU;0;;0;0;0;0;0;0;0;0;0;1;0;0;1;;;;https://en.wikipedia.org/wiki/Puma_(German_infantry_fighting_vehicle)
-lav25a2;1.2;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;0;1;0;0;1;;;;
-leoclerc;0;;EU;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;https://www.edrmagazine.eu/the-leo-clerc-shows-french-german-cooperation-within-knds
-leopard_2a7;0;;EU;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;;cannon does not move up/down?;;https://en.wikipedia.org/wiki/Leopard_2
+lav25a2;1.2;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;0;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-bmd-2-and-lav-25a2-texture-pack;
+leoclerc;0;;EU;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/leoclerc;https://www.edrmagazine.eu/the-leo-clerc-shows-french-german-cooperation-within-knds
+leopard_2a7;0;;EU;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;;cannon does not move up/down?;https://www.moddb.com/games/battlefield-2/addons/leopard-2a7;https://en.wikipedia.org/wiki/Leopard_2
 mbt_c1_ariete;0;;EU;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
-mbt_t72b1;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
-mbt_t80bv;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
+mbt_t72b1;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-t-72b1-and-zbd04b;
+mbt_t80bv;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-t-80bv-and-uaz-469-technical;
 mbt_t80u;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
 RU_T80UK;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;to test more;;
 RU_T90MS;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;to test more;;
 meat_niva;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;0;0;;;;
 mercedes_560sel_w126;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;0;0;;;;
-mrap_maxxpro;3;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;0;0;1;0;0;1;;;;https://en.wikipedia.org/wiki/International_MaxxPro
-MSTA-S;0.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
+mrap_maxxpro;3;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;0;0;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-mrap-maxxpro-and-dacia;https://en.wikipedia.org/wiki/International_MaxxPro
+MSTA-S;0.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/msta-s;
 P4_ASPIC;3;;EU;0;;0;0;0;0;0;0;0;0;1;0;1;0;1;;;;
 patria_amv;1.2;;EU;0;;1;1;0;0;0;0;0;1;0;1;0;0;1;;;;https://en.wikipedia.org/wiki/Patria_AMV
-kto_rosomak;1.2;;EU;0;;1;1;0;0;0;0;0;1;0;1;0;0;1;;;;https://en.wikipedia.org/wiki/KTO_Rosomak
+kto_rosomak;1.2;;EU;0;;1;1;0;0;0;0;0;1;0;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/kto-rosomak-and-textures-pack;https://en.wikipedia.org/wiki/KTO_Rosomak
 RUTNK_T14;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
 ru_apc_k17a;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
 ru_apc_k25a;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
-uaz_technical;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;0;0;1;0;1;;;;
-usapc_m2a3;1;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
+uaz_technical;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;0;0;1;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-t-80bv-and-uaz-469-technical;
+usapc_m2a3;1;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/usapc-m2a3;
 ustank_m1a3;0;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
 VBCI;1.2;;EU;0;;0;0;0;0;0;0;0;1;0;1;0;0;1;;;;
