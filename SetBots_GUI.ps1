@@ -7,7 +7,8 @@ $form.width = 640
 $form.height = 480
 $form.Text = "SetBots"
 
-$modFolder = "U:\Other data\Games\Battlefield 2\Personal mods\GitHub\bf2"
+$modFolder = "C:\Program Files (x86)\EA GAMES\Battlefield 2\mods\bf2"
+#$modFolder = "U:\Other data\Games\Battlefield 2\Personal mods\GitHub\bf2"
 $nbBots = [int]47
 $maxBotsIncludeHumans = [int]0
 $botSkill = [double]1.0

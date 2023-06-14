@@ -7,11 +7,14 @@ $form.width = 640
 $form.height = 480
 $form.Text = "ChangeMapVehicles"
 
-$levelFolder = "U:\Progs\EA Games\Battlefield 2\mods\xpack_alt\Levels\Gulf_of_Oman"
+$levelFolder = "C:\Program Files (x86)\EA GAMES\Battlefield 2\mods\bf2\Levels\Gulf_of_Oman"
+#$levelFolder = "U:\Progs\EA Games\Battlefield 2\mods\xpack_alt\Levels\Gulf_of_Oman"
 $gameMode = "sp3"
 $mapSize = "64"
-$forcedTeam1 = "Spetz"
-$forcedTeam2 = "EU"
+$forcedTeam1 = "MEC"
+#$forcedTeam1 = "Spetz"
+$forcedTeam2 = "US"
+#$forcedTeam2 = "EU"
 
 #should list detected available maps, gamemodes, mapsizes...
 

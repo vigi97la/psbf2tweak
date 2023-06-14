@@ -7,7 +7,8 @@ $form.width = 640
 $form.height = 480
 $form.Text = "BasicTempUpdate"
 
-$objectsFolder = "U:\Other data\Games\Battlefield 2\Personal mods\GitHub\bf2"
+$objectsFolder = "C:\Program Files (x86)\EA GAMES\Battlefield 2\mods\bf2\Objects_server"
+#$objectsFolder = "U:\Other data\Games\Battlefield 2\Personal mods\GitHub\bf2"
 $tempMultiplier = [double]100
 
 $instructionsLabel = New-Object System.Windows.Forms.Label
