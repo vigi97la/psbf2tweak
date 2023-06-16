@@ -1,6 +1,6 @@
 Description
 
-Warning: this is experimental, use it at your own risk!
+Warning: This is experimental, use it at your own risk! Latest updates: https://github.com/vigi97la/psbf2tweak
 
 These PowerShell GUIs and scripts helps to tweak a Battlefield 2 custom mod, especially groups of vehicles:
 _ When you have multiple similar vehicles and don't know how to fit them in your favorite map, the ChangeMapVehicles tool can help randomize the vehicles on the existing spawnpoints of the map. Multiple characteristics can be defined in "vehicles_db.csv" (to edit e.g. with Microsoft Excel) to describe how a specific vehicle can be replaced with another one (e.g. you might want that only a US car could be swapped with another US car and not with a MEC plane, etc.). Most of the vehicles of Battlefield 2 Complete Collection are already described, plus some available from Mod DB and elsewhere (some download links are in "vehicles_db.csv", you would have to install them manually or disable them if they cause problems).
@@ -8,7 +8,13 @@ _ Vehicles wrecks usually stay up to 10 s in standard Battlefield 2 versions. Ti
 _ AddVehicleSpawnPoint and AddVehicleSupplyObject tools can help adding a mobile spawnpoint or supplyobject for a whole folder of vehicles according to "vehicles_db.csv".
 _ BasicTempUpdate tool can help convince the bots to use more the vehicles whenever possible.
 _ SetBots tool can help changing the number of bots.
+_ ListVehicles tool can help building "vehicles_db.csv" from a folder of vehicles.
 _ Please see the tutorial below, where Battlefield 2 Demo with a modified Gulf Of Oman map with many vehicles spawnpoints will be used to demonstrate some possiblities.
+
+
+Quick start for people already familiar with Battlefield 2 modding
+
+You probably just have to run "set-executionpolicy remotesigned" in Admin Powershell, add 7z.exe in the PATH, reboot, then running "ChangeMapVehicles_GUI.bat" and playing with "vehicles_db.csv" should be intuitive enough...
 
 
 Prerequisites
@@ -41,7 +47,7 @@ _ Note: See Known issues section below.
 _ Edit "vehicles_db.csv" e.g. with Microsoft Excel (or any text editor) to ensure only the vehicles really fully available in Battlefield 2 Demo have their column Disabled to 0 (i.e. only apc_btr90, JEEP_FAAV, jep_mec_paratrooper, jep_vodnik, RUTNK_T90, USAPC_LAV25, USJEP_HMMWV, USTNK_M1A2, boat_rib, ahe_ah1z, ahe_havoc, air_f35b, ruair_mig29, RUAIR_SU34, usthe_uh60), while all the others have Disabled to 1.
 _ Copy "C:\Program Files\EA Games\Battlefield 2 Demo\mods\bf2" as "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2". xbf2 will be the name of the new mod.
 _ Replace "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Levels\Gulf_of_Oman\Info" with the provided one, extract using 7-Zip "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Levels\Gulf_of_Oman\server.zip", right-click on "server" folder and in its Properties, disable Read-only attribute for all its content. Copy "server\gamemodes\sp1\16" as "server\gamemodes\sp3\64". Compress using 7-Zip the content of "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Levels\Gulf_of_Oman\server" to "server.zip" and replace the original (make sure that the resulting "server.zip" does not contain itself a root folder "server", the directory structure needs to look like "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Levels\Gulf_of_Oman\server.zip\gamemodes\..." and not "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Levels\Gulf_of_Oman\server.zip\server\gamemodes\...").
-_ Double-click "ChangeMapVehicles_GUI.bat", change the level folder in the GUI to "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Levels\Gulf_of_Oman", change gameMode to sp3, mapSize to 64, teams to MEC and US, you will need to uncheck bEnforceCompatibleTeams and/or other options to see some changes since few vehicles are available for those teams in Battlefield 2 Demo, click on Apply button and check the output in the console and especially if/which vehicle changed, click again on Apply button to get another random distribution if needed, then close both windows (note that the warnings about stationary weapons not found in vehicles_db.csv are not a problem).
+_ Double-click "ChangeMapVehicles_GUI.bat", change the level folder in the GUI to "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Levels\Gulf_of_Oman", change gameMode to sp3, mapSize to 64, teams to MEC and US, you will need to uncheck bEnforceCompatibleTeams and/or other options to see some changes since few vehicles are available for those teams in Battlefield 2 Demo, click on Apply button and check the output in the console and especially if/which vehicle changed, click again on Apply button to get another random distribution if needed, then close both windows (note that the warnings about stationary weapons not found in "vehicles_db.csv" are not a problem).
 _ To increase the number of bots, double-click "SetBots_GUI.bat", change the mod folder in the GUI to "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2", click on Apply button and check the output in the console, then close both windows.
 _ Extract using 7-Zip "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Objects_server.zip" to "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Objects_server". 
 _ Right-click on Objects_server folder and in its Properties, disable Read-only attribute for all its content.
@@ -49,8 +55,8 @@ _ To have vehicles wrecks stay longer, double-click "TimeToStayAsWreckUpdate_GUI
 _ To make the bots use more the vehicles, double-click "BasicTempUpdate_GUI.bat", change the Objects folder in the GUI to "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Objects_server", change BasicTemp to 100, click on Apply button and check the output in the console, then close both windows.
 _ Test also "AddVehicleSpawnPoint_GUI.bat", "AddVehicleSupplyObject_GUI.bat", "AddArmorEffect_GUI.bat" in a similar way. You might want to use WinMerge to compare the original Objects_server with the modified one.
 _ Compress using 7-Zip the content of "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Objects_server" to "Objects_server.zip" and replace the original (make sure that the resulting "Objects_server.zip" does not contain itself a root folder "Objects_server", the directory structure needs to look like "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Objects_server.zip\Vehicles\..." and not "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2\Objects_server.zip\Objects_server\Vehicles\...")
-_ Open a terminal in "C:\Program Files\EA Games\Battlefield 2 Demo\mods\xbf2" and run something similar to:
-bf2.exe +restart 1 +developer 1 +managedTextures 0 +fileMonitor 1 +menu 1 +fullscreen 0 +modPath mods/xbf2 +szx 1600 +szy 900
+_ Open a terminal in "C:\Program Files\EA Games\Battlefield 2 Demo\" and run something similar to:
+.\bf2.exe +restart 1 +developer 1 +managedTextures 0 +fileMonitor 1 +menu 1 +fullscreen 0 +modPath mods/xbf2 +szx 1600 +szy 900
 to test the modified map "Gulf Of Oman - 64" in the mod.
 _ To get a version of the map with more vehicle spawnpoints, download https://www.moddb.com/games/battlefield-2/addons/gulf-of-oman-coop, get its server\StaticObjects.con, server\ai, server\aipathfinding (or maybe use directly all the files...), copy server\gamemodes\gpm_coop\64 as server\gamemodes\sp3\64 (be sure to delete any GamePlayObject.con.bak inside the zip and extracted folder), run "ChangeMapVehicles_GUI.bat" with bEnforceVehicleType, bEnforceVTOL, bEnforceNeedLargeAirfield disabled, bRemoveIncompatible enabled...
 _ To get a version of the map with even more vehicle spawnpoints, get provided sp3\64 (be sure to delete any GamePlayObject.con.bak inside the zip and extracted folder), remove occurences of ATS_HJ8 and ATS_TOW in GamePlayObject.con (since they are not available in Battlefield 2 Demo), remove sp3\64\ai\Strategies.ai (or install https://www.moddb.com/mods/esai-enhanced-strategic-ai/ and edit Strategies.ai), run "ChangeMapVehicles_GUI.bat" with bEnforceVehicleType, bEnforceVTOL, bEnforceNeedLargeAirfield disabled, bRemoveIncompatible enabled...
@@ -67,13 +73,14 @@ Do not forget to set Disabled to 1 for vehicles that you do not have or which ha
 
 Known issues
 
-_ If working in "C:\Program Files", you might have access rights problems editing, unzipping, etc. Move the files temporarily to e.g. "Documents" folder, edit them here, then move them back at their orignal place if needed.
+_ If working in "C:\Program Files", you might have access rights problems editing, unzipping, etc. Move the files temporarily to e.g. "Documents" folder, edit them here, then move them back at their original place if needed.
 _ Decimal separator interpretation might cause problems depending on the international settings of the OS. If needed, consider setting it to '.'.
 _ PowerShell 2.0 (highest version available on Windows XP) might have compatibility issues (e.g. FolderBrowserDialog does not work, use the TextBox instead)...
 _ Some custom vehicles from the Internet sometimes have problems with their wrecks, try to force ObjectTemplate.armor.timeToStayAsWreck need to be set to 0 in vehicleName.tweak if needed.
 _ BasicTemp might vary a lot among custom vehicles from the Internet, you might need to check specific cases.
 
 
-ChangeLog
+ChangeLog (more on https://github.com/vigi97la/psbf2tweak and https://www.moddb.com/games/battlefield-2/addons/psbf2tweak)
 
-0.1: First public version.
+v0.1.1: Added ListVehicles tool.
+v0.1.0: First public version.
