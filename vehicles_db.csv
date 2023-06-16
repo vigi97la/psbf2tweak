@@ -61,8 +61,8 @@ xpak2_tnkl2a6;0;EU;EU;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
 ;;;;;;;;;;;;;;;;;;;;;;
 kobra;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;0;0;0;0;0;0;;;;
 ah6c;2.1;;US,SEAL,EU,SAS;0;;0;0;1;1;0;0;0;0;0;1;0;0;0;;;;https://en.wikipedia.org/wiki/MD_Helicopters_MH-6_Little_Bird
-ah6j;2;;US,SEAL,EU,SAS;0;;0;0;1;1;0;0;0;0;1;0;0;0;0;;;;https://en.wikipedia.org/wiki/MD_Helicopters_MH-6_Little_Bird
-sa342a;2;;MEC,MECSF,Spetz;0;;0;0;1;1;0;0;0;0;1;0;0;0;0;;;;
+ah6j;2;;US,SEAL,EU,SAS;0;;0;0;1;1;0;0;0;0;1;0;0;1;0;;;;https://en.wikipedia.org/wiki/MD_Helicopters_MH-6_Little_Bird
+sa342a;2;;MEC,MECSF,Spetz;0;;0;0;1;1;0;0;0;0;1;0;0;1;0;;;;
 sa342f;2.1;;MEC,MECSF,Spetz;0;;0;0;1;1;0;0;0;0;0;1;0;0;0;;;;
 B52;4.2;;US,SEAL,EU,SAS;0;;0;0;1;0;0;1;1;1;1;0;0;1;1;;;https://www.moddb.com/games/battlefield-2/addons/b52;
 idair_rafale;4;;EU;1;;0;0;1;0;0;1;0;0;1;0;0;0;0;;Dynamics or controls to check;;
@@ -93,16 +93,18 @@ mbt_c1_ariete;0;;EU;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
 mbt_t72b1;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-t-72b1-and-zbd04b;
 mbt_t80bv;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-t-80bv-and-uaz-469-technical;
 mbt_t80u;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
-RU_T80UK;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;to test more;;
-RU_T90MS;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;to test more;;
+RU_T80UK;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;armor to check more;;
+RU_T90MS;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;armor to check more;;
 meat_niva;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;0;0;;;;
 mercedes_560sel_w126;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;0;0;;;;
 mrap_maxxpro;3;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;0;0;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-mrap-maxxpro-and-dacia;https://en.wikipedia.org/wiki/International_MaxxPro
-MSTA-S;0.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/msta-s;
+MSTA-S;0.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/msta-s;
 P4_ASPIC;3;;EU;0;;0;0;0;0;0;0;0;0;1;0;1;0;1;;;;
 patria_amv;1.2;;EU;0;;1;1;0;0;0;0;0;1;0;1;0;0;1;;;;https://en.wikipedia.org/wiki/Patria_AMV
 kto_rosomak;1.2;;EU;0;;1;1;0;0;0;0;0;1;0;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/kto-rosomak-and-textures-pack;https://en.wikipedia.org/wiki/KTO_Rosomak
 RUTNK_T14;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;;;;
+T14_Armata;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;;to test;;
+BF2042_T28;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;;to test;;
 ru_apc_k17a;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
 ru_apc_k25a;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;1;;;;
 uaz_technical;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;0;0;1;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-t-80bv-and-uaz-469-technical;
