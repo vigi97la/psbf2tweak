@@ -2,6 +2,94 @@
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
+function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSeparateServerClient=$true,[bool]$bFixVehicleHudNameInconsistencies=$false,[bool]$bFixVehicleTypeInconsistencies=$false,[bool]$bConfirmEachFix=$false) {
+
+	#$modFolder optional, would be to check the existence of includes...
+	#if downloadsFolder empty, only use modFolder and use Server/ClientArchives.con
+
+	#$bSeparateServerClient: Objects, Menu folders or Objects_server, Objects_client, etc.
+
+	# TODO: There might be other archives inside the archives, and their extracted name might conflict with existing folders...
+
+	Get-ChildItem "$downloadsFolder\*" -R -Include *.zip,*.rar,*.7z | ForEach-Object {
+		& 7z x -y $_.FullName `-o"$($_.DirectoryName)/$($_.Basename)"
+
+		#first assume it follows std dir struct of objects_server/client.zip
+
+		#first should find a .tweak which appears to correspond to a vehicle by checking its content...
+		#then in its folder there should be a .con and potentially other .tweak and .con for subparts, as well as ai, meshes, textures, sound folders
+		#.con, .tweak, ai should go to server, textures, sound to client. Directory structure?: vehicles\???\vehicleName?
+		#should look for any remaining .dds, .tga which might be necessary for Menu... Should read vehicleName.tweak and check for menuicon, etc.
+		#effects\vehicles...
+		# meshes folder should be copied to server, and its sudirectory structure copied to client with only the .bundlemesh
+
+	}
+
+
+
+
+
+	#use vehicleHudName to correct killname...
+
+	#parses and get includes (including  menuincon to put in correct folder, propose lines to copy for the db using vehicletype, etc.) to help extracting from other mods
+
+
+}
+
+#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\GitHub\psbf2tweak"
+function ExtractModServerArchives($modFolder) {
+
+	#$extractionFolder="."
+
+	$serverArchives="$modFolder\ServerArchives.con"
+
+	#Objects, Menu, Common, Fonts, Shaders, Scripts
+
+	# First lines have more priority over the last in ServerArchives.con?
+
+	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
+	$archiveregexpr="^\s*fileManager.mountArchive\s+(.+)`.zip\s+(.+)\s*"
+	$sr=[System.IO.StreamReader]$serverArchives
+	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+		$line=$sr.ReadLine()
+		$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if ($m.Success) {
+			Continue
+		}
+		$m=[regex]::Match($line, $archiveregexpr)
+		if ($m.Groups.Count -ne 3) {
+			Continue
+		}
+		$file=$m.Groups[1].value #filename without .zip
+		$folder=$m.Groups[2].value
+		"$file -> $folder"
+		If (Test-Path -Path "$modFolder\$file.zip") {
+			$zipfile="$modFolder\$file.zip"
+		}
+		else {
+			If (Test-Path -Path "$modFolder\..\..\$file.zip") {
+				# Should add option to choose what to do with files outside current mod...?
+				$zipfile="$modFolder\..\..\$file.zip"
+				Write-Output "Skipping $zipfile since it is outside current mod"
+				Continue
+			}
+			else {
+				Write-Error "Could not find $modFolder\$file.zip or $modFolder\..\..\$file.zip"
+			}
+		}
+		& 7z x -y "$zipfile" `-o"$modFolder\$file"
+	}
+	$sr.close()
+}
+
+function CompressModServerArchives($modFolder) {
+
+}
+
+#Read-Host -Prompt "Press Enter to continue"
+
+exit
+
 #"Please ensure Battlefield 2 is installed (tested with Complete Collection)."
 
 # Change or set to $null if you do not need/want.
@@ -96,98 +184,6 @@ function AddNewVehicle($vehicleName, $vehicleType, $vehicleTeams, $downloadLink,
 	#sometimes also there are weapons, effects, for that use $postCustomScript?...
 	$postCustomScript
 }
-
-function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSeparateServerClient=$true,[bool]$bFixVehicleHudNameInconsistencies=$false,[bool]$bFixVehicleTypeInconsistencies=$false,[bool]$bConfirmEachFix=$false) {
-
-	#$modFolder optional, would be to check the existence of includes...
-	#if downloadsFolder empty, only use modFolder and use Server/ClientArchives.con
-
-	#$bSeparateServerClient: Objects, Menu folders or Objects_server, Objects_client, etc.
-
-	# TODO: There might be other archives inside the archives, and their extracted name might conflict with existing folders...
-
-	Get-ChildItem "$downloadsFolder\*" -R -Include *.zip,*.rar,*.7z | ForEach-Object {
-		& 7z x -y $_.FullName `-o"$($_.DirectoryName)/$($_.Basename)"
-
-		#first assume it follows std dir struct of objects_server/client.zip
-
-		#first should find a .tweak which appears to correspond to a vehicle by checking its content...
-		#then in its folder there should be a .con and potentially other .tweak and .con for subparts, as well as ai, meshes, textures, sound folders
-		#.con, .tweak, ai should go to server, textures, sound to client. Directory structure?: vehicles\???\vehicleName?
-		#should look for any remaining .dds, .tga which might be necessary for Menu... Should read vehicleName.tweak and check for menuicon, etc.
-		#effects\vehicles...
-		# meshes folder should be copied to server, and its sudirectory structure copied to client with only the .bundlemesh
-
-	}
-
-
-
-
-
-	#use vehicleHudName to correct killname...
-
-	#parses and get includes (including  menuincon to put in correct folder, propose lines to copy for the db using vehicletype, etc.) to help extracting from other mods
-
-
-}
-
-#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\GitHub\psbf2tweak"
-function ExtractModServerArchives($modFolder) {
-
-	#$extractionFolder="."
-
-	$serverArchives="$modFolder\ServerArchives.con"
-
-	#Objects, Menu, Common, Fonts, Shaders, Scripts
-
-	# First lines have more priority over the last in ServerArchives.con?
-
-	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
-	$archiveregexpr="^\s*fileManager.mountArchive\s+(.+)`.zip\s+(.+)\s*"
-	$sr=[System.IO.StreamReader]$serverArchives
-	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
-		$line=$sr.ReadLine()
-		$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-		if ($m.Success) {
-			Continue
-		}
-		$m=[regex]::Match($line, $archiveregexpr)
-		if ($m.Groups.Count -ne 3) {
-			Continue
-		}
-		$file=$m.Groups[1].value #filename without .zip
-		$folder=$m.Groups[2].value
-		"$file -> $folder"
-		If (Test-Path -Path "$modFolder\$file.zip") {
-			$zipfile="$modFolder\$file.zip"
-		}
-		else {
-			If (Test-Path -Path "$modFolder\..\..\$file.zip") {
-				# Should add option to choose what to do with files outside current mod...?
-				$zipfile="$modFolder\..\..\$file.zip"
-				Write-Output "Skipping $zipfile since it is outside current mod"
-				Continue
-			}
-			else {
-				Write-Error "Could not find $modFolder\$file.zip or $modFolder\..\..\$file.zip"
-			}
-		}
-		& 7z x -y "$zipfile" `-o"$modFolder\$file"
-	}
-	$sr.close()
-}
-
-function CompressModServerArchives($modFolder) {
-
-}
-
-main
-
-Read-Host -Prompt "Press Enter to continue"
-
-exit
-
-
 
 function CreateNewModFromTemplate($modFolder) {
 	If (Test-Path -Path "$modFolder\..\xpack") {
