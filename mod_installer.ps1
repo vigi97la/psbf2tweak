@@ -2,6 +2,68 @@
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
+function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [bool]$bIncludeAll=$false) {
+
+	Get-ChildItem "$objectsFolder\*" -R -Include "*.tweak" | ForEach-Object {
+		$file=$_.FullName
+		$bVehicle=[regex]::Match($file, "(.*Vehicles.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
+		$bStationaryWeapon=[regex]::Match($file, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
+		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
+			$bSkip=$false
+			#$regexpr="\s*ObjectTemplate.create\s+PlayerControlObject\s+(\S+)\s*\r?\n" # .con
+			$regexpr="\s*ObjectTemplate.activeSafe\s+PlayerControlObject\s+(\S+)\s*\r?\n" # .tweak
+			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
+			If ($m.Groups.Count -eq 2) {
+				$vehicleName=$m.Groups[1].value
+			}
+			else {
+				$bSkip=$true
+			}
+
+			Write-Output "$file : $vehicleName"
+
+			$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
+			$sr=[System.IO.StreamReader]$file
+			#$sw=[System.IO.StreamWriter]"$file.tmp"
+			while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+				$line=$sr.ReadLine()
+				$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				if ($m.Success) {
+					#$sw.WriteLine($line)
+					Continue
+				}
+				$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*")
+				if ($m.Groups.Count -ge 2) {
+					$includedfile=$m.Groups[1].value
+
+					# should get args and process included file...
+
+					#20 max
+					for ($i=2; $i -lt $m.Groups.Count; $i+=2) {
+						$param=$m.Groups[$i+1].value
+						if ("" -ne $param) {
+
+							Write-Output "$file : $includedfile $param"
+
+						}
+					}
+				}
+
+
+				#get also vehicletype and replace hud with standard icons
+				$regexprvehicleType="^\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*"
+
+			$regexprtypeIcon="^\s*ObjectTemplate.vehicleHud.typeIcon\s+(\S+)\s*"
+			$regexprminiMapIcon="^\s*ObjectTemplate.vehicleHud.miniMapIcon\s+(\S+)\s*"
+			$regexprvehicleIcon="^\s*ObjectTemplate.vehicleHud.vehicleIcon\s+(\S+)\s*"
+
+			}
+			#$sw.close()
+			$sr.close()
+		}
+	}
+}
+
 function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSeparateServerClient=$true,[bool]$bFixVehicleHudNameInconsistencies=$false,[bool]$bFixVehicleTypeInconsistencies=$false,[bool]$bConfirmEachFix=$false) {
 
 	#$modFolder optional, would be to check the existence of includes...
@@ -31,7 +93,7 @@ function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSepa
 
 	#use vehicleHudName to correct killname...
 
-	#parses and get includes (including  menuincon to put in correct folder, propose lines to copy for the db using vehicletype, etc.) to help extracting from other mods
+	#parses and get includes (including  menuincon to put in correct folder, etc.) to help extracting from other mods
 
 
 }
