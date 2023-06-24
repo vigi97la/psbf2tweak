@@ -226,6 +226,14 @@ $bEnforceCanBeAirDroppedCheckbox.Text = "bEnforceCanBeAirDropped"
 $bEnforceCanBeAirDroppedCheckbox.Checked = $false
 $form.Controls.Add($bEnforceCanBeAirDroppedCheckbox)
 
+$offset += 20
+$bEnforceCivilianCheckbox = new-object System.Windows.Forms.checkbox
+$bEnforceCivilianCheckbox.Location = new-object System.Drawing.Size(10,$offset)
+$bEnforceCivilianCheckbox.Size = new-object System.Drawing.Size(250,20)
+$bEnforceCivilianCheckbox.Text = "bEnforceCivilian"
+$bEnforceCivilianCheckbox.Checked = $true
+$form.Controls.Add($bEnforceCivilianCheckbox)
+
 $offset = 115
 $bRemoveIncompatibleCheckbox = new-object System.Windows.Forms.checkbox
 $bRemoveIncompatibleCheckbox.Location = new-object System.Drawing.Size(300,$offset)
@@ -264,7 +272,7 @@ $applyButton.Location = new-object System.Drawing.Size(500,400)
 $applyButton.Size = new-object System.Drawing.Size(100,40)
 $applyButton.Text = "Apply"
 $applyButton.Add_Click({
-	.\ChangeMapVehicles.ps1 $levelFolderTextBox.Text $gameModeTextBox.Text $mapSizeTextBox.Text $forcedTeam1TextBox.Text $forcedTeam2TextBox.Text $bEnforceVehicleTypeCheckbox.Checked $bEnforceCompatibleTeamsCheckbox.Checked $bEnforcePreferredTeamsCheckbox.Checked $bEnforceSizeCategoryCheckbox.Checked $bEnforceAmphibiousCheckbox.Checked $bEnforceFloatingCheckbox.Checked $bEnforceFlyingCheckbox.Checked $bEnforceVTOLCheckbox.Checked $bEnforceNeedWaterCheckbox.Checked $bEnforceNeedAirfieldCheckbox.Checked $bEnforceNeedLargeAirfieldCheckbox.Checked $bEnforceHeavilyArmoredCheckbox.Checked $bEnforceHeavilyArmedCheckbox.Checked $bEnforceHasManyPassengersCheckbox.Checked $bEnforceCanBeAirDroppedCheckbox.Checked $bRemoveIncompatibleCheckbox.Checked $bRandomizeTeam1VehiclesCheckbox.Checked $bRandomizeTeam2VehiclesCheckbox.Checked $bUseAutoBackupCheckbox.Checked | Write-Host
+	.\ChangeMapVehicles.ps1 $levelFolderTextBox.Text $gameModeTextBox.Text $mapSizeTextBox.Text $forcedTeam1TextBox.Text $forcedTeam2TextBox.Text $bEnforceVehicleTypeCheckbox.Checked $bEnforceCompatibleTeamsCheckbox.Checked $bEnforcePreferredTeamsCheckbox.Checked $bEnforceSizeCategoryCheckbox.Checked $bEnforceAmphibiousCheckbox.Checked $bEnforceFloatingCheckbox.Checked $bEnforceFlyingCheckbox.Checked $bEnforceVTOLCheckbox.Checked $bEnforceNeedWaterCheckbox.Checked $bEnforceNeedAirfieldCheckbox.Checked $bEnforceNeedLargeAirfieldCheckbox.Checked $bEnforceHeavilyArmoredCheckbox.Checked $bEnforceHeavilyArmedCheckbox.Checked $bEnforceHasManyPassengersCheckbox.Checked $bEnforceCanBeAirDroppedCheckbox.Checked $bEnforceCivilianCheckbox.Checked $bRemoveIncompatibleCheckbox.Checked $bRandomizeTeam1VehiclesCheckbox.Checked $bRandomizeTeam2VehiclesCheckbox.Checked $bUseAutoBackupCheckbox.Checked | Write-Host
 })
 $form.Controls.Add($applyButton)
 

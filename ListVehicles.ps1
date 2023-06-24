@@ -71,9 +71,9 @@ function ListVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [
 				}
 
 				# Should also try to detect the number of passengers, bFloating, bAmphibious...
-				# Team sometimes could be deduced from vehicleName...?
+				# Team, bCivilian sometimes could be deduced from vehicleName...?
 
-				Write-Output "$vehicleName;$vehicleType;ALL;ALL;0;;0;$bFloating;$bFlying;$bVTOL;$bNeedWater;$bNeedAirfield;0;$bHeavilyArmored;$bHeavilyArmed;$bHasManyPassengers;0;0;$bHasSupplies;$vehicleHudName;;;"
+				Write-Output "$vehicleName;$vehicleType;ALL;ALL;0;;0;$bFloating;$bFlying;$bVTOL;$bNeedWater;$bNeedAirfield;0;$bHeavilyArmored;$bHeavilyArmed;$bHasManyPassengers;0;0;0;$bHasSupplies;$vehicleHudName;;;"
 			}
 		}
 	}
