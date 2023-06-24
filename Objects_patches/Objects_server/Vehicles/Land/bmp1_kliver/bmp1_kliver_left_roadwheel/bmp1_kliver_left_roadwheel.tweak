@@ -1,0 +1,27 @@
+rem *** Generated with Bf2Editor.exe [created: 2006/5/15 12:52]
+GeometryTemplate.setSubGeometryLodDistance 1 0 30
+GeometryTemplate.setSubGeometryLodDistance 1 1 50
+GeometryTemplate.setSubGeometryLodDistance 1 2 130
+GeometryTemplate.setSubGeometryLodDistance 2 0 30
+GeometryTemplate.setSubGeometryLodDistance 2 1 60
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe RotationalBundle bmp1_kliver_left_roadwheel
+ObjectTemplate.creator DESKTOP:sts_garage
+ObjectTemplate.modifiedByUser "sts_garage"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 12
+ObjectTemplate.geometry bmp1_kliver_left_roadwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject bmp1_kliver_L_whl_1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bmp1_kliver_left_roadwheel_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_bmp1_kliver_left_roadwheel_RotationRpm
+ObjectTemplate.modifiedByUser "sts_garage"
+

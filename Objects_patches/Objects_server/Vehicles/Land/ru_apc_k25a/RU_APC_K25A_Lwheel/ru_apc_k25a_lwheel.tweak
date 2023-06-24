@@ -1,0 +1,21 @@
+rem *** Generated with Bf2Editor.exe [created: 2006/1/4 7:47]
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe RotationalBundle ru_apc_k25a_lwheel
+ObjectTemplate.creator DESKTOP-D6K5BK3:yjlij
+ObjectTemplate.modifiedByUser "yjlij"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 42
+ObjectTemplate.geometry ru_apc_k25a_lwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject RU_APC_K25A_Lwheel_05
+rem -------------------------------------
+ObjectTemplate.addTemplate S_ru_apc_k25a_lwheel_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_ru_apc_k25a_lwheel_RotationRpm
+ObjectTemplate.modifiedByUser "yjlij"
+

@@ -1,0 +1,297 @@
+rem *** Generated with Bf2Editor.exe [created: 2006/1/4 6:47]
+ObjectTemplate.cullRadiusScale 5.8
+GeometryTemplate.setSubGeometryLodDistance 1 0 25
+GeometryTemplate.setSubGeometryLodDistance 1 1 50
+GeometryTemplate.setSubGeometryLodDistance 1 2 75
+GeometryTemplate.setSubGeometryLodDistance 1 3 100
+GeometryTemplate.setSubGeometryLodDistance 1 4 120
+GeometryTemplate.setSubGeometryLodDistance 2 0 25
+GeometryTemplate.setSubGeometryLodDistance 2 1 50
+GeometryTemplate.setSubGeometryLodDistance 2 2 75
+GeometryTemplate.setSubGeometryLodDistance 2 3 100
+ObjectTemplate.activeSafe PlayerControlObject leopard_2a7crows
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.creator STS:STS_Garage
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.castsDynamicShadow 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "Crows"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+rem ---EndComp ---
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.hudName "Crows"
+ObjectTemplate.weaponHud.guiIndex 26
+ObjectTemplate.weaponHud.altGuiIndex 26
+ObjectTemplate.weaponHud.hasFireRate 0
+ObjectTemplate.weaponHud.overheatSound S_Weapon_Vehicle_Overheat
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.aiTemplate leopard_2a7Crows2Gunner
+rem -------------------------------------
+ObjectTemplate.addTemplate S_leopard_2a7crows_Ambient
+ObjectTemplate.addTemplate S_leopard_2a7crows_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 0/0/-4 180/0/0
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.dontClearTeamOnExit 1
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.shakeFactor 4
+ObjectTemplate.sprintRecoverTime 3
+ObjectTemplate.sprintDissipationTime 3
+ObjectTemplate.sprintLimit 0.5
+ObjectTemplate.sprintFactor 1.125
+ObjectTemplate.setVehicleType VTHeavyTank
+ObjectTemplate.listenerObstruction 0.995
+ObjectTemplate.groundContactVolume 0.7
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.hasRestrictedExit 1
+
+ObjectTemplate.activeSafe Sound S_leopard_2a7crows_Ambient
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ustnk_m1a2/sounds/m1a2_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.2
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_leopard_2a7crows_AmbientDamaged
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.65
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create RotationalBundle leopard_2a7crows_citv
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setMaxSpeed 100/0/0
+ObjectTemplate.setAcceleration 300/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+
+ObjectTemplate.create RotationalBundle leopard_2a7crows_crows
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setMaxSpeed 100/0/0
+ObjectTemplate.setAcceleration 300/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+
+ObjectTemplate.activeSafe RotationalBundle leopard_2a7crows_Gunmount
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.aiTemplate leopard_2a7crowsGun
+rem -------------------------------------
+ObjectTemplate.addTemplate leopard_2a7crows_Camera
+ObjectTemplate.setPosition -0.6/-0.23225/0.73473
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-25/0
+ObjectTemplate.setMaxRotation 0/15/0
+ObjectTemplate.setMaxSpeed 0/100/0
+ObjectTemplate.setAcceleration 0/300/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+
+ObjectTemplate.activeSafe GenericFireArm leopard_2a7crows_M2HB
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.modifiedByUser "STS_Garage"
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.hudName "m2hb"
+ObjectTemplate.weaponHud.guiIndex 26
+ObjectTemplate.weaponHud.altGuiIndex 26
+ObjectTemplate.weaponHud.deviationFactor 5
+ObjectTemplate.weaponHud.maxVisualDeviation 20
+ObjectTemplate.weaponHud.minVisualDeviation 2
+ObjectTemplate.weaponHud.hasFireRate 0
+ObjectTemplate.weaponHud.showClips 0
+ObjectTemplate.weaponHud.overheatSound S_Weapon_Handheld_Overheat
+rem ---EndComp ---
+rem ---BeginComp:SingleFireComp ---
+ObjectTemplate.createComponent SingleFireComp
+ObjectTemplate.fire.roundsPerMinute 600
+ObjectTemplate.fire.fireInCameraDof 1
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags -1
+ObjectTemplate.ammo.magSize 2000
+ObjectTemplate.ammo.reloadTime 3
+rem ---EndComp ---
+rem ---BeginComp:WeaponBasedRecoilComp ---
+ObjectTemplate.createComponent WeaponBasedRecoilComp
+ObjectTemplate.recoil.recoilSize 0.23
+ObjectTemplate.recoil.recoilSpeed 30
+ObjectTemplate.recoil.recoilForce 1
+ObjectTemplate.recoil.cameraRecoilSpeed 13
+ObjectTemplate.recoil.cameraRecoilSize 1
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+ObjectTemplate.deviation.minDev 0.1
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAnimationComp ---
+ObjectTemplate.createComponent DefaultAnimationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+ObjectTemplate.zoom.zoomDelay 0
+ObjectTemplate.zoom.addZoomFactor 0
+ObjectTemplate.zoom.addZoomFactor 0.4
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.aiTemplate leopard_2a7crowsGun
+rem -------------------------------------
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_Fire1P
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_Fire1P_Outdoor
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_Fire3P
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_BoltClick
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_TriggerClick
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_SwitchFireRate
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_Reload1P
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_Reload3P
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_Deploy1P
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_Deploy3P
+ObjectTemplate.addTemplate S_leopard_2a7crows_M2HB_Zoom
+ObjectTemplate.addTemplate e_shellejection_50cal
+ObjectTemplate.setPosition -0.01287/-0.12603/0.20941
+ObjectTemplate.setRotation 116.875/0.476971/-90.0514
+ObjectTemplate.addTemplate e_muzz_minigun
+ObjectTemplate.setPosition -0.00002/0.01831/1.11559
+rem -------------------------------------
+ObjectTemplate.projectileTemplate HMG_M2HB50cal_Projectile
+ObjectTemplate.keepProjectiles 5
+ObjectTemplate.velocity 500
+ObjectTemplate.itemIndex 1
+
+ObjectTemplate.activeSafe Sound S_leopard_2a7crows_M2HB_Fire1P
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/leopard_2a7/leopard_2a7crows/sounds/M2HB_fire_1p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.98/1.04/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.93/1/
+
+ObjectTemplate.activeSafe Sound S_leopard_2a7crows_M2HB_Fire3P
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/leopard_2a7/leopard_2a7crows/sounds/M2HB_fire_3p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 0.9
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.975/1.04/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.93/1/
+ObjectTemplate.minDistance 10
+ObjectTemplate.halfVolumeDistance 30
+ObjectTemplate.soundRadius 0.5
+
+ObjectTemplate.activeSafe Sound S_leopard_2a7crows_M2HB_BoltClick
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/weapons/handheld/usrif_m4/sounds/mono/m4_boltclick.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.8
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_leopard_2a7crows_M2HB_TriggerClick
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/weapons/handheld/uspis_92fs/sounds/mono/trigger_click.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.5
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_HMG_M2HB_v3_50cal_Projectile_Looping
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "Common/Material/Bullet-Fly-By/25mm/Flyby_01.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_02.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_03.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_04.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_05.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_06.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_07.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_08.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_09.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_10.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_11.ogg,Common/Material/Bullet-Fly-By/25mm/Flyby_12.ogg"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.95/1.05/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.95/1/
+ObjectTemplate.minDistance 0.5
+ObjectTemplate.halfVolumeDistance 15
+ObjectTemplate.soundRadius 10
+
+ObjectTemplate.activeSafe Sound S_leopard_2a7crows_M2HB_Zoom
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/leopard_2a7/leopard_2a7crows/sounds/zoom.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.35
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create Camera leopard_2a7crows_Camera
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.chaseDistance 9
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection -0.25/-0.5/0.75
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/0/0
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7

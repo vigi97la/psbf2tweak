@@ -1,0 +1,22 @@
+rem *** Generated with Bf2Editor.exe [created: 2009/9/30 16:1]
+GeometryTemplate.setMaterialReflectionScale 1 0 0 0.7
+GeometryTemplate.setSpecularStaticGloss 0 0 0 0
+GeometryTemplate.setSpecularStaticGloss 0 0 1 0
+GeometryTemplate.setSpecularStaticGloss 0 0 2 0
+GeometryTemplate.setSpecularStaticGloss 0 0 3 0
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe SimpleObject rutnk_t14_side
+ObjectTemplate.creator WIZARDS:YAK43
+ObjectTemplate.modifiedByUser YAK43
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 20
+ObjectTemplate.geometry rutnk_t14_side
+ObjectTemplate.setCollisionMesh rutnk_t14_side
+ObjectTemplate.mapMaterial 0 Pentrable_Metal_thin 1015
+ObjectTemplate.mapMaterial 1 Armor_3_tank_rear_top 28
+ObjectTemplate.mapMaterial 2 Penetrable_Cloth 33
+ObjectTemplate.mapMaterial 3 Armor_4_tank_sides 29
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh

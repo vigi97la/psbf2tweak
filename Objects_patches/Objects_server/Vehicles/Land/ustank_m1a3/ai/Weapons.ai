@@ -1,0 +1,49 @@
+rem *** Armor Piercing Shell ***
+weaponTemplate.create mbt_ap_shell_ai
+weaponTemplate.indirect 0
+weaponTemplate.minRange 0.0
+weaponTemplate.maxRange 180.0
+weaponTemplate.WeaponFire PIFire
+weaponTemplate.setStrength Infantry  2.0
+weaponTemplate.setStrength LightArmour 8.0
+weaponTemplate.setStrength HeavyArmour 5.0
+weaponTemplate.setStrength NavalArmour 10.0
+weaponTemplate.setStrength Helicopter  2.0
+weaponTemplate.setStrength AirPlane    0.5
+weaponTemplate.allowedDeviation 3.0
+weaponTemplate.setExplosionRadius 8.0
+weaponTemplate.setFiresThroughTransparent 0
+
+rem *** High Explosive Shell ***
+weaponTemplate.create mbt_he_shell_ai
+weaponTemplate.indirect 0
+weaponTemplate.minRange 0.0
+weaponTemplate.maxRange 150.0
+weaponTemplate.WeaponFire PIFire
+weaponTemplate.WeaponActivate PIMenuSelect2
+weaponTemplate.setStrength Infantry  10.0
+weaponTemplate.setStrength LightArmour 2.0
+weaponTemplate.setStrength HeavyArmour 1.0
+weaponTemplate.setStrength NavalArmour 8.0
+weaponTemplate.setStrength Helicopter  1.0
+weaponTemplate.setStrength AirPlane    0.5
+weaponTemplate.allowedDeviation 3.0
+weaponTemplate.setExplosionRadius 12.0
+weaponTemplate.setFiresThroughTransparent 0
+
+rem *** Co-axial LMG ***
+
+weaponTemplate.create tank_coaxial_lmg_ai
+weaponTemplate.indirect 0
+weaponTemplate.minRange 0.0
+weaponTemplate.maxRange 80.0
+weaponTemplate.weaponActivate PINone
+weaponTemplate.weaponFire PIAltFire
+weaponTemplate.setStrength Infantry    12.0
+weaponTemplate.setStrength LightArmour  2.0
+weaponTemplate.setStrength HeavyArmour  1.0
+weaponTemplate.setStrength NavalArmour  1.0
+weaponTemplate.setStrength Helicopter   4.0
+weaponTemplate.setStrength AirPlane     0.5
+weaponTemplate.allowedDeviation 5.0
+weaponTemplate.deviation 15.0

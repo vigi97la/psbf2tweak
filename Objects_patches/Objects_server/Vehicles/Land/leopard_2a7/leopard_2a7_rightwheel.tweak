@@ -1,0 +1,15 @@
+rem *** Generated with Bf2Editor.exe [created: 2016/2/29 13:32]
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe RotationalBundle leopard_2a7_rightwheel
+ObjectTemplate.creator STS:STS_Garage
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 14
+ObjectTemplate.geometry leopard_2a7_rightwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject leopard_2a7_rwheel_02
+

@@ -1,0 +1,241 @@
+rem *** Generated with Bf2Editor.exe [created: 2016/5/10 17:52]
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe PlayerControlObject armatagunnercupola
+ObjectTemplate.creator DEMON:Demon_from_pripyat
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.saveInSeparateFile 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "killed"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_tank.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Tank.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+rem ---EndComp ---
+ObjectTemplate.geometry armatagunnercupola
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate T14_Armata_TopMG
+rem -------------------------------------
+ObjectTemplate.addTemplate S_armatagunnercupola_Ambient
+ObjectTemplate.addTemplate S_armatagunnercupola_AmbientDamaged
+ObjectTemplate.addTemplate T14_Armata_Cupolabase_entrypoint
+rem -------------------------------------
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.dontAllowExit 1
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.maintainCameraOnExit 1
+ObjectTemplate.maintainCameraOnEnter 1
+
+ObjectTemplate.activeSafe Sound S_armatagunnercupola_Ambient
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/tnk_type98/sounds/t98_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.2
+ObjectTemplate.pitch 0.8
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_armatagunnercupola_AmbientDamaged
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.65
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe RotationalBundle ArmataGunnerCupola_GunCupola
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.setMaxSpeed 100/0/0
+ObjectTemplate.setAcceleration 600/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+
+ObjectTemplate.activeSafe RotationalBundle ArmataGunnerCupola_GunBase
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate T14_Armata_crows_Camera
+ObjectTemplate.setPosition 0.356426/0/0.521999
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-55/0
+ObjectTemplate.setMaxRotation 0/6/0
+ObjectTemplate.setMaxSpeed 0/100/0
+ObjectTemplate.setAcceleration 0/600/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+
+ObjectTemplate.activeSafe GenericFireArm ArmataGunnerCupola_Gun
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.hudName "12.7MM"
+ObjectTemplate.weaponHud.guiIndex 4
+ObjectTemplate.weaponHud.altGuiIndex 4
+ObjectTemplate.weaponHud.deviationFactor 5
+ObjectTemplate.weaponHud.maxVisualDeviation 20
+ObjectTemplate.weaponHud.minVisualDeviation 2
+ObjectTemplate.weaponHud.hasFireRate 0
+ObjectTemplate.weaponHud.hasRangeFinder 1
+ObjectTemplate.weaponHud.addShowOnCamMode 2
+ObjectTemplate.weaponHud.showClips 0
+ObjectTemplate.weaponHud.overheatSound S_Weapon_Handheld_Overheat
+rem ---EndComp ---
+rem ---BeginComp:SingleFireComp ---
+ObjectTemplate.createComponent SingleFireComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.magSize 200
+ObjectTemplate.ammo.reloadTime 8
+ObjectTemplate.ammo.reloadWithoutPlayer 1
+rem ---EndComp ---
+rem ---BeginComp:WeaponBasedRecoilComp ---
+ObjectTemplate.createComponent WeaponBasedRecoilComp
+ObjectTemplate.recoil.recoilSize 0.23
+ObjectTemplate.recoil.recoilSpeed 30
+ObjectTemplate.recoil.recoilForce 1
+ObjectTemplate.recoil.cameraRecoilSpeed 13
+ObjectTemplate.recoil.cameraRecoilSize 1
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+ObjectTemplate.deviation.minDev 0.1
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAnimationComp ---
+ObjectTemplate.createComponent DefaultAnimationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+ObjectTemplate.zoom.zoomDelay 0
+ObjectTemplate.zoom.addZoomFactor 0
+ObjectTemplate.zoom.addZoomFactor 0.33
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate ArmataGunnerCupola_Gun_AI
+rem -------------------------------------
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_Fire1P
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_Fire1P_Outdoor
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_Fire3P
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_BoltClick
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_TriggerClick
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_SwitchFireRate
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_Reload1P
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_Reload3P
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_Deploy1P
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_Deploy3P
+ObjectTemplate.addTemplate S_ArmataGunnerCupola_Gun_Zoom
+ObjectTemplate.addTemplate e_muzz_Kord
+rem -------------------------------------
+ObjectTemplate.projectileTemplate CHHMG_KORD_Projectile
+ObjectTemplate.velocity 500
+ObjectTemplate.heatAddWhenFire 0.02
+ObjectTemplate.coolDownPerSec 0.4
+ObjectTemplate.overheatPenalty 3
+
+ObjectTemplate.activeSafe Sound S_ArmataGunnerCupola_Gun_Fire1P
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.soundFilename "objects/weapons/stationary/chhmg_kord/sounds/kord_fire_1p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.8
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.98/1.04/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.9/1/
+ObjectTemplate.position 0/0.0896358/1.28813
+
+ObjectTemplate.activeSafe Sound S_ArmataGunnerCupola_Gun_Fire3P
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.soundFilename "objects/weapons/stationary/chhmg_kord/sounds/kord_fire_3p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.9
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.97/1.035/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.9/1/
+ObjectTemplate.position 0/0.088623/1.28571
+ObjectTemplate.minDistance 5.5
+ObjectTemplate.halfVolumeDistance 11
+ObjectTemplate.soundRadius 0.5
+
+ObjectTemplate.activeSafe Sound S_ArmataGunnerCupola_Gun_BoltClick
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.soundFilename "objects/weapons/handheld/usrif_m4/sounds/mono/m4_boltclick.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.8
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.position 0/0.0898987/-0.176249
+
+ObjectTemplate.activeSafe Sound S_ArmataGunnerCupola_Gun_TriggerClick
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.soundFilename "objects/weapons/handheld/uspis_92fs/sounds/mono/trigger_click.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.5
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create Camera T14_Armata_crows_Camera
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.worldFOV 1.2
+ObjectTemplate.insideFOV 1.2
+ObjectTemplate.worldFOV 1.2
+ObjectTemplate.insideFOV 1.2
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection -0.25/-0.5/0.75
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/0/0
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+ObjectTemplate.cockpitLod 0
+ObjectTemplate.cockpitSubGeom 1
+
+ObjectTemplate.activeSafe RotationalBundle ArmataGunnerCupola_GunnerCamera
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+
+ObjectTemplate.create EntryPoint T14_Armata_Cupolabase_entrypoint
+ObjectTemplate.modifiedByUser "Demon_from_pripyat"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 3

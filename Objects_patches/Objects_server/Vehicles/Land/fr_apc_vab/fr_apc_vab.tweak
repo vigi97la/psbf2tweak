@@ -1,0 +1,1147 @@
+rem *** Generated with Bf2Editor.exe [created: 2006/5/15 11:52]
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe PlayerControlObject fr_apc_vab
+ObjectTemplate.creator Hauteclocque
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.castsDynamicShadow 1
+include ../../../common/params.con "cull" "armour"
+GeometryTemplate.setSubGeometryLodDistance 1 0 30
+GeometryTemplate.setSubGeometryLodDistance 1 1 60
+GeometryTemplate.setSubGeometryLodDistance 1 2 105
+GeometryTemplate.setSubGeometryLodDistance 1 3 145
+GeometryTemplate.setSubGeometryLodDistance 2 0 70
+GeometryTemplate.setSubGeometryLodDistance 2 1 105
+GeometryTemplate.setSubGeometryLodDistance 2 2 140
+rem ---BeginComp:Armor ---
+ObjectTemplate.createComponent Armor
+ObjectTemplate.armor.maxHitPoints 1300
+ObjectTemplate.armor.hitPoints 1300
+ObjectTemplate.armor.defaultMaterial 172
+ObjectTemplate.armor.hpLostWhileUpSideDown 5
+ObjectTemplate.armor.hpLostWhileCriticalDamage 12.475
+ObjectTemplate.armor.waterLevel -0.3
+ObjectTemplate.armor.explosionForce 15
+ObjectTemplate.armor.explosionForceMod 8
+ObjectTemplate.armor.explosionForceMax 5000
+ObjectTemplate.armor.explosionDamage 150
+ObjectTemplate.armor.explosionRadius 7
+ObjectTemplate.armor.explosionMaterial 70
+ObjectTemplate.armor.wreckExplosionForce 10
+ObjectTemplate.armor.wreckExplosionDamage 30
+ObjectTemplate.armor.wreckExplosionRadius 2
+ObjectTemplate.armor.wreckExplosionMaterial 70
+ObjectTemplate.armor.wreckHitPoints 1200
+include ../../../common/params.con "ttl" "wreck"
+ObjectTemplate.armor.criticalDamage 299
+ObjectTemplate.armor.hideChildrenOnSpectacularDeath 1
+ObjectTemplate.armor.addArmorEffect 70 e_dstate_land_whitesmoke -0.255/1.445/0.29 0/0/0
+ObjectTemplate.armor.addArmorEffect 40 e_dstate_land_whitesmoke_sparks -0.255/1.445/0.29 0/0/0
+ObjectTemplate.armor.addArmorEffect 20 e_dstate_land_darksmoke -0.255/1.445/0.29 0/0/0
+ObjectTemplate.armor.addArmorEffect 10 e_vexp_ammo01 0/1.05/0.275 0/0/0
+ObjectTemplate.armor.addArmorEffect 10 e_dstate_land_heavysmoke -0.255/1.445/0.29 0/0/0
+ObjectTemplate.armor.addArmorEffect 5 e_vexp_ammo02 0/1.05/0.275 0/0/0
+ObjectTemplate.armor.addArmorEffect 5 e_dstate_land_heavysmoke3 -0.255/1.445/0.29 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_vexp_armoredcar 0/0/0 0/0/0
+rem ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_btr90 0/0/0 0/0/0
+ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_tank_spec 0/0/0 0/0/0
+ObjectTemplate.armor.addArmorEffect -5 e_dstate_static_white01 -0.2475/0.9625/0.2 0/0/0
+ObjectTemplate.armor.addArmorEffect -10 e_sAmb_wreckfire01 -0.2475/0.9625/0.2 0/0/0
+ObjectTemplate.armor.addArmorEffect -20 e_sAmb_wreckfire02 -0.2475/0.9625/0.2 0/0/0
+ObjectTemplate.armor.addArmorEffect -40 e_dstate_static_white01 -0.2475/0.9625/0.2 0/0/0
+ObjectTemplate.armor.addArmorEffect -60 e_dstate_static_white01 -0.2475/0.9625/0.2 0/0/0
+ObjectTemplate.armor.addArmorEffect -80 e_dstate_static_white01 -0.2475/0.9625/0.2 0/0/0
+ObjectTemplate.armor.addArmorEffect -100 e_vexp_tank_2nd 0/0/0 0/0/0
+rem ---EndComp ---
+rem ---BeginComp:Radio ---
+ObjectTemplate.createComponent Radio
+ObjectTemplate.Radio.spottedMessage apc_spotted
+rem ---EndComp ---
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "VAB VTT"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_apc.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 54/8
+ObjectTemplate.vehicleHud.vehicleType 1
+rem ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\lav25.tga
+rem ---EndComp ---
+ObjectTemplate.geometry fr_apc_vab
+ObjectTemplate.setCollisionMesh fr_apc_vab
+ObjectTemplate.mapMaterial 0 PR_APC_ARMOR_1 4001
+ObjectTemplate.mapMaterial 1 GlassArmored 181
+ObjectTemplate.mapMaterial 2 Cloth 1016
+ObjectTemplate.mapMaterial 3 Wreck 60
+ObjectTemplate.mapMaterial 4 HeavyRubber 102
+ObjectTemplate.drag 1
+ObjectTemplate.mass 5000
+ObjectTemplate.gravityModifier 1.5
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate Lav25
+rem -------------------------------------
+include ../../../common/params.con "lasertarget"
+ObjectTemplate.addTemplate S_fr_apc_vab_Ambient
+ObjectTemplate.addTemplate S_fr_apc_vab_AmbientDamaged
+ObjectTemplate.addTemplate fr_apc_vab_EntryPoint_Fright
+ObjectTemplate.setPosition 1/0.25/1.5
+ObjectTemplate.addTemplate fr_apc_vab_EntryPoint_Fleft
+ObjectTemplate.setPosition -1/0.25/1.5
+ObjectTemplate.addTemplate fr_apc_vab_EntryPoint_Top
+ObjectTemplate.setPosition 0/2/-2.5
+ObjectTemplate.addTemplate fr_apc_vab_EntryPoint_Rear
+ObjectTemplate.setPosition 0/0.1/-3
+ObjectTemplate.addTemplate antennasm
+ObjectTemplate.setPosition 0.97364/1.425/0.9938
+ObjectTemplate.addTemplate antennasm
+ObjectTemplate.setPosition -0.936/1.4/-0.04129
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition 0/-0.165/2
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition 0/-0.165/-2.3
+ObjectTemplate.setRotation 180/0/0
+ObjectTemplate.addTemplate e_amphib_wake_sound
+ObjectTemplate.setPosition 0/-0.165/0
+ObjectTemplate.addTemplate e_amphib_bowspray
+ObjectTemplate.setPosition 0/0.65/0
+ObjectTemplate.addTemplate e_amphib_wake_rear
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_1
+ObjectTemplate.setPosition -0.4/1.2/-0.9
+ObjectTemplate.setRotation 90/0/0
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_2
+ObjectTemplate.setPosition 0.5/1.2/-1.2
+ObjectTemplate.setRotation -90/0/0
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_3
+ObjectTemplate.setPosition -0.4/1.2/-1.5
+ObjectTemplate.setRotation 90/0/0
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_4
+ObjectTemplate.setPosition 0.5/1.2/-1.8
+ObjectTemplate.setRotation -90/0/0
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_5
+ObjectTemplate.setPosition -0.325/1.75/-2.5
+ObjectTemplate.setRotation -180/0/0
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_6
+ObjectTemplate.setPosition 0.475/1.75/-2.5
+ObjectTemplate.setRotation -180/0/0
+ObjectTemplate.addTemplate fr_apc_vab_FloaterFrontLeft
+ObjectTemplate.setPosition -1.4/1.6/4
+ObjectTemplate.addTemplate fr_apc_vab_FloaterFrontRight
+ObjectTemplate.setPosition 1.4/1.6/4
+ObjectTemplate.addTemplate fr_apc_vab_FloaterRearLeft
+ObjectTemplate.setPosition -1.4/1.6/-4
+ObjectTemplate.addTemplate fr_apc_vab_FloaterRearRight
+ObjectTemplate.setPosition 1.4/1.6/-4
+ObjectTemplate.addTemplate fr_apc_vab_VerticalBodyWing
+ObjectTemplate.setPosition 0/0.625/0
+ObjectTemplate.setRotation 0/0/-90
+ObjectTemplate.addTemplate fr_apc_vab_Rudder
+ObjectTemplate.setPosition 0/0.3/-2.8
+ObjectTemplate.setRotation 0/0/-90
+ObjectTemplate.addTemplate fr_apc_vab_WaterEngine
+ObjectTemplate.setPosition 0/0.5/-2.8
+ObjectTemplate.addTemplate Car_horn14
+ObjectTemplate.setPosition 0/0.5/2.5
+ObjectTemplate.addTemplate fr_apc_vab_DriverCamera
+ObjectTemplate.setPosition -0.3499/1.235/1.40844
+ObjectTemplate.addTemplate jeep_dummy_weapon
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -1.5/0.6/1.4 -90/0/0
+ObjectTemplate.altSoldierExitPosition -0.4/2.2/1.4
+ObjectTemplate.exitSpeedMod 0.5
+include ../../../common/params.con "team" "battle"
+ObjectTemplate.seatInformation fr_apc_vab -0.36/1.2/1.4 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_driver_A_animSys.inc
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.sprintRecoverTime 3
+ObjectTemplate.sprintDissipationTime 3
+ObjectTemplate.sprintLimit 0.5
+ObjectTemplate.sprintFactor 1.05
+ObjectTemplate.setVehicleType VTApc
+ObjectTemplate.listenerObstruction 0.7
+ObjectTemplate.groundContactVolume 0.7
+ObjectTemplate.damagedAmbientSoundLimit 0.23
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Ambient
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/us_apc_lav25/sounds/lav_cockpit2.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.3
+ObjectTemplate.pitch 0.7
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_AmbientDamaged
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.46
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe RotationalBundle fr_apc_vab_aSteeringWheel
+ObjectTemplate.modifiedByUser "MaxP"
+rem ---BeginComp:Ik ---
+ObjectTemplate.createComponent Ik
+ObjectTemplate.ik.positionLeft -0.23443/-0.0152066/-0.0893322
+ObjectTemplate.ik.rotationLeft -75/-50/-90
+ObjectTemplate.ik.positionRight 0.203068/0.00508392/-0.102058
+ObjectTemplate.ik.rotationRight -105/80/90
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_aSteeringWheel_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -60/0/0
+ObjectTemplate.setMaxRotation 60/0/0
+ObjectTemplate.setMaxSpeed 1/0/0
+ObjectTemplate.setAcceleration 150/0/0
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.regulateYaw -0.05/0.1
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_aSteeringWheel_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe PlayerControlObject fr_apc_vab_Gunner
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "VAB VTT"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_apc.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.hasTurretIcon 0
+ObjectTemplate.vehicleHud.vehicleIconPos 54/18
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleType 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem ObjectTemplate.aiTemplate mg_gunner_cupola_4518_ai
+ObjectTemplate.aiTemplate HmmwvGunner
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Gunner_Ambient
+ObjectTemplate.addTemplate S_fr_apc_vab_Gunner_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 1.5/0.2/0 -90/0/0
+ObjectTemplate.altSoldierExitPosition 0.5/0.2/-5
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation fr_apc_vab_Gunner 0/1.25/-0.2 0/0/0
+ObjectTemplate.seatAnimationSystem objects/Vehicles/Land/fr_apc_vab/3p_gunturret_vab_animSys.inc
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.allowDucking 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+include ../../../common/params.con "team" "battle"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Gunner_Ambient
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Gunner_AmbientDamaged
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe RotationalBundle fr_apc_vab_Turret
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Turret_RotationRpm
+ObjectTemplate.addTemplate fr_apc_vab_DuckingCamera
+ObjectTemplate.setPosition 0/0.05/0
+ObjectTemplate.setRotation 0/-10/0
+ObjectTemplate.addTemplate hmg_m2hb_ammobox
+ObjectTemplate.setPosition -0.47403/0.23832/0.00938
+ObjectTemplate.setRotation 90.0/0/0
+ObjectTemplate.addTemplate 50cal_bullets_vab
+ObjectTemplate.setPosition -0.339662/0.40761/0.43220
+ObjectTemplate.setRotation -140.0/12.0/-175.0
+rem -------------------------------------
+ObjectTemplate.setMaxSpeed 40/0/0
+ObjectTemplate.setAcceleration 600/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Turret_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe RotationalBundle fr_apc_vab_UpDown
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_UpDown_RotationRpm
+ObjectTemplate.addTemplate fr_apc_vab_Gunner_Camera
+ObjectTemplate.setPosition 0/0.18510/-0.43000
+ObjectTemplate.addTemplate 50cal_m2hb_light
+ObjectTemplate.setPosition 0.002/0.0635278/0.358401
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-40/0
+ObjectTemplate.setMaxRotation 0/10/0
+ObjectTemplate.setMaxSpeed 0/60/0
+ObjectTemplate.setAcceleration 0/1200/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_UpDown_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create Camera fr_apc_vab_Gunner_Camera
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Gunner_Camera_RotationRpm
+rem -------------------------------------
+include ../../../common/params.con "mg_camera_move"
+ObjectTemplate.nosePos 0/0.07/-0.01
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Gunner_Camera_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create Camera fr_apc_vab_DuckingCamera
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_DuckingCamera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.CameraId 1
+ObjectTemplate.CVMChase 0
+ObjectTemplate.CVMFrontChase 0
+ObjectTemplate.CVMFlyBy 0
+ObjectTemplate.cameraShakeStartSpeed 99999
+ObjectTemplate.cameraShakeMaxSpeed 99999
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_DuckingCamera_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Engine fr_apc_vab_zMotor
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_zMotor_RotationRpm
+ObjectTemplate.addTemplate S_fr_apc_vab_zMotor_Idle
+ObjectTemplate.addTemplate S_fr_apc_vab_zMotor_Rpm1
+ObjectTemplate.addTemplate S_fr_apc_vab_zMotor_Rpm2
+ObjectTemplate.addTemplate S_fr_apc_vab_zMotor_Load
+ObjectTemplate.addTemplate e_exhaust
+ObjectTemplate.setPosition 0.775/0.7865/-2.96
+ObjectTemplate.addTemplate e_exhaust_startup
+ObjectTemplate.setPosition 0.775/0.7865/-2.96
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/0/-1
+ObjectTemplate.setMaxRotation 0/0/1
+ObjectTemplate.setMaxSpeed 0/0/10000
+ObjectTemplate.setAcceleration 0/0/10
+ObjectTemplate.setInputToRoll PIThrottle
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setEngineType c_ETNewCar2
+ObjectTemplate.setTorque 640
+ObjectTemplate.setDifferential 6
+ObjectTemplate.setNumberOfGears 4
+ObjectTemplate.setGearUp 0.85
+ObjectTemplate.setGearDown 0.4
+ObjectTemplate.setGearChangeTime 0.7
+ObjectTemplate.setGearRatios 2.35 1.2 1.1 0.6 0.6
+ObjectTemplate.spinWhenNoEngineInAir 1
+ObjectTemplate.newCar2.minRpm 1000
+ObjectTemplate.newCar2.maxRpm 4000
+ObjectTemplate.newCar2.useClutchedTorque 0
+ObjectTemplate.newCar2.wheelInertia 210
+ObjectTemplate.newCar2.engineFeedbackMod 0.6
+ObjectTemplate.newCar2.brakeTorque 10000
+ObjectTemplate.newCar2.engineBrakeTorque 4625
+ObjectTemplate.newCar2.frictionTorque 100
+ObjectTemplate.newCar2.frictionMod 1.5
+ObjectTemplate.newCar2.slopeTorqueMod 0.5
+ObjectTemplate.newCar2.wheelLongFrictionMod 1
+ObjectTemplate.newCar2.wheelLongDriveFrictionMod 1.2
+ObjectTemplate.newCar2.wheelLongPeakAt 0.1
+ObjectTemplate.newCar2.wheelLongMinDynamicFriction 0.7
+ObjectTemplate.newCar2.wheelLongScale 0.1
+ObjectTemplate.newCar2.wheelLatFrictionMod 3
+ObjectTemplate.newCar2.wheelLatDriveFrictionMod 0.3
+ObjectTemplate.newCar2.wheelLatPeakAt 0.2
+ObjectTemplate.newCar2.wheelLatMinDynamicFriction 0.7
+ObjectTemplate.newCar2.wheelLatScale 0.1
+ObjectTemplate.audio.newStyleAudio 1
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_zMotor_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_zMotor_Idle
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/fr_apc_vab/sounds/vab_start_idle_stop.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 0.4
+ObjectTemplate.pitch 1.5
+ObjectTemplate.reverbLevel 0
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0/0.619691/0/0.787645/1.5/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0/0.640927/0/0.185328/0.640927/0/0.783784/0/0/
+ObjectTemplate.position 0/0.647407/1.74956
+ObjectTemplate.minDistance 5
+ObjectTemplate.halfVolumeDistance 18
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_zMotor_Rpm1
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/us_apc_lav25/sounds/engine/mono/lav_engine_high_02.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.75
+ObjectTemplate.pitch 0.7
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0.003861/0.544402/0/0.992278/1.17568/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0/0/0/0.370656/0.660232/0/0.996139/0.772201/0/
+ObjectTemplate.minDistance 5
+ObjectTemplate.halfVolumeDistance 25
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_zMotor_Rpm2
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ch_apc_wz551/sound/apc_loaded.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.79
+ObjectTemplate.pitch 0.7
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0.003861/0.555985/0/0.996139/1.18726/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0.003861/0/0/0.305019/0.675676/0/0.984556/0.992278/0/
+ObjectTemplate.minDistance 5
+ObjectTemplate.halfVolumeDistance 25
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_zMotor_Load
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/common/sounds/land/gear_shift_01.wav,objects/vehicles/common/sounds/land/gear_shift_01.wav,objects/vehicles/common/sounds/land/gear_shift_02.wav,objects/vehicles/common/sounds/land/gear_shift_03.wav,objects/vehicles/common/sounds/land/gear_shift_04.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.7
+ObjectTemplate.pitch 0.85
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.minDistance 2
+ObjectTemplate.halfVolumeDistance 3
+
+ObjectTemplate.activeSafe Spring fr_apc_vab_BL_Whl
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_BL_Whl_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+rem -------------------------------------
+ObjectTemplate.setStrength 48
+ObjectTemplate.setDamping 8
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_BL_Whl_Rotation
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Spring fr_apc_vab_BR_Whl
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_BR_Whl_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+ObjectTemplate.addTemplate web_wheelBigSmoke
+ObjectTemplate.setPosition -1/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 48
+ObjectTemplate.setDamping 8
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_BR_Whl_Rotation
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe RotationalBundle fr_apc_vab_FL_Nav
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_FL_Nav_RotationRpm
+rem -------------------------------------
+include ../../../common/params.con "regulate_yaw" "apc"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_FL_Nav_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Spring fr_apc_vab_FL_Whl
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_FL_Whl_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+rem -------------------------------------
+ObjectTemplate.setStrength 48
+ObjectTemplate.setDamping 8
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_FL_Whl_Rotation
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe RotationalBundle fr_apc_vab_FR_Nav
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_FR_Nav_RotationRpm
+rem -------------------------------------
+include ../../../common/params.con "regulate_yaw" "apc"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_FR_Nav_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Spring fr_apc_vab_FR_Whl
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_FR_Whl_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+rem -------------------------------------
+ObjectTemplate.setStrength 48
+ObjectTemplate.setDamping 8
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_FR_Whl_Rotation
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create EntryPoint fr_apc_vab_EntryPoint_Fright
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 1.1
+
+ObjectTemplate.create EntryPoint fr_apc_vab_EntryPoint_Fleft
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 1.1
+
+ObjectTemplate.create EntryPoint fr_apc_vab_EntryPoint_Top
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 1.2
+
+ObjectTemplate.create EntryPoint fr_apc_vab_EntryPoint_Rear
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 1.2
+
+ObjectTemplate.create PlayerControlObject fr_apc_vab_Passenger_1
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "VAB VTT"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_apc.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 30/7
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleType 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem ObjectTemplate.aiTemplate passenger_apc_40_ffa_ai
+ObjectTemplate.aiTemplate Lav25Passenger1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_1_Ambient
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_1_AmbientDamaged
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_Camera
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_ikdummy
+ObjectTemplate.addTemplate FakeFireArm_APC
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 2.5/-0.6/0.3 -90/0/0
+ObjectTemplate.altSoldierExitPosition 2.5/-0.6/0.3
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation fr_apc_vab_Passenger_1 0/0/0 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_driver_A_animSys.inc
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.listenerObstruction 0.7
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+ObjectTemplate.altSoldierExitPosition 2.5/-0.6/0.3
+include ../../../common/params.con "team" "battle"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_1_Ambient
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_1_AmbientDamaged
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.46
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create Camera fr_apc_vab_Passenger_Camera
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_Camera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -100/-25/0
+ObjectTemplate.setMaxRotation 100/25/0
+ObjectTemplate.setMaxSpeed 90/90/0
+ObjectTemplate.setAcceleration 5000/5000/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch 0.1/-0.1
+ObjectTemplate.restoreRotationOnExit 1
+ObjectTemplate.CVMChase 0
+ObjectTemplate.CVMFrontChase 0
+ObjectTemplate.CVMFlyBy 0
+ObjectTemplate.cameraShakeStartSpeed 99999
+ObjectTemplate.cameraShakeMaxSpeed 99999
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection -0.25/-0.5/2
+ObjectTemplate.insideStaticSunColor 0/0/0
+ObjectTemplate.insideStaticSunDamageColor 1/0/0
+ObjectTemplate.insideDamageFrequency 7
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0/0/0
+ObjectTemplate.cockpitSubGeom 1
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_Camera_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create PlayerControlObject fr_apc_vab_Passenger_2
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "VAB VTT"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_apc.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 26/19
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleType 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem ObjectTemplate.aiTemplate passenger_apc_40_ffa_ai
+ObjectTemplate.aiTemplate Lav25Passenger1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_2_Ambient
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_2_AmbientDamaged
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_Camera
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_ikdummy
+ObjectTemplate.addTemplate FakeFireArm_APC
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -2.2/-0.6/0.3 -90/0/0
+ObjectTemplate.altSoldierExitPosition -2.2/-0.6/0.3
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation fr_apc_vab_Passenger_2 0/0/0 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_driver_A_animSys.inc
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.listenerObstruction 0.7
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+ObjectTemplate.altSoldierExitPosition -2.2/-0.6/0.3
+include ../../../common/params.con "team" "battle"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_2_Ambient
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_2_AmbientDamaged
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.46
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create PlayerControlObject fr_apc_vab_Passenger_3
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "VAB VTT"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_apc.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 21/7
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleType 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem ObjectTemplate.aiTemplate passenger_apc_40_ffa_ai
+ObjectTemplate.aiTemplate Lav25Passenger1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_3_Ambient
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_3_AmbientDamaged
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_Camera
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_ikdummy
+ObjectTemplate.addTemplate FakeFireArm_APC
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 1.9/-0.6/0.2 -90/0/0
+ObjectTemplate.altSoldierExitPosition 1.9/-0.6/0.2
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation fr_apc_vab_Passenger_3 0/0/0 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_driver_A_animSys.inc
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.listenerObstruction 0.7
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+ObjectTemplate.altSoldierExitPosition 1.9/-0.6/0.2
+include ../../../common/params.con "team" "battle"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_3_Ambient
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_3_AmbientDamaged
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.46
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create PlayerControlObject fr_apc_vab_Passenger_4
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "VAB VTT"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_apc.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 17/19
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleType 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem ObjectTemplate.aiTemplate passenger_apc_40_ffa_ai
+ObjectTemplate.aiTemplate Lav25Passenger1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_4_Ambient
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_4_AmbientDamaged
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_Camera
+ObjectTemplate.addTemplate fr_apc_vab_Passenger_ikdummy
+ObjectTemplate.addTemplate FakeFireArm_APC
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -1.6/-0.6/0.2 -90/0/0
+ObjectTemplate.altSoldierExitPosition -1.6/-0.6/0.2
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation fr_apc_vab_Passenger_4 0/0/0 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_driver_A_animSys.inc
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.listenerObstruction 0.7
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+ObjectTemplate.altSoldierExitPosition -1.6/-0.6/0.2
+include ../../../common/params.con "team" "battle"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_4_Ambient
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_4_AmbientDamaged
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.46
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create PlayerControlObject fr_apc_vab_Passenger_5
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "VAB VTT"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_apc.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 7/8
+ObjectTemplate.vehicleHud.useSelectionIcons 1
+ObjectTemplate.vehicleHud.vehicleType 0
+ObjectTemplate.vehicleHud.useChildHud 1
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem ObjectTemplate.aiTemplate passenger_TV_360_armed_bot_ai
+ObjectTemplate.aiTemplate HmmwvGunner
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_5_Ambient
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_5_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 0.2/-1/0.8 -90/0/0
+ObjectTemplate.altSoldierExitPosition 0.2/-1/0.8
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation fr_apc_vab_Passenger_5 0/0/0 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_gunTurret_C_animSys.inc
+ObjectTemplate.seatLeftRotationLimit -180
+ObjectTemplate.seatRightRotationLimit 180
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+ObjectTemplate.altSoldierExitPosition 0.2/-1/0.8
+include ../../../common/params.con "team" "battle"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_5_Ambient
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_5_AmbientDamaged
+ObjectTemplate.modifiedByUser "MaxP"
+
+
+ObjectTemplate.create PlayerControlObject fr_apc_vab_Passenger_6
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "VAB VTT"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_apc.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 7/18
+ObjectTemplate.vehicleHud.useSelectionIcons 1
+ObjectTemplate.vehicleHud.vehicleType 0
+ObjectTemplate.vehicleHud.useChildHud 1
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem ObjectTemplate.aiTemplate passenger_TV_360_armed_bot_ai
+ObjectTemplate.aiTemplate HmmwvGunner
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_6_Ambient
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_6_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -0.2/-1/0.8 -90/0/0
+ObjectTemplate.altSoldierExitPosition -0.2/-1/0.8
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation fr_apc_vab_Passenger_6 0/0/0 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_gunTurret_C_animSys.inc
+ObjectTemplate.seatLeftRotationLimit -180
+ObjectTemplate.seatRightRotationLimit 180
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+ObjectTemplate.altSoldierExitPosition -0.2/-1/0.8
+include ../../../common/params.con "team" "battle"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_6_Ambient
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_6_AmbientDamaged
+ObjectTemplate.modifiedByUser "MaxP"
+
+
+ObjectTemplate.create FloatingBundle fr_apc_vab_FloaterFrontLeft
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.dragModifier 4000/4000/4000
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_FloaterFrontLeft_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setHullHeight 1.93
+ObjectTemplate.setFloatMaxLift 7.5
+ObjectTemplate.setFloatMinLift 0
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_FloaterFrontLeft_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create FloatingBundle fr_apc_vab_FloaterFrontRight
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.dragModifier 4000/4000/4000
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_FloaterFrontRight_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setHullHeight 1.93
+ObjectTemplate.setFloatMaxLift 7.5
+ObjectTemplate.setFloatMinLift 0
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_FloaterFrontRight_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create FloatingBundle fr_apc_vab_FloaterRearLeft
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.dragModifier 4000/4000/4000
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_FloaterRearLeft_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setHullHeight 1.93
+ObjectTemplate.setFloatMaxLift 7.5
+ObjectTemplate.setFloatMinLift 0
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_FloaterRearLeft_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create FloatingBundle fr_apc_vab_FloaterRearRight
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.dragModifier 4000/4000/4000
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_FloaterRearRight_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setHullHeight 1.93
+ObjectTemplate.setFloatMaxLift 7.5
+ObjectTemplate.setFloatMinLift 0
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_FloaterRearRight_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create Wing fr_apc_vab_VerticalBodyWing
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_VerticalBodyWing_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setPositionOffset 0/0/0
+ObjectTemplate.setWingLift 0.1
+ObjectTemplate.setFlapLift 0
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_VerticalBodyWing_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create Wing fr_apc_vab_Rudder
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Rudder_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-20/0
+ObjectTemplate.setMaxRotation 0/20/0
+ObjectTemplate.setMaxSpeed 0/1/0
+ObjectTemplate.setAcceleration 0/40/0
+ObjectTemplate.setInputToPitch PIYaw
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setPositionOffset 0/0/0
+ObjectTemplate.setWingLift 0
+ObjectTemplate.setFlapLift 2.5
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Rudder_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create Engine fr_apc_vab_WaterEngine
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_WaterEngine_RotationRpm
+ObjectTemplate.addTemplate S_fr_apc_vab_WaterEngine_Idle
+ObjectTemplate.addTemplate S_fr_apc_vab_WaterEngine_Rpm1
+ObjectTemplate.addTemplate S_fr_apc_vab_WaterEngine_Rpm2
+ObjectTemplate.addTemplate S_fr_apc_vab_WaterEngine_Load
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/0/-10
+ObjectTemplate.setMaxRotation 1/0/20
+ObjectTemplate.setMaxSpeed 10/0/10
+ObjectTemplate.setAcceleration 10/0/10
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setInputToRoll PIThrottle
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setEngineType c_ETShip
+ObjectTemplate.setTorque 5.75
+ObjectTemplate.setDifferential 25
+ObjectTemplate.setNumberOfGears 4
+ObjectTemplate.setGearChangeTime 0.1
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_WaterEngine_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_WaterEngine_Idle
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_WaterEngine_Rpm1
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_WaterEngine_Rpm2
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_WaterEngine_Load
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create Camera fr_apc_vab_Drivercamera
+ObjectTemplate.modifiedByUser "MaxP"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Drivercamera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -120/-25/0
+ObjectTemplate.setMaxRotation 120/25/0
+ObjectTemplate.setMaxSpeed 90/90/0
+ObjectTemplate.setAcceleration 5000/5000/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.restoreRotationOnExit 1
+ObjectTemplate.CVMChase 0
+ObjectTemplate.CVMFrontChase 0
+ObjectTemplate.CVMFlyBy 0
+ObjectTemplate.cameraShakeStartSpeed 99999
+ObjectTemplate.cameraShakeMaxSpeed 99999
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection -0.25/-0.5/2
+ObjectTemplate.insideStaticSunColor 0/0/0
+ObjectTemplate.insideStaticSunDamageColor 1/0/0
+ObjectTemplate.insideDamageFrequency 7
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0/0/0
+ObjectTemplate.cockpitSubGeom 1
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Drivercamera_RotationRpm
+ObjectTemplate.modifiedByUser "MaxP"
+
+ObjectTemplate.create RotationalBundle fr_apc_vab_Passenger_ikdummy
+ObjectTemplate.modifiedByUser "Mats"
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:Ik ---
+ObjectTemplate.createComponent Ik
+ObjectTemplate.ik.positionLeft -0.17/-0.47/0.2
+ObjectTemplate.ik.rotationLeft 0/-85.5785/-163.401
+ObjectTemplate.ik.positionRight 0.2/-0.46/0.2
+ObjectTemplate.ik.rotationRight 100/87.1873/-10
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_fr_apc_vab_Passenger_ikdummy_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_fr_apc_vab_Passenger_ikdummy_RotationRpm
+ObjectTemplate.modifiedByUser "Mats"

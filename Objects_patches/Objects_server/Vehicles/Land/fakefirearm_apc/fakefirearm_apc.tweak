@@ -1,0 +1,33 @@
+ObjectTemplate.activeSafe GenericFireArm FakeFireArm_APC
+ObjectTemplate.modifiedByUser "MJP"
+ObjectTemplate.saveInSeparateFile 1
+
+ObjectTemplate.aiTemplate fake_firearm_ai
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.guiIndex 35000
+rem ---EndComp ---
+rem ---BeginComp:SingleFireComp ---
+ObjectTemplate.createComponent SingleFireComp
+ObjectTemplate.fire.fireInCameraDof 1
+rem ObjectTemplate.fire.fireInput PIFire
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags -1
+ObjectTemplate.ammo.magSize -1
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAnimationComp ---
+ObjectTemplate.createComponent DefaultAnimationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem ObjectTemplate.ItemIndex 1
+
+

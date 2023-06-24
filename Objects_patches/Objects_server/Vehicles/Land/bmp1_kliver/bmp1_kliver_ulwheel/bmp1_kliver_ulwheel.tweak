@@ -1,0 +1,18 @@
+GeometryTemplate.setMaterialReflectionScale 1 0 0 0.7
+GeometryTemplate.setSpecularStaticGloss 0 0 0 0
+GeometryTemplate.setSpecularStaticGloss 0 0 1 0
+GeometryTemplate.setSpecularStaticGloss 0 0 2 0
+GeometryTemplate.setSpecularStaticGloss 0 0 3 0
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe RotationalBundle bmp1_kliver_ulwheel
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 10
+ObjectTemplate.geometry bmp1_kliver_ulwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject bmp1_kliver_L_whl_1

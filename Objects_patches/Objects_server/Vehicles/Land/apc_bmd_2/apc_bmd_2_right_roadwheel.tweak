@@ -1,0 +1,21 @@
+GeometryTemplate.setSubGeometryLodDistance 1 0 30
+GeometryTemplate.setSubGeometryLodDistance 1 1 50
+GeometryTemplate.setSubGeometryLodDistance 1 2 130
+GeometryTemplate.setSubGeometryLodDistance 2 0 30
+GeometryTemplate.setSubGeometryLodDistance 2 1 60
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 8
+ObjectTemplate.activeSafe RotationalBundle apc_bmd_2_right_roadwheel
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 12
+ObjectTemplate.geometry apc_bmd_2_right_roadwheel
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVObject apc_bmd_2_R_whl_1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_apc_bmd_2_right_roadwheel_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_apc_bmd_2_right_roadwheel_RotationRpm
+

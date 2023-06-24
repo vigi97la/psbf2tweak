@@ -1,0 +1,21 @@
+GeometryTemplate.setSubGeometryLodDistance 0 0 20
+GeometryTemplate.setSubGeometryLodDistance 0 1 40
+GeometryTemplate.setSubGeometryLodDistance 0 2 50
+GeometryTemplate.setSubGeometryLodDistance 0 3 60
+GeometryTemplate.setSubGeometryLodDistance 1 0 20
+GeometryTemplate.setSubGeometryLodDistance 1 1 40
+GeometryTemplate.setSubGeometryLodDistance 1 2 50
+GeometryTemplate.setSubGeometryLodDistance 1 3 60
+ObjectTemplate.cullRadiusScale 42
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+GeometryTemplate.create BundledMesh bmd4_rwheel
+ObjectTemplate.create RotationalBundle bmd4_rwheel
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.geometry bmd4_rwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVObject bmd4_R_whl_1
+

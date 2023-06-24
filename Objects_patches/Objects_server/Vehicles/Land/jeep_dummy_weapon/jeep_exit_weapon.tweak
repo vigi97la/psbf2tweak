@@ -1,0 +1,86 @@
+rem *** Generated with Bf2Editor.exe [created: 2006/3/6 6:46]
+ObjectTemplate.activeSafe GenericFireArm jeep_exit_weapon
+ObjectTemplate.modifiedByUser "daveke"
+ObjectTemplate.saveInSeparateFile 1
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.hudName "Exit"
+ObjectTemplate.weaponHud.hasFireRate 0
+ObjectTemplate.weaponHud.selectIcon Ingame\Weapons\Icons\Hud\Selection\dummy_weapon.tga
+ObjectTemplate.weaponHud.guiIndex 0
+ObjectTemplate.weaponHud.altGuiIndex 0
+ObjectTemplate.weaponHud.showClips 0
+ObjectTemplate.weaponHud.addShowOnCamMode 2
+ObjectTemplate.weaponHud.displaySelectOnActivation 1
+rem ---EndComp ---
+rem ---BeginComp:SingleFireComp ---
+ObjectTemplate.createComponent SingleFireComp
+ObjectTemplate.fire.fireInput PIFlareFire
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags -1
+ObjectTemplate.ammo.magSize -1
+ObjectTemplate.ammo.reloadWithoutPlayer 1
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAnimationComp ---
+ObjectTemplate.createComponent DefaultAnimationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+ObjectTemplate.zoom.addZoomFactor 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.aiTemplate jeep_exit_weapon_ai
+rem -------------------------------------
+ObjectTemplate.addTemplate S_jeep_exit_weapon_Fire1P
+ObjectTemplate.addTemplate S_jeep_exit_weapon_Fire1P_Outdoor
+ObjectTemplate.addTemplate S_jeep_exit_weapon_Fire3P
+ObjectTemplate.addTemplate S_jeep_exit_weapon_BoltClick
+ObjectTemplate.addTemplate S_jeep_exit_weapon_TriggerClick
+ObjectTemplate.addTemplate S_jeep_exit_weapon_SwitchFireRate
+ObjectTemplate.addTemplate S_jeep_exit_weapon_Reload1P
+ObjectTemplate.addTemplate S_jeep_exit_weapon_Reload3P
+ObjectTemplate.addTemplate S_jeep_exit_weapon_Deploy1P
+ObjectTemplate.addTemplate S_jeep_exit_weapon_Deploy3P
+ObjectTemplate.addTemplate S_jeep_exit_weapon_Zoom
+rem -------------------------------------
+ObjectTemplate.projectileTemplate Blank_projectile
+ObjectTemplate.ItemIndex 1
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_Fire1P
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_Fire1P_Outdoor
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_Fire3P
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_BoltClick
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_TriggerClick
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_SwitchFireRate
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_Reload1P
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_Reload3P
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_Deploy1P
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_Deploy3P
+ObjectTemplate.modifiedByUser "daveke"
+
+ObjectTemplate.activeSafe Sound S_jeep_exit_weapon_Zoom
+ObjectTemplate.modifiedByUser "daveke"

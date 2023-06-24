@@ -1,0 +1,18 @@
+rem *** Generated with Bf2Editor.exe [created: 2011/8/17 18:27]
+GeometryTemplate.setMaterialReflectionScale 1 0 0 0
+GeometryTemplate.setMaterialReflectionScale 1 0 1 0
+GeometryTemplate.setMaterialReflectionScale 1 0 2 1
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 8
+ObjectTemplate.activeSafe RotationalBundle apc_btr_t_rwheel
+ObjectTemplate.creator dfgh/bf2modding
+ObjectTemplate.modifiedByUser "DESKTOP:sts_garage"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 9
+ObjectTemplate.geometry apc_btr_t_rwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject apc_btr_t_RWheel2

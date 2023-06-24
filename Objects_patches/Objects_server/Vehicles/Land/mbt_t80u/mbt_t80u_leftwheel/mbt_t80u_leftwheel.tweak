@@ -1,0 +1,15 @@
+rem *** Generated with Bf2Editor.exe [created: 2016/2/29 13:32]
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe RotationalBundle mbt_t80u_leftwheel
+ObjectTemplate.creator DESKTOP:sts_garage
+ObjectTemplate.modifiedByUser "sts_garage"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 14
+ObjectTemplate.geometry mbt_t80u_leftwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject mbt_t80u_lwheel_02
+

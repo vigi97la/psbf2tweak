@@ -1,0 +1,5 @@
+ObjectTemplate.activeSafe staticmesh shapetnk
+ObjectTemplate.geometry shapetnk
+
+ObjectTemplate.showInFirstPerson 1
+ObjectTemplate.showInThirdPerson 0

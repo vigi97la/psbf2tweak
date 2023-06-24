@@ -1,0 +1,1296 @@
+rem **** ---- **** ---- ****
+rem Model&Textures:DICE
+rem 3D-Ripped Modlel
+rem Import:D.K.
+rem **** ---- **** ---- ****
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe PlayerControlObject BF3_BMP2M
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.castsDynamicShadow 1
+rem ---BeginComp:Armor ---
+ObjectTemplate.createComponent Armor
+ObjectTemplate.armor.maxHitPoints 1000
+ObjectTemplate.armor.hitPoints 1000
+ObjectTemplate.armor.defaultMaterial 72
+ObjectTemplate.armor.hpLostWhileUpSideDown 50
+ObjectTemplate.armor.hpLostWhileCriticalDamage 20
+ObjectTemplate.armor.explosionForce 15
+ObjectTemplate.armor.explosionForceMod 8
+ObjectTemplate.armor.explosionForceMax 5000
+ObjectTemplate.armor.explosionDamage 300
+ObjectTemplate.armor.explosionRadius 7
+ObjectTemplate.armor.explosionMaterial 100
+ObjectTemplate.armor.wreckExplosionForce 7
+ObjectTemplate.armor.wreckExplosionDamage 50
+ObjectTemplate.armor.wreckExplosionRadius 3
+ObjectTemplate.armor.wreckExplosionMaterial 70
+ObjectTemplate.armor.wreckHitPoints 3000
+ObjectTemplate.armor.timeToStayAsWreck 109
+ObjectTemplate.armor.criticalDamage 101
+ObjectTemplate.armor.addArmorEffect 50 e_dstate_land_sparks -1.26691/0.403561/-2.30167 0/0/0
+ObjectTemplate.armor.addArmorEffect 50 e_dstate_land_lightsmoke 0/1.192/-1.80481 0/0/0
+ObjectTemplate.armor.addArmorEffect 25 e_dstate_land_sparks -1.26691/0.403561/-2.30167 0/0/0
+ObjectTemplate.armor.addArmorEffect 25 e_dstate_land_Mediumsmoke 0/1.192/-1.80481 0/0/0
+ObjectTemplate.armor.addArmorEffect 10 e_dstate_land_sparks -1.26691/0.403561/-2.30167 0/0/0
+ObjectTemplate.armor.addArmorEffect 10 e_dstate_land_heavysmoke 0/1.192/-1.80481 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_vexp_tank 0/0/0 0/0/0
+ObjectTemplate.armor.addArmorEffect -1 e_dstate_static_fire -0.2/1.52/-0.063 0/0/0
+ObjectTemplate.armor.addArmorEffect -1 e_sAmb_wreckfire 0.669/1.457/-1.77 0/0/0
+ObjectTemplate.armor.addArmorEffect -100 e_vexp_tank_2nd 0/0/-0.5 0/0/0
+rem ---EndComp ---
+rem ---BeginComp:Radio ---
+ObjectTemplate.createComponent Radio
+ObjectTemplate.Radio.spottedMessage apc_spotted
+rem ---EndComp ---
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "BMP2-M"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_APC.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.hasTurretIcon 1
+ObjectTemplate.vehicleHud.vehicleIconPos 40/13
+ObjectTemplate.vehicleHud.vehicleType 1
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\VI_xpak_bmp3.tga
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+ObjectTemplate.drag 1
+ObjectTemplate.mass 18000
+ObjectTemplate.gravityModifier 1.5
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate xpak_bmp3_ai
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_Ambient
+ObjectTemplate.addTemplate S_BF3_BMP2M_AmbientDamaged
+ObjectTemplate.addTemplate BF3_BMP2M_PassengerFL
+ObjectTemplate.setPosition -1.1393/0.9320/-1.9056
+ObjectTemplate.setRotation -90/0/0
+ObjectTemplate.addTemplate BF3_BMP2M_PassengerFR
+ObjectTemplate.setPosition 1.2092/0.9393/-1.2375
+ObjectTemplate.setRotation 90/0/0
+ObjectTemplate.addTemplate BF3_BMP2M_PassengerRear
+ObjectTemplate.setPosition -0.5308/0.7724/-3.3337
+ObjectTemplate.setRotation 180/0/0
+ObjectTemplate.addTemplate BF3_BMP2M_PassengerRL
+ObjectTemplate.setPosition -1.0734/0.9320/-2.5149
+ObjectTemplate.setRotation -90/0/0
+ObjectTemplate.addTemplate BF3_BMP2M_PassengerRR
+ObjectTemplate.setPosition 1.0734/0.9320/-2.5149
+ObjectTemplate.setRotation 90/0/0
+ObjectTemplate.addTemplate BF3_BMP2M_Floater
+ObjectTemplate.setPosition -1.5/1.7/3
+ObjectTemplate.addTemplate BF3_BMP2M_Floater
+ObjectTemplate.setPosition 1.5/1.7/3
+ObjectTemplate.addTemplate BF3_BMP2M_Floater
+ObjectTemplate.setPosition -1.5/1.7/-3
+ObjectTemplate.addTemplate BF3_BMP2M_Floater
+ObjectTemplate.setPosition 1.5/1.7/-3
+ObjectTemplate.addTemplate BF3_BMP2M_WaterEngine
+ObjectTemplate.setPosition 0/0/-3
+ObjectTemplate.setRotation 0/3/0
+ObjectTemplate.addTemplate BF3_BMP2M_Rudder
+ObjectTemplate.setPosition 0/-1/-4
+ObjectTemplate.setRotation 0/0/-90
+ObjectTemplate.addTemplate BF3_BMP2M_EntryPoint
+ObjectTemplate.setPosition 0/0.5/-3.5
+ObjectTemplate.addTemplate BF3_BMP2M_EntryPoint
+ObjectTemplate.setPosition -1/1.5/1
+ObjectTemplate.addTemplate LaserTarget_vehicle
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 0/0.3/-4 180/0/0
+ObjectTemplate.altSoldierExitPosition -2/0.3/1
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.shakeFactor 4
+ObjectTemplate.setVehicleType VTApc
+ObjectTemplate.listenerObstruction 0.6
+ObjectTemplate.groundContactVolume 1
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Ambient
+ObjectTemplate.soundFilename "objects/vehicles/land/aav_tunguska/sounds/tunguska_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.25
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_AmbientDamaged
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.65
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe RotationalBundle BF3_BMP2M_Turret
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_Turret_RotationRpm
+ObjectTemplate.addTemplate BF3_BMP2M_SmokeFlare
+ObjectTemplate.addTemplate BF3_BMP2M_Kornet
+ObjectTemplate.addTemplate BMP2M_RearKit
+rem -------------------------------------
+ObjectTemplate.setMaxSpeed 40/0/0
+ObjectTemplate.setAcceleration 400/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Turret_RotationRpm
+
+ObjectTemplate.activeSafe RotationalBundle BF3_BMP2M_2A42_Base
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_Base_RotationRpm
+ObjectTemplate.addTemplate BF3_BMP2M_Camera
+ObjectTemplate.setPosition -0.4094/0.4059/0.25
+rem ObjectTemplate.addTemplate Coaxial_mg_mec
+rem ObjectTemplate.setPosition -0.1774/0.0767/0.3802
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-25/0
+ObjectTemplate.setMaxRotation 0/7/0
+ObjectTemplate.setMaxSpeed 0/40/0
+ObjectTemplate.setAcceleration 0/400/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch -0.06/0.55
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_Base_RotationRpm
+
+ObjectTemplate.activeSafe GenericFireArm BF3_BMP2M_2A42
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.hudName "2A42"
+ObjectTemplate.weaponHud.guiIndex 33
+ObjectTemplate.weaponHud.hasRangeFinder 1
+ObjectTemplate.weaponHud.overheatSound S_Weapon_Vehicle_Overheat
+rem ---EndComp ---
+rem ---BeginComp:SingleFireComp ---
+ObjectTemplate.createComponent SingleFireComp
+ObjectTemplate.fire.roundsPerMinute 300
+ObjectTemplate.fire.fireInCameraDof 1
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags 1
+ObjectTemplate.ammo.magSize 500
+rem ---EndComp ---
+rem ---BeginComp:WeaponBasedRecoilComp ---
+ObjectTemplate.createComponent WeaponBasedRecoilComp
+ObjectTemplate.recoil.recoilSize 3
+ObjectTemplate.recoil.recoilSpeed 20
+ObjectTemplate.recoil.recoilSpeedGB 10
+ObjectTemplate.recoil.recoilForce 2
+ObjectTemplate.recoil.cameraRecoilSpeed 8
+ObjectTemplate.recoil.cameraRecoilSize 0.3
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+ObjectTemplate.deviation.minDev 0.25
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+ObjectTemplate.zoom.addZoomFactor 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate Btr90AutoCannon
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_Fire1P
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_Fire1P_Outdoor
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_Fire3P
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_BoltClick
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_TriggerClick
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_SwitchFireRate
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_Reload1P
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_Reload3P
+ObjectTemplate.setPosition 0/0/-3
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_Deploy1P
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_Deploy3P
+ObjectTemplate.addTemplate S_BF3_BMP2M_2A42_Zoom
+ObjectTemplate.addTemplate e_muzz_25mm
+rem -------------------------------------
+ObjectTemplate.projectileTemplate BF3_BMP2M_2A42_Projectile
+ObjectTemplate.keepProjectiles 5
+ObjectTemplate.velocity 375
+ObjectTemplate.itemIndex 1
+
+ObjectTemplate.create GenericProjectile BF3_BMP2M_2A42_Projectile
+rem ---BeginComp:DefaultCollisionComp ---
+ObjectTemplate.createComponent DefaultCollisionComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultDetonationComp ---
+ObjectTemplate.createComponent DefaultDetonationComp
+ObjectTemplate.detonation.explosionMaterial 42
+ObjectTemplate.detonation.explosionRadius 3
+ObjectTemplate.detonation.explosionForce 2.5
+ObjectTemplate.detonation.explosionDamage 40
+ObjectTemplate.detonation.endEffectTemplate e_exp_small
+ObjectTemplate.detonation.useMMOnEndEffect 1
+ObjectTemplate.detonation.detectionRadius 1.5
+ObjectTemplate.detonation.maxDepthForExplosion 2
+rem ---EndComp ---
+rem ---BeginComp:DefaultRicochetComp ---
+ObjectTemplate.createComponent DefaultRicochetComp
+rem ---EndComp ---
+ObjectTemplate.gravityModifier 0.4
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Point
+ObjectTemplate.collisionGroups 8
+ObjectTemplate.material 42
+rem -------------------------------------
+ObjectTemplate.timeToLive CRD_NONE/3/0/0
+ObjectTemplate.hasOnTimeEffect 1
+ObjectTemplate.tracerScaler 10
+ObjectTemplate.maxTracerScaler 20
+ObjectTemplate.minTracerScaler 1
+ObjectTemplate.tracerSizeModifier 0.5
+ObjectTemplate.tracerTemplate p_tracer_tank
+ObjectTemplate.minDamage 1
+ObjectTemplate.damage 25
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_Fire1P
+ObjectTemplate.soundFilename "objects/vehicles/land/apc_btr90/sounds/btr90_cannon_1p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.9
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.988/1.025/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.9/1/
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_Fire1P_Outdoor
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_Fire3P
+ObjectTemplate.soundFilename "objects/vehicles/land/apc_btr90/sounds/btr90_cannon_3p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.95
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.983/1.025/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.85/1/
+ObjectTemplate.minDistance 8
+ObjectTemplate.halfVolumeDistance 16
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_BoltClick
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_TriggerClick
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_Reload1P
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_Reload3P
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_Deploy1P
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_Deploy3P
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_2A42_Zoom
+
+ObjectTemplate.activeSafe RotationalBundle BF3_BMP2M_CITV
+ObjectTemplate.setMaxSpeed 75/0/0
+ObjectTemplate.setAcceleration -45/0/0
+ObjectTemplate.startAutoRotateOnEnter 1
+
+ObjectTemplate.activeSafe RotationalBundle BF3_BMP2M_TopCITV
+ObjectTemplate.setMaxSpeed 90/0/0
+ObjectTemplate.setAcceleration 90/0/0
+ObjectTemplate.startAutoRotateOnEnter 1
+
+ObjectTemplate.activeSafe LandingGear BF3_BMP2M_TopCapL
+ObjectTemplate.setMaxRotation 100/0/0
+ObjectTemplate.setMaxSpeed -100/0/0
+ObjectTemplate.setAcceleration 100/0/0
+ObjectTemplate.setGearUpHeight 0
+ObjectTemplate.setGearDownSpeed 1
+ObjectTemplate.setGearUpSpeed 2
+ObjectTemplate.setGearDownDelay 90
+
+ObjectTemplate.activeSafe LandingGear BF3_BMP2M_TopCapR
+ObjectTemplate.setMinRotation -100/0/0
+ObjectTemplate.setMaxSpeed 100/0/0
+ObjectTemplate.setAcceleration 100/0/0
+ObjectTemplate.setGearUpHeight 0
+ObjectTemplate.setGearDownSpeed 1
+ObjectTemplate.setGearUpSpeed 2
+ObjectTemplate.setGearDownDelay 90
+
+ObjectTemplate.activeSafe Engine BF3_BMP2M_Engine
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_Engine_RotationRpm
+ObjectTemplate.addTemplate S_BF3_BMP2M_Engine_Idle
+ObjectTemplate.addTemplate S_BF3_BMP2M_Engine_Rpm1
+ObjectTemplate.addTemplate S_BF3_BMP2M_Engine_Rpm2
+ObjectTemplate.addTemplate S_BF3_BMP2M_Engine_Load
+ObjectTemplate.addTemplate e_exhaust_startup
+ObjectTemplate.setPosition 1.2/1.2/0.7
+ObjectTemplate.addTemplate e_exhaust
+ObjectTemplate.setPosition 1.2/1.2/0.7
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition 0/0.3/3.3
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition 0/0.3/-3.2
+ObjectTemplate.setRotation -180/0/0
+ObjectTemplate.addTemplate e_amphib_bowspray
+ObjectTemplate.setPosition 0/0.9/0
+ObjectTemplate.addTemplate e_amphib_wake_rear
+ObjectTemplate.setPosition 0/0.3/3.3
+ObjectTemplate.addTemplate e_amphib_wake_rear
+ObjectTemplate.setPosition 0/0.3/-3
+ObjectTemplate.setRotation -180/0/0
+ObjectTemplate.addTemplate e_amphib_wake_sound
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/0/-1
+ObjectTemplate.setMaxRotation 1/0/1
+ObjectTemplate.setMaxSpeed 1/0/1
+ObjectTemplate.setAcceleration 25/0/2
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setInputToRoll PIThrottle
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setEngineType c_ETTank
+ObjectTemplate.setTorque 5
+ObjectTemplate.setDifferential 12
+ObjectTemplate.setGearUp 0.9
+ObjectTemplate.setGearDown 0.45
+ObjectTemplate.setGearChangeTime 0.1
+ObjectTemplate.trackTurnAcceleration 30
+ObjectTemplate.trackTurnSpeed 1.2
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Engine_RotationRpm
+ObjectTemplate.soundFilename "objects/vehicles/land/ustnk_m1a2/sounds/m1a2_tracks.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.6
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.1/3/0/3/0.003/0.637/0.1/0.688/0.961/0.1/0.997/0.961/0.1/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/2/0.025/0/0/0.32/1/0/
+ObjectTemplate.minDistance 4.5
+ObjectTemplate.halfVolumeDistance 7
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Engine_Idle
+ObjectTemplate.soundFilename "objects/vehicles/xpak_vehicles/xpak_bmp3/sounds/bmp_start_idle_stop.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1/0/2/0.003861/0.714286/0/0.984556/1/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/2/0.003861/0.571429/0/0.857143/1/0/
+ObjectTemplate.minDistance 3
+ObjectTemplate.halfVolumeDistance 6
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Engine_Rpm1
+ObjectTemplate.soundFilename "objects/vehicles/land/jep_paratrooper/sounds/mono/rpm_load.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1/0/2/0.003861/0.633205/0/0.996139/0.934363/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/2/0.003861/0/0/0.675676/1/0/
+ObjectTemplate.minDistance 3
+ObjectTemplate.halfVolumeDistance 6
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Engine_Rpm2
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Engine_Load
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_LWheel1
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 16
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_LWheel2
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition -0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 1
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_LWheel3
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVRotation 1
+ObjectTemplate.animatedUVRotationRadius 0.28
+ObjectTemplate.animatedUVRotationScale 1/1
+ObjectTemplate.animatedUVRotationIndex 1
+ObjectTemplate.animatedUVRotationReverse 0
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition -0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 1
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_LWheel4
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0/0.25
+ObjectTemplate.animatedUVTranslationSize 0/1.6
+ObjectTemplate.animatedUVTranslationReverse 1
+ObjectTemplate.animatedUVTranslationIndex 6
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition -0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 1
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_LWheel5
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition -0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 1
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_LWheel6
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition -0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 12
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_RWheel1
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition 0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 16
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_RWheel2
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition 0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 1
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_RWheel3
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVRotation 1
+ObjectTemplate.animatedUVRotationRadius 0.3
+ObjectTemplate.animatedUVRotationScale 1/1
+ObjectTemplate.animatedUVRotationIndex 3
+ObjectTemplate.animatedUVRotationReverse 1
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition 0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 1
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_RWheel4
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0/0.25
+ObjectTemplate.animatedUVTranslationSize 0/1.6
+ObjectTemplate.animatedUVTranslationReverse 1
+ObjectTemplate.animatedUVTranslationIndex 5
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition 0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 1
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_RWheel5
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition 0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 1
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Spring BF3_BMP2M_RWheel6
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition 0.2/0/0
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.2/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 12
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe RotationalBundle BF3_BMP2M_LEngineWheel
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 1
+ObjectTemplate.rotateAsAnimatedUVObject BF3_BMP2M_LWheel3
+
+ObjectTemplate.activeSafe RotationalBundle BF3_BMP2M_LWheel0
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 1
+ObjectTemplate.rotateAsAnimatedUVObject BF3_BMP2M_LWheel3
+
+ObjectTemplate.activeSafe RotationalBundle BF3_BMP2M_REngineWheel
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject BF3_BMP2M_RWheel3
+
+ObjectTemplate.activeSafe RotationalBundle BF3_BMP2M_RWheel0
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject BF3_BMP2M_RWheel3
+
+ObjectTemplate.create PlayerControlObject BF3_BMP2M_PassengerFL
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "BMP-2M"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_APC.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleType 0
+ObjectTemplate.vehicleHud.vehicleIconPos 24/8
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\VI_xpak_bmp3.tga
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.aiTemplate Btr90Passenger2
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerFL_Ambient
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerFL_AmbientDamaged
+ObjectTemplate.addTemplate BF3_BMP2M_Passenger_GunBase
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 2/0/-0.6 180/0/0
+ObjectTemplate.listenerObstruction 0.55
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerFL_Ambient
+ObjectTemplate.soundFilename "objects/vehicles/land/aav_tunguska/sounds/tunguska_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.25
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerFL_AmbientDamaged
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.65
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create PlayerControlObject BF3_BMP2M_PassengerFR
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "BMP-2M"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_APC.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleType 0
+ObjectTemplate.vehicleHud.vehicleIconPos 24/20
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\VI_xpak_bmp3.tga
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+ObjectTemplate.aiTemplate Btr90Passenger1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerFR_Ambient
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerFR_AmbientDamaged
+ObjectTemplate.addTemplate BF3_BMP2M_Passenger_GunBase
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -2.5/0/-0.75 180/0/0
+ObjectTemplate.listenerObstruction 0.55
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerFR_Ambient
+ObjectTemplate.soundFilename "objects/vehicles/land/aav_tunguska/sounds/tunguska_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.25
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerFR_AmbientDamaged
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.65
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create PlayerControlObject BF3_BMP2M_PassengerRear
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "BMP-2M"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_APC.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleType 0
+ObjectTemplate.vehicleHud.vehicleIconPos 8/12
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\VI_xpak_bmp3.tga
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+ObjectTemplate.aiTemplate Btr90Passenger3
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerRear_Ambient
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerRear_AmbientDamaged
+ObjectTemplate.addTemplate BF3_BMP2M_Passenger_GunBase
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 0/0/0.5 180/0/0
+ObjectTemplate.listenerObstruction 0.55
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerRear_Ambient
+ObjectTemplate.soundFilename "objects/vehicles/land/aav_tunguska/sounds/tunguska_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.25
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerRear_AmbientDamaged
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.65
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create PlayerControlObject BF3_BMP2M_PassengerRL
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "BMP-2M"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_APC.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleType 0
+ObjectTemplate.vehicleHud.vehicleIconPos 16/8
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\VI_xpak_bmp3.tga
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+ObjectTemplate.aiTemplate Btr90Passenger4
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerRL_Ambient
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerRL_AmbientDamaged
+ObjectTemplate.addTemplate BF3_BMP2M_Passenger_GunBase
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 1.5/0/-0.6 180/0/0
+ObjectTemplate.listenerObstruction 0.55
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerRL_Ambient
+ObjectTemplate.soundFilename "objects/vehicles/land/aav_tunguska/sounds/tunguska_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.25
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerRL_AmbientDamaged
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.65
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create PlayerControlObject BF3_BMP2M_PassengerRR
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "BMP-2M"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_APC.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleType 0
+ObjectTemplate.vehicleHud.vehicleIconPos 16/20
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\VI_xpak_bmp3.tga
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+ObjectTemplate.aiTemplate Btr90Passenger3
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerRR_Ambient
+ObjectTemplate.addTemplate S_BF3_BMP2M_PassengerRR_AmbientDamaged
+ObjectTemplate.addTemplate BF3_BMP2M_Passenger_GunBase
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -1.5/0/-0.6 180/0/0
+ObjectTemplate.listenerObstruction 0.55
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerRR_Ambient
+ObjectTemplate.soundFilename "objects/vehicles/land/aav_tunguska/sounds/tunguska_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.25
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_PassengerRR_AmbientDamaged
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.65
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.create FloatingBundle BF3_BMP2M_Floater
+ObjectTemplate.dragModifier 4000/4000/4000
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setHullHeight 2
+ObjectTemplate.setFloatMaxLift 7.5
+ObjectTemplate.setFloatMinLift 0
+
+ObjectTemplate.create Engine BF3_BMP2M_WaterEngine
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_WaterEngine_RotationRpm
+ObjectTemplate.addTemplate S_BF3_BMP2M_WaterEngine_Idle
+ObjectTemplate.addTemplate S_BF3_BMP2M_WaterEngine_Rpm1
+ObjectTemplate.addTemplate S_BF3_BMP2M_WaterEngine_Rpm2
+ObjectTemplate.addTemplate S_BF3_BMP2M_WaterEngine_Load
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/0/-1
+ObjectTemplate.setMaxRotation 1/0/1
+ObjectTemplate.setMaxSpeed 300/1/10
+ObjectTemplate.setAcceleration 300/0.1/10
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setInputToRoll PIThrottle
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setEngineType c_ETShip
+ObjectTemplate.setTorque 4
+ObjectTemplate.setDifferential 5
+ObjectTemplate.setNumberOfGears 5
+ObjectTemplate.setGearUp 0.95
+ObjectTemplate.setGearDown 0.45
+ObjectTemplate.setGearChangeTime 0.1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_WaterEngine_RotationRpm
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_WaterEngine_Idle
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_WaterEngine_Rpm1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_WaterEngine_Rpm2
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_WaterEngine_Load
+
+ObjectTemplate.create Wing BF3_BMP2M_Rudder
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.setMinRotation 0/-15/0
+ObjectTemplate.setMaxRotation 0/15/0
+ObjectTemplate.setMaxSpeed 0/50/0
+ObjectTemplate.setAcceleration 0/50/0
+ObjectTemplate.setInputToPitch PIYaw
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setFlapLift 2.5
+
+ObjectTemplate.create Camera BF3_BMP2M_Camera
+ObjectTemplate.setMinRotation -1.2/-0.2/-0.2
+ObjectTemplate.setMaxRotation 1.2/0.2/0.2
+ObjectTemplate.setPivotPosition -0.2/-0.2/-0.3
+ObjectTemplate.setMaxSpeed 1/1/1
+ObjectTemplate.setMaxResetSpeed 1/1/1
+ObjectTemplate.setAcceleration 1/1/1
+ObjectTemplate.setDeAcceleration 20/20/20
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setLesserYawAtSpeed 50
+ObjectTemplate.regulateYaw 0.1/0.1
+ObjectTemplate.regulatePitch 0.2/0.2
+ObjectTemplate.regulateRoll 0.2/0.2
+ObjectTemplate.restoreRotationOnExit 1
+ObjectTemplate.followStiffness 4
+ObjectTemplate.chaseDistance 17
+ObjectTemplate.chaseAngle 0.15
+ObjectTemplate.chaseOffset 0/1.5/8
+ObjectTemplate.worldFOV 1
+ObjectTemplate.insideFOV 1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 1
+ObjectTemplate.insideStaticSunDirection -0.25/-0.5/2
+ObjectTemplate.insideStaticSunColor 0/0/0
+ObjectTemplate.insideStaticSunDamageColor 1/0/0
+ObjectTemplate.insideDamageFrequency 7
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0/0/0
+ObjectTemplate.cockpitSubGeom 1
+
+ObjectTemplate.create RotationalBundle BF3_BMP2M_Passenger_GunBase
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate BF3_BMP2M_FiringportCamera
+ObjectTemplate.addTemplate Firingport_AK
+rem -------------------------------------
+ObjectTemplate.setMinRotation -35/-25/0
+ObjectTemplate.setMaxRotation 35/25/0
+ObjectTemplate.setMaxSpeed 90/90/0
+ObjectTemplate.setAcceleration 5000/5000/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.restoreRotationOnExit 1
+
+ObjectTemplate.create Camera BF3_BMP2M_FiringportCamera
+ObjectTemplate.CVMChase 0
+ObjectTemplate.CVMFrontChase 0
+ObjectTemplate.CVMFlyBy 0
+ObjectTemplate.worldFOV 1
+ObjectTemplate.insideFOV 1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.create GenericFireArm BF3_BMP2M_SmokeFlare
+rem ---BeginComp:MultiFireComp ---
+ObjectTemplate.createComponent MultiFireComp
+ObjectTemplate.fire.roundsPerMinute 900
+ObjectTemplate.fire.fireInput PIFlareFire
+ObjectTemplate.fire.addFireRate 1
+ObjectTemplate.fire.burstSize 6
+ObjectTemplate.fire.addBarrelName BF3_BMP2M_SmokeBarrel
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags -1
+ObjectTemplate.ammo.magSize 6
+ObjectTemplate.ammo.reloadTime 9
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+ObjectTemplate.deviation.minDev 15
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_Fire1P
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_Fire1P_Outdoor
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_Fire3P
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_BoltClick
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_TriggerClick
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_SwitchFireRate
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_Reload1P
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_Reload3P
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_Deploy1P
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_Deploy3P
+ObjectTemplate.addTemplate S_BF3_BMP2M_SmokeFlare_Zoom
+ObjectTemplate.addTemplate BF3_BMP2M_SmokeBarrel
+ObjectTemplate.setPosition 0.6624/0.3471/0.8480
+ObjectTemplate.setRotation 0/-27.4926/0
+ObjectTemplate.addTemplate BF3_BMP2M_SmokeBarrel
+ObjectTemplate.setPosition -0.6624/0.3471/0.8480
+ObjectTemplate.setRotation 3.1404/-27.4926/0
+ObjectTemplate.addTemplate BF3_BMP2M_SmokeBarrel
+ObjectTemplate.setPosition 0.5551/0.4327/0.8617
+ObjectTemplate.setRotation -13.8532/-23.7650/17.8796
+ObjectTemplate.addTemplate BF3_BMP2M_SmokeBarrel
+ObjectTemplate.setPosition -0.5551/0.4327/0.8617
+ObjectTemplate.setRotation 15.2907/-23.5198/-19.8329
+ObjectTemplate.addTemplate BF3_BMP2M_SmokeBarrel
+ObjectTemplate.setPosition 0.5518/0.3333/0.9355
+ObjectTemplate.setRotation -5.4321/-33.8645/4.0744
+ObjectTemplate.addTemplate BF3_BMP2M_SmokeBarrel
+ObjectTemplate.setPosition -0.5518/0.3333/0.9355
+ObjectTemplate.setRotation 6.4923/-33.8033/-5.6341
+rem -------------------------------------
+ObjectTemplate.projectileTemplate SmokeFlare
+ObjectTemplate.keepProjectiles 5
+ObjectTemplate.velocity 15
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_Fire1P
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_Fire1P_Outdoor
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_Fire3P
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_BoltClick
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_TriggerClick
+ObjectTemplate.soundFilename "objects/weapons/armament/decoy_flare_launcher/sounds/out_of_flares.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.7
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_SwitchFireRate
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_Reload1P
+ObjectTemplate.soundFilename "objects/weapons/armament/missiles/smokeflare/sounds/smoke_reload.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_Reload3P
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_Deploy1P
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_Deploy3P
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_SmokeFlare_Zoom
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.create GenericFireArm BF3_BMP2M_Kornet
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.hudName "Kornet"
+ObjectTemplate.weaponHud.guiIndex -1
+rem ---EndComp ---
+rem ---BeginComp:MultiFireComp ---
+ObjectTemplate.createComponent MultiFireComp
+ObjectTemplate.fire.fireInput PIAltFire
+ObjectTemplate.fire.roundsPerMinute 120
+ObjectTemplate.fire.minimumDistance 65
+ObjectTemplate.fire.addFireRate 0
+ObjectTemplate.fire.useDummyProjectiles 1
+ObjectTemplate.fire.addBarrelName Kornet_Dummy
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags 9
+ObjectTemplate.ammo.magSize 4
+ObjectTemplate.ammo.minimumTimeUntilReload 3
+ObjectTemplate.ammo.reloadTime 3
+ObjectTemplate.ammo.reloadWithoutPlayer 1
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:LPTargetComp ---
+ObjectTemplate.createComponent LPTargetComp
+ObjectTemplate.target.maxDistance 9999
+ObjectTemplate.target.setTargetAtMaxDistance 1
+ObjectTemplate.target.targetSystem TSWireGuided
+ObjectTemplate.target.targetObjectTemplate UniqueTarget
+rem ---EndComp ---
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 0
+ObjectTemplate.aiTemplate Btr90HJ8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_Fire1P
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_Fire1P_Outdoor
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_Fire3P
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_BoltClick
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_TriggerClick
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_SwitchFireRate
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_Reload1P
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_Reload3P
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_Deploy1P
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_Deploy3P
+ObjectTemplate.addTemplate S_BF3_BMP2M_Kornet_Zoom
+ObjectTemplate.addTemplate Kornet_Dummy
+ObjectTemplate.setPosition 1.2041/0.5041/-0.0376
+ObjectTemplate.addTemplate Kornet_Dummy
+ObjectTemplate.setPosition -1.2039/0.5041/-0.0376
+ObjectTemplate.addTemplate Kornet_Dummy
+ObjectTemplate.setPosition 0.9946/0.5041/-0.0376
+ObjectTemplate.addTemplate Kornet_Dummy
+ObjectTemplate.setPosition -0.9944/0.5041/-0.0376
+rem -------------------------------------
+ObjectTemplate.projectileTemplate 9M133
+ObjectTemplate.keepProjectiles 5
+ObjectTemplate.velocity 40
+ObjectTemplate.itemIndex 2
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_Fire1P
+ObjectTemplate.soundFilename "objects/weapons/stationary/ats_tow/sounds/tow_fire_1p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.position 0/0.16944/0.565987
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_Fire1P_Outdoor
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_Fire3P
+ObjectTemplate.soundFilename "objects/weapons/stationary/ats_tow/sounds/tow_fire_3p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 0.9
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.position 0.000721671/0.170038/0.602769
+ObjectTemplate.minDistance 5
+ObjectTemplate.halfVolumeDistance 9
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_BoltClick
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_TriggerClick
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_SwitchFireRate
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_Reload1P
+ObjectTemplate.soundFilename "objects/weapons/stationary/ats_tow/sounds/reload_missile.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.91
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_Deploy1P
+ObjectTemplate.soundFilename "common/sound/weapon_toggle_vehicle.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.3
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_Reload3P
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_Deploy1P
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_Deploy3P
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.activeSafe Sound S_BF3_BMP2M_Kornet_Zoom
+ObjectTemplate.modifiedByUser pho
+
+ObjectTemplate.create EntryPoint BF3_BMP2M_EntryPoint
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 3
+
+ObjectTemplate.create Bundle BF3_BMP2M_SmokeBarrel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0

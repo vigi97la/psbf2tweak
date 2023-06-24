@@ -1,0 +1,17 @@
+GeometryTemplate.setMaterialReflectionScale 1 0 0 0.7
+GeometryTemplate.setSpecularStaticGloss 0 0 0 0
+GeometryTemplate.setSpecularStaticGloss 0 0 1 0
+GeometryTemplate.setSpecularStaticGloss 0 0 2 0
+GeometryTemplate.setSpecularStaticGloss 0 0 3 0
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe SimpleObject turret_accessories
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 10
+ObjectTemplate.geometry turret_accessories
+ObjectTemplate.setCollisionMesh turret_accessories
+ObjectTemplate.mapMaterial 0 cloth 1016
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh

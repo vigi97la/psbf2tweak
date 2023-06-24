@@ -1,0 +1,830 @@
+rem *** Generated with Bf2Editor.exe [created: 2005/10/3 6:41]
+GeometryTemplate.setSubGeometryLodDistance 1 0 15
+GeometryTemplate.setSubGeometryLodDistance 1 1 35
+GeometryTemplate.setSubGeometryLodDistance 1 2 100
+GeometryTemplate.setMaterialReflectionScale 1 0 0 0
+GeometryTemplate.setMaterialReflectionScale 1 0 1 0
+GeometryTemplate.setMaterialReflectionScale 1 0 2 0
+GeometryTemplate.setMaterialReflectionScale 1 0 3 3
+GeometryTemplate.setMaterialReflectionScale 1 0 4 0.4
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 8
+ObjectTemplate.activeSafe PlayerControlObject mrap_maxxpro
+ObjectTemplate.creator STS:Sts_Garage
+ObjectTemplate.modifiedByUser "STS:Sts_Garage"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.castsDynamicShadow 1
+rem ---BeginComp:Armor ---
+ObjectTemplate.createComponent Armor
+ObjectTemplate.armor.maxHitPoints 1250
+ObjectTemplate.armor.hitPoints 1250
+ObjectTemplate.armor.defaultMaterial 71
+ObjectTemplate.armor.hpLostWhileUpSideDown 125
+ObjectTemplate.armor.hpLostWhileInWater 100
+ObjectTemplate.armor.hpLostWhileInDeepWater 335
+ObjectTemplate.armor.hpLostWhileCriticalDamage 18
+ObjectTemplate.armor.waterDamageDelay 1
+ObjectTemplate.armor.deepWaterDamageDelay 0
+ObjectTemplate.armor.waterLevel 0.1
+ObjectTemplate.armor.deepWaterLevel 0.7
+ObjectTemplate.armor.explosionForce 10
+ObjectTemplate.armor.explosionForceMod 12
+ObjectTemplate.armor.explosionForceMax 5000
+ObjectTemplate.armor.explosionDamage 300
+ObjectTemplate.armor.explosionRadius 6
+ObjectTemplate.armor.explosionMaterial 101
+ObjectTemplate.armor.wreckExplosionForce 7
+ObjectTemplate.armor.wreckExplosionDamage 50
+ObjectTemplate.armor.wreckExplosionRadius 2
+ObjectTemplate.armor.wreckExplosionMaterial 70
+ObjectTemplate.armor.wreckHitPoints 1000
+ObjectTemplate.armor.timeToStayAsWreck 10
+ObjectTemplate.armor.criticalDamage 101
+ObjectTemplate.armor.hideChildrenOnSpectacularDeath 1
+ObjectTemplate.armor.addArmorEffect 50 e_dstate_land_lightsmoke 0.93/0.63/1.63 0/0/0
+ObjectTemplate.armor.addArmorEffect 25 e_dstate_land_mediumsmoke 0.93/0.63/1.63 0/0/0
+ObjectTemplate.armor.addArmorEffect 10 e_dstate_land_heavysmoke 0.93/0.64/1.63 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_vexp_armoredcar 0/0/0 0/0/0
+rem ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_nanjing 0/0/0 0/0/0
+ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_armoredcar_spec 0/0/0 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_dstate_static_fire 0/0.500657/1.74866 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_sAmb_wreckfire 0.069318/-0.130134/2.32917 0/0/0
+ObjectTemplate.armor.addArmorEffect -100 e_vexp_armoredcar_2nd 0/0/0 0/0/0
+rem ---EndComp ---
+rem ---BeginComp:Radio ---
+ObjectTemplate.createComponent Radio
+ObjectTemplate.Radio.spottedMessage vehicle_spotted
+rem ---EndComp ---
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "MRAP MaxxPro"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_jeep.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_jeep.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 54/7
+ObjectTemplate.vehicleHud.vehicleType 3
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\Jeep_Nanjing.tga
+rem ---EndComp ---
+ObjectTemplate.geometry mrap_maxxpro
+ObjectTemplate.setCollisionMesh mrap_maxxpro
+ObjectTemplate.mapMaterial 0 Armour 26
+ObjectTemplate.mapMaterial 1 Metal_plate_thin 30
+ObjectTemplate.mapMaterial 2 glass 1018
+ObjectTemplate.mapMaterial 3 wreck 60
+ObjectTemplate.mapMaterial 4 Rubber 102
+ObjectTemplate.drag 1
+ObjectTemplate.mass 1800
+ObjectTemplate.gravityModifier 1.5
+ObjectTemplate.floaterMod 0.9
+ObjectTemplate.centerOfCollisionOffset 0/0.5/0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate Nanjing
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Ambient
+ObjectTemplate.setPosition -0.590831/0.994397/-1.66586e-006
+ObjectTemplate.addTemplate S_mrap_maxxpro_AmbientDamaged
+ObjectTemplate.addTemplate mrap_maxxpro_EntryPoint_fwd
+ObjectTemplate.setPosition -5.66617e-006/0.000308145/1.23038
+ObjectTemplate.addTemplate mrap_maxxpro_EntryPoint_bwd
+ObjectTemplate.setPosition 1.69843e-005/2.23846e-005/-0.826734
+ObjectTemplate.addTemplate mrap_maxxpro_Front_Passenger
+ObjectTemplate.setPosition 0.251908/0.526777/0.0672624
+ObjectTemplate.addTemplate mrap_maxxpro_Passenger_RR
+ObjectTemplate.setPosition 0.623/1.094/-1.026
+ObjectTemplate.setRotation -90/0/0
+ObjectTemplate.addTemplate mrap_maxxpro_Passenger_RL
+ObjectTemplate.setPosition -0.523/1.074/-1.56600
+ObjectTemplate.setRotation 90/0/0
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition 4.2627e-005/-0.513999/2.41205
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition 2.85719e-005/-0.487047/-2.04574
+ObjectTemplate.setRotation 180/0/0
+ObjectTemplate.addTemplate e_amphib_wake_sound
+ObjectTemplate.setPosition 4.2627e-005/-0.513999/0
+ObjectTemplate.addTemplate e_sinking_vehicle
+ObjectTemplate.addTemplate mrap_maxxpro_CameraMount
+ObjectTemplate.setPosition -0.44467/0.88234/0.85
+ObjectTemplate.addTemplate Car_horn
+ObjectTemplate.setPosition 0/0/2.52785
+ObjectTemplate.addTemplate LaserTarget_vehicle
+ObjectTemplate.addTemplate antenna
+ObjectTemplate.setPosition 0.96347/1.04289/1.77475
+ObjectTemplate.addTemplate antenna
+ObjectTemplate.setPosition -0.76915/1.02244/1.77104
+ObjectTemplate.addTemplate parts_maxxpro
+ObjectTemplate.addTemplate maxx_parts
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -1.7/-0.2/0.9 0/0/0
+ObjectTemplate.altSoldierExitPosition 0/-0.2/-3
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.regulatePitchInput PIMouseLookY
+ObjectTemplate.regulatePitch -0.02/0.05
+ObjectTemplate.regulateRollInput PIYaw
+ObjectTemplate.regulateRoll -0.02/0.2
+ObjectTemplate.seatInformation mrap_maxxpro -0.443096/1.007/0.886165 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_driver_A_animSys.inc
+ObjectTemplate.cockpitSubGeom 1
+ObjectTemplate.listenerObstruction 0.4
+ObjectTemplate.groundContactVolume 1
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.altSoldierExitPosition 0/-0.2/-3
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Ambient
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/mrap_maxxpro/sounds/mrap_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.2
+ObjectTemplate.pitch 1.2
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/2/0.003/0/0/0.756/1/0/
+ObjectTemplate.position -0.590831/0.994397/-1.66586e-006
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_AmbientDamaged
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe RotationalBundle mrap_maxxpro_Steeringwheel
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:Ik ---
+ObjectTemplate.createComponent Ik
+ObjectTemplate.ik.positionLeft -0.156504/-1.3411e-007/-0.0817095
+ObjectTemplate.ik.rotationLeft -106.35/-15.829/-43.7555
+ObjectTemplate.ik.positionRight 0.161415/0.00600094/-0.0786637
+ObjectTemplate.ik.rotationRight -38.2097/43.0936/157.474
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Steeringwheel_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/0/-75
+ObjectTemplate.setMaxRotation 0/0/75
+ObjectTemplate.setMaxSpeed 0/0/-150
+ObjectTemplate.setAcceleration 0/0/-200
+ObjectTemplate.setInputToRoll PIYaw
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.regulateRoll -0.05/0.1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Steeringwheel_RotationRpm
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe PlayerControlObject mrap_maxxpro_cupolabase
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "MRAP MaxxPro"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 28/14
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+rem ---EndComp ---
+rem ---BeginComp:HelpHud ---
+ObjectTemplate.createComponent HelpHud
+ObjectTemplate.HelpHud.helpStringKey "HUD_HELP_VEHICLE_TANK_TURRET_CONTROLS_duckInTurret"
+ObjectTemplate.HelpHud.helpSoundKey "DuckInTurret"
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.aiTemplate NanjingGunner
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_cupolabase_Ambient
+ObjectTemplate.addTemplate S_mrap_maxxpro_cupolabase_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 1.7/-1.7/0.9 0/0/0
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation mrap_maxxpro_cupolabase 0/0.399054/-0.1111868 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_gunturret_B_animSys.inc
+ObjectTemplate.cockpitSubGeom 1
+ObjectTemplate.allowDucking 1
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_cupolabase_Ambient
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/mrap_maxxpro/sounds/veh_stryker_engine_low.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/2/0.003/0/0/0.756/1/0/
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_cupolabase_AmbientDamaged
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.46
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe RotationalBundle mrap_maxxpro_cupola
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_cupola_RotationRpm
+ObjectTemplate.addTemplate mrap_maxxpro_DuckCamera
+ObjectTemplate.setRotation 0/-20/0
+rem -------------------------------------
+ObjectTemplate.setMaxSpeed 90/0/0
+ObjectTemplate.setAcceleration 5000/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.capMaxSpeed 1
+ObjectTemplate.regulateYaw 0.15/-0.1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_cupola_RotationRpm
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe RotationalBundle mrap_maxxpro_gunmount
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_gunmount_RotationRpm
+ObjectTemplate.addTemplate mrap_maxxpro_Gunner_Camera
+ObjectTemplate.setPosition 0/0.35/-0.6
+ObjectTemplate.addTemplate HMG_M2HB
+ObjectTemplate.setPosition 0.00135/-0.00267/0.07602
+ObjectTemplate.addTemplate hmg_m2hb_ammobox
+ObjectTemplate.setPosition -0.24140/0.02823/-0.01482
+ObjectTemplate.setRotation 180/-4.73266e-006/22.2425
+ObjectTemplate.addTemplate hmg_m2hb_ammo
+ObjectTemplate.setPosition -0.02943/0.06905/-0.01324
+ObjectTemplate.setRotation 90/0/0
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-45/0
+ObjectTemplate.setMaxRotation 0/18/0
+ObjectTemplate.setMaxSpeed 0/90/0
+ObjectTemplate.setAcceleration 0/5000/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch 0.15/-0.1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_gunmount_RotationRpm
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.create Camera mrap_maxxpro_Gunner_Camera
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Gunner_Camera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/-0.5/0
+ObjectTemplate.setMaxRotation 1/0.5/0
+ObjectTemplate.setPivotPosition 0/0/-2
+ObjectTemplate.setMaxSpeed 5/5/0
+ObjectTemplate.setAcceleration 2/1/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.followStiffness 6
+ObjectTemplate.chaseDistance 15
+ObjectTemplate.chaseAngle 0.15
+ObjectTemplate.chaseOffset 0/1/7
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.1
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Gunner_Camera_RotationRpm
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.create Camera mrap_maxxpro_DuckCamera
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_DuckCamera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.CameraId 1
+ObjectTemplate.CVMChase 0
+ObjectTemplate.CVMFrontChase 0
+ObjectTemplate.CVMFlyBy 0
+ObjectTemplate.followStiffness 6
+ObjectTemplate.chaseDistance 15
+ObjectTemplate.chaseAngle 0.15
+ObjectTemplate.chaseOffset 0/1/7
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.1
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_DuckCamera_RotationRpm
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Engine mrap_maxxpro_Engine
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Engine_RotationRpm
+ObjectTemplate.addTemplate S_mrap_maxxpro_Engine_Idle
+ObjectTemplate.setPosition 0/0.536701/2.60096
+ObjectTemplate.addTemplate S_mrap_maxxpro_Engine_Rpm1
+ObjectTemplate.setPosition 0/0.483879/2.73995
+ObjectTemplate.addTemplate S_mrap_maxxpro_Engine_Rpm2
+ObjectTemplate.setPosition 0/0.51943/2.70473
+ObjectTemplate.addTemplate S_mrap_maxxpro_Engine_Load
+ObjectTemplate.setPosition -0.00600463/0.575052/2.07034
+ObjectTemplate.addTemplate e_exhaust_small
+ObjectTemplate.setPosition -0.90092/-0.22771/-2.02885
+ObjectTemplate.setRotation 37.0007/0/0
+ObjectTemplate.addTemplate e_exhaust_small_startup
+ObjectTemplate.setPosition -0.90092/-0.22771/-2.02885
+ObjectTemplate.setRotation 37/0/0
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/0/-1
+ObjectTemplate.setMaxRotation 0/0/1
+ObjectTemplate.setMaxSpeed 0/0/10000
+ObjectTemplate.setAcceleration 0/0/10
+ObjectTemplate.setInputToRoll PIThrottle
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setEngineType c_ETNewCar2
+ObjectTemplate.setTorque 225
+ObjectTemplate.setDifferential 4
+ObjectTemplate.setNumberOfGears 4
+ObjectTemplate.setGearUp 0.85
+ObjectTemplate.setGearDown 0.4
+ObjectTemplate.setGearChangeTime 0.7
+ObjectTemplate.setGearRatios 2.25 1.25 1 0.6 0.6 
+ObjectTemplate.spinWhenNoEngineInAir 1
+ObjectTemplate.newCar2.minRpm 1000
+ObjectTemplate.newCar2.maxRpm 4000
+ObjectTemplate.newCar2.useClutchedTorque 0
+ObjectTemplate.newCar2.wheelInertia 100
+ObjectTemplate.newCar2.engineFeedbackMod 0.6
+ObjectTemplate.newCar2.brakeTorque 2500
+ObjectTemplate.newCar2.engineBrakeTorque 2000
+ObjectTemplate.newCar2.frictionTorque 100
+ObjectTemplate.newCar2.frictionMod 1.5
+ObjectTemplate.newCar2.slopeTorqueMod 0.5
+ObjectTemplate.newCar2.wheelLongFrictionMod 1
+ObjectTemplate.newCar2.wheelLongDriveFrictionMod 1.5
+ObjectTemplate.newCar2.wheelLongPeakAt 0.1
+ObjectTemplate.newCar2.wheelLongMinDynamicFriction 0.7
+ObjectTemplate.newCar2.wheelLongScale 0.05
+ObjectTemplate.newCar2.wheelLatFrictionMod 2
+ObjectTemplate.newCar2.wheelLatDriveFrictionMod 0.3
+ObjectTemplate.newCar2.wheelLatPeakAt 0.1
+ObjectTemplate.newCar2.wheelLatMinDynamicFriction 0.7
+ObjectTemplate.newCar2.wheelLatScale 0.1
+ObjectTemplate.audio.newStyleAudio 1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Engine_RotationRpm
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/mrap_maxxpro/sounds/veh_stryker_roll.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.1
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0.003861/0.364865/0/0.996139/1.13514/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/4/0.00772201/0.305019/0/0.320463/0.521236/0/0.610039/1/0/0.984556/1/0/
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 8
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Engine_Idle
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/mrap_maxxpro/sounds/mrap_engine_start_idle_stop.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 0.37
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/3/0.003861/0.880309/0/0.100386/0.984556/0/0.988417/1.18147/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0/0.888031/0/0.297297/0.868726/0/0.980695/0/0/
+ObjectTemplate.minDistance 5
+ObjectTemplate.halfVolumeDistance 15
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Engine_Rpm1
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/mrap_maxxpro/sounds/unloaded_rpm.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.7
+ObjectTemplate.pitch 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0/0.573359/0/0.988417/0.84556/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0.00772201/0.177606/0/0.27027/0.563707/0/0.714286/0.988417/0/
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 6
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Engine_Rpm2
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/mrap_maxxpro/sounds/loaded_rpm.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.6
+ObjectTemplate.pitch 1.2
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0.00772201/0.353282/0/0.996139/0.909266/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/4/0.003861/0.123552/0/0.235521/0.814672/0/0.69112/1/0/0.992278/1/0/
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 15
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Engine_Load
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/common/sound/gear_shift_01.wav,objects/vehicles/common/sound/gear_shift_01.wav,objects/vehicles/common/sound/gear_shift_02.wav,objects/vehicles/common/sound/gear_shift_03.wav,objects/vehicles/common/sound/gear_shift_04.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.7
+ObjectTemplate.pitch 1.4
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.position -0.0555691/0.338462/1.91426
+ObjectTemplate.minDistance 1.7
+ObjectTemplate.halfVolumeDistance 2.1
+
+ObjectTemplate.activeSafe RotationalBundle mrap_maxxpro_nav_RF
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_nav_RF_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -25/0/0
+ObjectTemplate.setMaxRotation 25/0/0
+ObjectTemplate.setMaxSpeed 1/0/0
+ObjectTemplate.setAcceleration 100/0/0
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.snapToZeroOnNoInput 1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_nav_RF_RotationRpm
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Spring mrap_maxxpro_Wheel_RF
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Wheel_RF_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+rem -------------------------------------
+ObjectTemplate.setStrength 40
+ObjectTemplate.setDamping 5
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Wheel_RF_Rotation
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe RotationalBundle mrap_maxxpro_nav_LF
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_nav_LF_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -25/0/0
+ObjectTemplate.setMaxRotation 25/0/0
+ObjectTemplate.setMaxSpeed 1/0/0
+ObjectTemplate.setAcceleration 100/0/0
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.snapToZeroOnNoInput 1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_nav_LF_RotationRpm
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Spring mrap_maxxpro_Wheel_LF
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Wheel_LF_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+rem -------------------------------------
+ObjectTemplate.setStrength 40
+ObjectTemplate.setDamping 5
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Wheel_LF_Rotation
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Spring mrap_maxxpro_Wheel_LB
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Wheel_LB_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+rem -------------------------------------
+ObjectTemplate.setStrength 40
+ObjectTemplate.setDamping 5
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Wheel_LB_Rotation
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Spring mrap_maxxpro_Wheel_RB
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Wheel_RB_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+ObjectTemplate.addTemplate web_wheelBigSmoke
+rem -------------------------------------
+ObjectTemplate.setStrength 40
+ObjectTemplate.setDamping 5
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Wheel_RB_Rotation
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.create EntryPoint mrap_maxxpro_EntryPoint_fwd
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 3
+
+ObjectTemplate.create EntryPoint mrap_maxxpro_EntryPoint_bwd
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 3
+
+ObjectTemplate.create PlayerControlObject mrap_maxxpro_Front_Passenger
+ObjectTemplate.modifiedByUser "SatNav"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "MRAP MaxxPro"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.useChildHud 1
+ObjectTemplate.vehicleHud.vehicleIconPos 42/20
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.aiTemplate HmmwvPassenger
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Front_Passenger_Ambient
+ObjectTemplate.addTemplate S_mrap_maxxpro_Front_Passenger_AmbientDamaged
+ObjectTemplate.addTemplate mrap_maxxpro_Front_Passenger_Camera
+ObjectTemplate.setPosition 0.52761/0.52998/0.77901
+rem -------------------------------------
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation mrap_maxxpro_Front_Passenger 0.389653/0.472140/0.793099 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_driver_A_animSys.inc
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.cockpitSubGeom 1
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.listenerObstruction 0.45
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Front_Passenger_Ambient
+ObjectTemplate.modifiedByUser "SatNav"
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Front_Passenger_AmbientDamaged
+ObjectTemplate.modifiedByUser "SatNav"
+
+ObjectTemplate.create Camera mrap_maxxpro_Front_Passenger_Camera
+ObjectTemplate.modifiedByUser "SatNav"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Front_Passenger_Camera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -130/-20/0
+ObjectTemplate.setMaxRotation 140/20/0
+ObjectTemplate.setMaxSpeed 90/90/0
+ObjectTemplate.setAcceleration 5000/5000/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch 0.1/-0.1
+ObjectTemplate.restoreRotationOnExit 1
+ObjectTemplate.cameraShakeStartSpeed 20
+ObjectTemplate.cameraShakeMaxSpeed 25
+ObjectTemplate.bounceLength 0.1
+ObjectTemplate.bounceStrength 15
+ObjectTemplate.bounceDamping 15
+ObjectTemplate.followStiffness 6
+ObjectTemplate.chaseDistance 15
+ObjectTemplate.chaseAngle 0.15
+ObjectTemplate.chaseOffset 0/1/6
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.1
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Front_Passenger_Camera_RotationRpm
+ObjectTemplate.modifiedByUser "SatNav"
+
+ObjectTemplate.create PlayerControlObject mrap_maxxpro_Passenger_RR
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "MRAP MaxxPro"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.useChildHud 1
+ObjectTemplate.vehicleHud.vehicleIconPos 10/22
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.aiTemplate NanjingRearPassenger
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Passenger_RR_Ambient
+ObjectTemplate.addTemplate S_mrap_maxxpro_Passenger_RR_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -2/-1.3/0 -180/0/0
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation mrap_maxxpro_passenger_rr 0.166799/0.0834451/0.262515 -17.3/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_passenger_A_animSys.inc
+ObjectTemplate.seatLeftRotationLimit -80
+ObjectTemplate.seatRightRotationLimit 30
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Passenger_RR_Ambient
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Passenger_RR_AmbientDamaged
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.create PlayerControlObject mrap_maxxpro_Passenger_RL
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "MRAP MaxxPro"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.useChildHud 1
+ObjectTemplate.vehicleHud.vehicleIconPos 10/5
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.aiTemplate NanjingPassenger
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_Passenger_RL_Ambient
+ObjectTemplate.addTemplate S_mrap_maxxpro_Passenger_RL_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 2/-1.3/0 -180/0/0
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation mrap_maxxpro_passenger_rl -0.0150473/0.0978067/0.342744 -9.7/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_passenger_A_animSys.inc
+ObjectTemplate.seatLeftRotationLimit -45
+ObjectTemplate.seatRightRotationLimit 45
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Passenger_RL_Ambient
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_Passenger_RL_AmbientDamaged
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.create RotationalBundle mrap_maxxpro_CameraMount
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_CameraMount_RotationRpm
+ObjectTemplate.addTemplate mrap_maxxpro_PilotCamera
+ObjectTemplate.setPosition 0/0.29000/0
+ObjectTemplate.setRotation 3.9/9.0/-0.1
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/0/-10
+ObjectTemplate.setMaxRotation 0/0/10
+ObjectTemplate.setMaxSpeed 0/0/500
+ObjectTemplate.setAcceleration 0/0/500
+ObjectTemplate.setInputToRoll PIRoll
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.regulateRoll 0.1/-0.1
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_CameraMount_RotationRpm
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.create Camera mrap_maxxpro_PilotCamera
+ObjectTemplate.modifiedByUser "armandoma"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_mrap_maxxpro_PilotCamera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -80/-10/0
+ObjectTemplate.setMaxRotation 140/10/0
+ObjectTemplate.setMaxSpeed 90/90/0
+ObjectTemplate.setAcceleration 5000/5000/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch 0.1/-0.1
+ObjectTemplate.restoreRotationOnExit 1
+ObjectTemplate.followStiffness 6
+ObjectTemplate.chaseDistance 15
+ObjectTemplate.chaseAngle 0.15
+ObjectTemplate.chaseOffset 0/1/7
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.1
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_mrap_maxxpro_PilotCamera_RotationRpm
+ObjectTemplate.modifiedByUser "armandoma"
+

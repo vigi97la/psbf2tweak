@@ -1,0 +1,21 @@
+rem *** Generated with Bf2Editor.exe [created: 2006/5/15 11:52]
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe RotationalBundle apc_acv_15_lroadwheel
+ObjectTemplate.creator Hauteclocque
+ObjectTemplate.modifiedByUser "sts.garage"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 20
+ObjectTemplate.geometry apc_acv_15_lroadwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject apc_acv_15_LWhl_01
+rem -------------------------------------
+ObjectTemplate.addTemplate S_apc_acv_15_lroadwheel_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_apc_acv_15_lroadwheel_RotationRpm
+ObjectTemplate.modifiedByUser "sts.garage"
+

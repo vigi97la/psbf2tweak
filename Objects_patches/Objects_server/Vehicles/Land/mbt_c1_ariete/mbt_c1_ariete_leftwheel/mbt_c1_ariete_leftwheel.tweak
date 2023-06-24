@@ -1,0 +1,15 @@
+rem *** Generated with Bf2Editor.exe [created: 2016/2/29 13:32]
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe RotationalBundle mbt_c1_ariete_leftwheel
+ObjectTemplate.creator STS:STS_Garage
+ObjectTemplate.modifiedByUser "STS_Garage"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 14
+ObjectTemplate.geometry mbt_c1_ariete_leftwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject mbt_c1_ariete_lwheel_02
+

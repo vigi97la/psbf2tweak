@@ -1,0 +1,1445 @@
+rem *** Generated with Bf2Editor.exe [created: 2006/5/15 11:52]
+GeometryTemplate.setMaterialReflectionScale 1 0 2 2
+GeometryTemplate.setMaterialReflectionScale 1 0 3 0
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 8
+ObjectTemplate.activeSafe PlayerControlObject ru_t90ms
+ObjectTemplate.creator FENG:CH
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.castsDynamicShadow 1
+rem ---BeginComp:Armor ---
+ObjectTemplate.createComponent Armor
+ObjectTemplate.armor.maxHitPoints 1300
+ObjectTemplate.armor.hitPoints 1300
+ObjectTemplate.armor.defaultMaterial 72
+ObjectTemplate.armor.hpLostWhileUpSideDown 125
+ObjectTemplate.armor.hpLostWhileInWater 100
+ObjectTemplate.armor.hpLostWhileInDeepWater 335
+ObjectTemplate.armor.hpLostWhileCriticalDamage 18
+ObjectTemplate.armor.waterDamageDelay 1
+ObjectTemplate.armor.deepWaterDamageDelay 0
+ObjectTemplate.armor.waterLevel 0.3
+ObjectTemplate.armor.deepWaterLevel 0.8
+ObjectTemplate.armor.explosionForce 15
+ObjectTemplate.armor.explosionForceMod 8
+ObjectTemplate.armor.explosionForceMax 5000
+ObjectTemplate.armor.explosionDamage 300
+ObjectTemplate.armor.explosionRadius 7
+ObjectTemplate.armor.explosionMaterial 99
+ObjectTemplate.armor.wreckExplosionForce 7
+ObjectTemplate.armor.wreckExplosionDamage 50
+ObjectTemplate.armor.wreckExplosionRadius 3
+ObjectTemplate.armor.wreckExplosionMaterial 70
+ObjectTemplate.armor.wreckHitPoints 1300
+ObjectTemplate.armor.timeToStayAsWreck 10
+ObjectTemplate.armor.criticalDamage 101
+ObjectTemplate.armor.hideChildrenOnSpectacularDeath 1
+ObjectTemplate.armor.addArmorEffect 50 e_dstate_land_lightsmoke -0.2/1/-2.5 0/0/0
+ObjectTemplate.armor.addArmorEffect 50 e_dstate_land_sparks 1.21701/-0.169338/-1.54665 0/0/0
+ObjectTemplate.armor.addArmorEffect 25 e_dstate_land_MediumSmoke -0.2/1/-2.5 0/0/0
+ObjectTemplate.armor.addArmorEffect 10 e_dstate_land_heavysmoke -0.2/1.1/-2.5 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_vexp_tank 0/0/0 0/0/0
+rem ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_type98 0/0/0 0/0/0
+ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_tank_spec 0/0/0 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_dstate_static_fire -0.2/1/-2.5 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_sAmb_wreckfire 0.726342/1/-2.5 0/0/0
+ObjectTemplate.armor.addArmorEffect -100 e_vexp_tank_2nd 0/0/-0.5 0/0/0
+rem ---EndComp ---
+rem ---BeginComp:Radio ---
+ObjectTemplate.createComponent Radio
+ObjectTemplate.Radio.spottedMessage tank_spotted
+rem ---EndComp ---
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "T90-MS"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_tank.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Tank.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.hasTurretIcon 1
+ObjectTemplate.vehicleHud.vehicleType 0
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\RU_T90MS.dds
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+rem ---BeginComp:HelpHud ---
+ObjectTemplate.createComponent HelpHud
+ObjectTemplate.HelpHud.helpStringKey "HUD_HELP_VEHICLE_TANK_DRIVER_CONTROLS_smoke"
+ObjectTemplate.HelpHud.helpSoundKey "HUD_HELP_VEHICLE_TANK_DRIVER_CONTROLS_smoke"
+rem ---EndComp ---
+ObjectTemplate.geometry RU_T90MS
+ObjectTemplate.setCollisionMesh RU_T90MS
+ObjectTemplate.mapMaterial 0 Armor_5_tank_front 30
+ObjectTemplate.mapMaterial 1 Armor_2_light_armored_vehicles 27
+ObjectTemplate.mapMaterial 2 glass 1018
+ObjectTemplate.mapMaterial 3 Tank_tracks 86
+ObjectTemplate.mapMaterial 4 wreck 60
+ObjectTemplate.drag 2
+ObjectTemplate.mass 6000
+ObjectTemplate.gravityModifier 1.5
+ObjectTemplate.centerOfCollisionOffset 0/0.5/0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate T90AI
+rem -------------------------------------
+ObjectTemplate.addTemplate S_ru_t90ms_Ambient
+ObjectTemplate.addTemplate S_ru_t90ms_AmbientDamaged
+ObjectTemplate.addTemplate RU_T90MS_EntryPoint_Front
+ObjectTemplate.setPosition 0/0.657929/1.54178
+ObjectTemplate.addTemplate RU_T90MS_EntryPoint_Rear
+ObjectTemplate.setPosition 0/0.738676/-2.00791
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition -0.00217/-0.51983/3.55929
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition -0.00217001/-0.51983/-3.35093
+ObjectTemplate.setRotation 180/0/0
+ObjectTemplate.addTemplate e_amphib_wake_sound
+ObjectTemplate.setPosition -0.00217/-0.51983/0
+ObjectTemplate.addTemplate e_sinking_vehicle
+ObjectTemplate.addTemplate LaserTarget_vehicle
+ObjectTemplate.setPosition 0/0.542557/0
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -2.5/0/0 0/0/0
+ObjectTemplate.altSoldierExitPosition 0/0/-5.2
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.cockpitSubGeom 1
+ObjectTemplate.sprintFactor 1
+ObjectTemplate.setVehicleType VTHeavyTank
+ObjectTemplate.listenerObstruction 0.6
+ObjectTemplate.groundContactVolume 1
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.altSoldierExitPosition 0/0/-5.2
+
+ObjectTemplate.activeSafe Sound S_ru_t90ms_Ambient
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/tnk_type98/sounds/t98_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.16
+ObjectTemplate.pitch 1.2
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_ru_t90ms_AmbientDamaged
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.8
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Engine RU_T90MS_Engine
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_Engine_RotationRpm
+ObjectTemplate.setPosition -0.507886/-1.09084e-008/0.433987
+ObjectTemplate.addTemplate S_RU_T90MS_Engine_Idle
+ObjectTemplate.setPosition -0.664945/0.641349/1.52434
+ObjectTemplate.addTemplate S_RU_T90MS_Engine_Rpm1
+ObjectTemplate.setPosition -0.63592/0.73412/1.82892
+ObjectTemplate.addTemplate S_RU_T90MS_Engine_Rpm2
+ObjectTemplate.setPosition -0.0250827/0.467535/1.24431
+ObjectTemplate.addTemplate S_RU_T90MS_Engine_Load
+ObjectTemplate.setPosition -0.184432/0/0.591951
+ObjectTemplate.addTemplate e_exhaust
+ObjectTemplate.setPosition 0.474528/0.385993/-2.7448
+ObjectTemplate.setRotation 90.2/-0.1/-0.3
+ObjectTemplate.addTemplate e_exhaust_startup
+ObjectTemplate.setPosition 0.474528/0.385993/-2.7448
+ObjectTemplate.setRotation 90.2/-0.1/-0.3
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/0/-1
+ObjectTemplate.setMaxRotation 1/0/1
+ObjectTemplate.setMaxSpeed 4/0/10
+ObjectTemplate.setAcceleration 50/0/10
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setInputToRoll PIThrottle
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setEngineType c_ETTank
+ObjectTemplate.setTorque 10
+ObjectTemplate.setDifferential 12
+ObjectTemplate.setGearUp 0.95
+ObjectTemplate.setGearDown 0.45
+ObjectTemplate.setGearChangeTime 0.1
+ObjectTemplate.setGearRatios 3.5 2.2 1.5 1.1 0.94 
+ObjectTemplate.trackTurnAcceleration 30
+ObjectTemplate.trackTurnSpeed 0.85
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Engine_RotationRpm
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sounds/tracks.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.67
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.1/3/0/3/0.003/0.637/0.1/0.673/1.079/0.1/0.995/1.079/0.1/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/2/0.038/0/0/0.32/1/0/
+ObjectTemplate.position -0.507886/-1.09084e-008/0.433987
+ObjectTemplate.minDistance 3.5
+ObjectTemplate.halfVolumeDistance 7
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Engine_Idle
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sounds/engine_start_idle_stop.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 0.89
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/3/0/2/0/0.602317/0/0.996139/1.34363/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/2/0/0.432432/0/0.366795/1/0/
+ObjectTemplate.position -0.664945/0.641349/1.52434
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 7
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Engine_Rpm1
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sounds/engine_loaded.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 0.7
+ObjectTemplate.pitch 0.8
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0.003861/1.10618/0/0.749035/1.5/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0.003861/0/0/0.104247/0.718147/0/0.559846/1/0/
+ObjectTemplate.position -0.63592/0.73412/1.82892
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 10
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Engine_Rpm2
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Engine_Load
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_FL
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject RU_T90MS_L3
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_FL_Rotation
+ObjectTemplate.addTemplate S_RU_T90MS_FL_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_FL_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_FR
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject RU_T90MS_L3
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_FR_Rotation
+ObjectTemplate.addTemplate S_RU_T90MS_FR_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_FR_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_L1
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_L1_Rotation
+ObjectTemplate.addTemplate RU_T90MS_left_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.4/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 14
+ObjectTemplate.setDamping 3
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_L1_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_L2
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_L2_Rotation
+ObjectTemplate.addTemplate RU_T90MS_left_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.11/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_L2_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_L3
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0.05/0
+ObjectTemplate.animatedUVTranslationSize 14/0
+ObjectTemplate.animatedUVTranslationReverse 1
+ObjectTemplate.animatedUVTranslationIndex 6
+ObjectTemplate.animatedUVRotation 1
+ObjectTemplate.animatedUVRotationRadius 0.4
+ObjectTemplate.animatedUVRotationScale 1/1
+ObjectTemplate.animatedUVRotationIndex 1
+ObjectTemplate.animatedUVRotationReverse 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_L3_Rotation
+ObjectTemplate.addTemplate RU_T90MS_left_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.18/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_L3_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_L4
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0/-0.07
+ObjectTemplate.animatedUVTranslationSize 0/8
+ObjectTemplate.animatedUVTranslationReverse 1
+ObjectTemplate.animatedUVTranslationIndex 6
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_L4_Rotation
+ObjectTemplate.addTemplate RU_T90MS_left_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.18/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_L4_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_L5
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_L5_Rotation
+ObjectTemplate.addTemplate RU_T90MS_left_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.18/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_L5_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_L6
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_L6_Rotation
+ObjectTemplate.addTemplate RU_T90MS_left_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.18/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 14
+ObjectTemplate.setDamping 3
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_L6_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_LDriveWheel
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject RU_T90MS_L3
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_LDriveWheel_Rotation
+ObjectTemplate.addTemplate S_RU_T90MS_LDriveWheel_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_LDriveWheel_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_R1
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_R1_Rotation
+ObjectTemplate.setPosition -1.49727/0/2.95386
+ObjectTemplate.addTemplate RU_T90MS_right_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.4/0/0
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition -1.55/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 14
+ObjectTemplate.setDamping 3
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_R1_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_R2
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_R2_Rotation
+ObjectTemplate.addTemplate RU_T90MS_right_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.11/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_R2_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_R3
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0.05/0
+ObjectTemplate.animatedUVTranslationSize 14/0
+ObjectTemplate.animatedUVTranslationReverse 1
+ObjectTemplate.animatedUVTranslationIndex 5
+ObjectTemplate.animatedUVRotation 1
+ObjectTemplate.animatedUVRotationRadius 0.4
+ObjectTemplate.animatedUVRotationScale 1/1
+ObjectTemplate.animatedUVRotationIndex 3
+ObjectTemplate.animatedUVRotationReverse 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_R3_Rotation
+ObjectTemplate.addTemplate RU_T90MS_right_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.18/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_R3_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_R4
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0/-0.07
+ObjectTemplate.animatedUVTranslationSize 0/8
+ObjectTemplate.animatedUVTranslationReverse 1
+ObjectTemplate.animatedUVTranslationIndex 5
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_R4_Rotation
+ObjectTemplate.addTemplate RU_T90MS_right_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.18/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_R4_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_R5
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_R5_Rotation
+ObjectTemplate.addTemplate RU_T90MS_right_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.18/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_R5_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_R6
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_R6_Rotation
+ObjectTemplate.addTemplate RU_T90MS_right_track
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.18/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 14
+ObjectTemplate.setDamping 3
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_R6_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Spring RU_T90MS_RDriveWheel
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject RU_T90MS_L3
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_RDriveWheel_Rotation
+ObjectTemplate.addTemplate S_RU_T90MS_RDriveWheel_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_RDriveWheel_Rotation
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe RotationalBundle RU_T90MS_Turret
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_Turret_RotationRpm
+ObjectTemplate.addTemplate RU_T90MS_SmokeLauncher
+ObjectTemplate.setPosition 2.92063e-006/-2.02656e-006/0.293374
+rem -------------------------------------
+ObjectTemplate.setMaxSpeed 30/0/0
+ObjectTemplate.setAcceleration 400/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Turret_RotationRpm
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ustnk_m1a2/sounds/genericturretmovement.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.4
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.1/3/0/2/0.003/0.1/0.1/0.505/1.55/0.1/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0.089/0/0/0.168/0.624/0/0.759/1/0/
+ObjectTemplate.minDistance 2
+ObjectTemplate.halfVolumeDistance 4.5
+
+ObjectTemplate.activeSafe RotationalBundle RU_T90MS_BarrelBase
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_BarrelBase_RotationRpm
+ObjectTemplate.addTemplate RU_T90MS_Camera
+ObjectTemplate.setPosition -0.631987/0.29213/-0.12129
+ObjectTemplate.addTemplate Coaxial_mg_mec
+ObjectTemplate.setPosition 0.220796/-0.100619/0.528893
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-15/0
+ObjectTemplate.setMaxRotation 0/5/0
+ObjectTemplate.setMaxSpeed 0/30/0
+ObjectTemplate.setAcceleration 0/400/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch -0.08/0.55
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_BarrelBase_RotationRpm
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ustnk_m1a2/sounds/genericturretmovement.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.35
+ObjectTemplate.pitch 2
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.1/3/0/3/0.003/0.1/0.1/0.251/0.843/0.1/0.995/1.491/0.1/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0.109/0/0/0.122/0.449/0/0.5/0.754/0/
+ObjectTemplate.minDistance 2
+ObjectTemplate.halfVolumeDistance 2.8
+
+ObjectTemplate.activeSafe GenericFireArm RU_T90MS_Barrel
+ObjectTemplate.modifiedByUser "Administrator"
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.hudName "T90-MS"
+ObjectTemplate.weaponHud.guiIndex 7
+ObjectTemplate.weaponHud.hasFireRate 0
+rem ---EndComp ---
+rem ---BeginComp:SingleFireComp ---
+ObjectTemplate.createComponent SingleFireComp
+ObjectTemplate.fire.roundsPerMinute 30
+ObjectTemplate.fire.addFireRate 0
+ObjectTemplate.fire.fireInCameraDof 1
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags 40
+ObjectTemplate.ammo.magSize 1
+ObjectTemplate.ammo.reloadTime 2.88
+ObjectTemplate.ammo.autoReload 1
+ObjectTemplate.ammo.reloadWithoutPlayer 1
+rem ---EndComp ---
+rem ---BeginComp:WeaponBasedRecoilComp ---
+ObjectTemplate.createComponent WeaponBasedRecoilComp
+ObjectTemplate.recoil.recoilSize 10
+ObjectTemplate.recoil.recoilSpeed 20
+ObjectTemplate.recoil.recoilSpeedGB 2.5
+ObjectTemplate.recoil.recoilForce 75
+ObjectTemplate.recoil.cameraRecoilSpeed 12
+ObjectTemplate.recoil.cameraRecoilSize 2
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+ObjectTemplate.deviation.minDev 0.25
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAnimationComp ---
+ObjectTemplate.createComponent DefaultAnimationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+ObjectTemplate.zoom.addZoomFactor 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate T90MainGun
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_Fire1P
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_Fire1P_Outdoor
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_Fire3P
+ObjectTemplate.setPosition 0/0/4.25475
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_BoltClick
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_TriggerClick
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_SwitchFireRate
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_Reload1P
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_Reload3P
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_Deploy1P
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_Deploy3P
+ObjectTemplate.addTemplate S_RU_T90MS_Barrel_Zoom
+ObjectTemplate.addTemplate e_muzz_tank
+ObjectTemplate.setPosition 0.00432/-0.00549/4.82012
+rem -------------------------------------
+ObjectTemplate.projectileTemplate 125MMGunProjectile
+ObjectTemplate.keepProjectiles 5
+ObjectTemplate.velocity 150
+
+ObjectTemplate.create GenericProjectile 125MMGunProjectile
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.createNotInGrid 1
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:DefaultCollisionComp ---
+ObjectTemplate.createComponent DefaultCollisionComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultDetonationComp ---
+ObjectTemplate.createComponent DefaultDetonationComp
+ObjectTemplate.detonation.explosionMaterial 70
+ObjectTemplate.detonation.explosionRadius 5
+ObjectTemplate.detonation.explosionForce 15
+ObjectTemplate.detonation.explosionDamage 150
+ObjectTemplate.detonation.endEffectTemplate e_exp_medium
+ObjectTemplate.detonation.useMMOnEndEffect 1
+ObjectTemplate.detonation.detectionRadius 1.5
+ObjectTemplate.detonation.maxDepthForExplosion 2
+rem ---EndComp ---
+rem ---BeginComp:DefaultProjSoundComp ---
+ObjectTemplate.createComponent DefaultProjSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultRicochetComp ---
+ObjectTemplate.createComponent DefaultRicochetComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultPenetrateComp ---
+ObjectTemplate.createComponent DefaultPenetrateComp
+ObjectTemplate.penetrate.allowSolidPenetration 0
+ObjectTemplate.penetrate.allowLiquidPenetration 0
+rem ---EndComp ---
+ObjectTemplate.gravityModifier 0.4
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Point
+ObjectTemplate.collisionGroups 8
+ObjectTemplate.material 43
+rem -------------------------------------
+ObjectTemplate.addTemplate S_125MMGunProjectile_Looping
+rem -------------------------------------
+ObjectTemplate.timeToLive CRD_NONE/7/0/0
+ObjectTemplate.material 43
+ObjectTemplate.hasOnTimeEffect 1
+ObjectTemplate.tracerScaler 3
+ObjectTemplate.maxTracerScaler 5
+ObjectTemplate.minTracerScaler 1
+ObjectTemplate.tracerTemplate p_tracer_tank
+ObjectTemplate.minDamage 1
+ObjectTemplate.damage 550
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_Fire1P
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sounds/cannon_1p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.95
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.97/1.03/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.9/1/
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_Fire1P_Outdoor
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_Fire3P
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sounds/cannon_3p.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.97/1.03/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.9/1/
+ObjectTemplate.position 0/0/4.25475
+ObjectTemplate.minDistance 10
+ObjectTemplate.halfVolumeDistance 20
+ObjectTemplate.soundRadius 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_BoltClick
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_TriggerClick
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ustnk_m1a2/sounds/vehicle_weapon_trigger_click.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.41
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0.3
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_SwitchFireRate
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_Reload1P
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sounds/reload.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.6
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_Reload3P
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_Deploy1P
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_Deploy3P
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_Zoom
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_125MMGunProjectile_Looping
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.create Camera RU_T90MS_Camera
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_Camera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/-0.2/-0.4
+ObjectTemplate.setMaxRotation 1/0.2/0.4
+ObjectTemplate.setPivotPosition 0.2/0.2/-0.4
+ObjectTemplate.setMaxSpeed 5/5/5
+ObjectTemplate.setMaxResetSpeed 200/5/5
+ObjectTemplate.setAcceleration 1/5/5
+ObjectTemplate.setDeAcceleration 0/20/20
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setLesserYawAtSpeed 50
+ObjectTemplate.regulateYaw 0.2/0.1
+ObjectTemplate.regulatePitch 0.2/2
+ObjectTemplate.regulateRoll 1/0
+ObjectTemplate.restoreRotationOnExit 1
+ObjectTemplate.followStiffness 4
+ObjectTemplate.chaseDistance 17
+ObjectTemplate.chaseAngle 0.15
+ObjectTemplate.chaseOffset 0/1/8.5
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 1
+ObjectTemplate.insideStaticSunDirection -0.25/-0.5/2
+ObjectTemplate.insideStaticSunColor 0/0/0
+ObjectTemplate.insideStaticSunDamageColor 1/0/0
+ObjectTemplate.insideDamageFrequency 7
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0/0/0
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Camera_RotationRpm
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe PlayerControlObject RU_T90MS_Crowsgunner
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "WZ551-120"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+rem ---BeginComp:HelpHud ---
+ObjectTemplate.createComponent HelpHud
+ObjectTemplate.HelpHud.helpStringKey "HUD_HELP_VEHICLE_TANK_TURRET_CONTROLS_duckInTurret"
+ObjectTemplate.HelpHud.helpSoundKey "DuckInTurret"
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate T90_TopMG_AI
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_Crowsgunner_Ambient
+ObjectTemplate.addTemplate S_RU_T90MS_Crowsgunner_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -2.5/0/0 0/0/0
+ObjectTemplate.altSoldierExitPosition 0/0/-4.5
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.cockpitSubGeom 1
+ObjectTemplate.allowDucking 1
+ObjectTemplate.crewKitIndex 7
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.altSoldierExitPosition 0/0/-4.5
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Crowsgunner_Ambient
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Crowsgunner_AmbientDamaged
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe RotationalBundle RU_T90MS_Gunmount
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_Gunmount_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMaxSpeed 90/0/0
+ObjectTemplate.setAcceleration 5000/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.automaticYawStabilization 1
+ObjectTemplate.regulateYaw -0.15/0.1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gunmount_RotationRpm
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe RotationalBundle RU_T90MS_Gundy
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_Gundy_RotationRpm
+ObjectTemplate.addTemplate RU_T90MS_Hud2Camera
+ObjectTemplate.setPosition 0.217131/0.00221753/0.308188
+ObjectTemplate.addTemplate RU_T90MS_Gun2
+ObjectTemplate.setPosition 0/0.02/0
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-30/0
+ObjectTemplate.setMaxRotation 0/8/0
+ObjectTemplate.setMaxSpeed 0/40/0
+ObjectTemplate.setAcceleration 0/400/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch -0.08/0.55
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gundy_RotationRpm
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.create Camera RU_T90MS_Hud2Camera
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_Hud2Camera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/-0.5/0
+ObjectTemplate.setMaxRotation 1/0.5/0
+ObjectTemplate.setPivotPosition 0/0/-2
+ObjectTemplate.setMaxSpeed 5/5/0
+ObjectTemplate.setAcceleration 2/1/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.cameraShakeStartSpeed 14
+ObjectTemplate.cameraShakeMaxSpeed 20
+ObjectTemplate.followStiffness 3
+ObjectTemplate.chaseDistance 16
+ObjectTemplate.chaseAngle 0.2
+ObjectTemplate.chaseOffset 0/1/7
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.1
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Hud2Camera_RotationRpm
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.create GenericFireArm RU_T90MS_Gun2
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.weaponIcon Ingame\Weapons\Icons\Hud\bomb.tga
+ObjectTemplate.weaponHud.hudName "RU_T90MS"
+ObjectTemplate.weaponHud.guiIndex 38
+ObjectTemplate.weaponHud.altGuiIndex 38
+ObjectTemplate.weaponHud.deviationFactor 5
+ObjectTemplate.weaponHud.maxVisualDeviation 25
+ObjectTemplate.weaponHud.minVisualDeviation 2
+ObjectTemplate.weaponHud.hasFireRate 0
+ObjectTemplate.weaponHud.hasRangeFinder 1
+ObjectTemplate.weaponHud.showClips 0
+rem ---EndComp ---
+rem ---BeginComp:SingleFireComp ---
+ObjectTemplate.createComponent SingleFireComp
+ObjectTemplate.fire.fireInCameraDof 1
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.ammoType 1
+ObjectTemplate.ammo.nrOfMags -1
+ObjectTemplate.ammo.magSize 200
+ObjectTemplate.ammo.reloadTime 6
+ObjectTemplate.ammo.autoReload 1
+ObjectTemplate.ammo.reloadWithoutPlayer 1
+rem ---EndComp ---
+rem ---BeginComp:WeaponBasedRecoilComp ---
+ObjectTemplate.createComponent WeaponBasedRecoilComp
+ObjectTemplate.recoil.recoilSize 0.23
+ObjectTemplate.recoil.recoilSpeed 30
+ObjectTemplate.recoil.recoilForce 0.1
+ObjectTemplate.recoil.cameraRecoilSpeed 13
+ObjectTemplate.recoil.cameraRecoilSize 1
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+ObjectTemplate.deviation.minDev 0.12
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAnimationComp ---
+ObjectTemplate.createComponent DefaultAnimationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+ObjectTemplate.zoom.zoomDelay 0.1
+ObjectTemplate.zoom.zoomLod 1
+ObjectTemplate.zoom.addZoomFactor 0
+ObjectTemplate.zoom.addZoomFactor 0.3
+ObjectTemplate.zoom.addZoomFactor 0.1
+ObjectTemplate.zoom.changeFovDelay 0.1
+ObjectTemplate.zoom.disableMuzzleWhenZoomed 1
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.aiTemplate Stationary_Kord_AI
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_Fire1P
+ObjectTemplate.setPosition 0/0.0896358/1.28813
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_Fire1P_Outdoor
+ObjectTemplate.setPosition 0/0.102556/1.3354
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_Fire3P
+ObjectTemplate.setPosition 0/0.088623/1.28571
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_BoltClick
+ObjectTemplate.setPosition 0/0.0898987/-0.176249
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_TriggerClick
+ObjectTemplate.setPosition 0/0/-0.257296
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_SwitchFireRate
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_Reload1P
+ObjectTemplate.setPosition 0/0.0866909/-0.0992336
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_Reload3P
+ObjectTemplate.setPosition 0/0.0921879/-0.060648
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_Deploy1P
+ObjectTemplate.setPosition 0/0.106226/-0.231516
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_Deploy3P
+ObjectTemplate.setPosition 0/0.0980568/-0.247274
+ObjectTemplate.addTemplate S_RU_T90MS_Gun2_Zoom
+ObjectTemplate.setPosition 0/0.148561/-0.240097
+ObjectTemplate.addTemplate e_muzz_minigun
+ObjectTemplate.setPosition -0.0265875/-0.0274568/1.13204
+ObjectTemplate.addTemplate e_shellejection_50cal
+ObjectTemplate.setPosition 0.0897293/-0.0455706/0.237109
+rem -------------------------------------
+ObjectTemplate.projectileTemplate CHHMG_KORD_Projectile
+ObjectTemplate.keepProjectiles 5
+ObjectTemplate.itemIndex 1
+ObjectTemplate.heatAddWhenFire 0.005
+ObjectTemplate.coolDownPerSec 0.4
+ObjectTemplate.overheatPenalty 3
+
+ObjectTemplate.create GenericProjectile CHHMG_KORD_Projectile
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.createNotInGrid 1
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:DefaultCollisionComp ---
+ObjectTemplate.createComponent DefaultCollisionComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultDetonationComp ---
+ObjectTemplate.createComponent DefaultDetonationComp
+ObjectTemplate.detonation.detectionRadius 1.5
+ObjectTemplate.detonation.maxDepthForExplosion 2
+rem ---EndComp ---
+rem ---BeginComp:DefaultProjSoundComp ---
+ObjectTemplate.createComponent DefaultProjSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultRicochetComp ---
+ObjectTemplate.createComponent DefaultRicochetComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultPenetrateComp ---
+ObjectTemplate.createComponent DefaultPenetrateComp
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Point
+ObjectTemplate.collisionGroups 8
+ObjectTemplate.material 39
+rem -------------------------------------
+ObjectTemplate.addTemplate S_CHHMG_KORD_Projectile_Looping
+rem -------------------------------------
+ObjectTemplate.timeToLive CRD_NONE/2/0/0
+ObjectTemplate.material 39
+ObjectTemplate.hasOnTimeEffect 1
+ObjectTemplate.tracerScaler 30
+ObjectTemplate.maxTracerScaler 30
+ObjectTemplate.minTracerScaler 5
+ObjectTemplate.tracerSizeModifier 5
+ObjectTemplate.tracerTemplate p_tracer_g
+ObjectTemplate.tracerInterval 3
+ObjectTemplate.tracerConvergeDistance -1
+ObjectTemplate.localPredictOnClient 1
+ObjectTemplate.minDamage 0.2
+ObjectTemplate.damage 80
+ObjectTemplate.damageMandownSoldiers 1
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_Fire1P
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sounds/crows_1p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.92
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.98/1.04/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.9/1/
+ObjectTemplate.position 0/0.0896358/1.28813
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_Fire1P_Outdoor
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_Fire3P
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sounds/crows_3p.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.9
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.98/1.04/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.9/1/
+ObjectTemplate.position 0/0.088623/1.28571
+ObjectTemplate.minDistance 5.5
+ObjectTemplate.halfVolumeDistance 35
+ObjectTemplate.soundRadius 0.5
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_BoltClick
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/weapons/handheld/usrif_m4/sounds/mono/m4_boltclick.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.8
+ObjectTemplate.pitch 0.9
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.position 0/0.0898987/-0.176249
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_TriggerClick
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/weapons/handheld/uspis_92fs/sounds/mono/trigger_click.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.5
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.position 0/0/-0.257296
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_SwitchFireRate
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_Reload1P
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/weapons/stationary/50cal_m2hb/sounds/m2_reload_1p.ogg"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.8
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.position 0/0.0866909/-0.0992336
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_Reload3P
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_Deploy1P
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sound/gun_deploy.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.35
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.position 0/0.106226/-0.231516
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_Deploy3P
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_Gun2_Zoom
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/ru_t90ms/sound/zoom.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.35
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.position 0/0.148561/-0.240097
+
+ObjectTemplate.activeSafe Sound S_CHHMG_KORD_Projectile_Looping
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.create GenericFireArm RU_T90MS_SmokeLauncher
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:MultiFireComp ---
+ObjectTemplate.createComponent MultiFireComp
+ObjectTemplate.fire.roundsPerMinute 1800
+ObjectTemplate.fire.fireInput PIFlareFire
+ObjectTemplate.fire.addFireRate 1
+ObjectTemplate.fire.burstSize 2
+ObjectTemplate.fire.addBarrelName RU_T90MS_SmokeLauncher_Barrel
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags -1
+ObjectTemplate.ammo.magSize 2
+ObjectTemplate.ammo.minimumTimeUntilReload 13
+ObjectTemplate.ammo.autoReload 1
+ObjectTemplate.ammo.reloadWithoutPlayer 1
+rem ---EndComp ---
+rem ---BeginComp:WeaponBasedRecoilComp ---
+ObjectTemplate.createComponent WeaponBasedRecoilComp
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+ObjectTemplate.deviation.minDev 6
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAnimationComp ---
+ObjectTemplate.createComponent DefaultAnimationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+ObjectTemplate.zoom.addZoomFactor 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_Fire1P
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_Fire1P_Outdoor
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_Fire3P
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_BoltClick
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_TriggerClick
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_SwitchFireRate
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_Reload1P
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_Reload3P
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_Deploy1P
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_Deploy3P
+ObjectTemplate.addTemplate S_RU_T90MS_SmokeLauncher_Zoom
+ObjectTemplate.addTemplate RU_T90MS_SmokeLauncher_Barrel
+ObjectTemplate.setPosition 1.37/0.39341/0.38885
+ObjectTemplate.setRotation 40/-20/0
+ObjectTemplate.addTemplate RU_T90MS_SmokeLauncher_Barrel
+ObjectTemplate.setPosition -1.37/0.39341/0.38885
+ObjectTemplate.setRotation -40/-20/0
+rem -------------------------------------
+ObjectTemplate.projectileTemplate Smokeflare
+ObjectTemplate.keepProjectiles 5
+ObjectTemplate.velocity 12
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_Fire1P
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/weapons/armament/missiles/smokeflare/sounds/smoke_fire.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_Fire1P_Outdoor
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_Fire3P
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_BoltClick
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_TriggerClick
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/weapons/armament/decoy_flare_launcher/sounds/out_of_flares.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.7
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_SwitchFireRate
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_Reload1P
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/weapons/armament/missiles/smokeflare/sounds/smoke_reload.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_Reload3P
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_Deploy1P
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_Deploy3P
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.activeSafe Sound S_RU_T90MS_SmokeLauncher_Zoom
+ObjectTemplate.modifiedByUser "Administrator"
+
+ObjectTemplate.create Bundle RU_T90MS_SmokeLauncher_Barrel
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+
+ObjectTemplate.create EntryPoint RU_T90MS_EntryPoint_Front
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 4
+
+ObjectTemplate.create EntryPoint RU_T90MS_EntryPoint_Rear
+ObjectTemplate.modifiedByUser "Administrator"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 4
+

@@ -1,0 +1,1115 @@
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe PlayerControlObject rutnk_t14
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.castsDynamicShadow 1
+rem ---BeginComp:Armor ---
+ObjectTemplate.createComponent Armor
+ObjectTemplate.armor.maxHitPoints 1000
+ObjectTemplate.armor.hitPoints 1000
+ObjectTemplate.armor.defaultMaterial 72
+ObjectTemplate.armor.hpLostWhileUpSideDown 125
+ObjectTemplate.armor.hpLostWhileInWater 100
+ObjectTemplate.armor.hpLostWhileInDeepWater 335
+ObjectTemplate.armor.hpLostWhileCriticalDamage 18
+ObjectTemplate.armor.waterDamageDelay 1
+ObjectTemplate.armor.deepWaterDamageDelay 0
+ObjectTemplate.armor.waterLevel 0.3
+ObjectTemplate.armor.deepWaterLevel 0.8
+ObjectTemplate.armor.explosionForce 15
+ObjectTemplate.armor.explosionForceMod 8
+ObjectTemplate.armor.explosionForceMax 5000
+ObjectTemplate.armor.explosionDamage 300
+ObjectTemplate.armor.explosionRadius 7
+ObjectTemplate.armor.explosionMaterial 99
+ObjectTemplate.armor.wreckExplosionForce 10
+ObjectTemplate.armor.wreckExplosionForceMax 10
+ObjectTemplate.armor.wreckExplosionDamage 50
+ObjectTemplate.armor.wreckExplosionRadius 3
+ObjectTemplate.armor.wreckExplosionMaterial 70
+ObjectTemplate.armor.wreckHitPoints 1000
+ObjectTemplate.armor.timeToStayAsWreck 10
+ObjectTemplate.armor.criticalDamage 101
+ObjectTemplate.armor.hideChildrenOnSpectacularDeath 1
+ObjectTemplate.armor.addArmorEffect 50 e_dstate_land_lightsmoke 0/0.35/-2.5 0/0/0
+ObjectTemplate.armor.addArmorEffect 25 e_dstate_land_mediumSmoke 0/0.35/-2.5 0/0/0
+ObjectTemplate.armor.addArmorEffect 10 e_dstate_land_heavysmoke 0/0.36/-2.5 0/0/0
+ObjectTemplate.armor.addArmorEffect 25 e_dstate_land_sparks -1.5/-0.3/0 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_vexp_tank 0/0/0 0/0/0
+rem ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_t90 0/1.5/-0.5 0/0/0
+ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_tank_spec 0/0/0 0/0/0
+ObjectTemplate.armor.addArmorEffect 50 e_dstate_land_sparks -1.45/-0.5/-2.15 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_dstate_static_fire 0/0.5/-0.15 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_sAmb_wreckfire -0.26/0.5/-1.14 0/0/0
+ObjectTemplate.armor.addArmorEffect -100 e_vexp_tank_2nd 0/0/0 0/0/0
+rem ---EndComp ---
+rem ---BeginComp:Radio ---
+ObjectTemplate.createComponent Radio
+ObjectTemplate.Radio.spottedMessage tank_spotted
+rem ---EndComp ---
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "T14"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_tank.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Tank.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.hasTurretIcon 1
+ObjectTemplate.vehicleHud.vehicleIconPos 38/13
+ObjectTemplate.vehicleHud.vehicleType 0
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\t90.tga
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+ObjectTemplate.geometry rutnk_t14
+ObjectTemplate.setCollisionMesh rutnk_t14
+ObjectTemplate.mapMaterial 0 Armor_3_tank_rear_top 28
+ObjectTemplate.mapMaterial 1 Armor_5_tank_front 30
+ObjectTemplate.mapMaterial 2 Armor_4_tank_sides 29
+ObjectTemplate.mapMaterial 3 Pentrable_Metal_thin 1014
+ObjectTemplate.mapMaterial 4 penetrable_glass 1018
+ObjectTemplate.mapMaterial 5 TankTracks 86
+ObjectTemplate.mapMaterial 6 Wreck 60
+ObjectTemplate.drag 2
+ObjectTemplate.mass 6000
+ObjectTemplate.gravityModifier 1.5
+ObjectTemplate.floaterMod 0.5
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate T90AI
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Ambient
+ObjectTemplate.addTemplate S_rutnk_t14_AmbientDamaged
+ObjectTemplate.addTemplate rutnk_t14_Entry
+ObjectTemplate.addTemplate rutnk_t14_side
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition 0/-0.40234/3.59296
+ObjectTemplate.addTemplate e_amphib_wake
+ObjectTemplate.setPosition -3.60177e-008/-0.40234/-3.50387
+ObjectTemplate.setRotation -180/0/0
+ObjectTemplate.addTemplate e_amphib_wake_sound
+ObjectTemplate.setPosition 0/-0.40234/0
+ObjectTemplate.addTemplate e_sinking_vehicle
+ObjectTemplate.addTemplate LaserTarget_vehicle
+ObjectTemplate.setPosition -1.17973e-008/0.978662/-1.3083e-007
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -1/2.5/0 0/0/0
+ObjectTemplate.altSoldierExitPosition 0/0.1/-4.5
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.cockpitSubGeom 1
+ObjectTemplate.shakeFactor 4
+ObjectTemplate.sprintFactor 1
+ObjectTemplate.setVehicleType VTHeavyTank
+ObjectTemplate.listenerObstruction 0.6
+ObjectTemplate.groundContactVolume 1
+ObjectTemplate.damagedAmbientSoundLimit 0.15
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.altSoldierExitPosition 0/-0.2/-4.5
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Ambient
+ObjectTemplate.soundFilename "objects/vehicles/land/tnk_type98/sounds/t98_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.2
+ObjectTemplate.pitch 0.8
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_AmbientDamaged
+ObjectTemplate.soundFilename "objects/effects/sounds/damagestates/fire_alarm_tank.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.65
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe RotationalBundle rutnk_t14_Turret
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Turret_RotationRpm
+ObjectTemplate.addTemplate rutnk_t14_SmokeLauncher
+rem -------------------------------------
+ObjectTemplate.setMaxSpeed 40/0/0
+ObjectTemplate.setAcceleration 450/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Turret_RotationRpm
+ObjectTemplate.soundFilename "objects/vehicles/land/ustnk_m1a2/sounds/genericturretmovement.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.4
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.1/3/0/2/0.003/0.1/0.1/0.505/1.55/0.1/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0.089/0/0/0.168/0.624/0/0.759/1/0/
+ObjectTemplate.minDistance 2
+ObjectTemplate.halfVolumeDistance 4.5
+
+ObjectTemplate.activeSafe RotationalBundle rutnk_t14_Barrel_Base
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Base_RotationRpm
+ObjectTemplate.addTemplate Coaxial_mg_mec
+ObjectTemplate.setPosition -0.147805/0.135184/0.592081
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-20/0
+ObjectTemplate.setMaxRotation 0/1/0
+ObjectTemplate.setMaxSpeed 0/30/0
+ObjectTemplate.setAcceleration 0/400/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch -0.08/0.55
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Base_RotationRpm
+ObjectTemplate.soundFilename "objects/vehicles/land/ustnk_m1a2/sounds/genericturretmovement.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.35
+ObjectTemplate.pitch 2
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.1/3/0/3/0.003/0.1/0.1/0.251/0.843/0.1/0.995/1.491/0.1/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0.109/0/0/0.122/0.449/0/0.5/0.754/0/
+ObjectTemplate.minDistance 2
+ObjectTemplate.halfVolumeDistance 2.8
+
+ObjectTemplate.activeSafe GenericFireArm rutnk_t14_Barrel
+rem ---BeginComp:WeaponHud ---
+ObjectTemplate.createComponent WeaponHud
+ObjectTemplate.weaponHud.hudName "125MM GUN"
+ObjectTemplate.weaponHud.guiIndex 7
+ObjectTemplate.weaponHud.hasFireRate 0
+ObjectTemplate.weaponHud.hasRangeFinder 1
+ObjectTemplate.weaponHud.addShowOnCamMode 2
+rem ---EndComp ---
+rem ---BeginComp:SingleFireComp ---
+ObjectTemplate.createComponent SingleFireComp
+ObjectTemplate.fire.roundsPerMinute 30
+ObjectTemplate.fire.addFireRate 0
+ObjectTemplate.fire.fireInCameraDof 1
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags 45
+ObjectTemplate.ammo.magSize 1
+ObjectTemplate.ammo.autoReload 1
+ObjectTemplate.ammo.reloadWithoutPlayer 1
+rem ---EndComp ---
+rem ---BeginComp:WeaponBasedRecoilComp ---
+ObjectTemplate.createComponent WeaponBasedRecoilComp
+ObjectTemplate.recoil.recoilSize 12
+ObjectTemplate.recoil.recoilSpeed 10
+ObjectTemplate.recoil.recoilSpeedGB 2.5
+ObjectTemplate.recoil.recoilForce 90
+ObjectTemplate.recoil.cameraRecoilSpeed 12
+ObjectTemplate.recoil.cameraRecoilSize 2
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+ObjectTemplate.deviation.setFireDev 4 0 0
+ObjectTemplate.deviation.minDev 0.25
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAnimationComp ---
+ObjectTemplate.createComponent DefaultAnimationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+ObjectTemplate.zoom.addZoomFactor 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate T90MainGun
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Fire1P
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Fire1P_Outdoor
+ObjectTemplate.setPosition 0.00391629/0/0.370109
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Fire3P
+ObjectTemplate.setPosition 0/0/3.45281
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_BoltClick
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_TriggerClick
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_SwitchFireRate
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Reload1P
+ObjectTemplate.setPosition 0.477544/-0.000482261/-2.42846
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Reload3P
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Deploy1P
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Deploy3P
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Zoom
+ObjectTemplate.addTemplate e_muzz_tank
+ObjectTemplate.setPosition -0.000424892/0.0238959/4.77738
+ObjectTemplate.addTemplate geb_tank
+ObjectTemplate.setPosition 0/-1.8/3.72529
+rem -------------------------------------
+ObjectTemplate.projectileTemplate rutnk_t14_Barrel_Projectile
+ObjectTemplate.keepProjectiles 5
+ObjectTemplate.velocity 1150
+ObjectTemplate.itemIndex 1
+ObjectTemplate.delayToUse 0.5
+
+ObjectTemplate.create GenericProjectile rutnk_t14_Barrel_Projectile
+ObjectTemplate.createNotInGrid 1
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:DefaultCollisionComp ---
+ObjectTemplate.createComponent DefaultCollisionComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultDetonationComp ---
+ObjectTemplate.createComponent DefaultDetonationComp
+ObjectTemplate.detonation.explosionMaterial 70
+ObjectTemplate.detonation.explosionRadius 5
+ObjectTemplate.detonation.explosionForce 15
+ObjectTemplate.detonation.explosionDamage 125
+ObjectTemplate.detonation.endEffectTemplate e_exp_bomb
+ObjectTemplate.detonation.useMMOnEndEffect 1
+ObjectTemplate.detonation.detectionRadius 1.5
+ObjectTemplate.detonation.maxDepthForExplosion 2
+rem ---EndComp ---
+rem ---BeginComp:DefaultProjSoundComp ---
+ObjectTemplate.createComponent DefaultProjSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultRicochetComp ---
+ObjectTemplate.createComponent DefaultRicochetComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultPenetrateComp ---
+ObjectTemplate.createComponent DefaultPenetrateComp
+ObjectTemplate.penetrate.allowSolidPenetration 0
+ObjectTemplate.penetrate.allowLiquidPenetration 0
+rem ---EndComp ---
+ObjectTemplate.gravityModifier 0.4
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Point
+ObjectTemplate.collisionGroups 8
+ObjectTemplate.material 43
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Barrel_Projectile_Looping
+rem -------------------------------------
+ObjectTemplate.timeToLive CRD_NONE/6/0/0
+ObjectTemplate.material 43
+ObjectTemplate.hasOnTimeEffect 1
+ObjectTemplate.tracerScaler 10
+ObjectTemplate.maxTracerScaler 30
+ObjectTemplate.minTracerScaler 10
+ObjectTemplate.tracerTemplate p_tracer_tank
+ObjectTemplate.minDamage 1
+ObjectTemplate.damage 500
+ObjectTemplate.useProjectileCamera 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Projectile_Looping
+ObjectTemplate.modifiedByUser "yjlij"
+
+ObjectTemplate.create Camera rutnk_t14_Barrel_Projectile_cam
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.CameraId 17
+ObjectTemplate.CVMChase 0
+ObjectTemplate.CVMFrontChase 0
+ObjectTemplate.CVMFlyBy 0
+ObjectTemplate.cameraShakeSensitivity 0
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Fire1P
+ObjectTemplate.soundFilename "objects/vehicles/land/rutnk_t14/sounds/cannon/t90_1p_fire.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.95
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.97/1.03/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.9/1/
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Fire1P_Outdoor
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Fire3P
+ObjectTemplate.soundFilename "objects/vehicles/land/rutnk_t14/sounds/cannon/t90_3p_fire.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.97/1.03/
+ObjectTemplate.volumeEnvelope 0/1/0/1/1/1/0/0.9/1/
+ObjectTemplate.position 1.78814e-006/-0.171334/4.91355
+ObjectTemplate.minDistance 12
+ObjectTemplate.halfVolumeDistance 30
+ObjectTemplate.soundRadius 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_BoltClick
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_TriggerClick
+ObjectTemplate.soundFilename "objects/vehicles/land/ustnk_m1a2/sounds/vehicle_weapon_trigger_click.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.41
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0.3
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_SwitchFireRate
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Reload1P
+ObjectTemplate.soundFilename "objects/vehicles/land/rutnk_t14/sounds/cannon/t90_reload.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.5
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Reload3P
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Deploy1P
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Deploy3P
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Zoom
+ObjectTemplate.modifiedByUser "armandoma"
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Barrel_Projectile_Looping
+ObjectTemplate.lowSamples 2147483647
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/weapons/stationary/usart_lw155/sounds/artillery_projectile_01.wav,objects/weapons/stationary/usart_lw155/sounds/artillery_projectile_02.wav,objects/weapons/stationary/usart_lw155/sounds/artillery_projectile_03.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 0
+ObjectTemplate.pitchEnvelope 0/1/0.9/1.1/1/1/0/0.97/1.1/
+ObjectTemplate.minDistance 10
+ObjectTemplate.halfVolumeDistance 30
+
+ObjectTemplate.activeSafe PlayerControlObject rutnk_t14_Cupola
+ObjectTemplate.modifiedByUser "YAK43"
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:VehicleHud ---
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "KILLMESSAGE_VEHICLE_t90"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 25/17
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+rem ---EndComp ---
+rem ---BeginComp:WarningHud ---
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+rem ---EndComp ---
+rem ---BeginComp:HelpHud ---
+ObjectTemplate.createComponent HelpHud
+ObjectTemplate.HelpHud.helpStringKey "HUD_HELP_VEHICLE_TANK_TURRET_CONTROLS_duckInTurret"
+ObjectTemplate.HelpHud.helpSoundKey "DuckInTurret"
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.aiTemplate T90_TopMG_AI
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Cupola_Ambient
+ObjectTemplate.addTemplate S_rutnk_t14_Cupola_AmbientDamaged
+ObjectTemplate.addTemplate armatagunnercupola
+ObjectTemplate.setPosition -0.0058744/0.57252/-0.0215612
+ObjectTemplate.addTemplate rutnk_t14_Cupola_Camera
+ObjectTemplate.setPosition -7.60846/0.775578/-0.436092
+rem -------------------------------------
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.cockpitSubGeom 1
+ObjectTemplate.allowDucking 1
+ObjectTemplate.crewKitIndex 7
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Cupola_Ambient
+ObjectTemplate.modifiedByUser "YAK43"
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Cupola_AmbientDamaged
+ObjectTemplate.modifiedByUser "YAK43"
+
+ObjectTemplate.create Camera rutnk_t14_Cupola_Camera
+ObjectTemplate.modifiedByUser "YAK43"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Cupola_Camera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.worldFOV 1.2
+ObjectTemplate.insideFOV 1.2
+ObjectTemplate.worldFOV 1.2
+ObjectTemplate.insideFOV 1.2
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection -0.25/-0.5/0.75
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/0/0
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Cupola_Camera_RotationRpm
+ObjectTemplate.modifiedByUser "YAK43"
+
+ObjectTemplate.activeSafe RotationalBundle rutnk_t14_Hud
+ObjectTemplate.modifiedByUser "YAK43"
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.hasRelativeOffset 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Hud_RotationRpm
+ObjectTemplate.addTemplate rutnk_t14_Driver_Camera
+ObjectTemplate.setPosition -0.00670177/0.500137/0.468798
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-20/0
+ObjectTemplate.setMaxRotation 0/5/0
+ObjectTemplate.setMaxSpeed 0/30/0
+ObjectTemplate.setAcceleration 0/400/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch -0.08/0.55
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Hud_RotationRpm
+ObjectTemplate.modifiedByUser "YAK43"
+
+ObjectTemplate.create Camera rutnk_t14_Driver_Camera
+ObjectTemplate.modifiedByUser "YAK43"
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Driver_Camera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/-0.2/-0.4
+ObjectTemplate.setMaxRotation 1/0.2/0.4
+ObjectTemplate.setPivotPosition -0.2/-0.2/-0.3
+ObjectTemplate.setMaxSpeed 1/1/1
+ObjectTemplate.setMaxResetSpeed 20/1/1
+ObjectTemplate.setAcceleration 0.3/1/1
+ObjectTemplate.setDeAcceleration 20/20/20
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setLesserYawAtSpeed 50
+ObjectTemplate.regulateYaw 1/0.5
+ObjectTemplate.regulatePitch 0.2/0.2
+ObjectTemplate.regulateRoll 0.5/0.5
+ObjectTemplate.restoreRotationOnExit 1
+ObjectTemplate.followStiffness 4
+ObjectTemplate.chaseDistance 17
+ObjectTemplate.chaseAngle 0.15
+ObjectTemplate.chaseOffset 0/1/8.5
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 1
+ObjectTemplate.insideStaticSunDirection -0.25/-0.5/2
+ObjectTemplate.insideStaticSunColor 0/0/0
+ObjectTemplate.insideStaticSunDamageColor 1/0/0
+ObjectTemplate.insideDamageFrequency 7
+ObjectTemplate.insideDamageThreshold 0.15
+ObjectTemplate.insideStaticSunAmbientColor 0/0/0
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Driver_Camera_RotationRpm
+ObjectTemplate.modifiedByUser "YAK43"
+
+ObjectTemplate.create GenericFireArm rutnk_t14_SmokeLauncher
+ObjectTemplate.createdInEditor 1
+rem ---BeginComp:MultiFireComp ---
+ObjectTemplate.createComponent MultiFireComp
+ObjectTemplate.fire.roundsPerMinute 1800
+ObjectTemplate.fire.fireInput PIFlareFire
+ObjectTemplate.fire.addFireRate 1
+ObjectTemplate.fire.burstSize 2
+ObjectTemplate.fire.addBarrelName rutnk_t14_SmokeLauncher_Barrel
+rem ---EndComp ---
+rem ---BeginComp:DefaultAmmoComp ---
+ObjectTemplate.createComponent DefaultAmmoComp
+ObjectTemplate.ammo.nrOfMags -1
+ObjectTemplate.ammo.magSize 2
+ObjectTemplate.ammo.minimumTimeUntilReload 13
+ObjectTemplate.ammo.autoReload 1
+ObjectTemplate.ammo.reloadWithoutPlayer 1
+rem ---EndComp ---
+rem ---BeginComp:WeaponBasedRecoilComp ---
+ObjectTemplate.createComponent WeaponBasedRecoilComp
+rem ---EndComp ---
+rem ---BeginComp:SimpleDeviationComp ---
+ObjectTemplate.createComponent SimpleDeviationComp
+ObjectTemplate.deviation.minDev 6
+rem ---EndComp ---
+rem ---BeginComp:DefaultSoundComp ---
+ObjectTemplate.createComponent DefaultSoundComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultAnimationComp ---
+ObjectTemplate.createComponent DefaultAnimationComp
+rem ---EndComp ---
+rem ---BeginComp:DefaultZoomComp ---
+ObjectTemplate.createComponent DefaultZoomComp
+ObjectTemplate.zoom.addZoomFactor 0
+rem ---EndComp ---
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_SmokeLauncher_Fire1P
+ObjectTemplate.addTemplate S_rutnk_t14_SmokeLauncher_TriggerClick
+ObjectTemplate.addTemplate S_rutnk_t14_SmokeLauncher_Reload1P
+ObjectTemplate.setPosition 1.5112/0.7897/0.26157
+ObjectTemplate.setRotation 40/-20/0
+ObjectTemplate.addTemplate rutnk_t14_SmokeLauncher_Barrel
+ObjectTemplate.setPosition -1.56012/0.580705/0.319848
+ObjectTemplate.setRotation -40/-20/0
+ObjectTemplate.addTemplate rutnk_t14_SmokeLauncher_Barrel
+ObjectTemplate.setPosition 1.55514/0.601983/0.313911
+ObjectTemplate.setRotation 40/-20/0
+ObjectTemplate.addTemplate rutnk_t14_SmokeLauncher_Barrel
+ObjectTemplate.setPosition -1.58837/0.459952/0.353517
+ObjectTemplate.setRotation -40/-20/0
+ObjectTemplate.addTemplate rutnk_t14_SmokeLauncher_Barrel
+ObjectTemplate.setPosition 1.59316/0.439561/0.359199
+ObjectTemplate.setRotation 40/-20/0
+ObjectTemplate.addTemplate rutnk_t14_SmokeLauncher_Barrel
+ObjectTemplate.setPosition -1.59375/0.436899/0.35994
+ObjectTemplate.setRotation -40/-20/0
+rem -------------------------------------
+ObjectTemplate.projectileTemplate Smokeflare
+ObjectTemplate.keepProjectiles 5
+ObjectTemplate.velocity 12
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_SmokeLauncher_Fire1P
+ObjectTemplate.soundFilename "objects/weapons/armament/missiles/smokeflare/sounds/smoke_fire.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_SmokeLauncher_TriggerClick
+ObjectTemplate.soundFilename "objects/weapons/armament/decoy_flare_launcher/sounds/out_of_flares.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.7
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_SmokeLauncher_Reload1P
+ObjectTemplate.soundFilename "objects/weapons/armament/missiles/smokeflare/sounds/smoke_reload.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 1
+ObjectTemplate.pitch 1
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 0
+
+ObjectTemplate.create Bundle rutnk_t14_SmokeLauncher_Barrel
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+
+ObjectTemplate.activeSafe Engine rutnk_t14_ZMotor
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_ZMotor_RotationRpm
+ObjectTemplate.addTemplate S_rutnk_t14_ZMotor_Idle
+ObjectTemplate.addTemplate S_rutnk_t14_ZMotor_Rpm1
+ObjectTemplate.addTemplate S_rutnk_t14_ZMotor_Rpm2
+ObjectTemplate.addTemplate S_rutnk_t14_ZMotor_Load
+ObjectTemplate.addTemplate e_exhaust
+ObjectTemplate.setPosition 0.101242/0.618438/-3.89332
+ObjectTemplate.addTemplate e_exhaust_startup
+ObjectTemplate.setPosition 0.101/0.618/-3.105
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/0/-220
+ObjectTemplate.setMaxRotation 1/0/1000
+ObjectTemplate.setMaxSpeed 4/0/10
+ObjectTemplate.setAcceleration 50/0/200
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setInputToRoll PIThrottle
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.snapToZeroOnNoInput 1
+ObjectTemplate.restoreRotationOnExit 1
+ObjectTemplate.setEngineType c_ETTank
+ObjectTemplate.setTorque 200
+ObjectTemplate.setDifferential 19.9
+ObjectTemplate.setGearUp 0.7
+ObjectTemplate.setGearDown 0.3
+ObjectTemplate.setGearRatios 3.5 2.2 1.5 1.1 0.94 
+ObjectTemplate.trackTurnAcceleration 30
+ObjectTemplate.trackTurnSpeed 0.85
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_ZMotor_RotationRpm
+ObjectTemplate.soundFilename "objects/vehicles/land/ustnk_m1a2/sounds/m1a2_tracks.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.63
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0.1/3/0/3/0.003/0.637/0.1/0.673/1.079/0.1/0.995/1.079/0.1/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/2/0.038/0/0/0.32/1/0/
+ObjectTemplate.position -0.391918/5.06292e-007/0.419513
+ObjectTemplate.minDistance 3.5
+ObjectTemplate.halfVolumeDistance 7
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_ZMotor_Idle
+ObjectTemplate.soundFilename "objects/vehicles/land/rutnk_t14/sounds/engine/mono/startup_idle_stop_01.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 0.7
+ObjectTemplate.pitch 1.3
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/3/0/3/0.003861/0.683398/0/0.324324/1.0193/0/0.996139/1.38996/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0/0.714286/0/0.285714/0.714286/0/0.996139/0.517375/0/
+ObjectTemplate.position -0.415014/5.96046e-006/1.37766
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 9
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_ZMotor_Rpm1
+ObjectTemplate.soundFilename "objects/vehicles/land/rutnk_t14/sounds/engine/mono/t90_loaded_rpm.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.91
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/3/0/3/0/0.474903/0/0.332046/0.833977/0/0.996139/1.21622/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0/0/0/0.142857/0.745174/0/0.756757/1/0/
+ObjectTemplate.position -0.519073/5.96046e-006/1.46048
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 9
+
+ObjectTemplate.activeSafe RotationalBundle rutnk_t14_Ldrivewheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 1
+ObjectTemplate.rotateAsAnimatedUVObject rutnk_t14_Lwheel_03
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_LDriveWheel_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_LDriveWheel_RotationRpm
+ObjectTemplate.modifiedByUser "YAK43"
+
+ObjectTemplate.activeSafe RotationalBundle rutnk_t14_Lwheel_00
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 1
+ObjectTemplate.rotateAsAnimatedUVObject rutnk_t14_Lwheel_03
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Lwheel_00_RotationRpm
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.33/0/0
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Lwheel_00_RotationRpm
+ObjectTemplate.modifiedByUser "YAK43"
+
+GeometryTemplate.create BundledMesh rutnk_t14_TLwheel
+ObjectTemplate.create RotationalBundle rutnk_t14_TLwheel
+ObjectTemplate.geometry rutnk_t14_TLwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 1
+ObjectTemplate.rotateAsAnimatedUVObject rutnk_t14_Lwheel_03
+
+GeometryTemplate.create BundledMesh rutnk_t14_TRwheel
+ObjectTemplate.create RotationalBundle rutnk_t14_TRwheel
+ObjectTemplate.geometry rutnk_t14_TRwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject rutnk_t14_Rwheel_03
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Lwheel_01
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Lwheel_01_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TLwheel
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.addTemplate web_trackedSmoke
+rem -------------------------------------
+ObjectTemplate.setStrength 15
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Lwheel_01_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Lwheel_02
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Lwheel_02_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TLwheel
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Lwheel_02_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Lwheel_03
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0.05/0
+ObjectTemplate.animatedUVTranslationSize 16/0
+ObjectTemplate.animatedUVTranslationReverse 0
+ObjectTemplate.animatedUVTranslationIndex 2
+ObjectTemplate.animatedUVRotation 1
+ObjectTemplate.animatedUVRotationRadius 0.3
+ObjectTemplate.animatedUVRotationScale 1/1
+ObjectTemplate.animatedUVRotationIndex 1
+ObjectTemplate.animatedUVRotationReverse 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Lwheel_03_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TLwheel
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition 0.31/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Lwheel_03_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Lwheel_04
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0/0.125
+ObjectTemplate.animatedUVTranslationSize 0/6.8
+ObjectTemplate.animatedUVTranslationReverse 1
+ObjectTemplate.animatedUVTranslationIndex 6
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Lwheel_04_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TLwheel
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Lwheel_04_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Lwheel_05
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Lwheel_05_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TLwheel
+rem -------------------------------------
+ObjectTemplate.setStrength 15
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Lwheel_05_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Lwheel_06
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Lwheel_06_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TLwheel
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Lwheel_06_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Lwheel_07
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Lwheel_07_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TLwheel
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.addTemplate web_trackedSmoke
+rem -------------------------------------
+ObjectTemplate.setStrength 15
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Lwheel_07_Rotation
+
+ObjectTemplate.activeSafe RotationalBundle rutnk_t14_Rdrivewheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject rutnk_t14_Rwheel_03
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_RDriveWheel_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_RDriveWheel_RotationRpm
+
+ObjectTemplate.activeSafe RotationalBundle rutnk_t14_Rwheel_00
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject rutnk_t14_Rwheel_03
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Rwheel_00_RotationRpm
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.33/0/0
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Rwheel_00_RotationRpm
+ObjectTemplate.modifiedByUser "YAK43"
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Rwheel_01
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Rwheel_01_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TRwheel
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.addTemplate web_trackedSmoke
+rem -------------------------------------
+ObjectTemplate.setStrength 15
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Rwheel_01_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Rwheel_02
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_TRwheel_02_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TRwheel
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Rwheel_02_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Rwheel_03
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0.05/0
+ObjectTemplate.animatedUVTranslationSize 16/0
+ObjectTemplate.animatedUVTranslationReverse 1
+ObjectTemplate.animatedUVTranslationIndex 4
+ObjectTemplate.animatedUVRotation 1
+ObjectTemplate.animatedUVRotationRadius 0.3
+ObjectTemplate.animatedUVRotationScale 1/1
+ObjectTemplate.animatedUVRotationIndex 3
+ObjectTemplate.animatedUVRotationReverse 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Rwheel_03_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TRwheel
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.31/0/0
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Rwheel_03_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Rwheel_04
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+ObjectTemplate.animatedUVTranslation 1
+ObjectTemplate.animatedUVTranslationSpeed 0/0
+ObjectTemplate.animatedUVTranslationMax 0/0.125
+ObjectTemplate.animatedUVTranslationSize 0/6.8
+ObjectTemplate.animatedUVTranslationReverse 1
+ObjectTemplate.animatedUVTranslationIndex 5
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Rwheel_04_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TRwheel
+rem -------------------------------------
+ObjectTemplate.setStrength 0
+ObjectTemplate.setDamping 0
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Rwheel_04_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Rwheel_05
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Rwheel_05_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TRwheel
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition -1.36307/-6.25849e-007/-3.45707e-006
+rem -------------------------------------
+ObjectTemplate.setStrength 15
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_RWheel5_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Rwheel_06
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 128
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Rwheel_06_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TRwheel
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.setPosition -0.31/0/0
+ObjectTemplate.addTemplate web_trackedSmoke
+ObjectTemplate.setPosition -1.36307/-6.25849e-007/-3.45707e-006
+rem -------------------------------------
+ObjectTemplate.setStrength 15
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Rwheel_06_Rotation
+
+ObjectTemplate.activeSafe Spring rutnk_t14_Rwheel_07
+ObjectTemplate.modifiedByUser "YAK43"
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_rutnk_t14_Rwheel_07_Rotation
+ObjectTemplate.addTemplate rutnk_t14_TRwheel
+ObjectTemplate.addTemplate web_tracked
+ObjectTemplate.addTemplate web_trackedSmoke
+rem -------------------------------------
+ObjectTemplate.setStrength 15
+ObjectTemplate.setDamping 4
+ObjectTemplate.rotateUV 1
+
+ObjectTemplate.activeSafe Sound S_rutnk_t14_Rwheel_07_Rotation
+ObjectTemplate.modifiedByUser "YAK43"
+
+ObjectTemplate.create EntryPoint rutnk_t14_Entry
+ObjectTemplate.createdInEditor 1
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 3.5

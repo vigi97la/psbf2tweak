@@ -1,0 +1,16 @@
+rem *** Weaponory ***
+
+rem * Bombs *
+weaponTemplate.create AIX_A10b_Bombs
+WeaponTemplate.WeaponFire PIAltFire
+rem WeaponTemplate.WeaponActivate PIMenuSelect3
+weaponTemplate.indirect 1
+weaponTemplate.minRange 30
+weaponTemplate.maxRange 600
+weaponTemplate.setStrength Infantry    40
+weaponTemplate.setStrength LightArmour 5
+weaponTemplate.setStrength HeavyArmour 45
+weaponTemplate.setStrength NavalArmour 15
+weaponTemplate.setStrength Helicopter  1
+weaponTemplate.setStrength Airplane    1
+weaponTemplate.allowedDeviation 90

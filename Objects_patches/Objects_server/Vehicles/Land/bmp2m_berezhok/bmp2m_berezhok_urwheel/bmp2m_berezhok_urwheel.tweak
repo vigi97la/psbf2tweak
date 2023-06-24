@@ -1,0 +1,18 @@
+GeometryTemplate.setMaterialReflectionScale 1 0 0 0.7
+GeometryTemplate.setSpecularStaticGloss 0 0 0 0
+GeometryTemplate.setSpecularStaticGloss 0 0 1 0
+GeometryTemplate.setSpecularStaticGloss 0 0 2 0
+GeometryTemplate.setSpecularStaticGloss 0 0 3 0
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 8
+ObjectTemplate.activeSafe RotationalBundle bmp2m_berezhok_urwheel
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 9
+ObjectTemplate.geometry bmp2m_berezhok_urwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 1
+ObjectTemplate.rotateAsAnimatedUVObject bmp2m_berezhok_RWheel3

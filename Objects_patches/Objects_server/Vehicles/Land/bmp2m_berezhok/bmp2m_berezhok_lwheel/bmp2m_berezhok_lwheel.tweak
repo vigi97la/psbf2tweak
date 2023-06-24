@@ -1,0 +1,21 @@
+GeometryTemplate.setSubGeometryLodDistance 1 0 20
+GeometryTemplate.setSubGeometryLodDistance 1 1 35
+GeometryTemplate.setSubGeometryLodDistance 1 2 90
+GeometryTemplate.setSubGeometryLodDistance 2 0 30
+GeometryTemplate.setSubGeometryLodDistance 2 1 65
+GeometryTemplate.setMaterialReflectionScale 1 0 0 0
+GeometryTemplate.setMaterialReflectionScale 1 0 1 0
+GeometryTemplate.setMaterialReflectionScale 1 0 2 1
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 8
+ObjectTemplate.cullRadiusScale 9
+GeometryTemplate.create BundledMesh bmp2m_berezhok_lwheel
+ObjectTemplate.create RotationalBundle bmp2m_berezhok_lwheel
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.geometry bmp2m_berezhok_lwheel
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 1
+ObjectTemplate.rotateAsAnimatedUVObject bmp2m_berezhok_LWheel3
+

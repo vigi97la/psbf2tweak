@@ -1,0 +1,618 @@
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe PlayerControlObject bushmaster
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.castsDynamicShadow 1
+ObjectTemplate.createComponent Armor
+ObjectTemplate.armor.maxHitPoints 1250
+ObjectTemplate.armor.hitPoints 1250
+ObjectTemplate.armor.defaultMaterial 71
+ObjectTemplate.armor.hpLostWhileUpSideDown 125
+ObjectTemplate.armor.hpLostWhileInWater 100
+ObjectTemplate.armor.hpLostWhileInDeepWater 335
+ObjectTemplate.armor.hpLostWhileCriticalDamage 18
+ObjectTemplate.armor.waterDamageDelay 1
+ObjectTemplate.armor.deepWaterDamageDelay 0
+ObjectTemplate.armor.waterLevel 0.4
+ObjectTemplate.armor.deepWaterLevel 0.7
+ObjectTemplate.armor.explosionForce 10
+ObjectTemplate.armor.explosionForceMod 12
+ObjectTemplate.armor.explosionForceMax 5000
+ObjectTemplate.armor.explosionDamage 300
+ObjectTemplate.armor.explosionRadius 5
+ObjectTemplate.armor.explosionMaterial 101
+ObjectTemplate.armor.wreckExplosionForce 50
+ObjectTemplate.armor.wreckExplosionForceMax 60
+ObjectTemplate.armor.wreckExplosionDamage 50
+ObjectTemplate.armor.wreckExplosionRadius 3
+ObjectTemplate.armor.wreckExplosionMaterial 70
+ObjectTemplate.armor.wreckHitPoints 1000
+ObjectTemplate.armor.timeToStayAsWreck 10
+ObjectTemplate.armor.criticalDamage 101
+ObjectTemplate.armor.hideChildrenOnSpectacularDeath 1
+ObjectTemplate.armor.addArmorEffect 50 e_dstate_land_lightsmoke 0.93/0.63/1.63 0/0/0
+ObjectTemplate.armor.addArmorEffect 25 e_dstate_land_MediumSmoke 0.93/0.63/1.63 0/0/0
+ObjectTemplate.armor.addArmorEffect 10 e_dstate_land_heavysmoke 0.93/0.64/1.63 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_vexp_armoredcar_small 0/0/0 0/0/0
+rem ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_Humvee 0/0.5/-0.5 0/0/0
+ObjectTemplate.armor.addArmorEffectSpectacular 0 e_vexp_armoredcar_spec 0/0/0 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_dstate_static_fire 0/0.5/1.748 0/0/0
+ObjectTemplate.armor.addArmorEffect 0 e_sAmb_wreckfire 0.44/0.148/-1.645 0/0/0
+ObjectTemplate.armor.addArmorEffect -100 e_vexp_armoredcar_2nd 0/0/0 0/0/0
+ObjectTemplate.createComponent Radio
+ObjectTemplate.Radio.spottedMessage vehicle_spotted
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "Bushmaster"
+ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_jeep.tga
+ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Jeep.tga
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 44/19
+ObjectTemplate.vehicleHud.vehicleType 3
+ObjectTemplate.vehicleHud.vehicleIcon Ingame\Vehicles\Icons\Hud\VehicleIcons\vodnic.tga 
+ObjectTemplate.geometry bushmaster
+ObjectTemplate.setCollisionMesh bushmaster
+ObjectTemplate.mapMaterial 0 light_armour 26
+ObjectTemplate.mapMaterial 1 rubber 22
+ObjectTemplate.mapMaterial 2 wood 1017
+ObjectTemplate.mapMaterial 3 glass 1018
+ObjectTemplate.mapMaterial 4 wreck 60
+ObjectTemplate.drag 1
+ObjectTemplate.mass 2000
+ObjectTemplate.gravityModifier 1.5
+ObjectTemplate.floaterMod 0.9
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.aiTemplate usjep_hmmwv
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_Ambient
+ObjectTemplate.addTemplate S_bushmaster_AmbientDamaged
+ObjectTemplate.addTemplate bushmaster_cam
+ObjectTemplate.setPosition 0.590986/0.773266/1.21806
+ObjectTemplate.addTemplate bushmaster_entry
+ObjectTemplate.addTemplate bushmaster_gunner_entry
+ObjectTemplate.setPosition -9.8072e-006/1.84774e-006/1.24574
+ObjectTemplate.addTemplate antenna
+ObjectTemplate.setPosition 1.03236/0.615794/0.0551109
+ObjectTemplate.addTemplate antenna
+ObjectTemplate.setPosition -1.04137/0.613851/-2.19649
+ObjectTemplate.addTemplate Car_horn
+ObjectTemplate.setPosition 0/0.110645/2.30351
+ObjectTemplate.addTemplate bushmaster_pass1
+ObjectTemplate.setPosition 0.584285/1.45/-2.07679
+ObjectTemplate.setRotation 180/0/0
+ObjectTemplate.addTemplate bushmaster_pass2
+ObjectTemplate.setPosition -0.567125/1.45/-2.50998
+ObjectTemplate.setRotation 180/0/0
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation -2/-0.2/0 0/0/0
+ObjectTemplate.altSoldierExitPosition 0/-0.2/-3
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.regulatePitchInput PIMouseLookY
+ObjectTemplate.regulatePitch -0.02/0.05
+ObjectTemplate.regulateRollInput PIYaw
+ObjectTemplate.regulateRoll -0.02/0.2
+ObjectTemplate.seatInformation bushmaster 0.591413/0.72/1.35914 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_driver_A_animSys.inc
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.sprintFactor 1
+ObjectTemplate.listenerObstruction 0.45
+ObjectTemplate.groundContactVolume 1
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.altSoldierExitPosition 0/-0.2/-3
+
+ObjectTemplate.activeSafe Sound S_bushmaster_Ambient
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/usjep_hmmwv/sounds/mono/hmmwv_cockpit.ogg"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 0
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.2
+ObjectTemplate.pitch 1.2
+ObjectTemplate.pan 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/2/0.003/0/0/0.756/1/0/
+
+ObjectTemplate.activeSafe Sound S_bushmaster_AmbientDamaged
+
+ObjectTemplate.activeSafe RotationalBundle bushmaster_astreering_wheel
+ObjectTemplate.setNetworkableInfo BasicInfo
+rem ---BeginComp:Ik ---
+ObjectTemplate.createComponent Ik
+ObjectTemplate.ik.positionLeft -0.156504/-1.3411e-007/-0.0817095
+ObjectTemplate.ik.rotationLeft -106.35/-15.829/-43.7555
+ObjectTemplate.ik.positionRight 0.161415/0.00600094/-0.0786637
+ObjectTemplate.ik.rotationRight -38.2097/43.0936/157.474
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_astreering_wheel_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/0/-75
+ObjectTemplate.setMaxRotation 0/0/75
+ObjectTemplate.setMaxSpeed 0/0/-150
+ObjectTemplate.setAcceleration 0/0/-200
+ObjectTemplate.setInputToRoll PIYaw
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.regulateRoll -0.05/0.1
+
+ObjectTemplate.activeSafe Sound S_bushmaster_astreering_wheel_RotationRpm
+
+ObjectTemplate.activeSafe Bundle bushmaster_Glass
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+
+ObjectTemplate.activeSafe PlayerControlObject bushmaster_gunner
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "Bushmaster"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.vehicleIconPos 36/15
+ObjectTemplate.vehicleHud.useSelectionIcons 0
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.aiTemplate VodnikGunner
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_gunner_Ambient
+ObjectTemplate.addTemplate S_bushmaster_gunner_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.setSoldierExitLocation 1.8/0.1/0 0/0/0
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.regulatePitchInput PIMouseLookY
+ObjectTemplate.regulatePitch 0/0
+ObjectTemplate.regulateRollInput PIYaw
+ObjectTemplate.regulateRoll 0/0
+ObjectTemplate.seatInformation bushmaster_gunner 0/1.32925/0.00746 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_gunturret_B_animSys.inc
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.cockpitSubGeom 1
+ObjectTemplate.allowDucking 1
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+
+ObjectTemplate.activeSafe Sound S_bushmaster_gunner_Ambient
+
+ObjectTemplate.activeSafe Sound S_bushmaster_gunner_AmbientDamaged
+
+ObjectTemplate.activeSafe RotationalBundle bushmaster_turret
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_turret_RotationRpm
+ObjectTemplate.addTemplate bushmaster_DuckCamera
+ObjectTemplate.setPosition -3.08454e-006/0.304939/-0.114845
+ObjectTemplate.setRotation 0/-10/0
+rem -------------------------------------
+ObjectTemplate.setMaxSpeed 90/0/0
+ObjectTemplate.setAcceleration 450/0/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.regulateYaw 0.15/-0.1
+
+ObjectTemplate.activeSafe Sound S_bushmaster_turret_RotationRpm
+
+ObjectTemplate.activeSafe RotationalBundle bushmaster_gunmount
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_gunmount_RotationRpm
+ObjectTemplate.addTemplate HMG_M2HB
+ObjectTemplate.setPosition -0.000196448/0.00188923/0.241061
+ObjectTemplate.addTemplate bushmaster_gunner_Camera
+ObjectTemplate.setPosition -3.96045e-007/0.264595/-0.530755
+ObjectTemplate.addTemplate hmg_m2hb_ammobox
+ObjectTemplate.setPosition -0.174825/-0.0213504/0.170435
+ObjectTemplate.setRotation 180/0/0
+ObjectTemplate.addTemplate hmg_m2hb_ammo
+ObjectTemplate.setPosition -0.0505045/0.0715504/0.170172
+ObjectTemplate.setRotation 90/0/0
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/-45/0
+ObjectTemplate.setMaxRotation 0/18/0
+ObjectTemplate.setMaxSpeed 0/90/0
+ObjectTemplate.setAcceleration 0/450/0
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch 0.15/-0.1
+
+ObjectTemplate.activeSafe Sound S_bushmaster_gunmount_RotationRpm
+
+ObjectTemplate.create Camera bushmaster_gunner_Camera
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_gunner_Camera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -1/-0.5/0
+ObjectTemplate.setMaxRotation 1/0.5/0
+ObjectTemplate.setPivotPosition 0/0/-2
+ObjectTemplate.setMaxSpeed 5/5/0
+ObjectTemplate.setAcceleration 2/1/0
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.cameraShakeSensitivity 0
+ObjectTemplate.bounceLength 0.002
+ObjectTemplate.bounceSensitivity 0.09
+ObjectTemplate.bounceStrength 1
+ObjectTemplate.bounceDamping 15
+ObjectTemplate.followStiffness 6
+ObjectTemplate.chaseDistance 14
+ObjectTemplate.chaseAngle 0.15
+ObjectTemplate.chaseOffset 0/1/7
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.1
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_bushmaster_gunner_Camera_RotationRpm
+
+ObjectTemplate.create Camera bushmaster_DuckCamera
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_DuckCamera_RotationRpm
+rem -------------------------------------
+ObjectTemplate.CameraId 1
+ObjectTemplate.CVMChase 0
+ObjectTemplate.CVMFrontChase 0
+ObjectTemplate.CVMFlyBy 0
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.1
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_bushmaster_DuckCamera_RotationRpm
+
+ObjectTemplate.activeSafe Bundle bushmaster_rear_grill
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+
+ObjectTemplate.activeSafe Engine bushmaster_zMotor
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_zMotor_RotationRpm
+ObjectTemplate.addTemplate S_bushmaster_zMotor_Idle
+ObjectTemplate.addTemplate S_bushmaster_zMotor_Rpm1
+ObjectTemplate.addTemplate S_bushmaster_zMotor_Rpm2
+ObjectTemplate.addTemplate S_bushmaster_zMotor_Load
+ObjectTemplate.addTemplate e_exhaust_small
+ObjectTemplate.setPosition -1.089/1.277/-1.5
+ObjectTemplate.addTemplate e_exhaust_small_startup
+ObjectTemplate.setPosition -1.089/1.277/-1.5
+ObjectTemplate.setRotation 0.212557/30.743/-0.0138375
+rem -------------------------------------
+ObjectTemplate.setMinRotation 0/0/-1
+ObjectTemplate.setMaxRotation 0/0/1
+ObjectTemplate.setMaxSpeed 0/0/10000
+ObjectTemplate.setAcceleration 0/0/10
+ObjectTemplate.setInputToRoll PIThrottle
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.setEngineType c_ETNewCar2
+ObjectTemplate.setTorque 250
+ObjectTemplate.setDifferential 4
+ObjectTemplate.setNumberOfGears 4
+ObjectTemplate.setGearUp 0.85
+ObjectTemplate.setGearDown 0.4
+ObjectTemplate.setGearChangeTime 0.7
+ObjectTemplate.setGearRatios 2.45 1.35 1 0.6 0.6 
+ObjectTemplate.spinWhenNoEngineInAir 1
+ObjectTemplate.newCar2.minRpm 1000
+ObjectTemplate.newCar2.maxRpm 4000
+ObjectTemplate.newCar2.useClutchedTorque 0
+ObjectTemplate.newCar2.wheelInertia 200
+ObjectTemplate.newCar2.engineFeedbackMod 0.6
+ObjectTemplate.newCar2.brakeTorque 5000
+ObjectTemplate.newCar2.engineBrakeTorque 2500
+ObjectTemplate.newCar2.frictionTorque 100
+ObjectTemplate.newCar2.frictionMod 1.5
+ObjectTemplate.newCar2.slopeTorqueMod 1
+ObjectTemplate.newCar2.wheelLongFrictionMod 1
+ObjectTemplate.newCar2.wheelLongDriveFrictionMod 1.4
+ObjectTemplate.newCar2.wheelLongPeakAt 0.1
+ObjectTemplate.newCar2.wheelLongMinDynamicFriction 0.7
+ObjectTemplate.newCar2.wheelLongScale 0.1
+ObjectTemplate.newCar2.wheelLatFrictionMod 3
+ObjectTemplate.newCar2.wheelLatDriveFrictionMod 0.3
+ObjectTemplate.newCar2.wheelLatPeakAt 0.2
+ObjectTemplate.newCar2.wheelLatMinDynamicFriction 0.7
+ObjectTemplate.newCar2.wheelLatScale 0.1
+ObjectTemplate.audio.newStyleAudio 1
+
+ObjectTemplate.activeSafe Sound S_bushmaster_zMotor_RotationRpm
+
+ObjectTemplate.activeSafe Sound S_bushmaster_zMotor_Idle
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/usapc_lav25/sounds/engine/mono/lav_engine_start_and_idle.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 2
+ObjectTemplate.volume 0.6
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0.003861/0.781853/0/0.996139/1.24517/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0/0.683398/0/0.254826/0.683398/0/0.996139/0.19305/0/
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 7
+
+ObjectTemplate.activeSafe Sound S_bushmaster_zMotor_Rpm1
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/usapc_lav25/sounds/engine/mono/lav_engine_high_02.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.6
+ObjectTemplate.pitch 0.5
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0.003861/0.642857/0/0.996139/1.11197/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0/0/0/0.0926641/0.722008/0/0.996139/0.795367/0/
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 7
+
+ObjectTemplate.activeSafe Sound S_bushmaster_zMotor_Rpm2
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/land/usapc_lav25/sounds/engine/mono/lav_engine_high_01.wav"
+ObjectTemplate.loopCount 0
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 0
+ObjectTemplate.volume 0.6
+ObjectTemplate.pitch 1
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.pitchEnvelope 0/1/0/1.5/0/2/0.003861/0.642857/0/0.996139/1.11776/0/
+ObjectTemplate.volumeEnvelope 0/1/0/1/0/3/0.003861/0/0/0.301158/0.683398/0/0.996139/1/0/
+ObjectTemplate.minDistance 4
+ObjectTemplate.halfVolumeDistance 7
+
+ObjectTemplate.activeSafe Sound S_bushmaster_zMotor_Load
+ObjectTemplate.mediumSamples 2147483647
+ObjectTemplate.soundFilename "objects/vehicles/common/sound/gear_shift_01.wav,objects/vehicles/common/sound/gear_shift_01.wav,objects/vehicles/common/sound/gear_shift_02.wav,objects/vehicles/common/sound/gear_shift_03.wav,objects/vehicles/common/sound/gear_shift_04.wav"
+ObjectTemplate.loopCount 1
+ObjectTemplate.is3dSound 1
+ObjectTemplate.stopType 1
+ObjectTemplate.volume 0.85
+ObjectTemplate.pitch 0.85
+ObjectTemplate.reverbLevel 1
+ObjectTemplate.minDistance 2
+ObjectTemplate.halfVolumeDistance 3
+
+ObjectTemplate.activeSafe Spring bushmaster_whl_BL
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_whl_BL_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+rem -------------------------------------
+ObjectTemplate.setStrength 21
+ObjectTemplate.setDamping 6
+
+ObjectTemplate.activeSafe Sound S_bushmaster_whl_BL_Rotation
+
+ObjectTemplate.activeSafe Spring bushmaster_whl_BR
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_whl_BR_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+ObjectTemplate.addTemplate web_wheelBigSmoke
+ObjectTemplate.setPosition -0.878521/-1.07288e-006/2.80142e-005
+rem -------------------------------------
+ObjectTemplate.setStrength 21
+ObjectTemplate.setDamping 6
+
+ObjectTemplate.activeSafe Sound S_bushmaster_whl_BR_Rotation
+
+ObjectTemplate.activeSafe RotationalBundle bushmaster_whl_Nav_FL
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_whl_Nav_FL_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -30/0/0
+ObjectTemplate.setMaxRotation 30/0/0
+ObjectTemplate.setMaxSpeed 1/0/0
+ObjectTemplate.setAcceleration 150/0/0
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.snapToZeroOnNoInput 1
+
+ObjectTemplate.activeSafe Sound S_bushmaster_whl_Nav_FL_RotationRpm
+
+ObjectTemplate.activeSafe Spring bushmaster_whl_FL
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_whl_FL_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+rem -------------------------------------
+ObjectTemplate.setStrength 21
+ObjectTemplate.setDamping 6
+
+ObjectTemplate.activeSafe Sound S_bushmaster_whl_FL_Rotation
+
+ObjectTemplate.activeSafe RotationalBundle bushmaster_whl_Nav_FR
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_whl_Nav_FR_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -30/0/0
+ObjectTemplate.setMaxRotation 30/0/0
+ObjectTemplate.setMaxSpeed 1/0/0
+ObjectTemplate.setAcceleration 150/0/0
+ObjectTemplate.setInputToYaw PIYaw
+ObjectTemplate.setAutomaticReset 1
+ObjectTemplate.snapToZeroOnNoInput 1
+
+ObjectTemplate.activeSafe Sound S_bushmaster_whl_Nav_FR_RotationRpm
+
+ObjectTemplate.activeSafe Spring bushmaster_whl_FR
+ObjectTemplate.setNetworkableInfo SpringInfo
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.grip 8
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_whl_FR_Rotation
+ObjectTemplate.addTemplate web_wheelBig
+rem -------------------------------------
+ObjectTemplate.setStrength 21
+ObjectTemplate.setDamping 6
+
+ObjectTemplate.activeSafe Sound S_bushmaster_whl_FR_Rotation
+
+ObjectTemplate.create Camera bushmaster_cam
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_cam_RotationRpm
+rem -------------------------------------
+ObjectTemplate.setMinRotation -130/-20/0
+ObjectTemplate.setMaxRotation 140/20/0
+ObjectTemplate.setMaxSpeed 90/90/0
+ObjectTemplate.setAcceleration 5000/5000/0.1
+ObjectTemplate.setInputToYaw PIMouseLookX
+ObjectTemplate.setInputToPitch PIMouseLookY
+ObjectTemplate.regulatePitch 0.1/-0.1
+ObjectTemplate.restoreRotationOnExit 1
+ObjectTemplate.CVMChase 0
+ObjectTemplate.CVMFrontChase 0
+ObjectTemplate.CVMFlyBy 0
+ObjectTemplate.cameraShakeStartSpeed 20
+ObjectTemplate.cameraShakeMaxSpeed 25
+ObjectTemplate.bounceLength 0.1
+ObjectTemplate.bounceStrength 15
+ObjectTemplate.bounceDamping 15
+ObjectTemplate.followStiffness 6
+ObjectTemplate.chaseDistance 15
+ObjectTemplate.chaseAngle 0.15
+ObjectTemplate.chaseOffset 0/1/6
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.worldFOV 1.1
+ObjectTemplate.insideFOV 1.1
+ObjectTemplate.allowInsideDynamicLights 1
+ObjectTemplate.allowInsideStaticSun 0
+ObjectTemplate.insideStaticSunDirection 0/-1/0
+ObjectTemplate.insideStaticSunColor 1/1/1
+ObjectTemplate.insideStaticSunDamageColor 1/1/1
+ObjectTemplate.insideDamageFrequency 3
+ObjectTemplate.insideDamageThreshold 0.1
+ObjectTemplate.insideStaticSunAmbientColor 0.7/0.7/0.7
+
+ObjectTemplate.activeSafe Sound S_bushmaster_cam_RotationRpm
+
+ObjectTemplate.create EntryPoint bushmaster_entry
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 3
+
+ObjectTemplate.create EntryPoint bushmaster_gunner_entry
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.setEntryRadius 3
+
+ObjectTemplate.create PlayerControlObject bushmaster_pass1
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "Bushmaster"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.useChildHud 1
+ObjectTemplate.vehicleHud.vehicleIconPos 19/20
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.aiTemplate VodnikPassenger
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_pass1_Ambient
+ObjectTemplate.addTemplate S_bushmaster_pass1_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation bushmaster_pass1 0/0/0 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_gunTurret_C_animSys.inc
+ObjectTemplate.seatLeftRotationLimit -360
+ObjectTemplate.seatRightRotationLimit 360
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_bushmaster_pass1_Ambient
+
+ObjectTemplate.activeSafe Sound S_bushmaster_pass1_AmbientDamaged
+
+ObjectTemplate.create PlayerControlObject bushmaster_pass2
+ObjectTemplate.setNetworkableInfo BasicInfo
+ObjectTemplate.createComponent VehicleHud
+ObjectTemplate.vehicleHud.hudName "Bushmaster"
+ObjectTemplate.vehicleHud.miniMapIconLeaderSize Medium
+ObjectTemplate.vehicleHud.useChildHud 1
+ObjectTemplate.vehicleHud.vehicleIconPos 11/7
+ObjectTemplate.createComponent WarningHud
+ObjectTemplate.WarningHud.firstWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.secondWarningSound HUD_Laser_Track_Warning
+ObjectTemplate.WarningHud.warningIcon Ingame\GeneralIcons\Action_Icons\large_laserlockicon.tga
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.aiTemplate VodnikPassenger
+rem -------------------------------------
+ObjectTemplate.addTemplate S_bushmaster_pass2_Ambient
+ObjectTemplate.addTemplate S_bushmaster_pass2_AmbientDamaged
+rem -------------------------------------
+ObjectTemplate.exitSpeedMod 0.5
+ObjectTemplate.seatInformation bushmaster_pass2 0/0/0 0/0/0
+ObjectTemplate.seatAnimationSystem Objects/Vehicles/Common/Animations/3p_gunTurret_C_animSys.inc
+ObjectTemplate.seatLeftRotationLimit -360
+ObjectTemplate.seatRightRotationLimit 360
+ObjectTemplate.soundFilter vehicle
+ObjectTemplate.autoUseAbility 1
+ObjectTemplate.hasRestrictedExit 1
+ObjectTemplate.isOpenVehicle 1
+
+ObjectTemplate.activeSafe Sound S_bushmaster_pass2_Ambient
+
+ObjectTemplate.activeSafe Sound S_bushmaster_pass2_AmbientDamaged
+

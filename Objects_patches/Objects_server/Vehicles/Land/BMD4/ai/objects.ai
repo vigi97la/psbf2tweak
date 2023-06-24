@@ -1,0 +1,382 @@
+rem *** Plugins ***
+aiTemplatePlugIn.create Armament bmd4Arms
+aiTemplatePlugIn.setIsAntiAircraft 2
+
+aiTemplatePlugIn.create Mobile bmd4Mobile
+aiTemplatePlugIn.setPathfindingMap Vehicle
+aiTemplatePlugIn.maxSpeed 20.0
+aiTemplatePlugIn.turnRadius 5.0
+aiTemplatePlugIn.coverSearchRadius 50.0
+
+aiTemplatePlugIn.create Physical bmd4Physical
+aiTemplatePlugIn.setStrType HeavyArmour
+
+aiTemplatePlugIn.create Unit bmd4Unit
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 0
+aiTemplatePlugIn.equipmentTypeName ArmedCar
+aiTemplatePlugIn.cullDistance 250
+
+aiTemplatePlugIn.create ControlInfo bmd4Ctrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.proportionalConstant	   -7
+aiTemplatePlugIn.derivativeConstant	   -1
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 1.0
+aiTemplatePlugIn.rollScale                  1.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -360/-20/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 360/7/0
+
+rem *** AITemplate ***
+aiTemplate.create bmd4
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.addType ITMobile
+aiTemplate.addType ITHasWreck
+aiTemplate.degeneration 10
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 20
+aiTemplate.commonKnowledge 0
+aiTemplate.addPlugIn bmd4Arms
+aiTemplate.addPlugIn bmd4Mobile
+aiTemplate.addPlugIn bmd4Physical
+aiTemplate.addPlugIn bmd4Ctrl
+aiTemplate.addPlugIn bmd4Unit
+
+
+rem  *** The turret mounted MG
+
+rem *** Plugins ***
+aiTemplatePlugIn.create Armament bmd4TopMgArms
+aiTemplatePlugIn.setIsAntiAircraft 1
+
+aiTemplatePlugIn.create Unit bmd4TopMgUnit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+aiTemplatePlugIn.setSelectKey PIPositionSelect2
+aiTemplatePlugIn.setHasExposedSoldier 1
+
+aiTemplatePlugIn.create ControlInfo bmd4TopMgCtrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+rem aiTemplatePlugIn.pitchSensitivity           0.021817
+rem aiTemplatePlugIn.rollSensitivity           -0.021817
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+rem aiTemplatePlugIn.lookVerticalSensitivity    0.021817
+rem aiTemplatePlugIn.lookHorizontalSensitivity -0.021817
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.proportionalConstant	   -4
+aiTemplatePlugIn.derivativeConstant	   -1  
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 2.0
+aiTemplatePlugIn.rollScale                  2.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -360/-30/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 360/15/0
+
+
+rem *** AITemplate ***
+aiTemplate.create bmd4_TopMG
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.degeneration 15
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 7
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn bmd4TopMgArms
+aiTemplate.addPlugIn bmd4TopMgUnit
+aiTemplate.addPlugIn bmd4TopMgCtrl
+
+
+
+rem ******************************************************************
+rem ******************************************************************
+
+rem *** Plugins ***
+
+aiTemplatePlugIn.create Armament bmd4Passenger1Arms
+
+aiTemplatePlugIn.create Unit bmd4Passenger1Unit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+
+aiTemplatePlugIn.create ControlInfo bmd4Passenger1Ctrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+rem aiTemplatePlugIn.pitchSensitivity           0.021817
+rem aiTemplatePlugIn.rollSensitivity           -0.021817
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+rem aiTemplatePlugIn.lookVerticalSensitivity    0.021817
+rem aiTemplatePlugIn.lookHorizontalSensitivity -0.021817
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.proportionalConstant	   -7
+aiTemplatePlugIn.derivativeConstant	   -1
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 5.0
+aiTemplatePlugIn.rollScale                  5.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeDofRotationOffsetDeg 270
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -35/-25/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 35/25/0
+
+rem *** AITemplate ***
+aiTemplate.create bmd4Passenger1
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.degeneration 10
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 8
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn bmd4Passenger1Arms
+aiTemplate.addPlugIn bmd4Passenger1Unit
+aiTemplate.addPlugIn bmd4Passenger1Ctrl
+
+
+rem ******************************************************************
+rem ******************************************************************
+
+rem *** Plugins ***
+aiTemplatePlugIn.create Armament bmd4Passenger2Arms
+
+aiTemplatePlugIn.create Unit bmd4Passenger2Unit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+
+aiTemplatePlugIn.create ControlInfo bmd4Passenger2Ctrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+rem aiTemplatePlugIn.pitchSensitivity           0.021817
+rem aiTemplatePlugIn.rollSensitivity           -0.021817
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+rem aiTemplatePlugIn.lookVerticalSensitivity    0.021817
+rem aiTemplatePlugIn.lookHorizontalSensitivity -0.021817
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.proportionalConstant	   -7
+aiTemplatePlugIn.derivativeConstant	   -1
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 5.0
+aiTemplatePlugIn.rollScale                  5.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeDofRotationOffsetDeg 90
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -35/-25/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 35/25/0
+
+rem *** AITemplate ***
+aiTemplate.create bmd4Passenger2
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.degeneration 10
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 8
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn bmd4Passenger2Arms
+aiTemplate.addPlugIn bmd4Passenger2Unit
+aiTemplate.addPlugIn bmd4Passenger2Ctrl
+
+
+rem ******************************************************************
+rem ******************************************************************
+
+rem *** Plugins ***
+
+aiTemplatePlugIn.create Armament bmd4Passenger3Arms
+
+aiTemplatePlugIn.create Unit bmd4Passenger3Unit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+
+aiTemplatePlugIn.create ControlInfo bmd4Passenger3Ctrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+rem aiTemplatePlugIn.pitchSensitivity           0.021817
+rem aiTemplatePlugIn.rollSensitivity           -0.021817
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+rem aiTemplatePlugIn.lookVerticalSensitivity    0.021817
+rem aiTemplatePlugIn.lookHorizontalSensitivity -0.021817
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.proportionalConstant	   -7
+aiTemplatePlugIn.derivativeConstant	   -1
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 5.0
+aiTemplatePlugIn.rollScale                  5.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -35/-25/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 35/25/0
+
+rem *** AITemplate ***
+aiTemplate.create bmd4Passenger3
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.degeneration 10
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 8
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn bmd4Passenger3Arms
+aiTemplate.addPlugIn bmd4Passenger3Unit
+aiTemplate.addPlugIn bmd4Passenger3Ctrl
+
+
+rem ******************************************************************
+rem ******************************************************************
+
+rem *** Plugins ***
+
+aiTemplatePlugIn.create Armament bmd4Passenger4Arms
+
+aiTemplatePlugIn.create Unit bmd4Passenger4Unit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+
+aiTemplatePlugIn.create ControlInfo bmd4Passenger4Ctrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+rem aiTemplatePlugIn.pitchSensitivity           0.021817
+rem aiTemplatePlugIn.rollSensitivity           -0.021817
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+rem aiTemplatePlugIn.lookVerticalSensitivity    0.021817
+rem aiTemplatePlugIn.lookHorizontalSensitivity -0.021817
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.proportionalConstant	   -7
+aiTemplatePlugIn.derivativeConstant	   -1
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 5.0
+aiTemplatePlugIn.rollScale                  5.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -35/-25/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 35/25/0
+
+rem *** AITemplate ***
+aiTemplate.create bmd4Passenger4
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.degeneration 10
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 8
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn bmd4Passenger4Arms
+aiTemplate.addPlugIn bmd4Passenger4Unit
+aiTemplate.addPlugIn bmd4Passenger4Ctrl
+
+rem ******************************************************************
+rem ******************************************************************

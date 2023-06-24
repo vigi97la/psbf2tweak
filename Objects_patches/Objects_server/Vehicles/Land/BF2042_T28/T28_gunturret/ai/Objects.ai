@@ -1,0 +1,54 @@
+rem *** Plugins ***
+aiTemplatePlugIn.create Armament EMZPJ_BF3T90_GUNTURRET_Gunner_Armament
+aiTemplatePlugIn.setIsAntiAircraft 1
+
+aiTemplatePlugIn.create Unit EMZPJ_BF3T90_GUNTURRET_Gunner_Unit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+aiTemplatePlugIn.SelectKey PIMenuSelect2
+
+aiTemplatePlugIn.create ControlInfo EMZPJ_BF3T90_GUNTURRET_Gunner_ControlInfo
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity -3.0
+aiTemplatePlugIn.pitchSensitivity    -1.0
+aiTemplatePlugIn.rollSensitivity     -1.3
+aiTemplatePlugIn.yawSensitivity       0.3
+aiTemplatePlugIn.throttleLookAhead    1.0
+aiTemplatePlugIn.pitchLookAhead       1.2
+aiTemplatePlugIn.rollLookAhead        1.5
+aiTemplatePlugIn.yawLookAhead         0.3
+aiTemplatePlugIn.throttleScale        1.0
+aiTemplatePlugIn.proportionalConstant -5
+aiTemplatePlugIn.derivativeConstant   -1
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale           0.0010
+aiTemplatePlugIn.rollScale            0.0750
+aiTemplatePlugIn.yawScale             0.0750
+rem *** CHECK NONAI OBJECT.CON FOR THESE VALUES
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -100/-10/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 100/60/0
+
+rem *** AITemplate ***
+aiTemplate.create EMZPJ_BF3T90_GUNTURRET_Gunner
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITAir
+aiTemplate.addType ITHelicopter
+aiTemplate.degeneration 5
+aiTemplate.allowedTimeDiff 0.5
+aiTemplate.basicTemp 7
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn EMZPJ_BF3T90_GUNTURRET_Gunner_Armament
+aiTemplate.addPlugIn EMZPJ_BF3T90_GUNTURRET_Gunner_Unit
+aiTemplate.addPlugIn EMZPJ_BF3T90_GUNTURRET_Gunner_ControlInfo
+
+
+
+

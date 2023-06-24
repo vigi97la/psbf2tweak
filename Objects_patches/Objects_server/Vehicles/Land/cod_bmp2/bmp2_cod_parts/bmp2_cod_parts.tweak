@@ -1,0 +1,18 @@
+GeometryTemplate.setMaterialReflectionScale 1 0 0 0.7
+GeometryTemplate.setSpecularStaticGloss 0 0 0 0
+GeometryTemplate.setSpecularStaticGloss 0 0 1 0
+GeometryTemplate.setSpecularStaticGloss 0 0 2 0
+GeometryTemplate.setSpecularStaticGloss 0 0 3 0
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe SimpleObject bmp2_cod_parts
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 10
+ObjectTemplate.geometry bmp2_cod_parts
+ObjectTemplate.setCollisionMesh bmp2_cod_parts
+ObjectTemplate.mapMaterial 0 Armor 26
+ObjectTemplate.mapMaterial 1 metal_plate_thin 29
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh

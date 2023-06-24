@@ -1,0 +1,19 @@
+rem *** Generated with Bf2Editor.exe [created: 2009/9/30 16:1]
+GeometryTemplate.setMaterialReflectionScale 1 0 0 0.7
+GeometryTemplate.setSpecularStaticGloss 0 0 0 0
+GeometryTemplate.setSpecularStaticGloss 0 0 1 0
+GeometryTemplate.setSpecularStaticGloss 0 0 2 0
+GeometryTemplate.setSpecularStaticGloss 0 0 3 0
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe SimpleObject shapetnkf1
+ObjectTemplate.creator WIZARDS:Guedoe
+ObjectTemplate.modifiedByUser "Guedoe"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 20
+ObjectTemplate.geometry shapetnkf1
+ObjectTemplate.mapMaterial 0 armor_4_tank_sides 29
+ObjectTemplate.hasMobilePhysics 0
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+

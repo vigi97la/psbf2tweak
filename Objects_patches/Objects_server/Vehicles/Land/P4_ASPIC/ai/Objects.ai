@@ -1,0 +1,278 @@
+rem *** Plugins ***
+aiTemplatePlugIn.create Mobile P4_aspicMobile
+aiTemplatePlugIn.setPathfindingMap Vehicle
+aiTemplatePlugIn.maxSpeed 25.0
+aiTemplatePlugIn.turnRadius 5.0
+aiTemplatePlugIn.coverSearchRadius 50.0
+
+aiTemplatePlugIn.create Physical P4_aspicPhysical
+aiTemplatePlugIn.setStrType LightArmour
+
+aiTemplatePlugIn.create Cover P4_aspicCover
+aiTemplatePlugIn.coverValue 2.0
+
+aiTemplatePlugIn.create Unit P4_aspicUnit
+aiTemplatePlugIn.setSelectKey PIPositionSelect1
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 0
+aiTemplatePlugIn.equipmentTypeName Car
+aiTemplatePlugIn.setHasExposedSoldier 1
+aiTemplatePlugIn.cullDistance 200
+
+aiTemplatePlugIn.create ControlInfo P4_aspicCtrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+rem aiTemplatePlugIn.pitchSensitivity           0.021817
+rem aiTemplatePlugIn.rollSensitivity           -0.021817
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+rem aiTemplatePlugIn.lookVerticalSensitivity    0.021817
+rem aiTemplatePlugIn.lookHorizontalSensitivity -0.021817
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 1.0
+aiTemplatePlugIn.rollScale                  1.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -120/-20/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 120/20/0
+
+rem *** AITemplate ***
+aiTemplate.create P4_aspic
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.addType ITMobile
+aiTemplate.addType ITHasWreck
+aiTemplate.addType ITHasCarHorn
+aiTemplate.degeneration 10
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 7
+aiTemplate.commonKnowledge 0
+aiTemplate.addPlugIn P4_aspicMobile
+aiTemplate.addPlugIn P4_aspicPhysical
+aiTemplate.addPlugIn P4_aspicCover
+aiTemplate.addPlugIn P4_aspicCtrl
+aiTemplate.addPlugIn P4_aspicUnit
+
+
+rem ******************************************************************
+rem ******************************************************************
+
+rem *** Plugins ***
+
+beginrem
+aiTemplatePlugIn.create Unit P4_aspicPassengerUnit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+aiTemplatePlugIn.setHasExposedSoldier 1
+
+aiTemplatePlugIn.create ControlInfo P4_aspicPassengerCtrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+rem aiTemplatePlugIn.pitchSensitivity           0.021817
+rem aiTemplatePlugIn.rollSensitivity           -0.021817
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+rem aiTemplatePlugIn.lookVerticalSensitivity    0.021817
+rem aiTemplatePlugIn.lookHorizontalSensitivity -0.021817
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.proportionalConstant	   -7
+aiTemplatePlugIn.derivativeConstant	   -1
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 5.0
+aiTemplatePlugIn.rollScale                  5.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -110/-40/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 110/10/0
+
+rem *** AITemplate ***
+aiTemplate.create P4_aspicPassenger
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.degeneration 10
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 6
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn P4_aspicPassengerUnit
+aiTemplate.addPlugIn P4_aspicPassengerCtrl
+
+aiTemplatePlugIn.create Unit P4_aspicRearPassengerUnit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+aiTemplatePlugIn.setHasExposedSoldier 1
+
+rem *** AITemplate ***
+aiTemplate.create P4_aspicRearPassenger
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.degeneration 10
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 6
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn P4_aspicRearPassengerUnit
+aiTemplate.addPlugIn P4_aspicPassengerCtrl
+endrem
+
+
+rem *** Plugins ***
+aiTemplatePlugIn.create Armament P4_aspicTopMgArms
+aiTemplatePlugIn.setIsAntiAircraft 1
+
+aiTemplatePlugIn.create Unit P4_aspicTopMgUnit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+aiTemplatePlugIn.setHasExposedSoldier 1
+
+aiTemplatePlugIn.create ControlInfo P4_aspicTopMgCtrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+rem aiTemplatePlugIn.pitchSensitivity           0.021817
+rem aiTemplatePlugIn.rollSensitivity           -0.021817
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+rem aiTemplatePlugIn.lookVerticalSensitivity    0.021817
+rem aiTemplatePlugIn.lookHorizontalSensitivity -0.021817
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.proportionalConstant	   -7
+aiTemplatePlugIn.derivativeConstant	   -1
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 5.0
+aiTemplatePlugIn.rollScale                  5.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -360/-35/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 360/20/0
+
+
+rem *** AITemplate ***
+aiTemplate.create P4_aspicGunner
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.degeneration 15
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 6
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn P4_aspicTopMgArms
+aiTemplate.addPlugIn P4_aspicTopMgUnit
+aiTemplate.addPlugIn P4_aspicTopMgCtrl
+
+
+rem ******************************************************************
+
+rem *** Plugins ***
+aiTemplatePlugIn.create Armament P4_aspicFrontGunArms
+
+aiTemplatePlugIn.create Unit P4_aspicFrontGunUnit
+aiTemplatePlugIn.equipmentTypeName Fixed
+aiTemplatePlugIn.setStrategicStrength 0 1
+aiTemplatePlugIn.setStrategicStrength 1 1
+aiTemplatePlugIn.setHasExposedSoldier 1
+
+aiTemplatePlugIn.create ControlInfo P4_aspicFrontGunCtrl
+aiTemplatePlugIn.driveTurnControl           PIYaw
+aiTemplatePlugIn.driveThrottleControl       PIThrottle
+aiTemplatePlugIn.aimHorizontalControl       PIMouseLookX
+aiTemplatePlugIn.aimVerticalControl         PIMouseLookY
+aiTemplatePlugIn.lookHorizontalControl      PIMouseLookX
+aiTemplatePlugIn.lookVerticalControl        PIMouseLookY
+aiTemplatePlugIn.throttleSensitivity       -1.0
+rem aiTemplatePlugIn.pitchSensitivity           0.021817
+rem aiTemplatePlugIn.rollSensitivity           -0.021817
+aiTemplatePlugIn.pitchSensitivity           0.21817
+aiTemplatePlugIn.rollSensitivity           -0.21817
+aiTemplatePlugIn.yawSensitivity            -2.5
+rem aiTemplatePlugIn.lookVerticalSensitivity    0.021817
+rem aiTemplatePlugIn.lookHorizontalSensitivity -0.021817
+aiTemplatePlugIn.lookVerticalSensitivity    0.21817
+aiTemplatePlugIn.lookHorizontalSensitivity -0.21817
+aiTemplatePlugIn.proportionalConstant	   -4
+aiTemplatePlugIn.derivativeConstant	   -1
+aiTemplatePlugIn.throttleLookAhead          1.0
+aiTemplatePlugIn.pitchLookAhead             1.0
+aiTemplatePlugIn.rollLookAhead              1.0
+aiTemplatePlugIn.yawLookAhead               1.0
+aiTemplatePlugIn.lookVerticalLookAhead      1.0
+aiTemplatePlugIn.lookHorizontalLookAhead    1.0
+aiTemplatePlugIn.throttleScale              1.0
+rem *** Angle in radians ***
+aiTemplatePlugIn.pitchScale                 5.0
+aiTemplatePlugIn.rollScale                  5.0
+aiTemplatePlugIn.yawScale                   0.0020
+aiTemplatePlugIn.lookVerticalScale          1.0
+aiTemplatePlugIn.lookHorizontalScale        1.0
+aiTemplatePlugIn.setCameraRelativeMinRotationDeg -35/-5/0
+aiTemplatePlugIn.setCameraRelativeMaxRotationDeg 35/30/0
+
+
+rem *** AITemplate ***
+aiTemplate.create P4_aspicFrontGunner
+aiTemplate.addType ITUnit
+aiTemplate.addType ITBiological
+aiTemplate.addType ITGround
+aiTemplate.degeneration 15
+aiTemplate.allowedTimeDiff 2
+aiTemplate.basicTemp 5
+aiTemplate.commonKnowledge 0
+aiTemplate.secondary 1
+aiTemplate.addPlugIn P4_aspicFrontGunArms
+aiTemplate.addPlugIn P4_aspicFrontGunUnit
+aiTemplate.addPlugIn P4_aspicFrontGunCtrl
+
+
+rem ******************************************************************
+rem ******************************************************************

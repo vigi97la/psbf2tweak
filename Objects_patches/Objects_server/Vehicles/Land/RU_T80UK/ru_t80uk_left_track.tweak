@@ -1,0 +1,24 @@
+rem *** Generated with Bf2Editor.exe [created: 2015/9/26 16:54]
+GeometryTemplate.compressVertexData 1
+GeometryTemplate.maxTextureRepeat 16
+ObjectTemplate.activeSafe RotationalBundle RU_T80UK_left_track
+ObjectTemplate.creator FENG:CH
+ObjectTemplate.modifiedByUser "FENG"
+ObjectTemplate.saveInSeparateFile 1
+ObjectTemplate.cullRadiusScale 20
+ObjectTemplate.geometry RU_T80UK_left_track
+ObjectTemplate.setCollisionMesh RU_T80UK_left_track
+ObjectTemplate.mapMaterial 0 track 32
+ObjectTemplate.floaterMod 0
+ObjectTemplate.hasMobilePhysics 1
+ObjectTemplate.hasCollisionPhysics 1
+ObjectTemplate.physicsType Mesh
+ObjectTemplate.rotateAsAnimatedUV 1
+ObjectTemplate.rotateAsAnimatedUVReverse 0
+ObjectTemplate.rotateAsAnimatedUVObject RU_T80UK_L3
+rem -------------------------------------
+ObjectTemplate.addTemplate S_RU_T80UK_left_track_RotationRpm
+rem -------------------------------------
+
+ObjectTemplate.activeSafe Sound S_RU_T80UK_left_track_RotationRpm
+ObjectTemplate.modifiedByUser "FENG"
