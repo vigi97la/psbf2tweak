@@ -13,11 +13,19 @@ $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
 #params $gameMode=sp1,sp2,sp3,gpm_coop,gpm_cq, $mapSize=16,32,64,128...
 
-function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTeam1="Spetz",$forcedTeam2="EU",[bool]$bEnforceVehicleType=$true,[bool]$bEnforceCompatibleTeams=$true,[bool]$bEnforcePreferredTeams=$false,[bool]$bEnforceSizeCategory=$false,[bool]$bEnforceAmphibious=$true,[bool]$bEnforceFloating=$true,[bool]$bEnforceFlying=$true,[bool]$bEnforceVTOL=$true,[bool]$bEnforceNeedWater=$true,[bool]$bEnforceNeedAirfield=$true,[bool]$bEnforceNeedLargeAirfield=$true,[bool]$bEnforceHeavilyArmored=$false,[bool]$bEnforceHeavilyArmed=$false,[bool]$bEnforceHasManyPassengers=$false,[bool]$bEnforceCanBeAirDropped=$false,[bool]$bEnforceCivilian=$true,[bool]$bRemoveIncompatible=$false,[bool]$bRandomizeTeam1Vehicles=$true,[bool]$bRandomizeTeam2Vehicles=$true,[bool]$bUseAutoBackup=$true) {
+function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTeam1="Spetz",$forcedTeam2="EU",[bool]$bEnforceVehicleType=$true,[bool]$bEnforceCompatibleTeams=$true,[bool]$bEnforcePreferredTeams=$false,[bool]$bEnforceSizeCategory=$false,[bool]$bEnforceAmphibious=$true,[bool]$bEnforceFloating=$true,[bool]$bEnforceFlying=$true,[bool]$bEnforceVTOL=$true,[bool]$bEnforceNeedWater=$true,[bool]$bEnforceNeedAirfield=$true,[bool]$bEnforceNeedLargeAirfield=$true,[bool]$bEnforceHeavilyArmored=$false,[bool]$bEnforceHeavilyArmed=$false,[bool]$bEnforceHasManyPassengers=$false,[bool]$bEnforceCanBeAirDropped=$false,[bool]$bEnforceCivilian=$true,[bool]$bRemoveIncompatible=$false,[bool]$bUseObjectSpawnerExclusionList=$false,[bool]$bShowObjectSpawner=$false,[bool]$bRandomizeTeam1Vehicles=$true,[bool]$bRandomizeTeam2Vehicles=$true,[bool]$bUseAutoBackup=$true) {
 
 	#$knownTeams="EU","Spetz"
 
 	$db=Import-Csv -Path "$scriptPath\vehicles_db.csv" -Delimiter ";"
+
+	If ($bUseObjectSpawnerExclusionList) {
+		$oselfile="$scriptPath\ObjectSpawnerExclusionList.txt"
+		If (-not (Test-Path -Path $oselfile)) {
+			Write-Error "Could not find $oselfile"
+			Return
+		}
+	}
 
 	If (-not (Test-Path -Path "$levelFolder\server.zip")) {
 		Write-Error "Could not find $levelFolder\server.zip"
@@ -45,6 +53,7 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 		Return
 	}
 
+	$bObjectSpawnerExcluded=$false
 	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
 	$regexpr="^\s*ObjectTemplate.setObjectTemplate\s+([1-2])\s+(\S+)\s*"
 	$sr=[System.IO.StreamReader]$file
@@ -53,6 +62,25 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 		$line=$sr.ReadLine()
 		$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		if ($m.Success) {
+			$sw.WriteLine($line)
+			Continue
+		}
+		$m=[regex]::Match($line, "^\s*ObjectTemplate.create\s+ObjectSpawner\s+(\S+)\s*")
+		if ($m.Groups.Count -eq 2) {
+			$objectSpawner=$m.Groups[1].value
+			$bObjectSpawnerExcluded=$false
+			if ($bUseObjectSpawnerExclusionList) {
+				$oselsr=[System.IO.StreamReader]$oselfile
+				while (($null -ne $oselsr) -and (-not $oselsr.EndOfStream)) {
+					$oselline=$oselsr.ReadLine()
+					$m=[regex]::Match($objectSpawner, [Regex]::Escape($oselline))
+					if ($m.Success) {
+						$bObjectSpawnerExcluded=$true
+						break
+					}
+				}
+				$oselsr.close()
+			}
 			$sw.WriteLine($line)
 			Continue
 		}
@@ -66,6 +94,12 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 		#"$teamNumber, $vehicle"
 
 		$newVehicle=$vehicle
+
+		if ($bUseObjectSpawnerExclusionList -and $bObjectSpawnerExcluded) {
+			Write-Warning "$vehicle (team $teamNumber, $objectSpawner) has been explicitely excluded in ObjectSpawnerExclusionList.txt"
+			$sw.WriteLine($line)
+			Continue
+		}
 
 		if ((($teamNumber -eq 1) -and (!$bRandomizeTeam1Vehicles)) -or (($teamNumber -eq 2) -and (!$bRandomizeTeam2Vehicles))) {
 			$sw.WriteLine($line)
@@ -111,21 +145,26 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 				}
 				$newVehicle=$compatibleVehicles[$i_best].vehicleName
 
-				"$teamNumber, $vehicle -> $newVehicle"
+				if ($bShowObjectSpawner) {
+					Write-Output "$teamNumber, $vehicle -> $newVehicle ($objectSpawner)"
+				}
+				else {
+					Write-Output "$teamNumber, $vehicle -> $newVehicle"
+				}
 			}
 			else {
 				if ($bRemoveIncompatible) {
-					Write-Warning "Removed $vehicle (team $teamNumber): could not find a compatible vehicle, please check vehicles_db.csv"
+					Write-Warning "Removed $vehicle (team $teamNumber, $objectSpawner): could not find a compatible vehicle, please check vehicles_db.csv"
 					Continue
 				}
 				else {
-					Write-Warning "Could not find a vehicle compatible with $vehicle (team $teamNumber), please check vehicles_db.csv"
+					Write-Warning "Could not find a vehicle compatible with $vehicle (team $teamNumber, $objectSpawner), please check vehicles_db.csv"
 				}
 			}
 		}
 		else {
 			# Should try automatically to determine from name (tank: tank,tnk,mbt; Apc,amv,ifv; civilian,civ;jeep,jep;car;heli,the,ahe,che,the;plane,jet,air;flag: ru;us;ch;mec;eu)...?
-			Write-Warning "Could not find $vehicle (team $teamNumber), please check vehicles_db.csv"
+			Write-Warning "Could not find $vehicle (team $teamNumber, $objectSpawner), please check vehicles_db.csv"
 		}
 		$sw.WriteLine("ObjectTemplate.setObjectTemplate $teamNumber $newVehicle")
 	}
