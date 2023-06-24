@@ -2,6 +2,17 @@
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
+function ReadConFile($file) {
+	$content=""
+	$sr=[System.IO.StreamReader]$file
+	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+		$line=$sr.ReadLine()
+		$content+=$line+"`r`n"
+	}
+	$sr.close()
+	return $content
+}
+
 function ReadConFileAndStripRem($file) {
 	$content=""
 	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
@@ -35,61 +46,84 @@ function ReadConFileAndStripRem($file) {
 }
 
 # Not finished...
-function ReadConFileAndStripFalseIf($file) {
+function StripFalseIfConContent($concontent) {
 	$content=""
 	$ifregexpr="^\s*if\s*" # Should add groups to check condition.......................
 	$elseregexpr="^\s*else\s*"
 	$endifregexpr="^\s*endIf\s*"
 	$bInsideIf=$false
-	$sr=[System.IO.StreamReader]$file
-	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
-		$line=$sr.ReadLine()
+	$bFalseCondition=$false
+	$lines=$($concontent -split "\r?\n")
+	for ($i=0; $i -lt $lines.Count; $i++) {
+		$line=$lines[$i]
+
+		#what if multiple conditions inside...?
+
 		if ($bInsideIf) {
-			$m=[regex]::Match($line, $ifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($line, $endifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			if ($m.Success) {
 				$bInsideIf=$false
+				$content+=$line+"`r`n"
 				Continue
 			}
-			Continue
+			#$bFalseCondition
 		}
-		$m=[regex]::Match($line, $endifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		$m=[regex]::Match($line, $ifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		if ($m.Success) {
 			$bInsideIf=$true
-			Continue
 		}
 		$content+=$line+"`r`n"
 	}
-	$sr.close()
 	return $content
 }
 
-function ReadConFileWithArg($file, $v_arg1, $v_arg2, $v_arg3, $v_arg4, $v_arg5, $v_arg6, $v_arg7, $v_arg8, $v_arg9) {
+function ProcessArgsConContent($concontent, $v_arg1, $v_arg2, $v_arg3, $v_arg4, $v_arg5, $v_arg6, $v_arg7, $v_arg8, $v_arg9) {
 	$content=""
-	$sr=[System.IO.StreamReader]$file
-	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
-		$line=$sr.ReadLine()
-		$line=$line -replace "v_arg1","`"$v_arg1`""
-		$line=$line -replace "v_arg2","`"$v_arg2`""
-		$line=$line -replace "v_arg3","`"$v_arg3`""
-		$line=$line -replace "v_arg4","`"$v_arg4`""
-		$line=$line -replace "v_arg5","`"$v_arg5`""
-		$line=$line -replace "v_arg6","`"$v_arg6`""
-		$line=$line -replace "v_arg7","`"$v_arg7`""
-		$line=$line -replace "v_arg8","`"$v_arg8`""
-		$line=$line -replace "v_arg9","`"$v_arg9`""
+	ForEach ($line in $($concontent -split "\r?\n")) {
+		$line=$line -replace "v_arg1","$v_arg1"
+		$line=$line -replace "v_arg2","$v_arg2"
+		$line=$line -replace "v_arg3","$v_arg3"
+		$line=$line -replace "v_arg4","$v_arg4"
+		$line=$line -replace "v_arg5","$v_arg5"
+		$line=$line -replace "v_arg6","$v_arg6"
+		$line=$line -replace "v_arg7","$v_arg7"
+		$line=$line -replace "v_arg8","$v_arg8"
+		$line=$line -replace "v_arg9","$v_arg9"
 		$content+=$line+"`r`n"
 	}
-	$sr.close()
 	return $content
 }
 
-function ReadConFileAndProcessIncludes($file) {
+function ProcessIncludesConLine($line, $file) {
+	$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*")
+	if ($m.Groups.Count -ge 2) {
+		$includedfile=Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
+
+		# For aix2_reality...
+
+		$v_arg1=$m.Groups[3].value
+		$v_arg2=$m.Groups[5].value
+		$v_arg3=$m.Groups[7].value
+		$v_arg4=$m.Groups[9].value
+		$v_arg5=$m.Groups[11].value
+		$v_arg6=$m.Groups[13].value
+		$v_arg7=$m.Groups[15].value
+		$v_arg8=$m.Groups[17].value
+		$v_arg9=$m.Groups[19].value
+		$includedfilecontent=ProcessIncludesConContent (ProcessArgsConContent (ReadConFileAndStripRem $includedfile) $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) $includedfile
+		return $includedfilecontent
+	}
+	else {
+		return $line
+	}
+}
+
+function ProcessIncludesConContent($concontent, $file) {
 	$content=""
-
-	# ...
-
-
-	$content | Set-Content $file.tmp
+	ForEach ($line in $($concontent -split "\r?\n")) {
+		$content+=(ProcessIncludesConLine $line $file)+"`r`n"
+	}
+	return $content
 }
 
 function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [bool]$bIncludeAll=$false) {
@@ -110,81 +144,27 @@ function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false
 				$bSkip=$true
 			}
 
-			Write-Output "$file : $vehicleName"
+			If (-not $bSkip) {
+				Write-Output "$file : $vehicleName"
 
-			$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
-			$sr=[System.IO.StreamReader]$file
-			$sw=[System.IO.StreamWriter]"$file.tmp"
-			while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
-				$line=$sr.ReadLine()
-				$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-				if ($m.Success) {
-					$sw.WriteLine($line)
-					Continue
+				$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
+				$sr=[System.IO.StreamReader]$file
+				$sw=[System.IO.StreamWriter]"$file.tmp"
+				while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+					$line=$sr.ReadLine()
+					
+					#get also vehicletype and replace hud with standard icons...
+					$regexprvehicleType="^\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*"
+
+					$regexprtypeIcon="^\s*ObjectTemplate.vehicleHud.typeIcon\s+(\S+)\s*"
+					$regexprminiMapIcon="^\s*ObjectTemplate.vehicleHud.miniMapIcon\s+(\S+)\s*"
+					$regexprvehicleIcon="^\s*ObjectTemplate.vehicleHud.vehicleIcon\s+(\S+)\s*"
+
+					$sw.WriteLine((ProcessIncludesConLine $line $file))
 				}
-				$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*")
-				if ($m.Groups.Count -ge 2) {
-					$includedfile=$m.Groups[1].value
-										
-					# should get args and process included file...
-
-					# For aix2_reality...
-					$v_arg1=$m.Groups[3].value
-					$v_arg2=$m.Groups[5].value
-					$v_arg3=$m.Groups[7].value
-					$v_arg4=$m.Groups[9].value
-					$v_arg5=$m.Groups[11].value
-					$v_arg6=$m.Groups[13].value
-					$v_arg7=$m.Groups[15].value
-					$v_arg8=$m.Groups[17].value
-					$v_arg9=$m.Groups[19].value
-					$includedfilecontent=ReadConFileWithArg $includedfile $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9
-
-					# $includedfilecontent might have other includes...
-
-
-					#if ("" -eq $v_arg1) {
-					#	$sw.Write([System.IO.File]::ReadAllText($includedfile))
-					#	Continue
-					#}
-					#if ("" -eq $v_arg2) {
-						
-					#	#should open includedfile and look inside for If/elseIf v_arg1 == "$v_arg1" and get the lines until else or elseIf or endIf
-
-
-					#	$sw.Write([System.IO.File]::ReadAllText($includedfile))
-					#	Continue
-					#}
-
-					#should open includedfile_without_extension/$varg_1.tweak and look inside for v_arg1 == "$v_arg1" and get the lines until else or elseIf or endIf
-
-
-
-					#for ($i=2; $i -lt $m.Groups.Count; $i+=2) {
-					#	$param=$m.Groups[$i+1].value
-					#	$j=$i/2
-					#	if ("" -eq $param) {
-					#		break
-					#	}
-					#	# replace all occurences of v_arg$j with "$param"...
-					#}
-
-
-				}
-
-
-				#get also vehicletype and replace hud with standard icons
-				$regexprvehicleType="^\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*"
-
-				$regexprtypeIcon="^\s*ObjectTemplate.vehicleHud.typeIcon\s+(\S+)\s*"
-				$regexprminiMapIcon="^\s*ObjectTemplate.vehicleHud.miniMapIcon\s+(\S+)\s*"
-				$regexprvehicleIcon="^\s*ObjectTemplate.vehicleHud.vehicleIcon\s+(\S+)\s*"
-
-
-				$sw.WriteLine($line)
+				$sw.close()
+				$sr.close()
 			}
-			$sw.close()
-			$sr.close()
 		}
 	}
 }
@@ -274,8 +254,6 @@ function CompressModServerArchives($modFolder) {
 }
 
 #Read-Host -Prompt "Press Enter to continue"
-
-exit
 
 #"Please ensure Battlefield 2 is installed (tested with Complete Collection)."
 
