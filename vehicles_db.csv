@@ -70,23 +70,23 @@ ruair_mig144;4;;MEC,MECSF,Spetz;1;;0;0;1;0;0;1;0;0;1;0;0;0;0;0;;;;
 su75;4;;MEC,MECSF,Spetz;1;;0;0;1;0;0;1;0;0;1;0;0;0;0;0;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 apc_acv_15;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;0;0;1;1;0;0;1;;;;https://en.wikipedia.org/wiki/FNSS_ACV-15
-apc_bmd_2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-bmd-2-and-lav-25a2-texture-pack;
-apc_btr_4e;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;1;1;0;0;0;0;0;1;1;1;0;0;0;1;;;;
+apc_bmd_2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;1;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-bmd-2-and-lav-25a2-texture-pack;
+apc_btr_4e;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;1;1;0;0;0;0;0;1;1;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;;
 apc_btr_t;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-btr-t-ifv-puma-and-toyota-rocket-launcher;
 ARMA3_Boxer;1.2;;EU,SAS;0;;1;1;0;0;0;0;0;1;0;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-vt-5-boxer-crv-texture-pack;https://en.wikipedia.org/wiki/Boxer_(armoured_fighting_vehicle)
-BF3_BMP2M;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;;0;0;0;0;0;0;0;1;0;1;0;0;0;1;;;;
+BF3_BMP2M;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;1;;0;0;0;0;0;0;0;1;0;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;;
 bf3_m1128_stryker;1;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;;
 BMD4;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;1;0;0;1;;ObjectTemplate.armor.timeToStayAsWreck need to be set to 0 in bmd4.tweak?;;https://en.wikipedia.org/wiki/BMD-4
 BF3_SprutSD;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;1;0;0;1;;;;https://en.wikipedia.org/wiki/2S25_Sprut-SD
-bmp1_kliver;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bmp-1;
-bmp2m_berezhok;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;;
+bmp1_kliver;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;https://www.moddb.com/games/battlefield-2/addons/bmp-1;
+bmp2m_berezhok;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;;
 BMW_E32;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;1;0;0;;;;
 Bushmaster;3;;EU,SAS;0;;0;0;0;0;0;0;0;0;0;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bushmasters;https://fr.wikipedia.org/wiki/V%C3%A9hicule_blind%C3%A9_Bushmaster
 civ_dacia;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;1;0;0;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-mrap-maxxpro-and-dacia;
-cod_bmp2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;;
+cod_bmp2;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;;
 gaz_24_volga;3.3;;ALL;0;;0;0;0;0;0;0;0;1;0;0;0;1;0;0;;;;
 gaz_2975_tiger;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;0;0;1;1;0;0;0;;;;
-ifv_spz_puma;1;;EU;0;;0;0;0;0;0;0;0;0;0;1;0;0;0;1;;;;https://en.wikipedia.org/wiki/Puma_(German_infantry_fighting_vehicle)
+ifv_spz_puma;1;;EU;0;;0;0;0;0;0;0;0;0;0;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;;https://en.wikipedia.org/wiki/Puma_(German_infantry_fighting_vehicle)
 lav25a2;1.2;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;0;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-bmd-2-and-lav-25a2-texture-pack;
 leoclerc;0;;EU;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;t90_3p_fire.wav should be converted to mono (e.g. using Audacity);https://www.moddb.com/games/battlefield-2/addons/leoclerc;https://www.edrmagazine.eu/the-leo-clerc-shows-french-german-cooperation-within-knds
 leopard_2a7;0;;EU;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;cannon does not move up/down, t90_3p_fire.wav should be converted to mono (e.g. using Audacity)?;https://www.moddb.com/games/battlefield-2/addons/leopard-2a7;https://en.wikipedia.org/wiki/Leopard_2
@@ -104,12 +104,12 @@ P4_ASPIC;3;;EU;0;;0;0;0;0;0;0;0;0;1;0;1;0;0;1;;;;
 patria_amv;1.2;;EU;0;;1;1;0;0;0;0;0;1;0;1;0;0;0;1;;;;https://en.wikipedia.org/wiki/Patria_AMV
 kto_rosomak;1.2;;EU;0;;1;1;0;0;0;0;0;1;0;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/kto-rosomak-and-textures-pack;https://en.wikipedia.org/wiki/KTO_Rosomak
 RUTNK_T14;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;;;
-T14_Armata;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;to test;;
-BF2042_T28;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;to test;;
-t15_hifv;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;ObjectTemplate.armor.timeToStayAsWreck need to be set to 0 in t15_hifv.tweak, Replace t15_hifv.collisionmesh with t14_armata.collisionmesh to avoid random crash when exploding?;;https://en.wikipedia.org/wiki/T-15_Armata
+T14_Armata;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;to test more;;
+BF2042_T28;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;to test more;;
+t15_hifv;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;to test more, ObjectTemplate.armor.timeToStayAsWreck need to be set to 0 in t15_hifv.tweak, Replace t15_hifv.collisionmesh with t14_armata.collisionmesh to avoid random crash when exploding, bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;;https://en.wikipedia.org/wiki/T-15_Armata
 ru_apc_k17a;1.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;;
 ru_apc_k25a;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;;
 uaz_technical;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;0;0;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-t-80bv-and-uaz-469-technical;
-usapc_m2a3;1;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/usapc-m2a3;
+usapc_m2a3;1;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;https://www.moddb.com/games/battlefield-2/addons/usapc-m2a3;
 ustank_m1a3;0;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;;;
 VBCI;1.2;;EU;0;;0;0;0;0;0;0;0;1;0;1;0;0;0;1;;;;
