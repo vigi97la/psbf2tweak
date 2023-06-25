@@ -45,14 +45,25 @@ function ReadConFileAndStripRem($file) {
 	return $content
 }
 
-# Not finished...
+# Not finished, not easy to check some conditions...
+
+function StripFalseIfConBlock($content) {
+	# assume we are already in a if block...
+
+
+}
+
 function StripFalseIfConContent($concontent) {
 	$content=""
-	$ifregexpr="^\s*if\s*" # Should add groups to check condition.......................
+	$ifregexpr="^\s*if\s*"
+	$ifcondregexpr="^\s*if\s+(\S*)\s*==\s*(\S*)\s*"
+	$elseIfregexpr="^\s*elseIf\s*"
+	$elseIfcondregexpr="^\s*elseIf\s+(\S*)\s*==\s*(\S*)\s*"
 	$elseregexpr="^\s*else\s*"
 	$endifregexpr="^\s*endIf\s*"
 	$bInsideIf=$false
-	$bFalseCondition=$false
+	$bInsideTrueCondition=$false
+	$bFoundTrueCondition=$false
 	$lines=$($concontent -split "\r?\n")
 	for ($i=0; $i -lt $lines.Count; $i++) {
 		$line=$lines[$i]
@@ -60,19 +71,59 @@ function StripFalseIfConContent($concontent) {
 		#what if multiple conditions inside...?
 
 		if ($bInsideIf) {
+			$m=[regex]::Match($line, $elseIfcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if (($m.Groups.Count -eq 3)) {
+				if ($bInsideTrueCondition) {
+					$bInsideTrueCondition=$false
+					Continue
+				}				
+				if ((-not $bFoundTrueCondition) -and ($m.Groups[1].value -eq $m.Groups[2].value)) {
+					$bInsideTrueCondition=$true
+					$bFoundTrueCondition=$true
+				}
+				Continue
+			}
+			$m=[regex]::Match($line, $elseregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if ($m.Success) {
+				if ($bInsideTrueCondition) {
+					$bInsideTrueCondition=$false
+					Continue
+				}				
+				if (-not $bFoundTrueCondition) {
+					$bInsideTrueCondition=$true
+					$bFoundTrueCondition=$true
+				}
+				Continue
+			}
 			$m=[regex]::Match($line, $endifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			if ($m.Success) {
 				$bInsideIf=$false
+				$bInsideTrueCondition=$false
+				$bFoundTrueCondition=$false
+				Continue
+			}
+			if ($bInsideTrueCondition) {
+
+				#what if there is another if condition inside...?
+
 				$content+=$line+"`r`n"
 				Continue
 			}
-			#$bFalseCondition
 		}
-		$m=[regex]::Match($line, $ifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-		if ($m.Success) {
+		$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if (($m.Groups.Count -eq 3)) {
 			$bInsideIf=$true
+			$bInsideTrueCondition=$false
+			$bFoundTrueCondition=$false
+			if ($m.Groups[1].value -eq $m.Groups[2].value) {
+				$bInsideTrueCondition=$true
+				$bFoundTrueCondition=$true
+			}
+			Continue
 		}
 		$content+=$line+"`r`n"
+
+		#$content+=(ProcessIncludesConLine $line $file)+"`r`n"
 	}
 	return $content
 }
@@ -80,15 +131,19 @@ function StripFalseIfConContent($concontent) {
 function ProcessArgsConContent($concontent, $v_arg1, $v_arg2, $v_arg3, $v_arg4, $v_arg5, $v_arg6, $v_arg7, $v_arg8, $v_arg9) {
 	$content=""
 	ForEach ($line in $($concontent -split "\r?\n")) {
-		$line=$line -replace "v_arg1","$v_arg1"
-		$line=$line -replace "v_arg2","$v_arg2"
-		$line=$line -replace "v_arg3","$v_arg3"
-		$line=$line -replace "v_arg4","$v_arg4"
-		$line=$line -replace "v_arg5","$v_arg5"
-		$line=$line -replace "v_arg6","$v_arg6"
-		$line=$line -replace "v_arg7","$v_arg7"
-		$line=$line -replace "v_arg8","$v_arg8"
-		$line=$line -replace "v_arg9","$v_arg9"
+
+		# null...?
+
+		if (($null -ne $v_arg1) -and ("" -ne $v_arg1)) { $line=$line -replace "v_arg1","$v_arg1" } else { $line=$line -replace "v_arg1","`"null`"" }
+		if (($null -ne $v_arg2) -and ("" -ne $v_arg2)) { $line=$line -replace "v_arg2","$v_arg2" } else { $line=$line -replace "v_arg2","`"null`"" }
+		if (($null -ne $v_arg3) -and ("" -ne $v_arg3)) { $line=$line -replace "v_arg3","$v_arg3" } else { $line=$line -replace "v_arg3","`"null`"" }
+		if (($null -ne $v_arg4) -and ("" -ne $v_arg4)) { $line=$line -replace "v_arg4","$v_arg4" } else { $line=$line -replace "v_arg4","`"null`"" }
+		if (($null -ne $v_arg5) -and ("" -ne $v_arg5)) { $line=$line -replace "v_arg5","$v_arg5" } else { $line=$line -replace "v_arg5","`"null`"" }
+		if (($null -ne $v_arg6) -and ("" -ne $v_arg6)) { $line=$line -replace "v_arg6","$v_arg6" } else { $line=$line -replace "v_arg6","`"null`"" }
+		if (($null -ne $v_arg7) -and ("" -ne $v_arg7)) { $line=$line -replace "v_arg7","$v_arg7" } else { $line=$line -replace "v_arg7","`"null`"" }
+		if (($null -ne $v_arg8) -and ("" -ne $v_arg8)) { $line=$line -replace "v_arg8","$v_arg8" } else { $line=$line -replace "v_arg8","`"null`"" }
+		if (($null -ne $v_arg9) -and ("" -ne $v_arg9)) { $line=$line -replace "v_arg9","$v_arg9" } else { $line=$line -replace "v_arg9","`"null`"" }
+
 		$content+=$line+"`r`n"
 	}
 	return $content
