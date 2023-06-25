@@ -80,12 +80,127 @@ function ProcessCommentsConContent($concontent, $cbInsideCommentLine, $cbOutside
 
 # Not finished, not easy to check some conditions...
 
-function StripFalseIfConBlock($content) {
-	# assume we are already in a if block...
-
-
+function cbConditionCodeTest($concontent, $line, $params) {
+	$content=$params
+	return $content
 }
 
+function cbOtherCodeTest($concontent, $line, $params) {
+	$content=$params
+	$content+=$line+"`r`n"
+	return $content
+}
+
+function cbInsideTrueCondition($concontent, $line, $params) {
+	$content=$params
+	$content+=$line+"`r`n"
+	return $content
+}
+
+function cbInsideFalseCondition($concontent, $line, $params) {
+	$content=$params
+	return $content
+}
+
+#. .\mod_installer.ps1
+#ProcessIfConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleapc.tweak") "cbConditionCodeTest" "cbOtherCodeTest" "cbInsideTrueCondition" "cbInsideFalseCondition"
+function ProcessIfConContent($concontent, $cbConditionCode, $cbOtherCode, $cbInsideTrueCondition, $cbInsideFalseCondition) {
+	$content=""
+	$ifregexpr="^\s*if\s*"
+	$ifcondregexpr="^\s*if\s+(\S*)\s*==\s*(\S*)\s*"
+	$elseIfregexpr="^\s*elseIf\s*"
+	$elseIfcondregexpr="^\s*elseIf\s+(\S*)\s*==\s*(\S*)\s*"
+	$elseregexpr="^\s*else\s*"
+	$endifregexpr="^\s*endIf\s*"
+	$bInsideCondition=$false
+	$bInsideTrueCondition=$false
+	$bFoundTrueCondition=$false
+	$lines=$($concontent -split "\r?\n")
+	for ($i=0; $i -lt $lines.Count; $i++) {
+		$line=$lines[$i]
+
+		if ($bInsideCondition) {
+			$m=[regex]::Match($line, $elseIfcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if (($m.Groups.Count -eq 3)) {
+
+				$params=$content
+				$content=& $cbConditionCode $concontent $line $params
+
+				if ($bInsideTrueCondition) {
+					$bInsideTrueCondition=$false
+					Continue
+				}				
+				if ((-not $bFoundTrueCondition) -and ($m.Groups[1].value -eq $m.Groups[2].value)) {
+					$bInsideTrueCondition=$true
+					$bFoundTrueCondition=$true
+				}
+				Continue
+			}
+			$m=[regex]::Match($line, $elseregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if ($m.Success) {
+
+				$params=$content
+				$content=& $cbConditionCode $concontent $line $params
+
+				if ($bInsideTrueCondition) {
+					$bInsideTrueCondition=$false
+					Continue
+				}				
+				if (-not $bFoundTrueCondition) {
+					$bInsideTrueCondition=$true
+					$bFoundTrueCondition=$true
+				}
+				Continue
+			}
+			$m=[regex]::Match($line, $endifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if ($m.Success) {
+
+				$params=$content
+				$content=& $cbConditionCode $concontent $line $params
+
+				$bInsideCondition=$false
+				$bInsideTrueCondition=$false
+				$bFoundTrueCondition=$false
+				Continue
+			}
+			if ($bInsideTrueCondition) {
+
+				$params=$content
+				$content=& $cbInsideTrueCondition $concontent $line $params
+
+			}
+			else {
+
+				$params=$content
+				$content=& $cbInsideFalseCondition $concontent $line $params
+
+			}
+			Continue
+		}
+		$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if (($m.Groups.Count -eq 3)) {
+
+			$params=$content
+			$content=& $cbConditionCode $concontent $line $params
+
+			$bInsideCondition=$true
+			$bInsideTrueCondition=$false
+			$bFoundTrueCondition=$false
+			if ($m.Groups[1].value -eq $m.Groups[2].value) {
+				$bInsideTrueCondition=$true
+				$bFoundTrueCondition=$true
+			}
+			Continue
+		}
+
+		$params=$content
+		$content=& $cbOtherCode $concontent $line $params
+
+	}
+	return $content
+}
+
+#tmp
 function StripFalseIfConContent($concontent) {
 	$content=""
 	$ifregexpr="^\s*if\s*"
