@@ -13,23 +13,29 @@ function ReadConFile($file) {
 	return $content
 }
 
-# not finished...
-#StripRemConContent()
-function ReadConFileAndStripRemEx($file) {
+function cbInsideCommentLineTest($concontent, $line, $params) {
+	"Comment : $line"
+}
+
+function cbOutsideCommentLineTest($concontent, $line, $params) {
+	"Not comment : $line"
+}
+
+function StripRemConContent($concontent, $cbInsideCommentLine, $cbOutsideCommentLine) {
 	$content=""
 	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
 	$beginremregexpr="^\s*beginrem\s*" # To skip block comments.
 	$endremregexpr="^\s*endrem\s*" # To skip block comments.
 	$bInsideBlockComment=$false
-	$sr=[System.IO.StreamReader]$file
-	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
-		$line=$sr.ReadLine()
+	$lines=$($concontent -split "\r?\n")
+	for ($i=0; $i -lt $lines.Count; $i++) {
+		$line=$lines[$i]
 		if ($bInsideBlockComment) {
 			$m=[regex]::Match($line, $endremregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			if ($m.Success) {
 				$bInsideBlockComment=$false
 
-				#cbInsideCommentLine($line, $params)
+				& $cbInsideCommentLine $concontent $line $params
 
 				Continue
 			}
@@ -38,7 +44,7 @@ function ReadConFileAndStripRemEx($file) {
 		$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		if ($m.Success) {
 
-			#cbInsideCommentLine($line, $params)
+			& $cbInsideCommentLine $concontent $line $params
 
 			Continue
 		}
@@ -46,16 +52,15 @@ function ReadConFileAndStripRemEx($file) {
 		if ($m.Success) {
 			$bInsideBlockComment=$true
 
-			#cbInsideCommentLine($line, $params)
+			& $cbInsideCommentLine $concontent $line $params
 
 			Continue
 		}
 
-		#cbOutsideCommentLine($line, $params)
+		& $cbOutsideCommentLine $concontent $line $params
 
 		$content+=$line+"`r`n"
 	}
-	$sr.close()
 	return $content
 }
 
