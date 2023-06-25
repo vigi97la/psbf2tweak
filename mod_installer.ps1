@@ -26,6 +26,8 @@ function cbOutsideCommentLineTest($concontent, $line, $params) {
 	return $content
 }
 
+#. .\mod_installer.ps1
+#(ProcessCommentsConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleparams.con") "cbInsideCommentLineTest" "cbOutsideCommentLineTest") -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 function ProcessCommentsConContent($concontent, $cbInsideCommentLine, $cbOutsideCommentLine) {
 	$content=""
 	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
@@ -193,7 +195,7 @@ function ProcessIncludesConLine($line, $file) {
 		$v_arg7=$m.Groups[15].value
 		$v_arg8=$m.Groups[17].value
 		$v_arg9=$m.Groups[19].value
-		$includedfilecontent=(ProcessIncludesConContent (ProcessArgsConContent (ReadConFileAndStripRem $includedfile) $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) $includedfile) -replace "\r?\n\r?\n","\r?\n"
+		$includedfilecontent=(ProcessIncludesConContent (ProcessArgsConContent (ReadConFileAndStripRem $includedfile) $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) $includedfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 		return $includedfilecontent
 	}
 	else {
