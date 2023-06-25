@@ -13,6 +13,52 @@ function ReadConFile($file) {
 	return $content
 }
 
+# not finished...
+#StripRemConContent()
+function ReadConFileAndStripRemEx($file) {
+	$content=""
+	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
+	$beginremregexpr="^\s*beginrem\s*" # To skip block comments.
+	$endremregexpr="^\s*endrem\s*" # To skip block comments.
+	$bInsideBlockComment=$false
+	$sr=[System.IO.StreamReader]$file
+	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+		$line=$sr.ReadLine()
+		if ($bInsideBlockComment) {
+			$m=[regex]::Match($line, $endremregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if ($m.Success) {
+				$bInsideBlockComment=$false
+
+				#cbInsideCommentLine($line, $params)
+
+				Continue
+			}
+			Continue
+		}
+		$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if ($m.Success) {
+
+			#cbInsideCommentLine($line, $params)
+
+			Continue
+		}
+		$m=[regex]::Match($line, $beginremregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if ($m.Success) {
+			$bInsideBlockComment=$true
+
+			#cbInsideCommentLine($line, $params)
+
+			Continue
+		}
+
+		#cbOutsideCommentLine($line, $params)
+
+		$content+=$line+"`r`n"
+	}
+	$sr.close()
+	return $content
+}
+
 function ReadConFileAndStripRem($file) {
 	$content=""
 	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
@@ -153,9 +199,6 @@ function ProcessIncludesConLine($line, $file) {
 	$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*")
 	if ($m.Groups.Count -ge 2) {
 		$includedfile=Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
-
-		# For aix2_reality...
-
 		$v_arg1=$m.Groups[3].value
 		$v_arg2=$m.Groups[5].value
 		$v_arg3=$m.Groups[7].value
@@ -165,7 +208,7 @@ function ProcessIncludesConLine($line, $file) {
 		$v_arg7=$m.Groups[15].value
 		$v_arg8=$m.Groups[17].value
 		$v_arg9=$m.Groups[19].value
-		$includedfilecontent=ProcessIncludesConContent (ProcessArgsConContent (ReadConFileAndStripRem $includedfile) $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) $includedfile
+		$includedfilecontent=(ProcessIncludesConContent (ProcessArgsConContent (ReadConFileAndStripRem $includedfile) $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) $includedfile) -replace "\r?\n\r?\n","\r?\n"
 		return $includedfilecontent
 	}
 	else {
@@ -181,7 +224,7 @@ function ProcessIncludesConContent($concontent, $file) {
 	return $content
 }
 
-function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [bool]$bIncludeAll=$false) {
+function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [bool]$bIncludeAll=$false, [bool]$bResetMapIcons=$false, [bool]$bResetHUDIcons=$false, [bool]$bExpandIncludes=$false) {
 
 	Get-ChildItem "$objectsFolder\*" -R -Include "*.tweak" | ForEach-Object {
 		$file=$_.FullName
@@ -202,20 +245,105 @@ function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false
 			If (-not $bSkip) {
 				Write-Output "$file : $vehicleName"
 
-				$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
+				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), "\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*\r?\n")
+				If ($m.Groups.Count -eq 2) {
+					$vehicleType=[int]$m.Groups[1].value
+				}
+				# VTHeavyTank (0), VTApc (1), VCHelicopter (2), car (3), VCAir (4), VTAA (5), VCSea (6)
+				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), "\s*ObjectTemplate.setVehicleType\s+(\S+)\s*\r?\n")
+				If ($m.Groups.Count -eq 2) {
+					$vehicleVT=$m.Groups[1].value
+				}
+				# VCHelicopter, VCAir, VCSea...
+				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), "\s*ObjectTemplate.vehicleCategory\s+(\S+)\s*\r?\n")
+				If ($m.Groups.Count -eq 2) {
+					$vehicleVC=$m.Groups[1].value
+				}
+
 				$sr=[System.IO.StreamReader]$file
 				$sw=[System.IO.StreamWriter]"$file.tmp"
 				while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 					$line=$sr.ReadLine()
-					
-					#get also vehicletype and replace hud with standard icons...
-					$regexprvehicleType="^\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*"
+										
+					If ($bResetMapIcons) {
 
-					$regexprtypeIcon="^\s*ObjectTemplate.vehicleHud.typeIcon\s+(\S+)\s*"
-					$regexprminiMapIcon="^\s*ObjectTemplate.vehicleHud.miniMapIcon\s+(\S+)\s*"
-					$regexprvehicleIcon="^\s*ObjectTemplate.vehicleHud.vehicleIcon\s+(\S+)\s*"
+						# Should use vehicles_db.csv, see xpak_ailraider and others with specific icons, should not change if the file is found...
 
-					$sw.WriteLine((ProcessIncludesConLine $line $file))
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.typeIcon\s+(\S+)\s*")
+						If ($m.Groups.Count -eq 2) {
+							$vehicleTypeIcon=$m.Groups[1].value
+							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_tank.tga")
+							}
+							elseIf (([double]$vehicleType -ge 1) -and ([double]$vehicleType -lt 2)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga")
+							}
+							elseIf (([double]$vehicleType -ge 2) -and ([double]$vehicleType -lt 3)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_chopper.tga")
+							}
+							elseIf (([double]$vehicleType -ge 3) -and ([double]$vehicleType -lt 4)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_jeep.tga")
+							}
+							elseIf (([double]$vehicleType -ge 4) -and ([double]$vehicleType -lt 5)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_plane.tga")
+							}
+							elseIf (([double]$vehicleType -ge 5) -and ([double]$vehicleType -lt 6)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_antiair.tga")
+							}
+							elseIf (([double]$vehicleType -ge 6) -and ([double]$vehicleType -lt 7)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_boat.tga")
+							}
+							else {
+								$sw.WriteLine($line)
+							}
+							Continue
+						}
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.miniMapIcon\s+(\S+)\s*")
+						If ($m.Groups.Count -eq 2) {
+							$vehicleMiniMapIcon=$m.Groups[1].value
+							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Tank.tga")
+							}
+							elseIf (([double]$vehicleType -ge 1) -and ([double]$vehicleType -lt 2)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_APC.tga")
+							}
+							elseIf (([double]$vehicleType -ge 2) -and ([double]$vehicleType -lt 3)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Attack_Heli.tga")
+							}
+							elseIf (([double]$vehicleType -ge 3) -and ([double]$vehicleType -lt 4)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Jeep.tga")
+							}
+							elseIf (([double]$vehicleType -ge 4) -and ([double]$vehicleType -lt 5)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Jet.tga")
+							}
+							elseIf (([double]$vehicleType -ge 5) -and ([double]$vehicleType -lt 6)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_AAVehicle.tga")
+							}
+							elseIf (([double]$vehicleType -ge 6) -and ([double]$vehicleType -lt 7)) {
+								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_rib.tga")
+							}
+							else {
+								$sw.WriteLine($line)
+							}
+							#Ingame\Vehicles\Icons\HUD\Minimap\MM_xpak_civcar.dds
+							Continue
+						}
+					}
+					If ($bResetHUDIcons) {
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.vehicleIcon\s+(\S+)\s*")
+						If ($m.Groups.Count -eq 2) {
+							$vehicleMiniMapIcon=$m.Groups[1].value
+							$sw.WriteLine("rem $line")
+							Continue
+						}
+					}
+
+					If ($bExpandIncludes) {
+						$sw.WriteLine((ProcessIncludesConLine $line $file))
+						Continue
+					}
+
+					$sw.WriteLine($line)
 				}
 				$sw.close()
 				$sr.close()
