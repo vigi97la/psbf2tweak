@@ -27,8 +27,8 @@ function cbOutsideCommentLine($concontent, $i, $line, $params) {
 }
 
 #. .\mod_installer.ps1
-#(ProcessCommentsConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleparams.con") "cbInsideCommentLine" "cbOutsideCommentLine") -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
-function ProcessCommentsConContent($concontent, $cbInsideCommentLine, $cbOutsideCommentLine) {
+#(PreProcessCommentsConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleparams.con") "cbInsideCommentLine" "cbOutsideCommentLine") -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+function PreProcessCommentsConContent($concontent, $cbInsideCommentLine, $cbOutsideCommentLine) {
 	$content=""
 	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
 	$beginremregexpr="^\s*beginrem\s*" # To skip block comments.
@@ -78,8 +78,6 @@ function ProcessCommentsConContent($concontent, $cbInsideCommentLine, $cbOutside
 	return $content
 }
 
-# Not finished, not easy to check some conditions...
-
 function cbConditionCode($concontent, $i, $line, $params) {
 	$content=$params
 	return $content
@@ -93,24 +91,19 @@ function cbOtherCode($concontent, $i, $line, $params) {
 
 function cbInsideTrueCondition($concontent, $i, $line, $params) {
 	$content=$params
-
-	#what if multiple conditions inside...?
-
 	$content+=$line+"`r`n"
 	return $content
 }
 
 function cbInsideFalseCondition($concontent, $i, $line, $params) {
 	$content=$params
-
-	#what if multiple conditions inside...?
-
 	return $content
 }
 
 #. .\mod_installer.ps1
-#ProcessIfConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleapc.tweak") "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition"
-function ProcessIfConContent($concontent, $cbConditionCode, $cbOtherCode, $cbInsideTrueCondition, $cbInsideFalseCondition) {
+#$i=0
+#PreProcessIfConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleapc.tweak") ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition"
+function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOtherCode, $cbInsideTrueCondition, $cbInsideFalseCondition) {
 	$content=""
 	$ifregexpr="^\s*if\s*"
 	$ifcondregexpr="^\s*if\s+(\S*)\s*==\s*(\S*)\s*"
@@ -122,15 +115,15 @@ function ProcessIfConContent($concontent, $cbConditionCode, $cbOtherCode, $cbIns
 	$bInsideTrueCondition=$false
 	$bFoundTrueCondition=$false
 	$lines=$($concontent -split "\r?\n")
-	for ($i=0; $i -lt $lines.Count; $i++) {
-		$line=$lines[$i]
+	for ($i.value=0; $i.value -lt $lines.Count; $i.value++) {
+		$line=$lines[$i.value]
 
 		if ($bInsideCondition) {
 			$m=[regex]::Match($line, $elseIfcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			if (($m.Groups.Count -eq 3)) {
 
 				$params=$content
-				$content=& $cbConditionCode $concontent $i $line $params
+				$content=& $cbConditionCode $concontent $i.value $line $params
 
 				if ($bInsideTrueCondition) {
 					$bInsideTrueCondition=$false
@@ -146,7 +139,7 @@ function ProcessIfConContent($concontent, $cbConditionCode, $cbOtherCode, $cbIns
 			if ($m.Success) {
 
 				$params=$content
-				$content=& $cbConditionCode $concontent $i $line $params
+				$content=& $cbConditionCode $concontent $i.value $line $params
 
 				if ($bInsideTrueCondition) {
 					$bInsideTrueCondition=$false
@@ -162,7 +155,7 @@ function ProcessIfConContent($concontent, $cbConditionCode, $cbOtherCode, $cbIns
 			if ($m.Success) {
 
 				$params=$content
-				$content=& $cbConditionCode $concontent $i $line $params
+				$content=& $cbConditionCode $concontent $i.value $line $params
 
 				$bInsideCondition=$false
 				$bInsideTrueCondition=$false
@@ -170,15 +163,34 @@ function ProcessIfConContent($concontent, $cbConditionCode, $cbOtherCode, $cbIns
 				Continue
 			}
 			if ($bInsideTrueCondition) {
-
-				$params=$content
-				$content=& $cbInsideTrueCondition $concontent $i $line $params
-
+					
+				# If multiple conditions inside...
+				$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				if (($m.Groups.Count -eq 3)) {
+					$contentblock=$lines | Select-Object -Index ($i.value..($lines.Count-1)) # $concontent starting at $i.value line (so it includes the if)
+					$iblock=0
+					$content+=PreProcessIfConContent $contentblock ([ref]$iblock) $cbConditionCode $cbOtherCode $cbInsideTrueCondition $cbInsideFalseCondition
+					$i.value+=($iblock-1) # Does not include the endIf that made PreProcessIfConContent return
+				}
+				else {
+					$params=$content
+					$content=& $cbInsideTrueCondition $concontent $i.value $line $params
+				}
 			}
 			else {
 
-				$params=$content
-				$content=& $cbInsideFalseCondition $concontent $i $line $params
+				# If multiple conditions inside...
+				$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				if (($m.Groups.Count -eq 3)) {
+					$contentblock=$lines | Select-Object -Index ($i.value..($lines.Count-1)) # $concontent starting at $i.value line (so it includes the if)
+					$iblock=0
+					$content+=PreProcessIfConContent $contentblock ([ref]$iblock) $cbInsideFalseCondition $cbInsideFalseCondition $cbInsideFalseCondition $cbInsideFalseCondition
+					$i.value+=($iblock-1) # Does not include the endIf that made PreProcessIfConContent return
+				}
+				else {
+					$params=$content
+					$content=& $cbInsideFalseCondition $concontent $i.value $line $params
+				}
 
 			}
 			Continue
@@ -187,7 +199,7 @@ function ProcessIfConContent($concontent, $cbConditionCode, $cbOtherCode, $cbIns
 		if (($m.Groups.Count -eq 3)) {
 
 			$params=$content
-			$content=& $cbConditionCode $concontent $i $line $params
+			$content=& $cbConditionCode $concontent $i.value $line $params
 
 			$bInsideCondition=$true
 			$bInsideTrueCondition=$false
@@ -197,16 +209,28 @@ function ProcessIfConContent($concontent, $cbConditionCode, $cbOtherCode, $cbIns
 				$bFoundTrueCondition=$true
 			}
 			Continue
+		}	
+		
+		# If multiple conditions inside...
+		If ([regex]::Match($line, $elseIfregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Groups.Count -eq 3) {
+			break
 		}
-
-		$params=$content
-		$content=& $cbOtherCode $concontent $i $line $params
+		elseIf ([regex]::Match($line, $elseregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+			break
+		}
+		elseIf ([regex]::Match($line, $endifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+			break
+		}
+		else {
+			$params=$content
+			$content=& $cbOtherCode $concontent $i.value $line $params
+		}
 
 	}
 	return $content
 }
 
-function ProcessArgsConContent($concontent, $v_arg1, $v_arg2, $v_arg3, $v_arg4, $v_arg5, $v_arg6, $v_arg7, $v_arg8, $v_arg9) {
+function PreProcessArgsConContent($concontent, $v_arg1, $v_arg2, $v_arg3, $v_arg4, $v_arg5, $v_arg6, $v_arg7, $v_arg8, $v_arg9) {
 	$content=""
 	ForEach ($line in $($concontent -split "\r?\n")) {
 
@@ -227,7 +251,7 @@ function ProcessArgsConContent($concontent, $v_arg1, $v_arg2, $v_arg3, $v_arg4, 
 	return $content
 }
 
-function ProcessIncludesConLine($line, $file) {
+function PreProcessIncludesConLine($line, $file) {
 	$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*")
 	if ($m.Groups.Count -ge 2) {
 		$includedfile=Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
@@ -240,7 +264,8 @@ function ProcessIncludesConLine($line, $file) {
 		$v_arg7=$m.Groups[15].value
 		$v_arg8=$m.Groups[17].value
 		$v_arg9=$m.Groups[19].value
-		$includedfilecontent=(ProcessIncludesConContent (ProcessIfConContent (ProcessArgsConContent (ProcessCommentsConContent (ReadConFile $includedfile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $includedfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		$i=0
+		$includedfilecontent=(PreProcessIncludesConContent (PreProcessIfConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $includedfile) ([ref]$i) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $includedfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 		return $includedfilecontent
 	}
 	else {
@@ -248,10 +273,10 @@ function ProcessIncludesConLine($line, $file) {
 	}
 }
 
-function ProcessIncludesConContent($concontent, $file) {
+function PreProcessIncludesConContent($concontent, $file) {
 	$content=""
 	ForEach ($line in $($concontent -split "\r?\n")) {
-		$content+=(ProcessIncludesConLine $line $file)+"`r`n"
+		$content+=(PreProcessIncludesConLine $line $file)+"`r`n"
 	}
 	return $content
 }
@@ -372,7 +397,7 @@ function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false
 					}
 
 					If ($bExpandIncludes) {
-						$sw.WriteLine((ProcessIncludesConLine $line $file))
+						$sw.WriteLine((PreProcessIncludesConLine $line $file))
 						Continue
 					}
 
