@@ -22,15 +22,6 @@ $forcedTeam2 = "US"
 
 #Add config file to remember last modFolder, levelFolder,...
 
-$instructionsLabel = New-Object System.Windows.Forms.Label
-$instructionsLabel.Location = New-Object System.Drawing.Point(300,300)
-$instructionsLabel.Size = New-Object System.Drawing.Size(300,100)
-$instructionsLabel.Text =
-"Please install 7z.exe (7-Zip) and ensure it is in Windows PATH, and reboot. "+
-"Edit vehicles_db.csv with e.g. Microsoft Excel to change the list of available vehicles and for more options "+
-"(see more info in ChangeMapVehicles.ps1)"
-$form.Controls.Add($instructionsLabel)
-
 $offset += 5
 $levelFolderTextBox = New-Object System.Windows.Forms.TextBox
 $levelFolderTextBox.Location = New-Object System.Drawing.Point(10,$offset)
@@ -282,10 +273,30 @@ $bUseAutoBackupCheckbox.Text = "bUseAutoBackup"
 $bUseAutoBackupCheckbox.Checked = $true
 $form.Controls.Add($bUseAutoBackupCheckbox)
 
-$offset += 20
+$offset = 280
+$instructionsLabel = New-Object System.Windows.Forms.Label
+$instructionsLabel.Location = New-Object System.Drawing.Point(300,$offset)
+$instructionsLabel.Size = New-Object System.Drawing.Size(300,70)
+$instructionsLabel.Text =
+"Please install 7z.exe (7-Zip) and ensure it is in Windows PATH, and reboot. "+
+"Edit vehicles_db.csv with e.g. Microsoft Excel to change the list of available vehicles and for more options "+
+"(see more info in ReadMe.txt and ChangeMapVehicles.ps1)"
+$form.Controls.Add($instructionsLabel)
+
+$offset += 80
+$listButton = new-object System.Windows.Forms.Button
+$listButton.Location = new-object System.Drawing.Size(500,$offset)
+$listButton.Size = new-object System.Drawing.Size(100,35)
+$listButton.Text = "List map current vehicles"
+$listButton.Add_Click({
+	.\ChangeMapVehicles.ps1 $levelFolderTextBox.Text $gameModeTextBox.Text $mapSizeTextBox.Text $forcedTeam1TextBox.Text $forcedTeam2TextBox.Text $bEnforceVehicleTypeCheckbox.Checked $bEnforceCompatibleTeamsCheckbox.Checked $bEnforcePreferredTeamsCheckbox.Checked $bEnforceSizeCategoryCheckbox.Checked $bEnforceAmphibiousCheckbox.Checked $bEnforceFloatingCheckbox.Checked $bEnforceFlyingCheckbox.Checked $bEnforceVTOLCheckbox.Checked $bEnforceNeedWaterCheckbox.Checked $bEnforceNeedAirfieldCheckbox.Checked $bEnforceNeedLargeAirfieldCheckbox.Checked $bEnforceHeavilyArmoredCheckbox.Checked $bEnforceHeavilyArmedCheckbox.Checked $bEnforceHasManyPassengersCheckbox.Checked $bEnforceCanBeAirDroppedCheckbox.Checked $bEnforceCivilianCheckbox.Checked $bRemoveIncompatibleCheckbox.Checked $bUseObjectSpawnerExclusionListCheckbox.Checked $bShowObjectSpawnerCheckbox.Checked $false $false $false | Write-Host
+})
+$form.Controls.Add($listButton)
+
+$offset += 40
 $applyButton = new-object System.Windows.Forms.Button
-$applyButton.Location = new-object System.Drawing.Size(500,400)
-$applyButton.Size = new-object System.Drawing.Size(100,40)
+$applyButton.Location = new-object System.Drawing.Size(500,$offset)
+$applyButton.Size = new-object System.Drawing.Size(100,35)
 $applyButton.Text = "Apply"
 $applyButton.Add_Click({
 	.\ChangeMapVehicles.ps1 $levelFolderTextBox.Text $gameModeTextBox.Text $mapSizeTextBox.Text $forcedTeam1TextBox.Text $forcedTeam2TextBox.Text $bEnforceVehicleTypeCheckbox.Checked $bEnforceCompatibleTeamsCheckbox.Checked $bEnforcePreferredTeamsCheckbox.Checked $bEnforceSizeCategoryCheckbox.Checked $bEnforceAmphibiousCheckbox.Checked $bEnforceFloatingCheckbox.Checked $bEnforceFlyingCheckbox.Checked $bEnforceVTOLCheckbox.Checked $bEnforceNeedWaterCheckbox.Checked $bEnforceNeedAirfieldCheckbox.Checked $bEnforceNeedLargeAirfieldCheckbox.Checked $bEnforceHeavilyArmoredCheckbox.Checked $bEnforceHeavilyArmedCheckbox.Checked $bEnforceHasManyPassengersCheckbox.Checked $bEnforceCanBeAirDroppedCheckbox.Checked $bEnforceCivilianCheckbox.Checked $bRemoveIncompatibleCheckbox.Checked $bUseObjectSpawnerExclusionListCheckbox.Checked $bShowObjectSpawnerCheckbox.Checked $bRandomizeTeam1VehiclesCheckbox.Checked $bRandomizeTeam2VehiclesCheckbox.Checked $bUseAutoBackupCheckbox.Checked | Write-Host

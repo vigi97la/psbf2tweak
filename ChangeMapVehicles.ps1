@@ -101,6 +101,17 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 			Continue
 		}
 
+		if ((!$bRandomizeTeam1Vehicles) -and (!$bRandomizeTeam2Vehicles)) {
+			if ($bShowObjectSpawner) {
+				Write-Output "$teamNumber, $vehicle ($objectSpawner)"
+			}
+			else {
+				Write-Output "$teamNumber, $vehicle"
+			}
+			$sw.WriteLine($line)
+			Continue
+		}
+
 		if ((($teamNumber -eq 1) -and (!$bRandomizeTeam1Vehicles)) -or (($teamNumber -eq 2) -and (!$bRandomizeTeam2Vehicles))) {
 			$sw.WriteLine($line)
 			Continue
