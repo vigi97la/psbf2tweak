@@ -14,7 +14,7 @@ $instructionsLabel = New-Object System.Windows.Forms.Label
 $instructionsLabel.Location = New-Object System.Drawing.Point(300,200)
 $instructionsLabel.Size = New-Object System.Drawing.Size(300,100)
 $instructionsLabel.Text =
-"List vehicles and display lines that can be added to vehicles_db.csv as a template to be modified manually (see more info in ListVehicles.ps1)."
+"List vehicles and display lines that can be added to vehicles_db.csv as a template to be modified manually (see more info in ReadMe.txt and ListVehicles.ps1)."
 $form.Controls.Add($instructionsLabel)
 
 $offset += 20

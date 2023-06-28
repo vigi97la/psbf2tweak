@@ -14,7 +14,7 @@ $instructionsLabel = New-Object System.Windows.Forms.Label
 $instructionsLabel.Location = New-Object System.Drawing.Point(300,200)
 $instructionsLabel.Size = New-Object System.Drawing.Size(300,100)
 $instructionsLabel.Text =
-"Add more fire and smoke on damaged vehicles and wrecks (see more info in AddArmorEffect.ps1). "+
+"Add more fire and smoke on damaged vehicles and wrecks (see more info in ReadMe.txt and AddArmorEffect.ps1). "+
 "Warning: there is no script to remove it, so make a backup before if needed."
 $form.Controls.Add($instructionsLabel)
 

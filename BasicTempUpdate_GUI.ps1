@@ -15,7 +15,7 @@ $instructionsLabel = New-Object System.Windows.Forms.Label
 $instructionsLabel.Location = New-Object System.Drawing.Point(300,300)
 $instructionsLabel.Size = New-Object System.Drawing.Size(300,100)
 $instructionsLabel.Text =
-"BasicTemp setting is usually by default between 5 and 20 for vehicles, but a multiplier of 100 is the recommended setting for this mod so that bots use more the vehicles whenever possible (see more info in BasicTempUpdate.ps1). "+
+"BasicTemp setting is usually by default between 5 and 20 for vehicles, but a multiplier of 100 is the recommended setting for this mod so that bots use more the vehicles whenever possible (see more info in ReadMe.txt and BasicTempUpdate.ps1). "+
 $form.Controls.Add($instructionsLabel)
 
 $offset += 20

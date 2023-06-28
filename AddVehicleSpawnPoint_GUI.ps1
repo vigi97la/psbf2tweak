@@ -14,7 +14,7 @@ $instructionsLabel = New-Object System.Windows.Forms.Label
 $instructionsLabel.Location = New-Object System.Drawing.Point(300,200)
 $instructionsLabel.Size = New-Object System.Drawing.Size(300,100)
 $instructionsLabel.Text =
-"Add a mobile spawnpoint on vehicles (see more info in AddVehicleSpawnPoint.ps1 and vehicles_db.csv). "+
+"Add a mobile spawnpoint on vehicles (see more info in ReadMe.txt, vehicles_db.csv and AddVehicleSpawnPoint.ps1 and). "+
 "Warning: there is no script to remove it, so make a backup before if needed."
 $form.Controls.Add($instructionsLabel)
 
