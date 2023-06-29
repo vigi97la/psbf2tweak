@@ -750,7 +750,7 @@ ObjectTemplate.createComponent DefaultDetonationComp
 ObjectTemplate.detonation.explosionMaterial 70
 ObjectTemplate.detonation.explosionRadius 5
 ObjectTemplate.detonation.explosionForce 15
-ObjectTemplate.detonation.explosionDamage 150
+ObjectTemplate.detonation.explosionDamage 125
 ObjectTemplate.detonation.endEffectTemplate e_exp_medium
 ObjectTemplate.detonation.useMMOnEndEffect 1
 ObjectTemplate.detonation.detectionRadius 1.5
@@ -785,7 +785,7 @@ ObjectTemplate.maxTracerScaler 5
 ObjectTemplate.minTracerScaler 1
 ObjectTemplate.tracerTemplate p_tracer_tank
 ObjectTemplate.minDamage 1
-ObjectTemplate.damage 550
+ObjectTemplate.damage 500
 
 ObjectTemplate.activeSafe Sound S_RU_T90MS_Barrel_Fire1P
 ObjectTemplate.modifiedByUser "Administrator"
