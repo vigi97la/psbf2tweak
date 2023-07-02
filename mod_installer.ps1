@@ -444,20 +444,33 @@ function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSepa
 
 }
 
-#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\GitHub\psbf2tweak"
-function ExtractModServerArchives($modFolder) {
+function ExtractModArchivesConFile($archivesConFile,$extractionFolder,[bool]$bIgnoreZipOutsideModFolder=$true,[bool]$bExtractWithZipName=$true) {
 
-	#$extractionFolder="."
+	if (!(Test-Path -Path $archivesConFile)) {
+		Write-Error "Error: $archivesConFile not found"
+		return
+	}
+	if (!(Test-Path -Path $extractionFolder)) {
+		Write-Error "Error: $extractionFolder not found"
+		return
+	}
+	
+	$modFolder=split-path -parent $archivesConFile
 
-	$serverArchives="$modFolder\ServerArchives.con"
-
-	#Objects, Menu, Common, Fonts, Shaders, Scripts
+	# Objects, Menu, Common, Fonts, Shaders, Scripts
 
 	# First lines have more priority over the last in ServerArchives.con?
 
+	#$concontent=(PreProcessCommentsConContent (ReadConFile $archivesConFile))
+	#$lines=$($concontent -split "\r?\n")
+	#for ($i=$lines.Count-1; $i -ge 0; $i--) {
+	#	$line=$lines[$i]
+	#
+	#}
+
 	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
 	$archiveregexpr="^\s*fileManager.mountArchive\s+(.+)`.zip\s+(.+)\s*"
-	$sr=[System.IO.StreamReader]$serverArchives
+	$sr=[System.IO.StreamReader]$archivesConFile
 	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 		$line=$sr.ReadLine()
 		$m=[regex]::Match($line, $remregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
@@ -468,31 +481,49 @@ function ExtractModServerArchives($modFolder) {
 		if ($m.Groups.Count -ne 3) {
 			Continue
 		}
-		$file=$m.Groups[1].value #filename without .zip
+		$file=$m.Groups[1].value # Filename (might include relative path) without .zip
 		$folder=$m.Groups[2].value
-		"$file -> $folder"
+		"$file ($folder)"
 		If (Test-Path -Path "$modFolder\$file.zip") {
 			$zipfile="$modFolder\$file.zip"
 		}
 		else {
 			If (Test-Path -Path "$modFolder\..\..\$file.zip") {
-				# Should add option to choose what to do with files outside current mod...?
 				$zipfile="$modFolder\..\..\$file.zip"
-				Write-Output "Skipping $zipfile since it is outside current mod"
-				Continue
+				If ($bIgnoreZipOutsideModFolder) {
+					Write-Output "Skipping $zipfile ($folder) since it is outside current mod"
+					Continue
+				}
 			}
 			else {
-				Write-Error "Could not find $modFolder\$file.zip or $modFolder\..\..\$file.zip"
+				Write-Error "Could not find $modFolder\$file.zip or $modFolder\..\..\$file.zip ($folder)"
 			}
 		}
-		& 7z x -y "$zipfile" `-o"$modFolder\$file"
+		If ($bExtractWithZipName) {
+			& 7z x -y "$zipfile" `-o"$extractionFolder\$file"
+		}
+		Else {
+			& 7z x -y "$zipfile" `-o"$extractionFolder\$folder"
+		}
 	}
 	$sr.close()
 }
 
-function CompressModServerArchives($modFolder) {
+#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\GitHub\psbf2tweak"
+function ExtractModArchives($modFolder,$extractionFolder=$modFolder,[bool]$bIgnoreClientArchives=$true,[bool]$bIgnoreZipOutsideModFolder=$true,[bool]$bExtractWithZipName=$true) {
 
+	$serverArchives="$modFolder\ServerArchives.con"
+	$clientArchives="$modFolder\ClientArchives.con"
+
+	ExtractModArchivesConFile $serverArchives $extractionFolder $bIgnoreZipOutsideModFolder $bExtractWithZipName
+	if (-not $bIgnoreClientArchives) {
+		ExtractModArchivesConFile $clientArchives $extractionFolder $bIgnoreZipOutsideModFolder $bExtractWithZipName
+	}
 }
+
+#function CompressModArchives($modFolder) {
+#
+#}
 
 #Read-Host -Prompt "Press Enter to continue"
 
