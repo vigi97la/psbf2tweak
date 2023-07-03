@@ -412,13 +412,13 @@ function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false
 
 function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnoreZipOutsideModFolder=$false,[int]$extractMode=0) {
 
-	if (!(Test-Path -Path $archivesConFile)) {
-		Write-Error "Error: $archivesConFile not found"
+	if (($null -eq $archivesConFile) -or !(Test-Path -Path $archivesConFile)) {
+		Write-Error "Error: Invalid parameter (archivesConFile)"
 		return
 	}
 	New-Item $extractFolder -ItemType directory -Force
-	if (!(Test-Path -Path $extractFolder)) {
-		Write-Error "Error: $extractFolder not found"
+	if (($null -eq $extractFolder) -or !(Test-Path -Path $extractFolder)) {
+		Write-Error "Error: Invalid parameter (extractFolder)"
 		return
 	}
 
@@ -490,10 +490,10 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 	}
 }
 
-function FindTemplate($objectsFolder,$searchedTemplateName=$null) {
+function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOutput=$true) {
 
-	if (!(Test-Path -Path $objectsFolder)) {
-		Write-Error "Error: $objectsFolder not found"
+	if (($null -eq $objectsFolder) -or !(Test-Path -Path $objectsFolder)) {
+		Write-Error "Error: Invalid parameter (objectsFolder)"
 		return $null
 	}
 
@@ -514,10 +514,10 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null) {
 				$templateType=$m.Groups[1].value
 				$templateName=$m.Groups[2].value
 				If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
-					"$templateType $templateName ($file)"
+					If ($bShowOutput) { Write-Output "$templateType $templateName ($file)" }
 				}
 				ElseIf ($m.Groups[2].value -eq $searchedTemplateName) {
-					"$templateType $templateName ($file)"
+					If ($bShowOutput) { Write-Output "$templateType $templateName ($file)" }
 					$bFound=$true
 					$lastFileFound=$file
 				}				
@@ -534,19 +534,30 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null) {
 }
 
 #$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
-#$objectFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0"
+#$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0"
 #ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder
 function ListDependenciesConContent($concontent, $objectsFolder) {
+
+	# FindTemplate very slow...
+
+	# add option to list template dependencies that are created in the file...
+
+	if (($null -eq $objectsFolder) -or !(Test-Path -Path $objectsFolder)) {
+		Write-Error "Error: Invalid parameter (objectsFolder)"
+	}
+
 	$regexpr="^\s*ObjectTemplate.addTemplate\s+(\S+)\s*"
-	$concontent=(ReadConFile $file)
 	$lines=$($concontent -split "\r?\n")
 	for ($i=0; $i -lt $lines.Count; $i++) {
 		$line=$lines[$i]
+		#"$line"
 		$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 2) {
-			$neededFile=FindTemplate $objectsFolder $m.Groups[1].value
-			If (($null -ne $neededFile) -and ("" -ne $neededFile) -and ($file -ne $neededFile)) {
-				"Template $m.Groups[1].value created in $neededFile"
+			$templateDependency=$m.Groups[1].value
+			"$templateDependency"
+			$neededFile=FindTemplate $objectsFolder $templateDependency $false
+			If (($null -ne $neededFile) -and ("" -ne $neededFile) -and ((Get-Item $file ).Basename -ne (Get-Item $neededFile ).Basename)) {
+				Write-Output "Template $templateDependency created in $neededFile"
 			}
 		}
 	}
