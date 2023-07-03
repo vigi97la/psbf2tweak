@@ -265,7 +265,7 @@ function PreProcessIncludesConLine($line, $file) {
 		$v_arg8=$m.Groups[17].value
 		$v_arg9=$m.Groups[19].value
 		$i=0
-		$includedfilecontent=(PreProcessIncludesConContent (PreProcessIfConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $includedfile) ([ref]$i) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $includedfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		$includedfilecontent=(PreProcessIncludesConContent (PreProcessIfConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $includedfile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $includedfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 		return $includedfilecontent
 	}
 	else {
