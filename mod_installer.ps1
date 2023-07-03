@@ -476,7 +476,8 @@ function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnor
 }
 
 #. .\mod_installer.ps1
-#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\GitHub\psbf2tweak"
+#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\bf2"
+#ExtractModArchives $modFolder $modFolder $true $true 0
 #$extractMode : 0 if the extracted folders use the zip name, 1 if they use the folder specified in the .con file, 2 if a suffix "server" or "client" should be added to that folder.
 function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreClientArchives=$false,[bool]$bIgnoreZipOutsideModFolder=$false,[int]$extractMode=0) {
 
@@ -486,6 +487,68 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 	ExtractModArchivesConFile $serverArchives $extractFolder $bIgnoreZipOutsideModFolder $extractMode
 	if (-not $bIgnoreClientArchives) {
 		ExtractModArchivesConFile $clientArchives $extractFolder $bIgnoreZipOutsideModFolder $extractMode
+	}
+}
+
+function FindTemplate($objectsFolder,$searchedTemplateName=$null) {
+
+	if (!(Test-Path -Path $objectsFolder)) {
+		Write-Error "Error: $objectsFolder not found"
+		return $null
+	}
+
+	$bFound=$false
+	Get-ChildItem "$objectsFolder\*" -R -Include *.con,*.tweak | ForEach-Object {
+		$file=$_.FullName
+
+		#$bVehicle=[regex]::Match($file, "(.*Vehicles.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
+		#$bStationaryWeapon=[regex]::Match($file, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
+				
+		$regexpr="^\s*ObjectTemplate.create\s+(\S+)\s+(\S+)\s*"
+		$concontent=(ReadConFile $file)
+		$lines=$($concontent -split "\r?\n")
+		for ($i=0; $i -lt $lines.Count; $i++) {
+			$line=$lines[$i]
+			$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			If ($m.Groups.Count -eq 3) {
+				$templateType=$m.Groups[1].value
+				$templateName=$m.Groups[2].value
+				If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
+					"$templateType $templateName ($file)"
+				}
+				ElseIf ($m.Groups[2].value -eq $searchedTemplateName) {
+					"$templateType $templateName ($file)"
+					$bFound=$true
+					$lastFileFound=$file
+				}				
+			}
+		}
+
+	}
+	If ($bFound) {
+		return $lastFileFound
+	}
+	Else {
+		return $null
+	}
+}
+
+#$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
+#$objectFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0"
+#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder
+function ListDependenciesConContent($concontent, $objectsFolder) {
+	$regexpr="^\s*ObjectTemplate.addTemplate\s+(\S+)\s*"
+	$concontent=(ReadConFile $file)
+	$lines=$($concontent -split "\r?\n")
+	for ($i=0; $i -lt $lines.Count; $i++) {
+		$line=$lines[$i]
+		$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		If ($m.Groups.Count -eq 2) {
+			$neededFile=FindTemplate $objectsFolder $m.Groups[1].value
+			If (($null -ne $neededFile) -and ("" -ne $neededFile) -and ($file -ne $neededFile)) {
+				"Template $m.Groups[1].value created in $neededFile"
+			}
+		}
 	}
 }
 
