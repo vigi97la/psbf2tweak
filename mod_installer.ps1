@@ -490,7 +490,7 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 	}
 }
 
-function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOutput=$true) {
+function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOutput=$true,[bool]$bUseCache=$true) {
 
 	if (($null -eq $objectsFolder) -or !(Test-Path -Path $objectsFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
@@ -498,32 +498,60 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 	}
 
 	$bFound=$false
-	Get-ChildItem "$objectsFolder\*" -R -Include *.con,*.tweak | ForEach-Object {
-		$file=$_.FullName
+	$lastFileFound=$null
+	$cachefile="$objectsFolder\cache_db.csv"
+	If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
+		$sw=[System.IO.StreamWriter]$cachefile
+		Get-ChildItem "$objectsFolder\*" -R -Include *.con,*.tweak | ForEach-Object {
+			$file=$_.FullName
 
-		#$bVehicle=[regex]::Match($file, "(.*Vehicles.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
-		#$bStationaryWeapon=[regex]::Match($file, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
+			#$bVehicle=[regex]::Match($file, "(.*Vehicles.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
+			#$bStationaryWeapon=[regex]::Match($file, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
 				
-		$regexpr="^\s*ObjectTemplate.create\s+(\S+)\s+(\S+)\s*"
-		$concontent=(ReadConFile $file)
-		$lines=$($concontent -split "\r?\n")
-		for ($i=0; $i -lt $lines.Count; $i++) {
-			$line=$lines[$i]
-			$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-			If ($m.Groups.Count -eq 3) {
-				$templateType=$m.Groups[1].value
-				$templateName=$m.Groups[2].value
-				If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
-					If ($bShowOutput) { Write-Output "$templateType $templateName ($file)" }
+			$regexpr="^\s*ObjectTemplate.(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*"
+			$concontent=(ReadConFile $file)
+			$lines=$($concontent -split "\r?\n")
+			for ($i=0; $i -lt $lines.Count; $i++) {
+				$line=$lines[$i]
+				$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				If ($m.Groups.Count -eq 4) {
+					$templateType=$m.Groups[2].value
+					$templateName=$m.Groups[3].value
+					If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
+						$sw.WriteLine("$templateName;$templateType;$file")
+						If ($bShowOutput) { Write-Output "$templateType $templateName ($file)" }
+					}
+					ElseIf ($m.Groups[3].value -eq $searchedTemplateName) {
+						If ($bShowOutput) { Write-Output "$templateType $templateName ($file)" }
+						$bFound=$true
+						$lastFileFound=$file
+					}				
 				}
-				ElseIf ($m.Groups[2].value -eq $searchedTemplateName) {
-					If ($bShowOutput) { Write-Output "$templateType $templateName ($file)" }
-					$bFound=$true
-					$lastFileFound=$file
-				}				
+			}
+
+		}
+		$sw.close()
+	}
+	Else {
+		if (($null -eq $cachefile) -or !(Test-Path -Path $cachefile)) {
+			Write-Error "Error: cache_db.csv not found"
+			return $null
+		}
+		$regesc=[regex]::Escape($searchedTemplateName)
+		$regexpr="^$regesc;(\S+);(.*)$"
+		$sr=[System.IO.StreamReader]$cachefile
+		while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+			$line=$sr.ReadLine()
+			$m=[regex]::Match($line,$regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if ($m.Groups.Count -eq 3) {
+				$templateType=$m.Groups[1].value
+				$templateFile=$m.Groups[2].value
+				If ($bShowOutput) { Write-Output "$templateType $searchedTemplateName ($templateFile)" }
+				$bFound=$true
+				$lastFileFound=$templateFile
 			}
 		}
-
+		$sr.close()		
 	}
 	If ($bFound) {
 		return $lastFileFound
@@ -535,8 +563,9 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 
 #$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0"
-#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder
-function ListDependenciesConContent($concontent, $objectsFolder) {
+#FindTemplate $objectsFolder
+#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder $true $true
+function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true) {
 
 	# FindTemplate very slow...
 
@@ -555,9 +584,14 @@ function ListDependenciesConContent($concontent, $objectsFolder) {
 		If ($m.Groups.Count -eq 2) {
 			$templateDependency=$m.Groups[1].value
 			"$templateDependency"
-			$neededFile=FindTemplate $objectsFolder $templateDependency $false
-			If (($null -ne $neededFile) -and ("" -ne $neededFile) -and ((Get-Item $file ).Basename -ne (Get-Item $neededFile ).Basename)) {
-				Write-Output "Template $templateDependency created in $neededFile"
+			$neededFile=FindTemplate $objectsFolder $templateDependency $false $bUseCache
+			If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
+				If ((-not $bHideDefinitionsInCurrentConOrTweak) -or ((Get-Item $file).Basename -ne (Get-Item $neededFile).Basename)) {
+					Write-Output "Template $templateDependency created in $neededFile"
+				}
+			}
+			Else {
+				Write-Warning "Template $templateDependency not found"
 			}
 		}
 	}
