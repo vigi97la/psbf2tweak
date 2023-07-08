@@ -596,8 +596,8 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 #$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0"
 #FindTemplate $objectsFolder
-#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder $true $true
-function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true) {
+#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder $true $true $false $false
+function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
 
 	# add option to list template dependencies that are created in the file...
 
@@ -616,7 +616,9 @@ function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=
 			#"$templateDependency"
 			$neededFile=FindTemplate $objectsFolder $templateDependency $false $bUseCache
 			If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
-				If ((-not $bHideDefinitionsInCurrentConOrTweak) -or ((Get-Item $file).Basename -ne (Get-Item $neededFile).Basename)) {
+				If (((-not $bHideDefinitionsInCurrentConOrTweak) -or ((Get-Item $file).Basename -ne (Get-Item $neededFile).Basename)) -and
+				((-not $bHideDefinitionsInBf2) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\bf2"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success)) -and
+				((-not $bHideDefinitionsInXpack) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\xpack"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success))) {
 					Write-Output "Template $templateDependency created in $neededFile"
 				}
 			}
