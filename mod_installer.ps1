@@ -497,39 +497,71 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 		return $null
 	}
 
+	$templateName=$null
 	$bFound=$false
 	$lastFileFound=$null
 	$cachefile="$objectsFolder\cache_db.csv"
-	If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
+	If ((-not $bUseCache) -or (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName))) {
 		$sw=[System.IO.StreamWriter]$cachefile
 		Get-ChildItem "$objectsFolder\*" -R -Include *.con,*.tweak | ForEach-Object {
 			$file=$_.FullName
-
-			#$bVehicle=[regex]::Match($file, "(.*Vehicles.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
-			#$bStationaryWeapon=[regex]::Match($file, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
-				
-			$regexpr="^\s*ObjectTemplate.(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*"
 			$concontent=(ReadConFile $file)
 			$lines=$($concontent -split "\r?\n")
 			for ($i=0; $i -lt $lines.Count; $i++) {
 				$line=$lines[$i]
-				$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				$m=[regex]::Match($line, "^\s*ObjectTemplate.(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -eq 4) {
+
+					# End of any previous object, beginning of new one
+
+					If ($null -ne $templateName) {
+						If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
+							$sw.Write("$templateName;$templateType;$templateFile")
+							foreach ($element in $templateChildren) {
+								$sw.Write(";$element")
+							}
+							$sw.WriteLine()
+							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
+						}
+						ElseIf ($m.Groups[3].value -eq $searchedTemplateName) {
+							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
+							$bFound=$true
+							$lastFileFound=$templateFile
+						}				
+					}
+
 					$templateType=$m.Groups[2].value
 					$templateName=$m.Groups[3].value
-					If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
-						$sw.WriteLine("$templateName;$templateType;$file")
-						If ($bShowOutput) { Write-Output "$templateType $templateName ($file)" }
+					$templateFile=$file
+					$templateChildren=$null
+				}
+				ElseIf ($null -ne $templateName) {
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.addTemplate\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 2) {
+						$templateChild=$m.Groups[1].value
+						$templateChildren+=,$templateChild
 					}
-					ElseIf ($m.Groups[3].value -eq $searchedTemplateName) {
-						If ($bShowOutput) { Write-Output "$templateType $templateName ($file)" }
-						$bFound=$true
-						$lastFileFound=$file
-					}				
 				}
 			}
 
 		}
+
+		If ($null -ne $templateName) {
+			If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
+				$sw.Write("$templateName;$templateType;$templateFile")
+				foreach ($element in $templateChildren) {
+					$sw.Write(";$element")
+				}
+				$sw.WriteLine()
+				If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
+			}
+			ElseIf ($m.Groups[3].value -eq $searchedTemplateName) {
+				If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
+				$bFound=$true
+				$lastFileFound=$templateFile
+			}				
+		}
+
 		$sw.close()
 	}
 	Else {
@@ -538,11 +570,10 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 			return $null
 		}
 		$regesc=[regex]::Escape($searchedTemplateName)
-		$regexpr="^$regesc;(\S+);(.*)$"
 		$sr=[System.IO.StreamReader]$cachefile
 		while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 			$line=$sr.ReadLine()
-			$m=[regex]::Match($line,$regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($line,"^$regesc;(\S+);([^;$\r\n]*);?",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			if ($m.Groups.Count -eq 3) {
 				$templateType=$m.Groups[1].value
 				$templateFile=$m.Groups[2].value
@@ -561,13 +592,12 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 	}
 }
 
+#. .\mod_installer.ps1
 #$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0"
 #FindTemplate $objectsFolder
 #ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder $true $true
 function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true) {
-
-	# FindTemplate very slow...
 
 	# add option to list template dependencies that are created in the file...
 
@@ -583,7 +613,7 @@ function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=
 		$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 2) {
 			$templateDependency=$m.Groups[1].value
-			"$templateDependency"
+			#"$templateDependency"
 			$neededFile=FindTemplate $objectsFolder $templateDependency $false $bUseCache
 			If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
 				If ((-not $bHideDefinitionsInCurrentConOrTweak) -or ((Get-Item $file).Basename -ne (Get-Item $neededFile).Basename)) {
