@@ -490,6 +490,23 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 	}
 }
 
+# Classes are not available before Powershell 5...
+#class ObjectTemplate {
+#    [string]$name=$null
+#    [string]$type=$null
+#    [string]$file=$null
+#    #[string[]]$files=$null
+#	[string[]]$children=$null
+#	# Position
+#	[double]$x=0
+#	[double]$y=0
+#	[double]$z=0
+#	# Rotation
+#	[double]$phi=0
+#	[double]$theta=0
+#	[double]$psi=0
+#}
+
 function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOutput=$true,[bool]$bUseCache=$true) {
 
 	if (($null -eq $objectsFolder) -or !(Test-Path -Path $objectsFolder)) {
@@ -512,7 +529,7 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 				$m=[regex]::Match($line, "^\s*ObjectTemplate.(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -eq 4) {
 
-					# End of any previous object, beginning of new one
+					# End of any previous object, beginning of new one...
 
 					If ($null -ne $templateName) {
 						If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
@@ -581,6 +598,9 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 				$bFound=$true
 				$lastFileFound=$templateFile
 			}
+
+			# Should get children...
+
 		}
 		$sr.close()		
 	}
@@ -598,8 +618,6 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 #FindTemplate $objectsFolder
 #ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder $true $true $false $false
 function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
-
-	# add option to list template dependencies that are created in the file...
 
 	if (($null -eq $objectsFolder) -or !(Test-Path -Path $objectsFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
@@ -621,6 +639,9 @@ function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=
 				((-not $bHideDefinitionsInXpack) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\xpack"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success))) {
 					Write-Output "Template $templateDependency created in $neededFile"
 				}
+
+				# Check also for its own dependencies... But should check only for the dependencies of $templateDependency...
+				#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $neededFile) $neededFile) $objectsFolder $bUseCache $bHideDefinitionsInCurrentConOrTweak $bHideDefinitionsInBf2 $bHideDefinitionsInXpack
 			}
 			Else {
 				Write-Warning "Template $templateDependency not found"
@@ -629,7 +650,7 @@ function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=
 	}
 }
 
-function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSeparateServerClient=$true,[bool]$bFixVehicleHudNameInconsistencies=$false,[bool]$bFixVehicleTypeInconsistencies=$false,[bool]$bConfirmEachFix=$false) {
+#function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSeparateServerClient=$true,[bool]$bFixVehicleHudNameInconsistencies=$false,[bool]$bFixVehicleTypeInconsistencies=$false,[bool]$bConfirmEachFix=$false) {
 
 	#$modFolder optional, would be to check the existence of includes...
 	#if downloadsFolder empty, only use modFolder and use Server/ClientArchives.con
@@ -638,8 +659,8 @@ function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSepa
 
 	# TODO: There might be other archives inside the archives, and their extracted name might conflict with existing folders...
 
-	Get-ChildItem "$downloadsFolder\*" -R -Include *.zip,*.rar,*.7z | ForEach-Object {
-		& 7z x -y $_.FullName `-o"$($_.DirectoryName)/$($_.Basename)"
+	#Get-ChildItem "$downloadsFolder\*" -R -Include *.zip,*.rar,*.7z | ForEach-Object {
+	#	& 7z x -y $_.FullName `-o"$($_.DirectoryName)/$($_.Basename)"
 
 		#first assume it follows std dir struct of objects_server/client.zip
 
@@ -650,7 +671,7 @@ function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSepa
 		#effects\vehicles...
 		# meshes folder should be copied to server, and its sudirectory structure copied to client with only the .bundlemesh
 
-	}
+	#}
 
 
 
@@ -661,7 +682,7 @@ function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSepa
 	#parses and get includes (including  menuincon to put in correct folder, etc.) to help extracting from other mods
 
 
-}
+#}
 
 #function CompressModArchives($modFolder) {
 #
