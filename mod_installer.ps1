@@ -1,5 +1,16 @@
 # DO NOT USE, TEMPORARY
 
+#. .\mod_installer.ps1
+#$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
+#$extractFolder="$modFolder"
+#ExtractModArchives $modFolder $extractFolder $false $true 0
+#$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_tnk_leclerc"
+#ProcessVehicles $vehicleToExtract $false $true $true $true $true
+#Should output a .tweak.tmp for each vehicle, to be renamed manually to .tweak if it is OK...
+#$file=(Get-Item "$vehicleToExtract\*.con").FullName
+#FindTemplate $extractFolder
+#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $extractFolder $true $true $false $false
+
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
 function ReadConFile($file) {
@@ -281,7 +292,10 @@ function PreProcessIncludesConContent($concontent, $file) {
 	return $content
 }
 
-#ProcessVehicles "U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab" $false $true $true $true $true
+#. .\mod_installer.ps1
+#$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab"
+#ProcessVehicles $vehicleToExtract $false $true $true $true $true
+#Should output a .tweak.tmp for each vehicle, to be renamed manually to .tweak if it is OK...
 function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [bool]$bIncludeAll=$false, [bool]$bResetMapIcons=$false, [bool]$bResetHUDIcons=$false, [bool]$bExpandIncludes=$false) {
 
 	Get-ChildItem "$objectsFolder\*" -R -Include "*.tweak" | ForEach-Object {
@@ -476,9 +490,10 @@ function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnor
 }
 
 #. .\mod_installer.ps1
-#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\bf2"
-#ExtractModArchives $modFolder $modFolder $true $true 0
-#$extractMode : 0 if the extracted folders use the zip name, 1 if they use the folder specified in the .con file, 2 if a suffix "server" or "client" should be added to that folder.
+#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack"
+#$extractFolder="$modFolder\extracted"
+#ExtractModArchives $modFolder $extractFolder $true $true 0
+#$extractMode: 0 if the extracted folders use the zip name, 1 if they use the folder specified in the .con file, 2 if a suffix "server" or "client" should be added to that folder.
 function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreClientArchives=$false,[bool]$bIgnoreZipOutsideModFolder=$false,[int]$extractMode=0) {
 
 	$serverArchives="$modFolder\ServerArchives.con"
@@ -613,8 +628,8 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 }
 
 #. .\mod_installer.ps1
-#$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
-#$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\0"
+#$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\extracted\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
+#$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\extracted"
 #FindTemplate $objectsFolder
 #ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder $true $true $false $false
 function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
