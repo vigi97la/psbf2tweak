@@ -524,7 +524,7 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 #	[double]$psi=0
 #}
 
-function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOutput=$true,[bool]$bUseCache=$true) {
+function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bUseCache=$true,[bool]$bShowOutput=$true) {
 
 	if (($null -eq $objectsFolder) -or !(Test-Path -Path $objectsFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
@@ -534,6 +534,7 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 	$templateName=$null
 	$bFound=$false
 	$lastFileFound=$null
+	$lastChildrenFound=$null
 	$cachefile="$objectsFolder\cache_db.csv"
 	If ((-not $bUseCache) -or (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName))) {
 		$sw=[System.IO.StreamWriter]$cachefile
@@ -552,7 +553,9 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 						If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
 							$sw.Write("$templateName;$templateType;$templateFile")
 							foreach ($element in $templateChildren) {
-								$sw.Write(";$element")
+								If (($null -ne $element) -and ("" -ne $element)) {
+									$sw.Write(";$element")
+								}
 							}
 							$sw.WriteLine()
 							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
@@ -561,6 +564,7 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 							$bFound=$true
 							$lastFileFound=$templateFile
+							$lastChildrenFound=$templateChildren
 						}				
 					}
 
@@ -584,7 +588,9 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 			If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
 				$sw.Write("$templateName;$templateType;$templateFile")
 				foreach ($element in $templateChildren) {
-					$sw.Write(";$element")
+					If (($null -ne $element) -and ("" -ne $element)) {
+						$sw.Write(";$element")
+					}
 				}
 				$sw.WriteLine()
 				If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
@@ -607,31 +613,69 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bShowOut
 		$sr=[System.IO.StreamReader]$cachefile
 		while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 			$line=$sr.ReadLine()
-			$m=[regex]::Match($line,"^$regesc;(\S+);([^;$\r\n]*);?",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-			if ($m.Groups.Count -eq 3) {
-				$templateType=$m.Groups[1].value
-				$templateFile=$m.Groups[2].value
+			$cols=($line -split ";")
+			$m=[regex]::Match($cols[0],"^$regesc",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if ($m.Success) {
+				$templateType=$cols[1]
+				$templateFile=$cols[2]
+				$templateChildren=$null
+				for ($i=3; $i -lt $cols.Count; $i++) {
+					$templateChild=$cols[$i]
+					If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
+						$templateChildren+=,$cols[$i]
+					}
+				}
 				If ($bShowOutput) { Write-Output "$templateType $searchedTemplateName ($templateFile)" }
 				$bFound=$true
 				$lastFileFound=$templateFile
+				$lastChildrenFound=$templateChildren
 			}
-
-			# Should get children...
-
 		}
 		$sr.close()		
 	}
 	If ($bFound) {
-		return $lastFileFound
+		If (($null -ne $templateChildren) -and ("" -ne $templateChildren)) {
+			return @($lastFileFound)+$templateChildren
+		}
+		Else {
+			return $lastFileFound
+		}
 	}
 	Else {
 		return $null
 	}
 }
 
+function FindTemplateDependencies($objectsFolder,$searchedTemplateName,[bool]$bUseCache=$true) {
+
+	$neededFiles=$null
+	$ret=@(FindTemplate $objectsFolder $searchedTemplateName $bUseCache $false)
+	#Write-Warning "$ret"
+	If (($null -eq $ret) -or ("" -eq $ret)) {
+		return $null
+	}
+	$neededFile=$ret[0]
+	If (($null -eq $neededFile) -or ("" -eq $neededFile)) {
+		return $null
+	}
+	$neededFiles=,$neededFile
+	#Write-Warning "$neededFile"
+	for ($i=1; $i -lt $ret.Count; $i++) {
+		$templateChild=$ret[$i]
+		#Write-Warning "$templateChild"
+		If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
+			$neededChildFiles=@(FindTemplateDependencies $objectsFolder $templateChild $bUseCache)
+			If (($null -ne $neededChildFiles) -and ("" -ne $neededChildFiles)) {
+				$neededFiles+=$neededChildFiles
+			}
+		}
+	}
+	return $neededFiles
+}
+
 #. .\mod_installer.ps1
-#$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\extracted\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
-#$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack\extracted"
+#$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\extracted\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
+#$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\extracted"
 #FindTemplate $objectsFolder
 #ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder $true $true $false $false
 function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
@@ -648,20 +692,25 @@ function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=
 		$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 2) {
 			$templateDependency=$m.Groups[1].value
-			#"$templateDependency"
-			$neededFile=FindTemplate $objectsFolder $templateDependency $false $bUseCache
-			If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
-				If (((-not $bHideDefinitionsInCurrentConOrTweak) -or ((Get-Item $file).Basename -ne (Get-Item $neededFile).Basename)) -and
-				((-not $bHideDefinitionsInBf2) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\bf2"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success)) -and
-				((-not $bHideDefinitionsInXpack) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\xpack"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success))) {
-					Write-Output "Template $templateDependency created in $neededFile"
-				}
-
-				# Check also for its own dependencies... But should check only for the dependencies of $templateDependency...
-				#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $neededFile) $neededFile) $objectsFolder $bUseCache $bHideDefinitionsInCurrentConOrTweak $bHideDefinitionsInBf2 $bHideDefinitionsInXpack
-			}
-			Else {
+			"$templateDependency"
+			$ret=@(FindTemplateDependencies $objectsFolder $templateDependency $bUseCache)
+			#"$ret"
+			If (($null -eq $ret) -or ("" -eq $ret)) {
 				Write-Warning "Template $templateDependency not found"
+				continue
+			}
+			for ($j=0; $j -lt $ret.Count; $j++) {
+				$neededFile=$ret[$j]
+				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
+					If (((-not $bHideDefinitionsInCurrentConOrTweak) -or ((Get-Item $file).Basename -ne (Get-Item $neededFile).Basename)) -and
+					((-not $bHideDefinitionsInBf2) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\bf2"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success)) -and
+					((-not $bHideDefinitionsInXpack) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\xpack"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success))) {
+						Write-Output "Template $templateDependency needs $neededFile"
+					}
+				}
+				Else {
+					Write-Warning "Template $templateDependency not found"
+				}
 			}
 		}
 	}
