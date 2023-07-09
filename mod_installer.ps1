@@ -2,13 +2,14 @@
 
 #. .\mod_installer.ps1
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
-#$extractFolder="$modFolder"
-#ExtractModArchives $modFolder $extractFolder $false $true 0
-#$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_tnk_leclerc"
+#$extractFolder="$modFolder\extracted"
+#ExtractModArchives $modFolder $extractFolder $false $true 1
+#$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\extracted\Objects\Vehicles\Land\fr_tnk_leclerc"
 #ProcessVehicles $vehicleToExtract $false $true $true $true $true $true
 #$file=(Get-Item "$vehicleToExtract\*.con").FullName
 #FindTemplate $extractFolder
-#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $extractFolder $true $true $false $false
+#$exportFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\export"
+#ListDependencies $file $extractFolder $exportFolder $true $false $false $false
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
@@ -614,7 +615,7 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bUseCach
 		while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 			$line=$sr.ReadLine()
 			$cols=($line -split ";")
-			$m=[regex]::Match($cols[0],"^$regesc",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($cols[0],"^$regesc$",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			if ($m.Success) {
 				$templateType=$cols[1]
 				$templateFile=$cols[2]
@@ -677,12 +678,19 @@ function FindTemplateDependencies($objectsFolder,$searchedTemplateName,[bool]$bU
 #$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\extracted\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\extracted"
 #FindTemplate $objectsFolder
-#ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $objectsFolder $true $true $false $false
-function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
+#$exportFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\export"
+#ListDependencies $file $objectsFolder $exportFolder $true $true $false $false
+function ListDependencies($file,$objectsFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
 
 	if (($null -eq $objectsFolder) -or !(Test-Path -Path $objectsFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
 	}
+
+	#ObjectTemplate.soundFilename "..."
+	#ObjectTemplate.seatAnimationSystem "..."
+	#ObjectTemplate.XXXIconXXX "..."
+
+	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
 
 	$regexpr="^\s*ObjectTemplate.addTemplate\s+(\S+)\s*"
 	$lines=$($concontent -split "\r?\n")
@@ -703,9 +711,22 @@ function ListDependenciesConContent($concontent,$objectsFolder,[bool]$bUseCache=
 				$neededFile=$ret[$j]
 				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
 					If (((-not $bHideDefinitionsInCurrentConOrTweak) -or ((Get-Item $file).Basename -ne (Get-Item $neededFile).Basename)) -and
-					((-not $bHideDefinitionsInBf2) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\bf2"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success)) -and
-					((-not $bHideDefinitionsInXpack) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\xpack"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success))) {
+					((-not $bHideDefinitionsInBf2) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success)) -and
+					((-not $bHideDefinitionsInXpack) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success))) {
 						Write-Output "Template $templateDependency needs $neededFile"
+						If (($null -ne $exportFolder) -and ("" -ne $exportFolder)) {
+							New-Item "$exportFolder" -ItemType directory -Force | Out-Null
+
+							# Should remove $objectsFolder from the path in $neededFile and add the rest (up to the parent folder of the file) at the end of $exportFolder...
+							$neededDirectory=(Get-Item $neededFile).DirectoryName
+							$regesc=[regex]::Escape($objectsFolder)
+							$m=[regex]::Match($neededDirectory, "$regesc\\(\S+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+							$restOfPath=$m.Groups[1].value
+							#"$restOfPath"
+							$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder,$restOfPath)
+							#"$exportNeededDirectory"
+							Copy-Item -Path $neededDirectory -Destination $exportNeededDirectory -Force -Recurse
+						}
 					}
 				}
 				Else {
