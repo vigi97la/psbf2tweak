@@ -525,9 +525,9 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 #	[double]$psi=0
 #}
 
-function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bUseCache=$true,[bool]$bShowOutput=$true) {
+function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCache=$true,[bool]$bShowOutput=$true) {
 
-	if (($null -eq $objectsFolder) -or !(Test-Path -Path $objectsFolder)) {
+	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
 		return $null
 	}
@@ -536,10 +536,10 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bUseCach
 	$bFound=$false
 	$lastFileFound=$null
 	$lastChildrenFound=$null
-	$cachefile="$objectsFolder\cache_db.csv"
+	$cachefile="$extractedFolder\cache_db.csv"
 	If ((-not $bUseCache) -or (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName))) {
 		$sw=[System.IO.StreamWriter]$cachefile
-		Get-ChildItem "$objectsFolder\*" -R -Include *.con,*.tweak | ForEach-Object {
+		Get-ChildItem "$extractedFolder\*" -R -Include *.con,*.tweak | ForEach-Object {
 			$file=$_.FullName
 			$concontent=(ReadConFile $file)
 			$lines=$($concontent -split "\r?\n")
@@ -572,6 +572,7 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bUseCach
 					$templateType=$m.Groups[2].value
 					$templateName=$m.Groups[3].value
 					$templateFile=$file
+					#$templateFiles=,$file
 					$templateChildren=$null
 				}
 				ElseIf ($null -ne $templateName) {
@@ -580,7 +581,20 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bUseCach
 						$templateChild=$m.Groups[1].value
 						$templateChildren+=,$templateChild
 					}
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.(textureName|soundFilename|seatAnimationSystem)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 2) {
+						
+						# How to generate absolute path...?
+						#$templateFile=[System.IO.Path]::Combine($extractedFolder,$m.Groups[1].value)
+
+						#$templateFiles+=,$templateFile
+					}
 				}
+
+				#handling definitions in multiple files...
+
+				#ObjectTemplate.XXXIconXXX "..."
+
 			}
 
 		}
@@ -618,7 +632,7 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bUseCach
 			$m=[regex]::Match($cols[0],"^$regesc$",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			if ($m.Success) {
 				$templateType=$cols[1]
-				$templateFile=$cols[2]
+				$templateFile=$cols[2] # What if multiple files... Detect whether it is a file or children...
 				$templateChildren=$null
 				for ($i=3; $i -lt $cols.Count; $i++) {
 					$templateChild=$cols[$i]
@@ -647,10 +661,10 @@ function FindTemplate($objectsFolder,$searchedTemplateName=$null,[bool]$bUseCach
 	}
 }
 
-function FindTemplateDependencies($objectsFolder,$searchedTemplateName,[bool]$bUseCache=$true) {
+function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$bUseCache=$true) {
 
 	$neededFiles=$null
-	$ret=@(FindTemplate $objectsFolder $searchedTemplateName $bUseCache $false)
+	$ret=@(FindTemplate $extractedFolder $searchedTemplateName $bUseCache $false)
 	#Write-Warning "$ret"
 	If (($null -eq $ret) -or ("" -eq $ret)) {
 		return $null
@@ -665,7 +679,7 @@ function FindTemplateDependencies($objectsFolder,$searchedTemplateName,[bool]$bU
 		$templateChild=$ret[$i]
 		#Write-Warning "$templateChild"
 		If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
-			$neededChildFiles=@(FindTemplateDependencies $objectsFolder $templateChild $bUseCache)
+			$neededChildFiles=@(FindTemplateDependencies $extractedFolder $templateChild $bUseCache)
 			If (($null -ne $neededChildFiles) -and ("" -ne $neededChildFiles)) {
 				$neededFiles+=$neededChildFiles
 			}
@@ -676,19 +690,15 @@ function FindTemplateDependencies($objectsFolder,$searchedTemplateName,[bool]$bU
 
 #. .\mod_installer.ps1
 #$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\extracted\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
-#$objectsFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\extracted"
-#FindTemplate $objectsFolder
+#$extractedFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\extracted"
+#FindTemplate $extractedFolder
 #$exportFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\export"
-#ListDependencies $file $objectsFolder $exportFolder $true $true $false $false
-function ListDependencies($file,$objectsFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
+#ListDependencies $file $extractedFolder $exportFolder $true $true $false $false
+function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
 
-	if (($null -eq $objectsFolder) -or !(Test-Path -Path $objectsFolder)) {
+	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
 	}
-
-	#ObjectTemplate.soundFilename "..."
-	#ObjectTemplate.seatAnimationSystem "..."
-	#ObjectTemplate.XXXIconXXX "..."
 
 	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
 
@@ -701,7 +711,7 @@ function ListDependencies($file,$objectsFolder,$exportFolder=$null,[bool]$bUseCa
 		If ($m.Groups.Count -eq 2) {
 			$templateDependency=$m.Groups[1].value
 			"$templateDependency"
-			$ret=@(FindTemplateDependencies $objectsFolder $templateDependency $bUseCache)
+			$ret=@(FindTemplateDependencies $extractedFolder $templateDependency $bUseCache)
 			#"$ret"
 			If (($null -eq $ret) -or ("" -eq $ret)) {
 				Write-Warning "Template $templateDependency not found"
@@ -717,9 +727,9 @@ function ListDependencies($file,$objectsFolder,$exportFolder=$null,[bool]$bUseCa
 						If (($null -ne $exportFolder) -and ("" -ne $exportFolder)) {
 							New-Item "$exportFolder" -ItemType directory -Force | Out-Null
 
-							# Should remove $objectsFolder from the path in $neededFile and add the rest (up to the parent folder of the file) at the end of $exportFolder...
+							# Should remove $extractedFolder from the path in $neededFile and add the rest (up to the parent folder of the file) at the end of $exportFolder...
 							$neededDirectory=(Get-Item $neededFile).DirectoryName
-							$regesc=[regex]::Escape($objectsFolder)
+							$regesc=[regex]::Escape($extractedFolder)
 							$m=[regex]::Match($neededDirectory, "$regesc\\(\S+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 							$restOfPath=$m.Groups[1].value
 							#"$restOfPath"
@@ -735,6 +745,21 @@ function ListDependencies($file,$objectsFolder,$exportFolder=$null,[bool]$bUseCa
 			}
 		}
 	}
+}
+
+function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFolder,[bool]$bOverwrite=$false) {
+
+	if (($null -eq $originalFolder) -or !(Test-Path -Path $originalFolder)) {
+		Write-Error "Error: Invalid parameter ($originalFolder)"
+	}
+	New-Item "$serverFolder" -ItemType directory -Force | Out-Null
+	New-Item "$clientFolder" -ItemType directory -Force | Out-Null
+
+	# directory structures containing .tweak and .con, Meshes\*.collisionmesh, ai\*.ai are copied to server
+	# directory structures containing Meshes\*.bundledmesh, Textures are copied to client
+
+	# Objects vs Menu...
+
 }
 
 #function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSeparateServerClient=$true,[bool]$bFixVehicleHudNameInconsistencies=$false,[bool]$bFixVehicleTypeInconsistencies=$false,[bool]$bConfirmEachFix=$false) {
