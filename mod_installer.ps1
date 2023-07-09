@@ -5,8 +5,7 @@
 #$extractFolder="$modFolder"
 #ExtractModArchives $modFolder $extractFolder $false $true 0
 #$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_tnk_leclerc"
-#ProcessVehicles $vehicleToExtract $false $true $true $true $true
-#Should output a .tweak.tmp for each vehicle, to be renamed manually to .tweak if it is OK...
+#ProcessVehicles $vehicleToExtract $false $true $true $true $true $true
 #$file=(Get-Item "$vehicleToExtract\*.con").FullName
 #FindTemplate $extractFolder
 #ListDependenciesConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $extractFolder $true $true $false $false
@@ -294,9 +293,8 @@ function PreProcessIncludesConContent($concontent, $file) {
 
 #. .\mod_installer.ps1
 #$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab"
-#ProcessVehicles $vehicleToExtract $false $true $true $true $true
-#Should output a .tweak.tmp for each vehicle, to be renamed manually to .tweak if it is OK...
-function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [bool]$bIncludeAll=$false, [bool]$bResetMapIcons=$false, [bool]$bResetHUDIcons=$false, [bool]$bExpandIncludes=$false) {
+#ProcessVehicles $vehicleToExtract $false $true $true $true $true $true
+function ProcessVehicles($objectsFolder,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetMapIcons=$false,[bool]$bResetHUDIcons=$false,[bool]$bExpandIncludes=$false,[bool]$bOverwrite=$false) {
 
 	Get-ChildItem "$objectsFolder\*" -R -Include "*.tweak" | ForEach-Object {
 		$file=$_.FullName
@@ -419,6 +417,10 @@ function ProcessVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false
 				}
 				$sw.close()
 				$sr.close()
+				If ($bOverwrite) { 
+					Move-Item -Path $file -Destination "$file.bak" -Force
+					Move-Item -Path "$file.tmp" -Destination $file -Force
+				}
 			}
 		}
 	}
