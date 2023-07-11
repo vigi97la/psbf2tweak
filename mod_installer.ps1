@@ -303,11 +303,11 @@ function ProcessVehicles($objectsFolder,[bool]$bIncludeStationaryWeapons=$false,
 		$bStationaryWeapon=[regex]::Match($file, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
 		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
 			$bSkip=$false
-			#$regexpr="\s*ObjectTemplate.create\s+PlayerControlObject\s+(\S+)\s*\r?\n" # .con
-			$regexpr="\s*ObjectTemplate.activeSafe\s+PlayerControlObject\s+(\S+)\s*\r?\n" # .tweak
+			#$regexpr="\s*ObjectTemplate.create\s+(PlayerControlObject|GenericFireArm)\s+(\S+)\s*\r?\n" # .con
+			$regexpr="\s*ObjectTemplate.activeSafe\s+(PlayerControlObject|GenericFireArm)\s+(\S+)\s*\r?\n" # .tweak
 			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
-			If ($m.Groups.Count -eq 2) {
-				$vehicleName=$m.Groups[1].value
+			If ($m.Groups.Count -eq 3) {
+				$vehicleName=$m.Groups[2].value
 			}
 			else {
 				$bSkip=$true
