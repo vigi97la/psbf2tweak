@@ -5,7 +5,7 @@
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $true 1
 #$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\extracted\Objects\Vehicles\Land\fr_tnk_leclerc"
-#ProcessVehicles $vehicleToExtract $false $true $true $true $true $true
+#ProcessVehicles $vehicleToExtract $false $true $true $true $true $true $true
 #$file=(Get-Item "$vehicleToExtract\*.con").FullName
 #FindTemplate $extractFolder
 #$exportFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\export"
@@ -294,8 +294,8 @@ function PreProcessIncludesConContent($concontent, $file) {
 
 #. .\mod_installer.ps1
 #$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab"
-#ProcessVehicles $vehicleToExtract $false $true $true $true $true $true
-function ProcessVehicles($objectsFolder,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetMapIcons=$false,[bool]$bResetHUDIcons=$false,[bool]$bExpandIncludes=$false,[bool]$bOverwrite=$false) {
+#ProcessVehicles $vehicleToExtract $false $true $true $true $true $true $true
+function ProcessVehicles($objectsFolder,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetMapIcons=$false,[bool]$bResetHUDIcons=$false,[bool]$bResetSpottedMessage=$false,[bool]$bExpandIncludes=$false,[bool]$bOverwrite=$false) {
 
 	Get-ChildItem "$objectsFolder\*" -R -Include "*.tweak" | ForEach-Object {
 		$file=$_.FullName
@@ -403,8 +403,39 @@ function ProcessVehicles($objectsFolder,[bool]$bIncludeStationaryWeapons=$false,
 					If ($bResetHUDIcons) {
 						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.vehicleIcon\s+(\S+)\s*")
 						If ($m.Groups.Count -eq 2) {
-							$vehicleMiniMapIcon=$m.Groups[1].value
+							$vehicleIcon=$m.Groups[1].value
 							$sw.WriteLine("rem $line")
+							Continue
+						}
+					}
+					If ($bResetSpottedMessage) {
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.Radio.spottedMessage\s+(\S+)\s*")
+						If ($m.Groups.Count -eq 2) {
+							$vehicleSpottedMessage=$m.Groups[1].value
+							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage tank_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 1) -and ([double]$vehicleType -lt 2)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage apc_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 2) -and ([double]$vehicleType -lt 3)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage heli_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 3) -and ([double]$vehicleType -lt 4)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage vehicle_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 4) -and ([double]$vehicleType -lt 5)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage air_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 5) -and ([double]$vehicleType -lt 6)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage aa_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 6) -and ([double]$vehicleType -lt 7)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage boat_spotted")
+							}
+							else {
+								$sw.WriteLine($line)
+							}
 							Continue
 						}
 					}
