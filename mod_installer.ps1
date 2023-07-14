@@ -3,13 +3,14 @@
 #. .\mod_installer.ps1
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
-#ExtractModArchives $modFolder $extractFolder $false $true 1
-#$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\extracted\Objects\Vehicles\Land\fr_tnk_leclerc"
-#ProcessVehicles $vehicleToExtract $false $true $true $true $true $true $true
+#ExtractModArchives $modFolder $extractFolder $false $false 1
+#ProcessVehicles $extractFolder $true $true $false $false $false $true $true
+#FindTemplate $extractFolder $null $true $false
+#$vehicleToExtract="$modFolder\extracted\Objects\Vehicles\Land\fr_tnk_leclerc"
 #$file=(Get-Item "$vehicleToExtract\*.con").FullName
-#FindTemplate $extractFolder
-#$exportFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\export"
-#ListDependencies $file $extractFolder $exportFolder $true $false $false $false
+#$exportFolder="$modFolder\export"
+#ListDependencies $file $extractFolder $exportFolder $true $true $false $false
+#ProcessVehicles $exportFolder $true $true $true $true $true $true $true
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
@@ -565,8 +566,8 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 
 	$templateName=$null
 	$bFound=$false
-	$lastFileFound=$null
 	$lastChildrenFound=$null
+	$lastFilesFound=$null
 	$cachefile="$extractedFolder\cache_db.csv"
 	If ((-not $bUseCache) -or (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName))) {
 		$sw=[System.IO.StreamWriter]$cachefile
@@ -583,27 +584,34 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 
 					If ($null -ne $templateName) {
 						If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
-							$sw.Write("$templateName;$templateType;$templateFile")
+							$sw.Write("$templateName;$templateType")
 							foreach ($element in $templateChildren) {
 								If (($null -ne $element) -and ("" -ne $element)) {
 									$sw.Write(";$element")
 								}
 							}
+							foreach ($element in $templateFiles) {
+								If (($null -ne $element) -and ("" -ne $element)) {
+									$sw.Write(";$element")
+								}
+							}
 							$sw.WriteLine()
+							$templateFile=$templateFiles[0]
 							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 						}
 						ElseIf ($m.Groups[3].value -eq $searchedTemplateName) {
+							$templateFile=$templateFiles[0]
 							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 							$bFound=$true
-							$lastFileFound=$templateFile
 							$lastChildrenFound=$templateChildren
+							$lastFilesFound=$templateFiles
 						}				
 					}
 
 					$templateType=$m.Groups[2].value
 					$templateName=$m.Groups[3].value
 					$templateFile=$file
-					#$templateFiles=,$file
+					$templateFiles=,$file
 					$templateChildren=$null
 				}
 				ElseIf ($null -ne $templateName) {
@@ -612,19 +620,28 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 						$templateChild=$m.Groups[1].value
 						$templateChildren+=,$templateChild
 					}
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.(textureName|soundFilename|seatAnimationSystem)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.textureName\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
-						
-						# How to generate absolute path...?
-						#$templateFile=[System.IO.Path]::Combine($extractedFolder,$m.Groups[1].value)
-
-						#$templateFiles+=,$templateFile
+						$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
+						$resFile=[System.IO.Path]::Combine($extractedFolder,"$resRelPath.dds")
+						$templateFiles+=,$resFile
 					}
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 3) {
+						$resRelPath=($m.Groups[2].value -replace "`"","" -replace "/","\")
+						$resFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
+						$templateFiles+=,$resFile
+					}
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.(vehicleHud.typeIcon|weaponHud.typeIcon|vehicleHud.miniMapIcon|weaponHud.miniMapIcon|vehicleHud.vehicleIcon|weaponHud.weaponIcon|WarningHud.warningIcon)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 3) {
+						$resRelPath=($m.Groups[2].value -replace "`"","" -replace "/","\")
+						$resFile=[System.IO.Path]::Combine("$extractedFolder\Menu\HUD\Texture",$resRelPath)
+						$templateFiles+=,$resFile
+					}
+					#aitemplate...
 				}
 
 				#handling definitions in multiple files...
-
-				#ObjectTemplate.XXXIconXXX "..."
 
 			}
 
@@ -632,19 +649,27 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 
 		If ($null -ne $templateName) {
 			If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
-				$sw.Write("$templateName;$templateType;$templateFile")
+				$sw.Write("$templateName;$templateType")
 				foreach ($element in $templateChildren) {
 					If (($null -ne $element) -and ("" -ne $element)) {
 						$sw.Write(";$element")
 					}
 				}
+				foreach ($element in $templateFiles) {
+					If (($null -ne $element) -and ("" -ne $element)) {
+						$sw.Write(";$element")
+					}
+				}
 				$sw.WriteLine()
+				$templateFile=$templateFiles[0]
 				If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 			}
 			ElseIf ($m.Groups[3].value -eq $searchedTemplateName) {
+				$templateFile=$templateFiles[0]
 				If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 				$bFound=$true
-				$lastFileFound=$templateFile
+				$lastChildrenFound=$templateChildren
+				$lastFilesFound=$templateFiles
 			}				
 		}
 
@@ -663,28 +688,40 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 			$m=[regex]::Match($cols[0],"^$regesc$",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			if ($m.Success) {
 				$templateType=$cols[1]
-				$templateFile=$cols[2] # What if multiple files... Detect whether it is a file or children...
+				$templateFile=$cols[2]
 				$templateChildren=$null
-				for ($i=3; $i -lt $cols.Count; $i++) {
+				for ($i=2; $i -lt $cols.Count; $i++) {
+					# Detect whether it is a child or file...
+					if ([regex]::Match($cols[$i],[regex]::Escape("\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+						break
+					}
 					$templateChild=$cols[$i]
 					If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
-						$templateChildren+=,$cols[$i]
+						$templateChildren+=,$templateChild
 					}
 				}
+				$templateFiles=$null
+				for (; $i -lt $cols.Count; $i++) {
+					$templateFile=$cols[$i]
+					If (($null -ne $templateFile) -and ("" -ne $templateFile)) {
+						$templateFiles+=,$templateFile
+					}
+				}
+				$templateFile=$templateFiles[0]
 				If ($bShowOutput) { Write-Output "$templateType $searchedTemplateName ($templateFile)" }
 				$bFound=$true
-				$lastFileFound=$templateFile
 				$lastChildrenFound=$templateChildren
+				$lastFilesFound=$templateFiles
 			}
 		}
 		$sr.close()		
 	}
 	If ($bFound) {
 		If (($null -ne $templateChildren) -and ("" -ne $templateChildren)) {
-			return @($lastFileFound)+$templateChildren
+			return $lastFilesFound+$templateChildren
 		}
 		Else {
-			return $lastFileFound
+			return $lastFilesFound
 		}
 	}
 	Else {
@@ -704,9 +741,16 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 	If (($null -eq $neededFile) -or ("" -eq $neededFile)) {
 		return $null
 	}
-	$neededFiles=,$neededFile
+	$neededFiles+=,$neededFile
 	#Write-Warning "$neededFile"
 	for ($i=1; $i -lt $ret.Count; $i++) {
+		# Detect whether it is a child or file...
+		if ([regex]::Match($ret[$i],[regex]::Escape("\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+			$neededFile=$ret[$i]
+			$neededFiles+=$neededFile
+			#Write-Warning "$neededFile"
+			continue
+		}
 		$templateChild=$ret[$i]
 		#Write-Warning "$templateChild"
 		If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
@@ -716,15 +760,19 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 			}
 		}
 	}
+	#Write-Warning "$neededFiles"
 	return $neededFiles
 }
 
 #. .\mod_installer.ps1
-#$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\extracted\Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
-#$extractedFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\extracted"
-#FindTemplate $extractedFolder
-#$exportFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\bf2\export"
-#ListDependencies $file $extractedFolder $exportFolder $true $true $false $false
+#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack"
+#$extractFolder="$modFolder\extracted"
+#ExtractModArchives $modFolder $extractFolder $false $false 1
+#FindTemplate $extractFolder $null $true $false
+#$vehicleToExtract="$modFolder\extracted\Objects\Vehicles\Land\aav_tunguska"
+#$file=(Get-Item "$vehicleToExtract\*.con").FullName
+#$exportFolder="$modFolder\export"
+#ListDependencies $file $extractFolder $exportFolder $true $true $false $false
 function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
 
 	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
@@ -751,13 +799,18 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 			for ($j=0; $j -lt $ret.Count; $j++) {
 				$neededFile=$ret[$j]
 				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
+					# Sometimes textures might not have the correct extension...
+					If (-not (Test-Path -Path $neededFile)) {
+						$origNeededFile=$neededFile
+						Write-Warning "$origNeededFile not found"
+						$neededFile=($origNeededFile -replace ".tga",".dds")
+					}
 					If (((-not $bHideDefinitionsInCurrentConOrTweak) -or ((Get-Item $file).Basename -ne (Get-Item $neededFile).Basename)) -and
 					((-not $bHideDefinitionsInBf2) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success)) -and
 					((-not $bHideDefinitionsInXpack) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success))) {
 						Write-Output "Template $templateDependency needs $neededFile"
 						If (($null -ne $exportFolder) -and ("" -ne $exportFolder)) {
 							New-Item "$exportFolder" -ItemType directory -Force | Out-Null
-
 							# Should remove $extractedFolder from the path in $neededFile and add the rest (up to the parent folder of the file) at the end of $exportFolder...
 							$neededDirectory=(Get-Item $neededFile).DirectoryName
 							$regesc=[regex]::Escape($extractedFolder)
