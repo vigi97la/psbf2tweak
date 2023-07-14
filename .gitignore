@@ -3,3 +3,5 @@ obj
 bin
 *.sln
 *.pssproj
+TODO/
+!*ReadMe.txt
