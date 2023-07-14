@@ -17,9 +17,16 @@ $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
 function ReadConFile($file) {
 	$content=""
+	If (-not (Test-Path -Path "$file")) {
+		Write-Warning "$file not found"
+		return $content
+	}
 	$sr=[System.IO.StreamReader]$file
 	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 		$line=$sr.ReadLine()
+		if ($null -eq $line) {
+			break
+		}
 		$content+=$line+"`r`n"
 	}
 	$sr.close()
@@ -27,13 +34,13 @@ function ReadConFile($file) {
 }
 
 function cbInsideCommentLine($concontent, $i, $line, $params) {
-	#Write-Output "Comment     : $line" # Write-Output causes problems?
+	#Write-Warning "Comment     : $line" # Write-Output causes problems?
 	$content=$params
 	return $content
 }
 
 function cbOutsideCommentLine($concontent, $i, $line, $params) {
-	#Write-Output "Not comment : $line" # Write-Output causes problems?
+	#Write-Warning "Not comment : $line" # Write-Output causes problems?
 	$content=$params
 	$content+=$line+"`r`n"
 	return $content
@@ -120,6 +127,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 	$content=""
 	$ifregexpr="^\s*if\s*"
 	$ifcondregexpr="^\s*if\s+(\S*)\s*==\s*(\S*)\s*"
+	#$ifcondregexpr=[regex]::new("^\s*if\s+(\S*)\s*==\s*(\S*)\s*","Compiled, IgnoreCase, CultureInvariant")
 	$elseIfregexpr="^\s*elseIf\s*"
 	$elseIfcondregexpr="^\s*elseIf\s+(\S*)\s*==\s*(\S*)\s*"
 	$elseregexpr="^\s*else\s*"
@@ -179,6 +187,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 					
 				# If multiple conditions inside...
 				$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				#$m=$ifcondregexpr.Match($line)
 				if (($m.Groups.Count -eq 3)) {
 					$contentblock=$lines | Select-Object -Index ($i.value..($lines.Count-1)) # $concontent starting at $i.value line (so it includes the if)
 					$iblock=0
@@ -194,6 +203,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 
 				# If multiple conditions inside...
 				$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				#$m=$ifcondregexpr.Match($line)
 				if (($m.Groups.Count -eq 3)) {
 					$contentblock=$lines | Select-Object -Index ($i.value..($lines.Count-1)) # $concontent starting at $i.value line (so it includes the if)
 					$iblock=0
@@ -209,6 +219,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 			Continue
 		}
 		$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		#$m=$ifcondregexpr.Match($line)
 		if (($m.Groups.Count -eq 3)) {
 
 			$params=$content
@@ -336,7 +347,12 @@ function ProcessVehicles($objectsFolder,[bool]$bIncludeStationaryWeapons=$false,
 				$sr=[System.IO.StreamReader]$file
 				$sw=[System.IO.StreamWriter]"$file.tmp"
 				while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
-					$line=$sr.ReadLine()
+					$line=$sr.ReadLine()					
+					if ($null -eq $line) {
+						break
+					}
+
+					#Write-Warning "$line"
 										
 					If ($bResetMapIcons) {
 
@@ -452,7 +468,9 @@ function ProcessVehicles($objectsFolder,[bool]$bIncludeStationaryWeapons=$false,
 				$sw.close()
 				$sr.close()
 				If ($bOverwrite) { 
-					Move-Item -Path $file -Destination "$file.bak" -Force
+					If (-not (Test-Path -Path "$file.bak")) { 
+						Move-Item -Path $file -Destination "$file.bak" -Force
+					}
 					Move-Item -Path "$file.tmp" -Destination $file -Force
 				}
 			}
