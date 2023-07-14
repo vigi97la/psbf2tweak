@@ -539,7 +539,7 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 	}
 }
 
-# Classes are not available before Powershell 5...
+# Classes are not directly available before Powershell 5...
 #class ObjectTemplate {
 #    [string]$name=$null
 #    [string]$type=$null
