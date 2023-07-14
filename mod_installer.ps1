@@ -11,6 +11,7 @@
 #$exportFolder="$modFolder\export"
 #ListDependencies $file $extractFolder $exportFolder $true $true $false $false
 #ProcessVehicles $exportFolder $true $true $true $true $true $true $true
+#SplitToServerAndClientFolders $exportFolder $exportFolder\server $exportFolder\client
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
@@ -831,19 +832,59 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 	}
 }
 
+#. .\mod_installer.ps1
+#SplitToServerAndClientFolders C:\Users\Administrator\Downloads\Objects C:\Users\Administrator\Downloads\Objects_server C:\Users\Administrator\Downloads\Objects_client
 function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFolder,[bool]$bOverwrite=$false) {
 
 	if (($null -eq $originalFolder) -or !(Test-Path -Path $originalFolder)) {
 		Write-Error "Error: Invalid parameter ($originalFolder)"
 	}
-	New-Item "$serverFolder" -ItemType directory -Force | Out-Null
-	New-Item "$clientFolder" -ItemType directory -Force | Out-Null
+	#New-Item "$serverFolder" -ItemType directory -Force | Out-Null
+	#New-Item "$clientFolder" -ItemType directory -Force | Out-Null
 
-	# directory structures containing .tweak and .con, Meshes\*.collisionmesh, ai\*.ai are copied to server
-	# directory structures containing Meshes\*.bundledmesh, Textures are copied to client
-
+	# Directory structures containing .tweak and .con, Meshes\*.collisionmesh, ai\*.ai are copied to server...
+	# Directory structures containing Meshes\*.bundledmesh, Textures are copied to client...
+	# How to correct wrong directory structures...
 	# Objects vs Menu...
 
+	Get-ChildItem "$originalFolder\*" -R -Include *.tweak,*.con,*.ai,*.inc,*.ske,*.baf,*.tai,*.desc,*.txt,*.collisionmesh | ForEach-Object {
+		$file=$_.FullName
+		#"$file"
+		If (-not (Test-Path -Path "$file" -PathType Container)) {
+			$regesc=[regex]::Escape($originalFolder)
+			$m=[regex]::Match($file, "$regesc\\(\S+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$restOfPath=$m.Groups[1].value
+			#"$restOfPath"
+			$newPath=[System.IO.Path]::Combine($serverFolder,$restOfPath)
+			#"$newPath"
+			New-Item (split-path -parent $newPath) -ItemType directory -Force | Out-Null
+			If ($bOverwrite) {
+				Move-Item -Path "$file" -Destination "$newPath" -Force
+			}
+			Else {
+				Move-Item -Path "$file" -Destination "$newPath"
+			}
+		}
+	}
+	Get-ChildItem "$originalFolder\*" -R | ForEach-Object {
+		$file=$_.FullName
+		#"$file"
+		If (-not (Test-Path -Path "$file" -PathType Container)) {
+			$regesc=[regex]::Escape($originalFolder)
+			$m=[regex]::Match($file, "$regesc\\(\S+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$restOfPath=$m.Groups[1].value
+			#"$restOfPath"
+			$newPath=[System.IO.Path]::Combine($clientFolder,$restOfPath)
+			#"$newPath"
+			New-Item (split-path -parent $newPath) -ItemType directory -Force | Out-Null
+			If ($bOverwrite) {
+				Move-Item -Path "$file" -Destination "$newPath" -Force
+			}
+			Else {
+				Move-Item -Path "$file" -Destination "$newPath"
+			}
+		}
+	}
 }
 
 #function ExtractVehicles($downloadsFolder,$extractFolder,$modFolder,[bool]$bSeparateServerClient=$true,[bool]$bFixVehicleHudNameInconsistencies=$false,[bool]$bFixVehicleTypeInconsistencies=$false,[bool]$bConfirmEachFix=$false) {
