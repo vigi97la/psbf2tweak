@@ -70,6 +70,8 @@ vehicleName;vehicleType (tank: 0, mobile artillery: 0.1, heavily armed APC: 1, a
 
 Do not forget to set Disabled to 1 for vehicles that you do not have or which have known issues. If a map references a vehicle which is not described in "vehicles_db.csv", consider running ChangeMapVehicles tool a first time to easily identify it in the warning messages, and then add it manually to "vehicles_db.csv" (set at least vehicleName, vehicleType, Disabled columns) so that next time it knows how to replace it especially if it appears multiple times (or use ListVehicles tool if there are many vehicles).
 
+See also https://www.moddb.com/games/battlefield-2/addons/psbf2tweak.
+
 
 Known issues
 
@@ -80,8 +82,6 @@ _ Some custom vehicles from the Internet sometimes have problems, check the comm
 _ BasicTemp might vary a lot among custom vehicles from the Internet, you might need to check specific cases.
 
 
-ChangeLog (more on https://github.com/vigi97la/psbf2tweak and https://www.moddb.com/games/battlefield-2/addons/psbf2tweak)
+ChangeLog
 
-v0.1.2: Added ObjectSpawnerExclusionList.txt, Objects_patches folder and bCivilian column in "vehicles_db.csv".
-v0.1.1: Added ListVehicles tool.
-v0.1.0: First public version.
+See https://github.com/vigi97la/psbf2tweak/releases.
