@@ -252,7 +252,7 @@ function PreProcessArgsConContent($concontent, $v_arg1, $v_arg2, $v_arg3, $v_arg
 }
 
 function PreProcessIncludesConLine($line, $file) {
-	$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*")
+	$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 	if ($m.Groups.Count -ge 2) {
 		$includedfile=Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
 		$v_arg1=$m.Groups[3].value
@@ -441,7 +441,7 @@ function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnor
 	$lines=$($concontent -split "\r?\n")
 	for ($i=$lines.Count-1; $i -ge 0; $i--) {
 		$line=$lines[$i]
-		$m=[regex]::Match($line, $archiveregexpr)
+		$m=[regex]::Match($line, $archiveregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		if ($m.Groups.Count -ne 3) {
 			Continue
 		}
