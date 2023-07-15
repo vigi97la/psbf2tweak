@@ -65,7 +65,7 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 			$sw.WriteLine($line)
 			Continue
 		}
-		$m=[regex]::Match($line, "^\s*ObjectTemplate.create\s+ObjectSpawner\s+(\S+)\s*")
+		$m=[regex]::Match($line, "^\s*ObjectTemplate.create\s+ObjectSpawner\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		if ($m.Groups.Count -eq 2) {
 			$objectSpawner=$m.Groups[1].value
 			$bObjectSpawnerExcluded=$false
@@ -73,7 +73,7 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 				$oselsr=[System.IO.StreamReader]$oselfile
 				while (($null -ne $oselsr) -and (-not $oselsr.EndOfStream)) {
 					$oselline=$oselsr.ReadLine()
-					$m=[regex]::Match($objectSpawner, [Regex]::Escape($oselline))
+					$m=[regex]::Match($objectSpawner, [Regex]::Escape($oselline),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					if ($m.Success) {
 						$bObjectSpawnerExcluded=$true
 						break
@@ -84,7 +84,7 @@ function ChangeMapVehicles($levelFolder,$gameMode="sp3",$mapSize="64",$forcedTea
 			$sw.WriteLine($line)
 			Continue
 		}
-		$m=[regex]::Match($line, $regexpr)
+		$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		if ($m.Groups.Count -ne 3) {
 			$sw.WriteLine($line)
 			Continue

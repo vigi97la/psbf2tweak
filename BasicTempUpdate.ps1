@@ -11,7 +11,7 @@ function BasicTempUpdate($objectsFolder, [double]$tempMultiplier=100, [bool]$bIn
 			$sw=[System.IO.StreamWriter]"$file.tmp"
 			while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 				$line=$sr.ReadLine()
-				$m=[regex]::Match($line, $regexpr)
+				$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				if ($m.Groups.Count -ne 2) {
 					$sw.WriteLine($line)
 					Continue

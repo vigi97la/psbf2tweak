@@ -16,7 +16,7 @@ function AddVehicleSpawnPoint($objectsFolder, [bool]$bUseVehiclesDB=$true, [bool
 		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
 			$bDisableSpawnPoint=$false
 			$regexpr="\s*ObjectTemplate.activeSafe\s+PlayerControlObject\s+(\S+)\s*\r?\n"
-			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
+			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Groups.Count -eq 2) {
 				$vehicleName=$m.Groups[1].value
 			}
@@ -34,7 +34,7 @@ function AddVehicleSpawnPoint($objectsFolder, [bool]$bUseVehiclesDB=$true, [bool
 			}
 			If (-not $bDisableSpawnPoint) {
 				#$regexpr="\s*ObjectTemplate.aiTemplate\s+(\S+)\s*\r?\n"
-				#$m=[regex]::Matches(([System.IO.File]::ReadAllText($file)), $regexpr)
+				#$m=[regex]::Matches(([System.IO.File]::ReadAllText($file)), $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 
 				$regexpr="^\s*ObjectTemplate.aiTemplate\s+(\S+)\s*"
 				$sr=[System.IO.StreamReader]$file
@@ -46,7 +46,7 @@ function AddVehicleSpawnPoint($objectsFolder, [bool]$bUseVehiclesDB=$true, [bool
 						$sw.WriteLine($line)
 						Continue
 					}
-					$m=[regex]::Match($line, $regexpr)
+					$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					if ($m.Groups.Count -ne 2) {
 						$sw.WriteLine($line)
 						Continue

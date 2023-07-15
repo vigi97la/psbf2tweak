@@ -9,7 +9,7 @@ function AddArmorEffect($objectsFolder, [bool]$bIncludeStationaryWeapons=$false,
 		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
 			$bDisableArmorEffect=$false
 			$regexpr="\s*ObjectTemplate.activeSafe\s+PlayerControlObject\s+(\S+)\s*\r?\n"
-			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
+			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Groups.Count -eq 2) {
 				$vehicleName=$m.Groups[1].value
 			}
@@ -27,7 +27,7 @@ function AddArmorEffect($objectsFolder, [bool]$bIncludeStationaryWeapons=$false,
 						$sw.WriteLine($line)
 						Continue
 					}
-					$m=[regex]::Match($line, $regexpr)
+					$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					if (($m.Groups.Count -ne 3) -or ([int]$m.Groups[1].Value -gt 10)) {
 						$sw.WriteLine($line)
 						Continue

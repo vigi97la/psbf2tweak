@@ -11,7 +11,7 @@ function ListVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [
 		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
 			$bSkip=$false
 			$regexpr="\s*ObjectTemplate.activeSafe\s+PlayerControlObject\s+(\S+)\s*\r?\n"
-			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
+			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Groups.Count -eq 2) {
 				$vehicleName=$m.Groups[1].value
 			}
@@ -19,7 +19,7 @@ function ListVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [
 				$bSkip=$true
 			}
 			$regexpr="\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*\r?\n"
-			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
+			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Groups.Count -eq 2) {
 				$vehicleType=[int]$m.Groups[1].value
 			}
@@ -27,7 +27,7 @@ function ListVehicles($objectsFolder, [bool]$bIncludeStationaryWeapons=$false, [
 				$bSkip=$true
 			}
 			$regexpr="\s*ObjectTemplate.vehicleHud.hudName\s+(\S+)\s*\r?\n"
-			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
+			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Groups.Count -eq 2) {
 				$vehicleHudName=$m.Groups[1].value
 			}
