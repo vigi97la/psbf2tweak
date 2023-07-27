@@ -4,7 +4,7 @@
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-#ProcessVehicles $extractFolder $true $true $false $false $false $true $true
+#ProcessVehicles $extractFolder $true $true $false $false $false $true $true # Can be very slow for AIX2 Reality handheld weapons...
 #FindTemplate $extractFolder $null $true $false
 #$vehicleToExtract="$modFolder\extracted\Objects\Vehicles\Land\fr_tnk_leclerc"
 #$file=(Get-Item "$vehicleToExtract\*.con").FullName
@@ -54,7 +54,7 @@ function PreProcessCommentsConContent($concontent, $cbInsideCommentLine, $cbOuts
 	$beginremregexpr="^\s*beginrem\s*" # To skip block comments.
 	$endremregexpr="^\s*endrem\s*" # To skip block comments.
 	$bInsideBlockComment=$false
-	$lines=$($concontent -split "\r?\n")
+	$lines=@($concontent -split "\r?\n")
 	for ($i=0; $i -lt $lines.Count; $i++) {
 		$line=$lines[$i]
 		if ($bInsideBlockComment) {
@@ -135,7 +135,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 	$bInsideCondition=$false
 	$bInsideTrueCondition=$false
 	$bFoundTrueCondition=$false
-	$lines=$($concontent -split "\r?\n")
+	$lines=@($concontent -split "\r?\n")
 	for ($i.value=0; $i.value -lt $lines.Count; $i.value++) {
 		$line=$lines[$i.value]
 
@@ -256,7 +256,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 
 function PreProcessArgsConContent($concontent, $v_arg1, $v_arg2, $v_arg3, $v_arg4, $v_arg5, $v_arg6, $v_arg7, $v_arg8, $v_arg9) {
 	$content=""
-	ForEach ($line in $($concontent -split "\r?\n")) {
+	ForEach ($line in @($concontent -split "\r?\n")) {
 
 		# null...?
 
@@ -299,7 +299,7 @@ function PreProcessIncludesConLine($line, $file) {
 
 function PreProcessIncludesConContent($concontent, $file) {
 	$content=""
-	ForEach ($line in $($concontent -split "\r?\n")) {
+	ForEach ($line in @($concontent -split "\r?\n")) {
 		$content+=(PreProcessIncludesConLine $line $file)+"`r`n"
 	}
 	return $content
@@ -506,7 +506,7 @@ function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnor
 
 	$archiveregexpr="^\s*fileManager.mountArchive\s+(.+)`.zip\s+(.+)\s*"
 	$concontent=(PreProcessIncludesConContent (ReadConFile $archivesConFile) $archivesConFile)
-	$lines=$($concontent -split "\r?\n")
+	$lines=@($concontent -split "\r?\n")
 	for ($i=$lines.Count-1; $i -ge 0; $i--) {
 		$line=$lines[$i]
 		$m=[regex]::Match($line, $archiveregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
@@ -591,16 +591,45 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 	If ((-not $bUseCache) -or (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName))) {
 		$sw=[System.IO.StreamWriter]$cachefile
 		Get-ChildItem "$extractedFolder\*" -R -Include *.con,*.tweak | ForEach-Object {
+
+			# End of any previous object...
+			If ($null -ne $templateName) {
+				If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
+					$sw.Write("$templateName;$templateType")
+					foreach ($element in $templateChildren) {
+						If (($null -ne $element) -and ("" -ne $element)) {
+							$sw.Write(";$element")
+						}
+					}
+					foreach ($element in $templateFiles) {
+						If (($null -ne $element) -and ("" -ne $element)) {
+							$sw.Write(";$element")
+						}
+					}
+					$sw.WriteLine()
+					$templateFile=$templateFiles[0]
+					If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
+				}
+				ElseIf ($templateName -eq $searchedTemplateName) {
+					$templateFile=$templateFiles[0]
+					If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
+					$bFound=$true
+					$lastChildrenFound=$templateChildren
+					$lastFilesFound=$templateFiles
+				}
+			}
+
+			$templateName=$null
+
 			$file=$_.FullName
 			$concontent=(ReadConFile $file)
-			$lines=$($concontent -split "\r?\n")
+			$lines=@($concontent -split "\r?\n")
 			for ($i=0; $i -lt $lines.Count; $i++) {
 				$line=$lines[$i]
 				$m=[regex]::Match($line, "^\s*ObjectTemplate.(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -eq 4) {
 
-					# End of any previous object, beginning of new one...
-
+					# End of any previous object...
 					If ($null -ne $templateName) {
 						If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
 							$sw.Write("$templateName;$templateType")
@@ -618,15 +647,16 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 							$templateFile=$templateFiles[0]
 							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 						}
-						ElseIf ($m.Groups[3].value -eq $searchedTemplateName) {
+						ElseIf ($templateName -eq $searchedTemplateName) {
 							$templateFile=$templateFiles[0]
 							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 							$bFound=$true
 							$lastChildrenFound=$templateChildren
 							$lastFilesFound=$templateFiles
-						}				
+						}
 					}
 
+					# Beginning of new object...
 					$templateType=$m.Groups[2].value
 					$templateName=$m.Groups[3].value
 					$templateFile=$file
@@ -641,23 +671,35 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.textureName\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
-						$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
-						$resFile=[System.IO.Path]::Combine($extractedFolder,"$resRelPath.dds")
-						$templateFiles+=,$resFile
+						$resRelPaths=@($m.Groups[1].value -split ",")
+						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
+							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
+							#Write-Warning "$extractedFolder\$resRelPath.dds"
+							$resFile=[System.IO.Path]::Combine($extractedFolder,"$resRelPath.dds")
+							$templateFiles+=,$resFile
+						}
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
-						$resRelPath=($m.Groups[2].value -replace "`"","" -replace "/","\")
-						$resFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
-						$templateFiles+=,$resFile
+						$resRelPaths=@($m.Groups[2].value -split ",")
+						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
+							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
+							#Write-Warning "$extractedFolder\$resRelPath"
+							$resFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
+							$templateFiles+=,$resFile
+						}
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.(vehicleHud.typeIcon|weaponHud.typeIcon|vehicleHud.miniMapIcon|weaponHud.miniMapIcon|vehicleHud.vehicleIcon|weaponHud.weaponIcon|WarningHud.warningIcon)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
-						$resRelPath=($m.Groups[2].value -replace "`"","" -replace "/","\")
-						$resFile=[System.IO.Path]::Combine("$extractedFolder\Menu\HUD\Texture",$resRelPath)
-						$templateFiles+=,$resFile
+						$resRelPaths=@($m.Groups[2].value -split ",")
+						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
+							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
+							#Write-Warning "$extractedFolder\Menu\HUD\Texture\$resRelPath"
+							$resFile=[System.IO.Path]::Combine("$extractedFolder\Menu\HUD\Texture",$resRelPath)
+							$templateFiles+=,$resFile
+						}
 					}
-					#aitemplate...
+					#aitemplate (.ai), animations (.inc)...
 				}
 
 				#handling definitions in multiple files...
@@ -666,6 +708,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 
 		}
 
+		# End of any previous object...
 		If ($null -ne $templateName) {
 			If (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName)) {
 				$sw.Write("$templateName;$templateType")
@@ -683,13 +726,13 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 				$templateFile=$templateFiles[0]
 				If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 			}
-			ElseIf ($m.Groups[3].value -eq $searchedTemplateName) {
+			ElseIf ($templateName -eq $searchedTemplateName) {
 				$templateFile=$templateFiles[0]
 				If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 				$bFound=$true
 				$lastChildrenFound=$templateChildren
 				$lastFilesFound=$templateFiles
-			}				
+			}
 		}
 
 		$sw.close()
@@ -801,7 +844,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
 
 	$regexpr="^\s*ObjectTemplate.addTemplate\s+(\S+)\s*"
-	$lines=$($concontent -split "\r?\n")
+	$lines=@($concontent -split "\r?\n")
 	for ($i=0; $i -lt $lines.Count; $i++) {
 		$line=$lines[$i]
 		#"$line"
