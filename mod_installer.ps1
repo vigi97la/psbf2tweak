@@ -9,7 +9,7 @@
 #$vehicleToExtract="$modFolder\extracted\Objects\Vehicles\Land\fr_tnk_leclerc"
 #$file=(Get-Item "$vehicleToExtract\*.con").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $false $false
+#ListDependencies $file $extractFolder $exportFolder $true $true $false $false $false
 #ProcessVehicles $exportFolder $true $true $true $true $true $true $true
 #SplitToServerAndClientFolders $exportFolder $exportFolder\server $exportFolder\client
 
@@ -834,8 +834,8 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 #$vehicleToExtract="$modFolder\extracted\Objects\Vehicles\Land\aav_tunguska"
 #$file=(Get-Item "$vehicleToExtract\*.con").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $false $false
-function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false) {
+#ListDependencies $file $extractFolder $exportFolder $true $true $false $false $false
+function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false,[bool]$bAlwaysCopyContainingFolder=$true) {
 
 	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
@@ -864,24 +864,57 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					# Sometimes textures might not have the correct extension...
 					If (-not (Test-Path -Path $neededFile)) {
 						$origNeededFile=$neededFile
-						Write-Warning "$origNeededFile not found"
 						$neededFile=($origNeededFile -replace ".tga",".dds")
+						If (-not (Test-Path -Path $neededFile)) {
+							Write-Error "$origNeededFile not found"
+							continue
+						}
+						Else {
+							Write-Warning "$origNeededFile not found but $neededFile found"
+						}
 					}
-					If (((-not $bHideDefinitionsInCurrentConOrTweak) -or ((Get-Item $file).Basename -ne (Get-Item $neededFile).Basename)) -and
-					((-not $bHideDefinitionsInBf2) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success)) -and
+					If (((-not $bHideDefinitionsInBf2) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success)) -and
 					((-not $bHideDefinitionsInXpack) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success))) {
-						Write-Output "Template $templateDependency needs $neededFile"
+						If ((-not $bHideDefinitionsInCurrentConOrTweak) -or ([System.IO.Path]::Combine((Get-Item $file).DirectoryName,(Get-Item $file).Basename) -ne [System.IO.Path]::Combine((Get-Item $neededFile).DirectoryName,(Get-Item $neededFile).Basename))) {
+							Write-Output "Template $templateDependency needs $neededFile"
+						}
 						If (($null -ne $exportFolder) -and ("" -ne $exportFolder)) {
 							New-Item "$exportFolder" -ItemType directory -Force | Out-Null
 							# Should remove $extractedFolder from the path in $neededFile and add the rest (up to the parent folder of the file) at the end of $exportFolder...
 							$neededDirectory=(Get-Item $neededFile).DirectoryName
 							$regesc=[regex]::Escape($extractedFolder)
-							$m=[regex]::Match($neededDirectory, "$regesc\\(\S+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-							$restOfPath=$m.Groups[1].value
-							#"$restOfPath"
-							$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder,$restOfPath)
-							#"$exportNeededDirectory"
-							Copy-Item -Path $neededDirectory -Destination $exportNeededDirectory -Force -Recurse
+							If ($bAlwaysCopyContainingFolder) {
+								$m=[regex]::Match($neededDirectory, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+								$restOfPath=$m.Groups[1].value
+								#"$restOfPath"
+								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder,$restOfPath)
+								#"$exportNeededDirectory"
+								Copy-Item -Path $neededDirectory -Destination $exportNeededDirectory -Force -Recurse
+							}
+							Else {
+								If ((Get-Item (Get-Item $neededFile).DirectoryName).Basename -eq ((Get-Item $neededFile).Basename)) {
+									$m=[regex]::Match($neededDirectory, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+									$restOfPath=$m.Groups[1].value
+									#"$restOfPath"
+									$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder,$restOfPath)
+									#"$exportNeededDirectory"
+									Copy-Item -Path $neededDirectory -Destination $exportNeededDirectory -Force -Recurse
+								}
+								Else {
+									$neededFileWithoutExtension=[System.IO.Path]::Combine((Get-Item $neededFile).DirectoryName,(Get-Item $neededFile).Basename)
+									$neededFiles=Get-ChildItem "$neededFileWithoutExtension*"
+									$neededFiles | ForEach-Object {
+										$nf=$_.FullName
+										$m=[regex]::Match($nf, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+										$restOfPath=$m.Groups[1].value
+										#"$restOfPath"
+										$exportNeededFile=[System.IO.Path]::Combine($exportFolder,$restOfPath)
+										#"$exportNeededFile"
+										New-Item ([System.IO.FileInfo]$exportNeededFile).DirectoryName -ItemType directory -Force | Out-Null
+										Copy-Item -Path $nf -Destination $exportNeededFile -Force -Recurse
+									}
+								}
+							}
 						}
 					}
 				}
