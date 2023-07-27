@@ -908,12 +908,15 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 	# How to correct wrong directory structures...
 	# Objects vs Menu...
 
-	Get-ChildItem "$originalFolder\*" -R -Include *.tweak,*.con,*.ai,*.inc,*.ske,*.baf,*.tai,*.desc,*.txt,*.collisionmesh | ForEach-Object {
+	$serverFiles=Get-ChildItem "$originalFolder\*" -R -Include *.tweak,*.con,*.ai,*.inc,*.ske,*.baf,*.tai,*.desc,*.txt,*.collisionmesh
+	$clientFiles=Get-ChildItem "$originalFolder\*" -R -Exclude *.tweak,*.con,*.ai,*.inc,*.ske,*.baf,*.tai,*.desc,*.txt,*.collisionmesh
+
+	$serverFiles | ForEach-Object {
 		$file=$_.FullName
 		#"$file"
 		If (-not (Test-Path -Path "$file" -PathType Container)) {
 			$regesc=[regex]::Escape($originalFolder)
-			$m=[regex]::Match($file, "$regesc\\(\S+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($file, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			$restOfPath=$m.Groups[1].value
 			#"$restOfPath"
 			$newPath=[System.IO.Path]::Combine($serverFolder,$restOfPath)
@@ -927,12 +930,12 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 			}
 		}
 	}
-	Get-ChildItem "$originalFolder\*" -R | ForEach-Object {
+	$clientFiles | ForEach-Object {
 		$file=$_.FullName
 		#"$file"
 		If (-not (Test-Path -Path "$file" -PathType Container)) {
 			$regesc=[regex]::Escape($originalFolder)
-			$m=[regex]::Match($file, "$regesc\\(\S+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($file, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			$restOfPath=$m.Groups[1].value
 			#"$restOfPath"
 			$newPath=[System.IO.Path]::Combine($clientFolder,$restOfPath)
