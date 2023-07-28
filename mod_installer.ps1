@@ -1,16 +1,24 @@
 # DO NOT USE, TEMPORARY
 
 #. .\mod_installer.ps1
+#$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\bf2"
+#$extractFolder="$modFolder\extracted"
+#ExtractModArchives $modFolder $extractFolder $false $false 1
+#$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\xpack"
+#$extractFolder="$modFolder\extracted"
+#ExtractModArchives $modFolder $extractFolder $false $false 1
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-#ProcessVehicles $extractFolder $true $true $false $false $false $true $true # Can be very slow for AIX2 Reality handheld weapons...
-#FindTemplate $extractFolder $null $true $false
-#$vehicleToExtract="$modFolder\extracted\Objects\Vehicles\Land\fr_tnk_leclerc"
-#$file=(Get-Item "$vehicleToExtract\*.con").FullName
+##ProcessVehicles $extractFolder $null $true $true $false $false $false $true $true # Can be very slow for AIX2 Reality handheld weapons...
+#FindTemplate $extractFolder $null $true $false # To build a template cache
+#$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc"
+#$file=(Get-Item "$modFolder\extracted\$vehicleToExtract\*.con").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $false $false $false
-#ProcessVehicles $exportFolder $true $true $true $true $true $true $true
+#ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $true $true $false
+#ProcessVehicles $exportFolder $null $true $true $true $true $true $true $true
+#Move-Item -Path "$exportFolder" -Destination "$exportFolder`_full" -Force
+#ListDependencies (Get-Item "$exportFolder`_full\$vehicleToExtract\*.con").FullName "$exportFolder`_full" $exportFolder $false $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $false $false $false
 #SplitToServerAndClientFolders $exportFolder $exportFolder\server $exportFolder\client
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
@@ -307,10 +315,14 @@ function PreProcessIncludesConContent($concontent, $file) {
 
 #. .\mod_installer.ps1
 #$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab"
-#ProcessVehicles $vehicleToExtract $false $true $true $true $true $true $true
-function ProcessVehicles($objectsFolder,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetMapIcons=$false,[bool]$bResetHUDIcons=$false,[bool]$bResetSpottedMessage=$false,[bool]$bExpandIncludes=$false,[bool]$bOverwrite=$false) {
+#ProcessVehicles $vehicleToExtract $null $false $true $true $true $true $true $true
+function ProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetMapIcons=$false,[bool]$bResetHUDIcons=$false,[bool]$bResetSpottedMessage=$false,[bool]$bExpandIncludes=$false,[bool]$bOverwrite=$false) {
 
-	Get-ChildItem "$objectsFolder\*" -R -Include "*.tweak" | ForEach-Object {
+	If (($null -ne $outputFolder) -and ("" -ne $outputFolder)) {
+		New-Item "$outputFolder" -ItemType directory -Force | Out-Null
+	}
+
+	Get-ChildItem "$objectsFolder" -R -Include "*.tweak" | ForEach-Object {
 		$file=$_.FullName
 		$bVehicle=[regex]::Match($file, "(.*Vehicles.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
 		$bStationaryWeapon=[regex]::Match($file, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
@@ -467,6 +479,17 @@ function ProcessVehicles($objectsFolder,[bool]$bIncludeStationaryWeapons=$false,
 				}
 				$sw.close()
 				$sr.close()
+				If (($null -ne $outputFolder) -and ("" -ne $outputFolder)) {
+					# Should remove $objectsFolder from the path in $file and add the rest at the end of the desired folder...
+					$regesc=[regex]::Escape($objectsFolder)
+					$m=[regex]::Match($file, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$restOfPath=$m.Groups[1].value
+					#"$restOfPath"
+					$outputFile=[System.IO.Path]::Combine($outputFolder,$restOfPath)
+					#"$outputFile"
+					New-Item ([System.IO.FileInfo]$outputFile).DirectoryName -ItemType directory -Force | Out-Null
+					Move-Item -Path "$file.tmp" -Destination $outputFile -Force
+				}
 				If ($bOverwrite) { 
 					If (-not (Test-Path -Path "$file.bak")) { 
 						Move-Item -Path $file -Destination "$file.bak" -Force
@@ -544,7 +567,7 @@ function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnor
 }
 
 #. .\mod_installer.ps1
-#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack"
+#$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\xpack"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $true $true 0
 #$extractMode: 0 if the extracted folders use the zip name, 1 if they use the folder specified in the .con file, 2 if a suffix "server" or "client" should be added to that folder.
@@ -589,7 +612,9 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 	$lastFilesFound=$null
 	$cachefile="$extractedFolder\cache_db.csv"
 	If ((-not $bUseCache) -or (($null -eq $searchedTemplateName) -or ("" -eq $searchedTemplateName))) {
-		$sw=[System.IO.StreamWriter]$cachefile
+		If ($bUseCache) {
+			$sw=[System.IO.StreamWriter]$cachefile
+		}
 		Get-ChildItem "$extractedFolder\*" -R -Include *.con,*.tweak | ForEach-Object {
 
 			# End of any previous object...
@@ -735,7 +760,9 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 			}
 		}
 
-		$sw.close()
+		If ($bUseCache) {
+			$sw.close()
+		}
 	}
 	Else {
 		if (($null -eq $cachefile) -or !(Test-Path -Path $cachefile)) {
@@ -827,18 +854,27 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 }
 
 #. .\mod_installer.ps1
-#$modFolder="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\mods\xpack"
+#$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\xpack"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
 #FindTemplate $extractFolder $null $true $false
-#$vehicleToExtract="$modFolder\extracted\Objects\Vehicles\Land\aav_tunguska"
-#$file=(Get-Item "$vehicleToExtract\*.con").FullName
+#$vehicleToExtract="Objects\Vehicles\Land\aav_tunguska"
+#$file=(Get-Item "$modFolder\extracted\$vehicleToExtract\*.con").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $false $false $false
-function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,[bool]$bHideDefinitionsInXpack=$false,[bool]$bAlwaysCopyContainingFolder=$true) {
+#ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $false $false
+function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bCheckModifiedFiles=$true,[bool]$bProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true) {
 
-	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
-		Write-Error "Error: Invalid parameter (objectsFolder)"
+	If (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
+		Write-Error "Error: Invalid parameter (extractedFolder)"
+		return
+	}
+	If ($bHideDefinitionsInBf2 -and (($null -eq $bf2ExtractedFolder) -or !(Test-Path -Path $bf2ExtractedFolder))) {
+		Write-Error "Error: Invalid parameter (bHideDefinitionsInBf2 or bf2ExtractedFolder)"
+		return
+	}
+	If ($bHideDefinitionsInXpack -and (($null -eq $xpackExtractedFolder) -or !(Test-Path -Path $xpackExtractedFolder))) {
+		Write-Error "Error: Invalid parameter (bHideDefinitionsInXpack or xpackExtractedFolder)"
+		return
 	}
 
 	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
@@ -873,45 +909,58 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 							Write-Warning "$origNeededFile not found but $neededFile found"
 						}
 					}
-					If (((-not $bHideDefinitionsInBf2) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success)) -and
-					((-not $bHideDefinitionsInXpack) -or (-not [regex]::Match((Get-Item $file).DirectoryName, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success))) {
+					# Should remove $extractedFolder from the path in $neededFile and add the rest at the end of the desired folder...
+					$neededDirectory=(Get-Item $neededFile).DirectoryName
+					$regesc=[regex]::Escape($extractedFolder)
+					$m=[regex]::Match($neededFile, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$restOfPath=$m.Groups[1].value
+					#"$restOfPath"
+					If ($bHideDefinitionsInBf2) {
+						$bf2NeededFile=[System.IO.Path]::Combine($bf2ExtractedFolder,$restOfPath)
+						#"$bf2NeededFile"
+					}
+					If ($bHideDefinitionsInXpack) {
+						$xpackNeededFile=[System.IO.Path]::Combine($xpackExtractedFolder,$restOfPath)
+						#"$xpackNeededFile"
+					}
+					If (((-not $bHideDefinitionsInBf2) -or ((-not [regex]::Match((Get-Item $neededFile).DirectoryName, [regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) -and (!(Test-Path -Path $bf2NeededFile) -or ($bCheckModifiedFiles -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $bf2NeededFile).hash))))) -and
+					((-not $bHideDefinitionsInXpack) -or ((-not [regex]::Match((Get-Item $neededFile).DirectoryName, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) -and (!(Test-Path -Path $xpackNeededFile) -or ($bCheckModifiedFiles -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $xpackNeededFile).hash)))))) {
 						If ((-not $bHideDefinitionsInCurrentConOrTweak) -or ([System.IO.Path]::Combine((Get-Item $file).DirectoryName,(Get-Item $file).Basename) -ne [System.IO.Path]::Combine((Get-Item $neededFile).DirectoryName,(Get-Item $neededFile).Basename))) {
 							Write-Output "Template $templateDependency needs $neededFile"
 						}
 						If (($null -ne $exportFolder) -and ("" -ne $exportFolder)) {
 							New-Item "$exportFolder" -ItemType directory -Force | Out-Null
-							# Should remove $extractedFolder from the path in $neededFile and add the rest (up to the parent folder of the file) at the end of $exportFolder...
-							$neededDirectory=(Get-Item $neededFile).DirectoryName
-							$regesc=[regex]::Escape($extractedFolder)
-							If ($bAlwaysCopyContainingFolder) {
+							If ($bAlwaysCopyContainingFolder -or ((Get-Item (Get-Item $neededFile).DirectoryName).Basename -eq ((Get-Item $neededFile).Basename))) {
 								$m=[regex]::Match($neededDirectory, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 								$restOfPath=$m.Groups[1].value
 								#"$restOfPath"
 								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder,$restOfPath)
 								#"$exportNeededDirectory"
-								Copy-Item -Path $neededDirectory -Destination $exportNeededDirectory -Force -Recurse
+								If (-not (Test-Path -Path $exportNeededDirectory)) {
+									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
+									Copy-Item -Path $neededDirectory\* -Destination $exportNeededDirectory -Force -Recurse
+									If ($bProcessVehicles) {
+										ProcessVehicles $neededDirectory $exportNeededDirectory $true $true $false $false $false $true $false
+									}
+								}
 							}
 							Else {
-								If ((Get-Item (Get-Item $neededFile).DirectoryName).Basename -eq ((Get-Item $neededFile).Basename)) {
-									$m=[regex]::Match($neededDirectory, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+								$neededFileWithoutExtension=[System.IO.Path]::Combine((Get-Item $neededFile).DirectoryName,(Get-Item $neededFile).Basename)
+								$neededFiles=Get-ChildItem "$neededFileWithoutExtension.*"
+								$neededFiles | ForEach-Object {
+									$nf=$_.FullName
+									$m=[regex]::Match($nf, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 									$restOfPath=$m.Groups[1].value
 									#"$restOfPath"
-									$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder,$restOfPath)
-									#"$exportNeededDirectory"
-									Copy-Item -Path $neededDirectory -Destination $exportNeededDirectory -Force -Recurse
-								}
-								Else {
-									$neededFileWithoutExtension=[System.IO.Path]::Combine((Get-Item $neededFile).DirectoryName,(Get-Item $neededFile).Basename)
-									$neededFiles=Get-ChildItem "$neededFileWithoutExtension*"
-									$neededFiles | ForEach-Object {
-										$nf=$_.FullName
-										$m=[regex]::Match($nf, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-										$restOfPath=$m.Groups[1].value
-										#"$restOfPath"
-										$exportNeededFile=[System.IO.Path]::Combine($exportFolder,$restOfPath)
-										#"$exportNeededFile"
-										New-Item ([System.IO.FileInfo]$exportNeededFile).DirectoryName -ItemType directory -Force | Out-Null
+									$exportNeededFile=[System.IO.Path]::Combine($exportFolder,$restOfPath)
+									#"$exportNeededFile"
+									$exportNeededDirectory=([System.IO.FileInfo]$exportNeededFile).DirectoryName
+									New-Item $exportNeededDirectory -ItemType directory -Force | Out-Null
+									If (-not (Test-Path -Path $exportNeededFile)) {
 										Copy-Item -Path $nf -Destination $exportNeededFile -Force -Recurse
+										If ($bProcessVehicles) {
+											ProcessVehicles $nf $exportNeededDirectory $true $true $false $false $false $true $false
+										}
 									}
 								}
 							}
@@ -932,6 +981,7 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 
 	if (($null -eq $originalFolder) -or !(Test-Path -Path $originalFolder)) {
 		Write-Error "Error: Invalid parameter ($originalFolder)"
+		return
 	}
 	#New-Item "$serverFolder" -ItemType directory -Force | Out-Null
 	#New-Item "$clientFolder" -ItemType directory -Force | Out-Null
