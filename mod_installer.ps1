@@ -615,7 +615,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 		If ($bUseCache) {
 			$sw=[System.IO.StreamWriter]$cachefile
 		}
-		Get-ChildItem "$extractedFolder\*" -R -Include *.con,*.tweak | ForEach-Object {
+		Get-ChildItem "$extractedFolder\*" -R -Include *.con,*.tweak,*.ai | ForEach-Object {
 
 			# End of any previous object...
 			If ($null -ne $templateName) {
@@ -651,8 +651,11 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 			$lines=@($concontent -split "\r?\n")
 			for ($i=0; $i -lt $lines.Count; $i++) {
 				$line=$lines[$i]
-				$m=[regex]::Match($line, "^\s*ObjectTemplate.(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-				If ($m.Groups.Count -eq 4) {
+				$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				If ($m.Groups.Count -ne 5) {
+					$m=[regex]::Match($line, "^\s*(aiTemplate|weaponTemplate).create\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				}
+				If (($m.Groups.Count -eq 5) -or ($m.Groups.Count -eq 3)) {
 
 					# End of any previous object...
 					If ($null -ne $templateName) {
@@ -682,14 +685,30 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					}
 
 					# Beginning of new object...
-					$templateType=$m.Groups[2].value
-					$templateName=$m.Groups[3].value
+					If ($m.Groups.Count -eq 5) {
+						$templateType=$m.Groups[3].value
+						$templateName=$m.Groups[4].value
+					}
+					Else {
+						$templateType=$m.Groups[1].value
+						$templateName=$m.Groups[2].value
+					}
 					$templateFile=$file
 					$templateFiles=,$file
 					$templateChildren=$null
 				}
 				ElseIf ($null -ne $templateName) {
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.addTemplate\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 3) {
+						$templateChild=$m.Groups[2].value
+						$templateChildren+=,$templateChild
+					}
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.setObjectTemplate\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 3) {
+						$templateChild=$m.Groups[2].value
+						$templateChildren+=,$templateChild
+					}
+					$m=[regex]::Match($line, "^\s*aiTemplate.addPlugIn\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$templateChild=$m.Groups[1].value
 						$templateChildren+=,$templateChild
@@ -724,10 +743,10 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 							$templateFiles+=,$resFile
 						}
 					}
-					#aitemplate (.ai), animations (.inc)...
+					# Animations (.inc)...?
 				}
 
-				#handling definitions in multiple files...
+				# Handling definitions in multiple files...
 
 			}
 
