@@ -12,13 +12,16 @@
 #ExtractModArchives $modFolder $extractFolder $false $false 1
 ##ProcessVehicles $extractFolder $null $true $true $false $false $false $true $true # Can be very slow for AIX2 Reality handheld weapons...
 #FindTemplate $extractFolder $null $true $false # To build a template cache
-#$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc"
-#$file=(Get-Item "$modFolder\extracted\$vehicleToExtract\*.con").FullName
+#$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
+#$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
 #ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $true $true $false
 #ProcessVehicles $exportFolder $null $true $true $true $true $true $true $true
 #Move-Item -Path "$exportFolder" -Destination "$exportFolder`_full" -Force
-#ListDependencies (Get-Item "$exportFolder`_full\$vehicleToExtract\*.con").FullName "$exportFolder`_full" $exportFolder $false $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $false $false $false
+#ListDependencies (Get-Item "$exportFolder`_full\$vehicleToExtract").FullName "$exportFolder`_full" $exportFolder $false $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $false $false $false
+#. .\MiscTweaks.ps1
+#DontClearTeamOnExitUpdate $exportFolder 0 $true $true
+#DelayToUseUpdate $exportFolder 0 $true $true
 #SplitToServerAndClientFolders $exportFolder $exportFolder\server $exportFolder\client
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
@@ -877,8 +880,8 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
 #FindTemplate $extractFolder $null $true $false
-#$vehicleToExtract="Objects\Vehicles\Land\aav_tunguska"
-#$file=(Get-Item "$modFolder\extracted\$vehicleToExtract\*.con").FullName
+#$vehicleToExtract="Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
+#$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
 #ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $false $false
 function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bCheckModifiedFiles=$true,[bool]$bProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true) {
