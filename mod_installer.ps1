@@ -726,6 +726,18 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 							$templateFiles+=,$resFile
 						}
 					}
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.collisionMesh\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 2) {
+						$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
+						$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\Meshes"),"$resRelPath.collisionmesh")
+						$templateFiles+=,$resFile
+					}
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.geometry\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 2) {
+						$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
+						$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\Meshes"),"$resRelPath.bundledmesh")
+						$templateFiles+=,$resFile
+					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
 						$resRelPaths=@($m.Groups[2].value -split ",")
