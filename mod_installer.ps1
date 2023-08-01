@@ -957,14 +957,28 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 						$xpackNeededFile=[System.IO.Path]::Combine($xpackExtractedFolder,$restOfPath)
 						#"$xpackNeededFile"
 					}
-					If (((-not $bHideDefinitionsInBf2) -or ((-not [regex]::Match((Get-Item $neededFile).DirectoryName, [regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) -and (!(Test-Path -Path $bf2NeededFile) -or ($bCheckModifiedFiles -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $bf2NeededFile).hash))))) -and
-					((-not $bHideDefinitionsInXpack) -or ((-not [regex]::Match((Get-Item $neededFile).DirectoryName, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) -and (!(Test-Path -Path $xpackNeededFile) -or ($bCheckModifiedFiles -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $xpackNeededFile).hash)))))) {
-						If ((-not $bHideDefinitionsInCurrentConOrTweak) -or ([System.IO.Path]::Combine((Get-Item $file).DirectoryName,(Get-Item $file).Basename) -ne [System.IO.Path]::Combine((Get-Item $neededFile).DirectoryName,(Get-Item $neededFile).Basename))) {
+					If (((-not $bHideDefinitionsInBf2) -or ((-not [regex]::Match($neededDirectory, [regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) -and (!(Test-Path -Path $bf2NeededFile) -or ($bCheckModifiedFiles -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $bf2NeededFile).hash))))) -and
+					((-not $bHideDefinitionsInXpack) -or ((-not [regex]::Match($neededDirectory, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) -and (!(Test-Path -Path $xpackNeededFile) -or ($bCheckModifiedFiles -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $xpackNeededFile).hash)))))) {
+						If ((-not $bHideDefinitionsInCurrentConOrTweak) -or ([System.IO.Path]::Combine((Get-Item $file).DirectoryName,(Get-Item $file).Basename) -ne [System.IO.Path]::Combine($neededDirectory,(Get-Item $neededFile).Basename))) {
 							Write-Output "Template $templateDependency needs $neededFile"
 						}
 						If (($null -ne $exportFolder) -and ("" -ne $exportFolder)) {
 							New-Item "$exportFolder" -ItemType directory -Force | Out-Null
-							If ($bAlwaysCopyContainingFolder -or ((Get-Item (Get-Item $neededFile).DirectoryName).Basename -eq ((Get-Item $neededFile).Basename))) {
+							If ((Get-Item $neededDirectory).Basename -ieq "meshes") {
+								$m=[regex]::Match("$neededDirectory\..", "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+								$restOfPath=$m.Groups[1].value
+								#"$restOfPath"
+								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder,$restOfPath)
+								#"$exportNeededDirectory"
+								If (-not (Test-Path -Path $exportNeededDirectory)) {
+									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
+									Copy-Item -Path $neededDirectory\..\* -Destination $exportNeededDirectory -Force -Recurse
+									If ($bProcessVehicles) {
+										ProcessVehicles $neededDirectory $exportNeededDirectory $true $true $false $false $false $true $false
+									}
+								}
+							}
+							ElseIf ($bAlwaysCopyContainingFolder -or ((Get-Item $neededDirectory).Basename -ieq (Get-Item $neededFile).Basename)) {
 								$m=[regex]::Match($neededDirectory, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 								$restOfPath=$m.Groups[1].value
 								#"$restOfPath"
@@ -979,7 +993,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								}
 							}
 							Else {
-								$neededFileWithoutExtension=[System.IO.Path]::Combine((Get-Item $neededFile).DirectoryName,(Get-Item $neededFile).Basename)
+								$neededFileWithoutExtension=[System.IO.Path]::Combine($neededDirectory,(Get-Item $neededFile).Basename)
 								$neededFiles=Get-ChildItem "$neededFileWithoutExtension.*"
 								$neededFiles | ForEach-Object {
 									$nf=$_.FullName
