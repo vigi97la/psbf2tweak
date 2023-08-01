@@ -1039,8 +1039,8 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 	# How to correct wrong directory structures...
 	# Objects vs Menu...
 
-	$serverFiles=Get-ChildItem "$originalFolder\*" -R -Include *.tweak,*.con,*.ai,*.inc,*.ske,*.baf,*.tai,*.desc,*.txt,*.collisionmesh
-	$clientFiles=Get-ChildItem "$originalFolder\*" -R -Exclude *.tweak,*.con,*.ai,*.inc,*.ske,*.baf,*.tai,*.desc,*.txt,*.collisionmesh
+	$serverFiles=Get-ChildItem "$originalFolder\*" -R -Include *.tweak,*.con,*.ai,*.inc,*.tweak.bak,*.con.bak,*.ai.bak,*.inc.bak,*.ske,*.baf,*.tai,*.desc,*.txt,*.collisionmesh
+	$clientFiles=Get-ChildItem "$originalFolder\*" -R -Exclude *.tweak,*.con,*.ai,*.inc,*.tweak.bak,*.con.bak,*.ai.bak,*.inc.bak,*.ske,*.baf,*.tai,*.desc,*.txt,*.collisionmesh
 
 	$serverFiles | ForEach-Object {
 		$file=$_.FullName
