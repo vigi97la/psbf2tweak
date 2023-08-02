@@ -45,6 +45,37 @@ function ReadConFile($file) {
 	return $content
 }
 
+#. .\mod_installer.ps1
+#ConvertBlockCommentsConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleparams.con")
+function ConvertBlockCommentsConContent($concontent) {
+	$content=""
+	$beginremregexpr="^\s*beginrem\s*"
+	$endremregexpr="^\s*endrem\s*"
+	$bInsideBlockComment=$false
+	$lines=@($concontent -split "\r?\n")
+	for ($i=0; $i -lt $lines.Count; $i++) {
+		$line=$lines[$i]
+		if ($bInsideBlockComment) {
+			$m=[regex]::Match($line, $endremregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if ($m.Success) {
+				$bInsideBlockComment=$false
+				$content+="rem "+$line+"`r`n"
+				Continue
+			}
+			$content+="rem "+$line+"`r`n"
+			Continue
+		}
+		$m=[regex]::Match($line, $beginremregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if ($m.Success) {
+			$bInsideBlockComment=$true
+			$content+="rem "+$line+"`r`n"
+			Continue
+		}
+		$content+=$line+"`r`n"
+	}
+	return $content
+}
+
 function cbInsideCommentLine($concontent, $i, $line, $params) {
 	#Write-Warning "Comment     : $line" # Write-Output causes problems?
 	$content=$params
