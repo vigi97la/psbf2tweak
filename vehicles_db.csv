@@ -88,7 +88,6 @@ gaz_24_volga;3.3;;ALL;0;;0;0;0;0;0;0;0;1;0;0;0;1;0;0;;;;
 gaz_2975_tiger;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;0;0;1;1;0;0;0;;;;
 ifv_spz_puma;1;;EU;0;;0;0;0;0;0;0;0;0;0;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;;https://en.wikipedia.org/wiki/Puma_(German_infantry_fighting_vehicle)
 lav25a2;1.2;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;0;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-bmd-2-and-lav-25a2-texture-pack;
-leoclerc;0;;EU;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;t90_3p_fire.wav should be converted to mono (e.g. using Audacity);https://www.moddb.com/games/battlefield-2/addons/leoclerc;https://www.edrmagazine.eu/the-leo-clerc-shows-french-german-cooperation-within-knds
 leopard_2a7;0;;EU;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;cannon does not move up/down, t90_3p_fire.wav should be converted to mono (e.g. using Audacity)?;https://www.moddb.com/games/battlefield-2/addons/leopard-2a7;https://en.wikipedia.org/wiki/Leopard_2
 mbt_c1_ariete;0;;EU;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;;;
 mbt_t72b1;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-t-72b1-and-zbd04b;
@@ -100,7 +99,6 @@ meat_niva;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;1;0;0;;;;
 mercedes_560sel_w126;3.3;;ALL;0;;0;0;0;0;0;0;0;0;0;0;0;1;0;0;;;;
 mrap_maxxpro;3;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;0;0;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-mrap-maxxpro-and-dacia;https://en.wikipedia.org/wiki/International_MaxxPro
 MSTA-S;0.1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;;https://www.moddb.com/games/battlefield-2/addons/msta-s;
-P4_ASPIC;3;;EU;0;;0;0;0;0;0;0;0;0;1;0;1;0;0;1;;;;
 patria_amv;1.2;;EU;0;;1;1;0;0;0;0;0;1;0;1;0;0;0;1;;;;https://en.wikipedia.org/wiki/Patria_AMV
 kto_rosomak;1.2;;EU;0;;1;1;0;0;0;0;0;1;0;1;0;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/kto-rosomak-and-textures-pack;https://en.wikipedia.org/wiki/KTO_Rosomak
 RUTNK_T14;0;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;;;
@@ -112,4 +110,9 @@ ru_apc_k25a;1;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;1;1;0;
 uaz_technical;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;0;0;1;0;0;1;;;https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-tank-t-80bv-and-uaz-469-technical;
 usapc_m2a3;1;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;https://www.moddb.com/games/battlefield-2/addons/usapc-m2a3;
 ustank_m1a3;0;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;;;
-VBCI;1.2;;EU;0;;0;0;0;0;0;0;0;1;0;1;0;0;0;1;;;;
+P4_ASPIC;3;;EU;0;;0;0;0;0;0;0;0;0;1;0;1;0;0;1;;wrong missile a.t.m.;;https://en.wikipedia.org/wiki/Peugeot_P4
+fr_apc_vab;3;;EU;1;;0;0;0;0;0;0;0;0;0;1;1;0;0;1;;;;https://en.wikipedia.org/wiki/V%C3%A9hicule_de_l%27Avant_Blind%C3%A9
+VBCI;1.2;;EU;0;;0;0;0;0;0;0;0;1;0;1;0;0;0;1;;;;https://en.wikipedia.org/wiki/VBCI
+fr_tnk_amx10rc_bf2;1;;EU;1;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;;https://en.wikipedia.org/wiki/AMX-10_RC
+fr_tnk_leclerc_bf2;0;;EU;1;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;;;https://en.wikipedia.org/wiki/Leclerc_tank
+leoclerc;0;;EU;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;t90_3p_fire.wav should be converted to mono (e.g. using Audacity);https://www.moddb.com/games/battlefield-2/addons/leoclerc;https://www.edrmagazine.eu/the-leo-clerc-shows-french-german-cooperation-within-knds
