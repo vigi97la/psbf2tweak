@@ -10,15 +10,16 @@
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-##PreProcessVehicles $extractFolder $null $true $true $false $false $false $true $true # Can be very slow for AIX2 Reality handheld weapons...
+##PreProcessVehicles $extractFolder $null $true $true $true $true # Can be very slow for AIX2 Reality handheld weapons...
 #FindTemplate $extractFolder $null $true $false # To build a template cache
 #$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
 #ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $true $true $false
-#PreProcessVehicles $exportFolder $null $true $true $true $true $true $true $true
 #Move-Item -Path "$exportFolder" -Destination "$exportFolder`_full" -Force
 #ListDependencies (Get-Item "$exportFolder`_full\$vehicleToExtract").FullName "$exportFolder`_full" $exportFolder $false $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $false $false $false
+#. .\MiscFixes.ps1
+#FixVehicleType $exportFolder $true $true $true $true $true $true
 #. .\MiscTweaks.ps1
 #DontClearTeamOnExitUpdate $exportFolder 0 $true $true
 #DelayToUseUpdate $exportFolder 0 $true $true
@@ -318,8 +319,8 @@ function PreProcessIncludesConContent($concontent, $file) {
 
 #. .\mod_installer.ps1
 #$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab"
-#PreProcessVehicles $vehicleToExtract $null $false $true $true $true $true $true $true
-function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetMapIcons=$false,[bool]$bResetHUDIcons=$false,[bool]$bResetSpottedMessage=$false,[bool]$bExpandIncludes=$false,[bool]$bOverwrite=$false) {
+#PreProcessVehicles $vehicleToExtract $null $false $true $true $true
+function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bExpandIncludes=$true,[bool]$bOverwrite=$false) {
 
 	If (($null -ne $outputFolder) -and ("" -ne $outputFolder)) {
 		New-Item "$outputFolder" -ItemType directory -Force | Out-Null
@@ -344,21 +345,6 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 			If (-not $bSkip) {
 				Write-Output "$file : $vehicleName"
 
-				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), "\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*\r?\n")
-				If ($m.Groups.Count -eq 2) {
-					$vehicleType=[int]$m.Groups[1].value
-				}
-				# VTHeavyTank (0), VTApc (1), VCHelicopter (2), car (3), VCAir (4), VTAA (5), VCSea (6)
-				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), "\s*ObjectTemplate.setVehicleType\s+(\S+)\s*\r?\n")
-				If ($m.Groups.Count -eq 2) {
-					$vehicleVT=$m.Groups[1].value
-				}
-				# VCHelicopter, VCAir, VCSea...
-				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), "\s*ObjectTemplate.vehicleCategory\s+(\S+)\s*\r?\n")
-				If ($m.Groups.Count -eq 2) {
-					$vehicleVC=$m.Groups[1].value
-				}
-
 				$sr=[System.IO.StreamReader]$file
 				$sw=[System.IO.StreamWriter]"$file.tmp"
 				while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
@@ -368,110 +354,6 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 					}
 
 					#Write-Warning "$line"
-										
-					If ($bResetMapIcons) {
-
-						# Should use vehicles_db.csv, see xpak_ailraider and others with specific icons, should not change if the file is found...
-
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.typeIcon\s+(\S+)\s*")
-						If ($m.Groups.Count -eq 2) {
-							$vehicleTypeIcon=$m.Groups[1].value
-							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_tank.tga")
-							}
-							elseIf (([double]$vehicleType -ge 1) -and ([double]$vehicleType -lt 2)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_apc.tga")
-							}
-							elseIf (([double]$vehicleType -ge 2) -and ([double]$vehicleType -lt 3)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_chopper.tga")
-							}
-							elseIf (([double]$vehicleType -ge 3) -and ([double]$vehicleType -lt 4)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_jeep.tga")
-							}
-							elseIf (([double]$vehicleType -ge 4) -and ([double]$vehicleType -lt 5)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_plane.tga")
-							}
-							elseIf (([double]$vehicleType -ge 5) -and ([double]$vehicleType -lt 6)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_antiair.tga")
-							}
-							elseIf (([double]$vehicleType -ge 6) -and ([double]$vehicleType -lt 7)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.typeIcon Ingame\Vehicles\Icons\Hud\MenuIcons\menuIcon_boat.tga")
-							}
-							else {
-								$sw.WriteLine($line)
-							}
-							Continue
-						}
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.miniMapIcon\s+(\S+)\s*")
-						If ($m.Groups.Count -eq 2) {
-							$vehicleMiniMapIcon=$m.Groups[1].value
-							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Tank.tga")
-							}
-							elseIf (([double]$vehicleType -ge 1) -and ([double]$vehicleType -lt 2)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_APC.tga")
-							}
-							elseIf (([double]$vehicleType -ge 2) -and ([double]$vehicleType -lt 3)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Attack_Heli.tga")
-							}
-							elseIf (([double]$vehicleType -ge 3) -and ([double]$vehicleType -lt 4)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Jeep.tga")
-							}
-							elseIf (([double]$vehicleType -ge 4) -and ([double]$vehicleType -lt 5)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_Jet.tga")
-							}
-							elseIf (([double]$vehicleType -ge 5) -and ([double]$vehicleType -lt 6)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_AAVehicle.tga")
-							}
-							elseIf (([double]$vehicleType -ge 6) -and ([double]$vehicleType -lt 7)) {
-								$sw.WriteLine("ObjectTemplate.vehicleHud.miniMapIcon Ingame\Vehicles\Icons\Minimap\mini_rib.tga")
-							}
-							else {
-								$sw.WriteLine($line)
-							}
-							#Ingame\Vehicles\Icons\HUD\Minimap\MM_xpak_civcar.dds
-							Continue
-						}
-					}
-					If ($bResetHUDIcons) {
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.vehicleIcon\s+(\S+)\s*")
-						If ($m.Groups.Count -eq 2) {
-							$vehicleIcon=$m.Groups[1].value
-							$sw.WriteLine("rem $line")
-							Continue
-						}
-					}
-					If ($bResetSpottedMessage) {
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.Radio.spottedMessage\s+(\S+)\s*")
-						If ($m.Groups.Count -eq 2) {
-							$vehicleSpottedMessage=$m.Groups[1].value
-							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage tank_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 1) -and ([double]$vehicleType -lt 2)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage apc_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 2) -and ([double]$vehicleType -lt 3)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage heli_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 3) -and ([double]$vehicleType -lt 4)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage vehicle_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 4) -and ([double]$vehicleType -lt 5)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage air_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 5) -and ([double]$vehicleType -lt 6)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage aa_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 6) -and ([double]$vehicleType -lt 7)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage boat_spotted")
-							}
-							else {
-								$sw.WriteLine($line)
-							}
-							Continue
-						}
-					}
 
 					If ($bExpandIncludes) {
 						$sw.WriteLine((PreProcessIncludesConLine $line $file))
@@ -974,7 +856,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 									Copy-Item -Path $neededDirectory\..\* -Destination $exportNeededDirectory -Force -Recurse
 									If ($bPreProcessVehicles) {
-										PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $false $false $false $true $false
+										PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false
 									}
 								}
 							}
@@ -988,7 +870,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 									Copy-Item -Path $neededDirectory\* -Destination $exportNeededDirectory -Force -Recurse
 									If ($bPreProcessVehicles) {
-										PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $false $false $false $true $false
+										PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false
 									}
 								}
 							}
@@ -1007,7 +889,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									If (-not (Test-Path -Path $exportNeededFile)) {
 										Copy-Item -Path $nf -Destination $exportNeededFile -Force -Recurse
 										If ($bPreProcessVehicles) {
-											PreProcessVehicles $nf $exportNeededDirectory $true $true $false $false $false $true $false
+											PreProcessVehicles $nf $exportNeededDirectory $true $true $true $false
 										}
 									}
 								}
