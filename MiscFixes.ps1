@@ -1,8 +1,10 @@
-#. .\MiscFixes.ps1
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
-function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetMapIcons=$false,[bool]$bResetHUDIcons=$false,[bool]$bResetSpottedMessage=$true) {
+#. .\MiscFixes.ps1
+#$exportFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\export\Objects\Vehicles\Land\fr_tnk_amx10rc_bf2"
+#FixVehicleType $exportFolder $true $true $true $true $true $true
+function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetSpottedMessage=$true,[bool]$bResetMapIcons=$true,[bool]$bResetHUDIcons=$false) {
 
 	If ($bUseVehiclesDB) { $db=Import-Csv -Path "$scriptPath\vehicles_db.csv" -Delimiter ";" }
 
@@ -129,6 +131,37 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 							Continue
 						}
 					}
+					If ($bResetSpottedMessage) {
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.Radio.spottedMessage\s+(\S+)\s*")
+						If ($m.Groups.Count -eq 2) {
+							$vehicleSpottedMessage=$m.Groups[1].value
+							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage tank_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 1) -and ([double]$vehicleType -lt 2)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage apc_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 2) -and ([double]$vehicleType -lt 3)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage heli_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 3) -and ([double]$vehicleType -lt 4)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage vehicle_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 4) -and ([double]$vehicleType -lt 5)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage air_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 5) -and ([double]$vehicleType -lt 6)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage aa_spotted")
+							}
+							elseIf (([double]$vehicleType -ge 6) -and ([double]$vehicleType -lt 7)) {
+								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage boat_spotted")
+							}
+							else {
+								$sw.WriteLine($line)
+							}
+							Continue
+						}
+					}
 					If ($bResetMapIcons) {
 
 						# See xpak_ailraider and others with specific icons, should not change if the file is found...
@@ -198,37 +231,6 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 						If ($m.Groups.Count -eq 2) {
 							$vehicleIcon=$m.Groups[1].value
 							$sw.WriteLine("rem $line")
-							Continue
-						}
-					}
-					If ($bResetSpottedMessage) {
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.Radio.spottedMessage\s+(\S+)\s*")
-						If ($m.Groups.Count -eq 2) {
-							$vehicleSpottedMessage=$m.Groups[1].value
-							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage tank_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 1) -and ([double]$vehicleType -lt 2)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage apc_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 2) -and ([double]$vehicleType -lt 3)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage heli_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 3) -and ([double]$vehicleType -lt 4)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage vehicle_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 4) -and ([double]$vehicleType -lt 5)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage air_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 5) -and ([double]$vehicleType -lt 6)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage aa_spotted")
-							}
-							elseIf (([double]$vehicleType -ge 6) -and ([double]$vehicleType -lt 7)) {
-								$sw.WriteLine("ObjectTemplate.Radio.spottedMessage boat_spotted")
-							}
-							else {
-								$sw.WriteLine($line)
-							}
 							Continue
 						}
 					}
