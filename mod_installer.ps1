@@ -1054,50 +1054,36 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 #$postCustomScript="apc_btr_t.ps1"
 #AddNewVehicle $vehicleName $vehicleType $vehicleTeams $downloadLink $homePage $wiki $preCustomScript $postCustomScript
 
-function main()
-{
-	$vehicleName="apc_btr_t"
-	$vehicleType=1
-	$downloadLink="https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-btr-t-ifv-puma-and-toyota-rocket-launcher"
-	$homePage="https://www.moddb.com/games/battlefield-2/addons/bf2-new-mods-btr-t-ifv-puma-and-toyota-rocket-launcher"
-	$wiki="https://en.wikipedia.org/wiki/BTR-T"
-	$preCustomScript=$null
-	$postCustomScript="$scriptPath\apc_btr_t.ps1"
-#	AddNewVehicle $vehicleName $vehicleType $vehicleTeams $downloadLink $homePage $wiki $preCustomScript $postCustomScript
+#Check xpack and bf2 existence...
+#FindAllVehicles, check ServerArchives.con, fileManager.mountArchive XXX.zip Objects, if mods/bf2/Objects_server.zip or mods/xpack/Objects_server.zip, should make a copy of the .tweak and add the ref to the new efserv.zip, vehserv.zip, stsgarageserv.zip in ServerArchives.con
 
-	#Check xpack and bf2 existence...
-	#FindAllVehicles, check ServerArchives.con, fileManager.mountArchive XXX.zip Objects, if mods/bf2/Objects_server.zip or mods/xpack/Objects_server.zip, should make a copy of the .tweak and add the ref to the new efserv.zip, vehserv.zip, stsgarageserv.zip in ServerArchives.con
-	$objectsFolder="C:\tmp\Objects"
+#Use git to create a repo and make commits inside...
 
-	#Use git to create a repo and make commits inside...
+#function AddNewVehicle($vehicleName, $vehicleType, $vehicleTeams, $downloadLink, $homePage=$null, $wiki=$null, $preCustomScript=$null, $postCustomScript=$null) {
+#	$preCustomScript
 
-}
+#	#first should try to download directly from $downloadLink (how to get wget error code?), if it fails assumes it is moddb, how to do without ie...
 
-function AddNewVehicle($vehicleName, $vehicleType, $vehicleTeams, $downloadLink, $homePage=$null, $wiki=$null, $preCustomScript=$null, $postCustomScript=$null) {
-	$preCustomScript
+#	# or if not easy to download auto, ask to manually download and gather in a folder, then extract all *.zip,*.rar,*.7z...
 
-	#first should try to download directly from $downloadLink (how to get wget error code?), if it fails assumes it is moddb, how to do without ie...
+#	$ie = new-object -ComObject InternetExplorer.Application
+#	$ie.Navigate($downloadLink)
+#	$ln=$IE.Document.getElementsByTagName('a') | Where-Object {$_.href -match "/addons/start"}
+#	$ie.Navigate($ln.IHTMLAnchorElement_href)
+#	$ln=$IE.Document.getElementsByTagName('a') | Where-Object {$_.href -match "/downloads/mirror"}
+#	$downloadLink=$ln.IHTMLAnchorElement_href
 
-	# or if not easy to download auto, ask to manually download and gather in a folder, then extract all *.zip,*.rar,*.7z...
+#	Invoke-WebRequest $downloadLink -UseBasicParsing -OutFile "C:\tmp\download.zip"
+#	& 7z x -y "C:\tmp\download.zip" `-o"C:\tmp\download"
+#	Get-ChildItem "C:\tmp\download\*" -R -Include *.zip,*.rar,*.7z | ForEach-Object {
+#		& 7z x -y $_.FullName `-o"$($_.DirectoryName)/$($_.Basename)"
+#		Remove-Item $_.FullName
+#	}
 
-	$ie = new-object -ComObject InternetExplorer.Application
-	$ie.Navigate($downloadLink)
-	$ln=$IE.Document.getElementsByTagName('a') | Where-Object {$_.href -match "/addons/start"}
-	$ie.Navigate($ln.IHTMLAnchorElement_href)
-	$ln=$IE.Document.getElementsByTagName('a') | Where-Object {$_.href -match "/downloads/mirror"}
-	$downloadLink=$ln.IHTMLAnchorElement_href
-
-	Invoke-WebRequest $downloadLink -UseBasicParsing -OutFile "C:\tmp\download.zip"
-	& 7z x -y "C:\tmp\download.zip" `-o"C:\tmp\download"
-	Get-ChildItem "C:\tmp\download\*" -R -Include *.zip,*.rar,*.7z | ForEach-Object {
-		& 7z x -y $_.FullName `-o"$($_.DirectoryName)/$($_.Basename)"
-		Remove-Item $_.FullName
-	}
-
-#search for .bundlemesh, .collisionmesh, .tweak, .con, then move sounds
-	#sometimes also there are weapons, effects, for that use $postCustomScript?...
-	$postCustomScript
-}
+##search for .bundlemesh, .collisionmesh, .tweak, .con, then move sounds
+#	#sometimes also there are weapons, effects, for that use $postCustomScript?...
+#	$postCustomScript
+#}
 
 function CreateNewModFromTemplate($modFolder) {
 	If (Test-Path -Path "$modFolder\..\xpack") {
@@ -1148,6 +1134,6 @@ function CreateNewModFromTemplate($modFolder) {
 
 }
 
-function SetLevelTeams($team1, $team2) {
+#function SetLevelTeams($team1, $team2) {
 #Levels\Gulf_of_Oman\server\Init.con 
-}
+#}
