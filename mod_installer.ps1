@@ -810,9 +810,16 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 				Write-Warning "Template $templateDependency not found"
 				continue
 			}
+			$templateDependencyProcessedNeededFiles=$null
 			for ($j=0; $j -lt $ret.Count; $j++) {
 				$neededFile=$ret[$j]
 				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
+					If (($null -ne $templateDependencyProcessedNeededFiles) -and ($templateDependencyProcessedNeededFiles -icontains $neededFile)) {
+						continue
+					}
+					Else {
+						$templateDependencyProcessedNeededFiles+=,$neededFile
+					}
 					# Sometimes textures might not have the correct extension...
 					If (-not (Test-Path -Path $neededFile)) {
 						$origNeededFile=$neededFile
