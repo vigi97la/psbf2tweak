@@ -10,13 +10,13 @@
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-##ProcessVehicles $extractFolder $null $true $true $false $false $false $true $true # Can be very slow for AIX2 Reality handheld weapons...
+##PreProcessVehicles $extractFolder $null $true $true $false $false $false $true $true # Can be very slow for AIX2 Reality handheld weapons...
 #FindTemplate $extractFolder $null $true $false # To build a template cache
 #$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
 #ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $true $true $false
-#ProcessVehicles $exportFolder $null $true $true $true $true $true $true $true
+#PreProcessVehicles $exportFolder $null $true $true $true $true $true $true $true
 #Move-Item -Path "$exportFolder" -Destination "$exportFolder`_full" -Force
 #ListDependencies (Get-Item "$exportFolder`_full\$vehicleToExtract").FullName "$exportFolder`_full" $exportFolder $false $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $false $false $false
 #. .\MiscTweaks.ps1
@@ -161,7 +161,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 					$bInsideTrueCondition=$false
 					Continue
 				}				
-				if ((-not $bFoundTrueCondition) -and ($m.Groups[1].value -eq $m.Groups[2].value)) {
+				if ((-not $bFoundTrueCondition) -and ($m.Groups[1].value -ieq $m.Groups[2].value)) {
 					$bInsideTrueCondition=$true
 					$bFoundTrueCondition=$true
 				}
@@ -239,7 +239,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 			$bInsideCondition=$true
 			$bInsideTrueCondition=$false
 			$bFoundTrueCondition=$false
-			if ($m.Groups[1].value -eq $m.Groups[2].value) {
+			if ($m.Groups[1].value -ieq $m.Groups[2].value) {
 				$bInsideTrueCondition=$true
 				$bFoundTrueCondition=$true
 			}
@@ -318,8 +318,8 @@ function PreProcessIncludesConContent($concontent, $file) {
 
 #. .\mod_installer.ps1
 #$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab"
-#ProcessVehicles $vehicleToExtract $null $false $true $true $true $true $true $true
-function ProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetMapIcons=$false,[bool]$bResetHUDIcons=$false,[bool]$bResetSpottedMessage=$false,[bool]$bExpandIncludes=$false,[bool]$bOverwrite=$false) {
+#PreProcessVehicles $vehicleToExtract $null $false $true $true $true $true $true $true
+function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bResetMapIcons=$false,[bool]$bResetHUDIcons=$false,[bool]$bResetSpottedMessage=$false,[bool]$bExpandIncludes=$false,[bool]$bOverwrite=$false) {
 
 	If (($null -ne $outputFolder) -and ("" -ne $outputFolder)) {
 		New-Item "$outputFolder" -ItemType directory -Force | Out-Null
@@ -638,7 +638,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					$templateFile=$templateFiles[0]
 					If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 				}
-				ElseIf ($templateName -eq $searchedTemplateName) {
+				ElseIf ($templateName -ieq $searchedTemplateName) {
 					$templateFile=$templateFiles[0]
 					If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 					$bFound=$true
@@ -678,7 +678,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 							$templateFile=$templateFiles[0]
 							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 						}
-						ElseIf ($templateName -eq $searchedTemplateName) {
+						ElseIf ($templateName -ieq $searchedTemplateName) {
 							$templateFile=$templateFiles[0]
 							If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 							$bFound=$true
@@ -785,7 +785,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 				$templateFile=$templateFiles[0]
 				If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 			}
-			ElseIf ($templateName -eq $searchedTemplateName) {
+			ElseIf ($templateName -ieq $searchedTemplateName) {
 				$templateFile=$templateFiles[0]
 				If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
 				$bFound=$true
@@ -896,7 +896,7 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
 #ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $false $false
-function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bCheckModifiedFiles=$true,[bool]$bProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true) {
+function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bCheckModifiedFiles=$true,[bool]$bPreProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true) {
 
 	If (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (extractedFolder)"
@@ -973,8 +973,8 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								If (-not (Test-Path -Path $exportNeededDirectory)) {
 									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 									Copy-Item -Path $neededDirectory\..\* -Destination $exportNeededDirectory -Force -Recurse
-									If ($bProcessVehicles) {
-										ProcessVehicles $neededDirectory $exportNeededDirectory $true $true $false $false $false $true $false
+									If ($bPreProcessVehicles) {
+										PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $false $false $false $true $false
 									}
 								}
 							}
@@ -987,8 +987,8 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								If (-not (Test-Path -Path $exportNeededDirectory)) {
 									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 									Copy-Item -Path $neededDirectory\* -Destination $exportNeededDirectory -Force -Recurse
-									If ($bProcessVehicles) {
-										ProcessVehicles $neededDirectory $exportNeededDirectory $true $true $false $false $false $true $false
+									If ($bPreProcessVehicles) {
+										PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $false $false $false $true $false
 									}
 								}
 							}
@@ -1006,8 +1006,8 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									New-Item $exportNeededDirectory -ItemType directory -Force | Out-Null
 									If (-not (Test-Path -Path $exportNeededFile)) {
 										Copy-Item -Path $nf -Destination $exportNeededFile -Force -Recurse
-										If ($bProcessVehicles) {
-											ProcessVehicles $nf $exportNeededDirectory $true $true $false $false $false $true $false
+										If ($bPreProcessVehicles) {
+											PreProcessVehicles $nf $exportNeededDirectory $true $true $false $false $false $true $false
 										}
 									}
 								}
