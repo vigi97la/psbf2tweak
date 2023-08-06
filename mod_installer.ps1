@@ -615,7 +615,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					$templateChildren=$null
 				}
 				ElseIf ($null -ne $templateName) {
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
 						$templateChild=$m.Groups[2].value
 						$templateChildren+=,$templateChild
@@ -649,6 +649,12 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.geometry\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
+						#If ($templateType -ieq "SkinnedMesh") { # Does not work since it is not the ObjectTemplate type but the GeometryTemplate type...
+						#	$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\Meshes"),"$resRelPath.skinnedmesh")
+						#}
+						#Else {
+						#	$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\Meshes"),"$resRelPath.bundledmesh")
+						#}
 						$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\Meshes"),"$resRelPath.bundledmesh")
 						$templateFiles+=,$resFile
 					}
@@ -675,7 +681,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					# Animations (.inc)...?
 				}
 
-				# Handling definitions in multiple files...
+				# Handling definitions in multiple files... See MergeTemplateMultipleDefinitions but templates sometimes have same name for different types...
 
 			}
 
@@ -751,7 +757,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 				$lastFilesFound=$templateFiles
 			}
 		}
-		$sr.close()		
+		$sr.close()
 	}
 	If ($bFound) {
 		If (($null -ne $templateChildren) -and ("" -ne $templateChildren)) {
@@ -850,10 +856,15 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					Else {
 						$templateDependencyProcessedNeededFiles+=,$neededFile
 					}
-					# Sometimes textures might not have the correct extension...
+					# Sometimes textures might not have the correct extension (or meshes but due to a limitation of FindTemplate...)...
 					If (-not (Test-Path -Path $neededFile)) {
 						$origNeededFile=$neededFile
-						$neededFile=($origNeededFile -replace ".tga",".dds")
+						If (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".tga") {
+							$neededFile=($origNeededFile -replace ".tga",".dds")
+						}
+						ElseIf (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".bundledmesh") {
+							$neededFile=($origNeededFile -replace ".bundledmesh",".skinnedmesh")
+						}						
 						If (-not (Test-Path -Path $neededFile)) {
 							Write-Error "$origNeededFile not found"
 							continue
@@ -974,7 +985,7 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 	#New-Item "$clientFolder" -ItemType directory -Force | Out-Null
 
 	# Directory structures containing .tweak and .con, Meshes\*.collisionmesh, ai\*.ai are copied to server...
-	# Directory structures containing Meshes\*.bundledmesh, Textures are copied to client...
+	# Directory structures containing Meshes\*.bundledmesh, Meshes\*.skinnedmesh, Textures are copied to client...
 	# How to correct wrong directory structures...
 	# Objects vs Menu...
 
