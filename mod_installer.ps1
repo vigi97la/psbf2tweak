@@ -13,17 +13,18 @@
 ##PreProcessVehicles $extractFolder $null $true $true $true $true # Can be very slow for AIX2 Reality handheld weapons...
 #FindTemplate $extractFolder $null $true $false # To build a template cache
 #$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
+#$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $true $true $false
-#Move-Item -Path "$exportFolder" -Destination "$exportFolder`_full" -Force
-#ListDependencies (Get-Item "$exportFolder`_full\$vehicleToExtract").FullName "$exportFolder`_full" $exportFolder $false $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $false $false $false
+#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $false
 #. .\MiscFixes.ps1
 #FixVehicleType $exportFolder $true $true $true $true $true $true
 #. .\MiscTweaks.ps1
 #DontClearTeamOnExitUpdate $exportFolder 0 $true $true
 #DelayToUseUpdate $exportFolder 0 $true $true
 #SplitToServerAndClientFolders $exportFolder $exportFolder\server $exportFolder\client
+#SplitToServerAndClientFolders $exportFolder"_bf2_modified" $exportFolder"_bf2_modified"\server $exportFolder"_bf2_modified"\client
+#SplitToServerAndClientFolders $exportFolder"_xpack_modified" $exportFolder"_xpack_modified"\server $exportFolder"_xpack_modified"\client
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
@@ -808,20 +809,18 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 #$vehicleToExtract="Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $false $false
-function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bCheckModifiedFiles=$true,[bool]$bPreProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true) {
+#ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $false
+function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true) {
 
 	If (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (extractedFolder)"
 		return
 	}
-	If ($bHideDefinitionsInBf2 -and (($null -eq $bf2ExtractedFolder) -or !(Test-Path -Path $bf2ExtractedFolder))) {
-		Write-Error "Error: Invalid parameter (bHideDefinitionsInBf2 or bf2ExtractedFolder)"
-		return
+	If (($null -eq $bf2ExtractedFolder) -or !(Test-Path -Path $bf2ExtractedFolder)) {
+		Write-Warning  "bf2ExtractedFolder parameter not available"
 	}
-	If ($bHideDefinitionsInXpack -and (($null -eq $xpackExtractedFolder) -or !(Test-Path -Path $xpackExtractedFolder))) {
-		Write-Error "Error: Invalid parameter (bHideDefinitionsInXpack or xpackExtractedFolder)"
-		return
+	If (($null -eq $xpackExtractedFolder) -or !(Test-Path -Path $xpackExtractedFolder)) {
+		Write-Warning  "xpackExtractedFolder parameter not available"
 	}
 
 	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
@@ -869,26 +868,46 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					$m=[regex]::Match($neededFile, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					$restOfPath=$m.Groups[1].value
 					#"$restOfPath"
-					If ($bHideDefinitionsInBf2) {
-						$bf2NeededFile=[System.IO.Path]::Combine($bf2ExtractedFolder,$restOfPath)
-						#"$bf2NeededFile"
-					}
-					If ($bHideDefinitionsInXpack) {
+					$exportFolderSuffix=""
+					$bAlreadyDefinedInXpack=$false
+					$bAlreadyDefinedInXpackButModified=$false
+					If (($null -ne $xpackExtractedFolder) -and (Test-Path -Path $xpackExtractedFolder)) {
 						$xpackNeededFile=[System.IO.Path]::Combine($xpackExtractedFolder,$restOfPath)
 						#"$xpackNeededFile"
+						$bAlreadyDefinedInXpack=([regex]::Match($neededDirectory, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success -or (Test-Path -Path $xpackNeededFile))
+						$bAlreadyDefinedInXpackButModified=((Test-Path -Path $xpackNeededFile) -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $xpackNeededFile).hash))
+						If ($bAlreadyDefinedInXpack) {
+							$exportFolderSuffix="_xpack"
+						}
+						If ($bAlreadyDefinedInXpackButModified) {
+							$exportFolderSuffix="_xpack_modified"
+						}
 					}
-					If (((-not $bHideDefinitionsInBf2) -or ((-not [regex]::Match($neededDirectory, [regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) -and (!(Test-Path -Path $bf2NeededFile) -or ($bCheckModifiedFiles -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $bf2NeededFile).hash))))) -and
-					((-not $bHideDefinitionsInXpack) -or ((-not [regex]::Match($neededDirectory, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) -and (!(Test-Path -Path $xpackNeededFile) -or ($bCheckModifiedFiles -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $xpackNeededFile).hash)))))) {
-						If ((-not $bHideDefinitionsInCurrentConOrTweak) -or ([System.IO.Path]::Combine((Get-Item $file).DirectoryName,(Get-Item $file).Basename) -ne [System.IO.Path]::Combine($neededDirectory,(Get-Item $neededFile).Basename))) {
+					$bAlreadyDefinedInBf2=$false
+					$bAlreadyDefinedInBf2ButModified=$false
+					If (($null -ne $bf2ExtractedFolder) -and (Test-Path -Path $bf2ExtractedFolder)) {
+						$bf2NeededFile=[System.IO.Path]::Combine($bf2ExtractedFolder,$restOfPath)
+						#"$bf2NeededFile"
+						$bAlreadyDefinedInBf2=([regex]::Match($neededDirectory,[regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success -or (Test-Path -Path $bf2NeededFile))
+						$bAlreadyDefinedInBf2ButModified=((Test-Path -Path $bf2NeededFile) -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $bf2NeededFile).hash))
+						If ($bAlreadyDefinedInBf2) {
+							$exportFolderSuffix="_bf2"
+						}
+						If ($bAlreadyDefinedInBf2ButModified) {
+							$exportFolderSuffix="_bf2_modified"
+						}
+					}
+					If ((!$bHideDefinitionsInBf2 -or !$bAlreadyDefinedInBf2 -or $bAlreadyDefinedInBf2ButModified) -and (!$bHideDefinitionsInXpack -or !$bAlreadyDefinedInXpack -or $bAlreadyDefinedInXpackButModified)) {
+						If ((!$bHideDefinitionsInCurrentConOrTweak) -or ([System.IO.Path]::Combine((Get-Item $file).DirectoryName,(Get-Item $file).Basename) -ne [System.IO.Path]::Combine($neededDirectory,(Get-Item $neededFile).Basename))) {
 							Write-Output "Template $templateDependency needs $neededFile"
 						}
 						If (($null -ne $exportFolder) -and ("" -ne $exportFolder)) {
-							New-Item "$exportFolder" -ItemType directory -Force | Out-Null
+							New-Item "$exportFolder$exportFolderSuffix" -ItemType directory -Force | Out-Null
 							If ((Get-Item $neededDirectory).Basename -ieq "meshes") {
 								$m=[regex]::Match("$neededDirectory\..", "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 								$restOfPath=$m.Groups[1].value
 								#"$restOfPath"
-								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder,$restOfPath)
+								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder+$exportFolderSuffix,$restOfPath)
 								#"$exportNeededDirectory"
 								If (-not (Test-Path -Path $exportNeededDirectory)) {
 									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
@@ -902,7 +921,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								$m=[regex]::Match($neededDirectory, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 								$restOfPath=$m.Groups[1].value
 								#"$restOfPath"
-								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder,$restOfPath)
+								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder+$exportFolderSuffix,$restOfPath)
 								#"$exportNeededDirectory"
 								If (-not (Test-Path -Path $exportNeededDirectory)) {
 									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
@@ -920,7 +939,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									$m=[regex]::Match($nf, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 									$restOfPath=$m.Groups[1].value
 									#"$restOfPath"
-									$exportNeededFile=[System.IO.Path]::Combine($exportFolder,$restOfPath)
+									$exportNeededFile=[System.IO.Path]::Combine($exportFolder+$exportFolderSuffix,$restOfPath)
 									#"$exportNeededFile"
 									$exportNeededDirectory=([System.IO.FileInfo]$exportNeededFile).DirectoryName
 									New-Item $exportNeededDirectory -ItemType directory -Force | Out-Null
