@@ -790,7 +790,9 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 		# Detect whether it is a child or file...
 		if ([regex]::Match($ret[$i],[regex]::Escape("\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
 			$neededFile=$ret[$i]
-			$neededFiles+=$neededFile
+			If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile))) {
+				$neededFiles+=$neededFile
+			}
 			#Write-Warning "$neededFile"
 			continue
 		}
@@ -799,7 +801,13 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 		If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
 			$neededChildFiles=@(FindTemplateDependencies $extractedFolder $templateChild $bUseCache)
 			If (($null -ne $neededChildFiles) -and ("" -ne $neededChildFiles)) {
-				$neededFiles+=$neededChildFiles
+				for ($j=0; $j -lt $neededChildFiles.Count; $j++) {
+					$neededChildFile=$neededChildFiles[$j]
+					If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $neededChildFile))) {
+						$neededFiles+=$neededChildFile
+					}
+					#Write-Warning "$neededChildFile"
+				}
 			}
 		}
 	}
