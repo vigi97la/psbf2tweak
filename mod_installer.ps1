@@ -723,13 +723,14 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 			Write-Error "Error: cache_db.csv not found"
 			return $null
 		}
-		$regesc=[regex]::Escape($searchedTemplateName)
+		#$regesc=[regex]::Escape($searchedTemplateName)
 		$sr=[System.IO.StreamReader]$cachefile
 		while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 			$line=$sr.ReadLine()
 			$cols=($line -split ";")
-			$m=[regex]::Match($cols[0],"^$regesc$",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-			if ($m.Success) {
+			#$m=[regex]::Match($cols[0],"^$regesc$",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			#if ($m.Success) {
+			If ($cols[0] -ieq $searchedTemplateName) {
 				$templateType=$cols[1]
 				$templateFile=$cols[2]
 				$templateChildren=$null
