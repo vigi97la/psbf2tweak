@@ -926,31 +926,57 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 
 	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
 
-	$regexpr="^\s*ObjectTemplate.addTemplate\s+(\S+)\s*"
 	$lines=@($concontent -split "\r?\n")
 	for ($i=0; $i -lt $lines.Count; $i++) {
 		$line=$lines[$i]
 		#"$line"
-		$m=[regex]::Match($line, $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-		If ($m.Groups.Count -eq 2) {
-			$templateDependency=$m.Groups[1].value
-			"$templateDependency"
-			$ret=@(FindTemplateDependencies $extractedFolder $templateDependency $bUseCache)
-			#"$ret"
-			If (($null -eq $ret) -or ("" -eq $ret)) {
-				Write-Warning "Template $templateDependency not found"
+
+		$templateDependency=$null
+		$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		If ($m.Groups.Count -eq 3) {
+			$templateDependency=$m.Groups[2].value
+		}
+		Else {
+			$m=[regex]::Match($line, "^\s*ObjectTemplate.setObjectTemplate\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			If ($m.Groups.Count -eq 3) {
+				$templateDependency=$m.Groups[2].value
+			}
+			Else {
 				continue
 			}
-			$templateDependencyProcessedNeededFiles=$null
-			for ($j=0; $j -lt $ret.Count; $j++) {
-				$neededFile=$ret[$j]
+		}
+
+		Write-Host "$templateDependency" -ForegroundColor Cyan
+
+		$retj=@(FindTemplateDependencies $extractedFolder $templateDependency $bUseCache)
+		#"$retj"
+		If (($null -eq $retj) -or ("" -eq $retj)) {
+			Write-Warning "Template $templateDependency not found"
+			continue
+		}
+
+		for ($j=0; $j -lt $retj.Count; $j++) {
+			$templateDependencyFile=$retj[$j]
+			If (($null -eq $templateDependencyFile) -or ("" -eq $templateDependencyFile)) {
+				Write-Warning "Template $templateDependency has invalid dependencies"
+				continue
+			}
+
+			#If ($bHideDefinitionsInCurrentConOrTweak -and ($file -ieq $templateDependencyFile)) {
+			If ($file -ieq $templateDependencyFile) {
+				$ret=,$file
+			}
+			Else {
+				$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache)
+			}
+			#"$ret"
+			If (($null -eq $ret) -or ("" -eq $ret)) {
+				Write-Warning "$templateDependencyFile not found"
+				continue
+			}
+			for ($k=0; $k -lt $ret.Count; $k++) {
+				$neededFile=$ret[$k]
 				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
-					If (($null -ne $templateDependencyProcessedNeededFiles) -and ($templateDependencyProcessedNeededFiles -icontains $neededFile)) {
-						continue
-					}
-					Else {
-						$templateDependencyProcessedNeededFiles+=,$neededFile
-					}
 					# Sometimes textures might not have the correct extension (or meshes but due to a limitation of FindTemplate...)...
 					If (-not (Test-Path -Path $neededFile)) {
 						$origNeededFile=$neededFile
@@ -959,9 +985,9 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 						}
 						ElseIf (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".bundledmesh") {
 							$neededFile=($origNeededFile -replace ".bundledmesh",".skinnedmesh")
-						}						
+						}
 						If (-not (Test-Path -Path $neededFile)) {
-							Write-Error "$origNeededFile not found"
+							Write-Error "Error: $origNeededFile not found"
 							continue
 						}
 						Else {
@@ -1015,12 +1041,10 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								#"$restOfPath"
 								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder+$exportFolderSuffix,$restOfPath)
 								#"$exportNeededDirectory"
-								If (-not (Test-Path -Path $exportNeededDirectory)) {
-									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
-									Copy-Item -Path $neededDirectory\..\* -Destination $exportNeededDirectory -Force -Recurse
-									If ($bPreProcessVehicles) {
-										PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false
-									}
+								New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
+								Copy-Item -Path $neededDirectory\..\* -Destination $exportNeededDirectory -Force -Recurse
+								If ($bPreProcessVehicles) {
+									PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false
 								}
 							}
 							ElseIf ($bAlwaysCopyContainingFolder -or ((Get-Item $neededDirectory).Basename -ieq (Get-Item $neededFile).Basename)) {
@@ -1029,12 +1053,10 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								#"$restOfPath"
 								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder+$exportFolderSuffix,$restOfPath)
 								#"$exportNeededDirectory"
-								If (-not (Test-Path -Path $exportNeededDirectory)) {
-									New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
-									Copy-Item -Path $neededDirectory\* -Destination $exportNeededDirectory -Force -Recurse
-									If ($bPreProcessVehicles) {
-										PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false
-									}
+								New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
+								Copy-Item -Path $neededDirectory\* -Destination $exportNeededDirectory -Force -Recurse
+								If ($bPreProcessVehicles) {
+									PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false
 								}
 							}
 							Else {
@@ -1049,11 +1071,9 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									#"$exportNeededFile"
 									$exportNeededDirectory=([System.IO.FileInfo]$exportNeededFile).DirectoryName
 									New-Item $exportNeededDirectory -ItemType directory -Force | Out-Null
-									If (-not (Test-Path -Path $exportNeededFile)) {
-										Copy-Item -Path $nf -Destination $exportNeededFile -Force -Recurse
-										If ($bPreProcessVehicles) {
-											PreProcessVehicles $nf $exportNeededDirectory $true $true $true $false
-										}
+									Copy-Item -Path $nf -Destination $exportNeededFile -Force -Recurse
+									If ($bPreProcessVehicles) {
+										PreProcessVehicles $nf $exportNeededDirectory $true $true $true $false
 									}
 								}
 							}
