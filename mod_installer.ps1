@@ -724,6 +724,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 			Write-Error "Error: cache_db.csv not found"
 			return $null
 		}
+		#$regescbackslash=[regex]::Escape("\")
 		#$regesc=[regex]::Escape($searchedTemplateName)
 		$sr=[System.IO.StreamReader]$cachefile
 		while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
@@ -737,7 +738,8 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 				$templateChildren=$null
 				for ($i=2; $i -lt $cols.Count; $i++) {
 					# Detect whether it is a child or file...
-					if ([regex]::Match($cols[$i],[regex]::Escape("\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+					#if ([regex]::Match($cols[$i],$regescbackslash,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+					If ($cols[$i].Contains("\")) {
 						break
 					}
 					$templateChild=$cols[$i]
@@ -792,6 +794,7 @@ function MergeTemplateMultipleDefinitions($extractedFolder,[bool]$bShowOutput=$t
 	$templateChildrenList=$null
 	$templateFilesList=$null
 
+	#$regescbackslash=[regex]::Escape("\")
 	$sr=[System.IO.StreamReader]$cachefile
 	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
 		$line=$sr.ReadLine()
@@ -802,7 +805,8 @@ function MergeTemplateMultipleDefinitions($extractedFolder,[bool]$bShowOutput=$t
 		$templateChildren=$null
 		for ($i=2; $i -lt $cols.Count; $i++) {
 			# Detect whether it is a child or file...
-			if ([regex]::Match($cols[$i],[regex]::Escape("\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+			#if ([regex]::Match($cols[$i],$regescbackslash,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+			If ($cols[$i].Contains("\")) {
 				break
 			}
 			$templateChild=$cols[$i]
@@ -910,11 +914,13 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 	If (($null -eq $neededFile) -or ("" -eq $neededFile)) {
 		return $null
 	}
+	#$regescbackslash=[regex]::Escape("\")
 	$neededFiles+=,$neededFile
 	#Write-Warning "$neededFile"
 	for ($i=1; $i -lt $ret.Count; $i++) {
 		# Detect whether it is a child or file...
-		if ([regex]::Match($ret[$i],[regex]::Escape("\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+		#if ([regex]::Match($ret[$i],$regescbackslash,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+		If ($ret[$i].Contains("\")) {
 			$neededFile=$ret[$i]
 			If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile))) {
 				$neededFiles+=$neededFile
