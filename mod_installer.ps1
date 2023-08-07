@@ -438,7 +438,7 @@ function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnor
 	}
 	else {
 		$serverclient="server"
-	}	
+	}
 
 	# Objects, Menu, Common, Fonts, Shaders, Scripts
 
@@ -468,7 +468,7 @@ function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnor
 				}
 			}
 			else {
-				Write-Error "Could not find $modFolder\$file.zip or $modFolder\..\..\$file.zip ($folder)"
+				Write-Error "Error: Could not find $modFolder\$file.zip or $modFolder\..\..\$file.zip ($folder)"
 			}
 		}
 		If ($extractMode -eq 1) {
