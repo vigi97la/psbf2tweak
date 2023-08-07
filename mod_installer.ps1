@@ -193,7 +193,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 				if ($bInsideTrueCondition) {
 					$bInsideTrueCondition=$false
 					Continue
-				}				
+				}
 				if ((-not $bFoundTrueCondition) -and ($m.Groups[1].value -ieq $m.Groups[2].value)) {
 					$bInsideTrueCondition=$true
 					$bFoundTrueCondition=$true
@@ -209,7 +209,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 				if ($bInsideTrueCondition) {
 					$bInsideTrueCondition=$false
 					Continue
-				}				
+				}
 				if (-not $bFoundTrueCondition) {
 					$bInsideTrueCondition=$true
 					$bFoundTrueCondition=$true
@@ -228,7 +228,7 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 				Continue
 			}
 			if ($bInsideTrueCondition) {
-					
+
 				# If multiple conditions inside...
 				$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				#$m=$ifcondregexpr.Match($line)
@@ -277,8 +277,8 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 				$bFoundTrueCondition=$true
 			}
 			Continue
-		}	
-		
+		}
+
 		# If multiple conditions inside...
 		If ([regex]::Match($line, $elseIfregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Groups.Count -eq 3) {
 			break
