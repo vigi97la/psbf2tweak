@@ -10,8 +10,9 @@
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-##PreProcessVehicles $extractFolder $null $true $true $true $true # Can be very slow for AIX2 Reality handheld weapons...
+##PreProcessVehicles $extractFolder $null $true $true $true $true # Can be very slow (2h) for AIX2 Reality handheld weapons...
 #FindTemplate $extractFolder $null $true $false # To build a template cache
+#MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be slow (1h) for AIX2 Reality...
 #$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
 #$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
@@ -771,6 +772,130 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 	Else {
 		return $null
 	}
+}
+
+function MergeTemplateMultipleDefinitions($extractedFolder,[bool]$bShowOutput=$true,[bool]$bShowExtendedOutput=$false) {
+
+	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
+		Write-Error "Error: Invalid parameter (objectsFolder)"
+		return
+	}
+	$cachefile="$extractedFolder\cache_db.csv"
+	if (($null -eq $cachefile) -or !(Test-Path -Path $cachefile)) {
+		Write-Error "Error: cache_db.csv not found"
+		return
+	}
+
+	$templateValidityList=$null
+	$templateNameList=$null
+	$templateTypeList=$null
+	$templateChildrenList=$null
+	$templateFilesList=$null
+
+	$sr=[System.IO.StreamReader]$cachefile
+	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+		$line=$sr.ReadLine()
+		$cols=($line -split ";")
+		$templateName=$cols[0]
+		$templateType=$cols[1]
+		$templateFile=$cols[2]
+		$templateChildren=$null
+		for ($i=2; $i -lt $cols.Count; $i++) {
+			# Detect whether it is a child or file...
+			if ([regex]::Match($cols[$i],[regex]::Escape("\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+				break
+			}
+			$templateChild=$cols[$i]
+			If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
+				$templateChildren+=,$templateChild
+			}
+		}
+		$templateFiles=$null
+		for (; $i -lt $cols.Count; $i++) {
+			$templateFile=$cols[$i]
+			If (($null -ne $templateFile) -and ("" -ne $templateFile)) {
+				$templateFiles+=,$templateFile
+			}
+		}
+		$templateFile=$templateFiles[0]
+		If ($bShowExtendedOutput) { Write-Output "$templateType $templateName ($templateFile)" }
+
+		$templateValidityList+=,$true
+		$templateNameList+=,$templateName
+		$templateTypeList+=,$templateType
+		$templateChildrenList+=,$templateChildren
+		$templateFilesList+=,$templateFiles
+	}
+	$sr.close()
+
+	$tmpcachefile="$extractedFolder\cache_db.csv.tmp"
+
+	$sw=[System.IO.StreamWriter]$tmpcachefile
+	for ($ii=0; $ii -lt $templateNameList.Count; $ii++) {
+		If (!$templateValidityList[$ii]) { continue }
+		$templateName=$templateNameList[$ii]
+		$templateType=$templateTypeList[$ii]
+		$templateChildren=$templateChildrenList[$ii]
+		$templateFiles=$templateFilesList[$ii]
+
+		# Search for further occurences of $templateName...
+		#$regesc=[regex]::Escape($templateName)
+		for ($j=$ii+1; $j -lt $templateNameList.Count; $j++) {
+			If (!$templateValidityList[$j]) { continue }
+			#$m=[regex]::Match($templateNameList[$j],"^$regesc$",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			#If ($m.Success) {
+			If ($templateNameList[$j] -ieq $templateName) {
+				$tmpTemplateType=$templateTypeList[$j]
+				$tmpTemplateChildren=$templateChildrenList[$j]
+				$tmpTemplateFiles=$templateFilesList[$j]
+				If ($templateType -ine $tmpTemplateType) {
+					Write-Warning "Multiple definitions of $templateName with a different type ($templateType vs. $tmpTemplateType)"
+					$templateType=$tmpTemplateType
+				}
+				Else {
+					If ($bShowOutput) { Write-Output "Multiple definitions of $templateType $templateName" }
+				}
+				If (($null -ne $tmpTemplateChildren) -and ("" -ne $tmpTemplateChildren)) {
+					for ($k=0; $k -lt $tmpTemplateChildren.Count; $k++) {
+						$tmpTemplateChild=$tmpTemplateChildren[$k]
+						If (-not (($null -ne $templateChildren) -and ($templateChildren -icontains $tmpTemplateChild))) {
+							$templateChildren+=,$tmpTemplateChild
+						}
+					}
+				}
+				If (($null -ne $tmpTemplateFiles) -and ("" -ne $tmpTemplateFiles)) {
+					for ($k=0; $k -lt $tmpTemplateFiles.Count; $k++) {
+						$tmpTemplateFile=$tmpTemplateFiles[$k]
+						If (-not (($null -ne $templateFiles) -and ($templateFiles -icontains $tmpTemplateFile))) {
+							$templateFiles+=,$tmpTemplateFile
+						}
+					}
+				}
+				$templateValidityList[$j]=$false
+			}
+		}
+
+		$sw.Write("$templateName;$templateType")
+		foreach ($element in $templateChildren) {
+			If (($null -ne $element) -and ("" -ne $element)) {
+				$sw.Write(";$element")
+			}
+		}
+		foreach ($element in $templateFiles) {
+			If (($null -ne $element) -and ("" -ne $element)) {
+				$sw.Write(";$element")
+			}
+		}
+		$sw.WriteLine()
+		$templateFile=$templateFiles[0]
+		#If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
+	}
+	$sw.close()
+
+	If (-not (Test-Path -Path "$cachefile.bak")) {
+		Move-Item -Path $cachefile -Destination "$cachefile.bak" -Force
+	}
+	Move-Item -Path $tmpcachefile -Destination $cachefile -Force
 }
 
 function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$bUseCache=$true) {
