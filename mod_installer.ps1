@@ -815,6 +815,93 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 	return $neededFiles
 }
 
+function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true) {
+
+	$neededFiles=$null
+	$neededFiles+=,$file
+
+	If (-not (Test-Path -Path $file)) {
+		#Write-Error "Error: $file not found"
+		return $neededFiles
+	}
+	If ((([System.IO.FileInfo]$file).Extension -ine ".con") -and (([System.IO.FileInfo]$file).Extension -ine ".tweak") -and (([System.IO.FileInfo]$file).Extension -ine ".ai")) {
+		#Write-Error "Error: $file has unsupported extension"
+		return $neededFiles
+	}
+
+	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
+
+	$lines=@($concontent -split "\r?\n")
+	for ($i=0; $i -lt $lines.Count; $i++) {
+		$line=$lines[$i]
+		#Write-Warning "$line"
+
+		$templateDependency=$null
+		$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		If ($m.Groups.Count -eq 3) {
+			$templateDependency=$m.Groups[2].value
+		}
+		Else {
+			$m=[regex]::Match($line, "^\s*ObjectTemplate.setObjectTemplate\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			If ($m.Groups.Count -eq 3) {
+				$templateDependency=$m.Groups[2].value
+			}
+			Else {
+				continue
+			}
+		}
+
+		#Write-Warning "$templateDependency"
+
+		$ret=@(FindTemplateDependencies $extractedFolder $templateDependency $bUseCache)
+		#"$ret"
+		If (($null -eq $ret) -or ("" -eq $ret)) {
+			Write-Warning "Template $templateDependency not found"
+			continue
+		}
+		for ($j=0; $j -lt $ret.Count; $j++) {
+			$templateDependencyFile=$ret[$j]
+			If (($null -ne $templateDependencyFile) -and ("" -ne $templateDependencyFile)) {
+
+				#If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $templateDependencyFile))) {
+				#	$neededFiles+=$templateDependencyFile
+				#}
+				##Write-Warning "$templateDependencyFile"
+
+				If (($null -ne $neededFiles) -and ($neededFiles -icontains $templateDependencyFile)) {
+					continue
+				}
+
+				$ret2=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache)
+				#"$ret2"
+				If (($null -eq $ret2) -or ("" -eq $ret2)) {
+					Write-Warning "File $templateDependencyFile not found"
+					continue
+				}
+				for ($k=0; $k -lt $ret2.Count; $k++) {
+					$neededFile=$ret2[$k]
+					If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
+						If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile))) {
+							$neededFiles+=$neededFile
+						}
+						#Write-Warning "$neededFile"
+					}
+					Else {
+						Write-Warning "File $templateDependencyFile has invalid dependencies"
+					}
+				}
+
+			}
+			Else {
+				Write-Warning "Template $templateDependency has invalid dependencies"
+			}
+		}
+	}
+
+	#Write-Warning "$neededFiles"
+	return $neededFiles
+}
+
 #. .\mod_installer.ps1
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\xpack"
 #$extractFolder="$modFolder\extracted"
