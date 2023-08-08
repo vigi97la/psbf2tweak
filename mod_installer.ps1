@@ -1043,6 +1043,9 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true) {
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
 #ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $false
+# $extractedFolder should correspond to the mod where the vehicle comes from, while $bf2ExtractedFolder can be set to the mod where the vehicle should be used (which is typically standard bf2 without modifications).
+# If $bf2ExtractedFolder is set, the vehicle dependencies will be split in separate folders, typically "export" folder for the dependencies that are not available in $bf2ExtractedFolder, "export_bf2" folder for those that are already in $bf2ExtractedFolder, "export_bf2_modified" folder for those that are modifications of existing files in $bf2ExtractedFolder. The files in "export_bf2_modified" folder might need to be manually modified since they might break existing functionalities in $bf2ExtractedFolder.
+# $xpackExtractedFolder is for advanced use, to get more details on where the different dependencies come from.
 function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true) {
 
 	If (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
@@ -1050,9 +1053,11 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 		return
 	}
 	If (($null -eq $bf2ExtractedFolder) -or !(Test-Path -Path $bf2ExtractedFolder)) {
+		$bf2ExtractedFolder=$null
 		Write-Warning  "bf2ExtractedFolder parameter not available"
 	}
 	If (($null -eq $xpackExtractedFolder) -or !(Test-Path -Path $xpackExtractedFolder)) {
+		$xpackExtractedFolder=$null
 		Write-Warning  "xpackExtractedFolder parameter not available"
 	}
 
@@ -1135,11 +1140,13 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					$exportFolderSuffix=""
 					$bAlreadyDefinedInXpack=$false
 					$bAlreadyDefinedInXpackButModified=$false
-					If (($null -ne $xpackExtractedFolder) -and (Test-Path -Path $xpackExtractedFolder)) {
+					If ($null -ne $xpackExtractedFolder) {
 						$xpackNeededFile=[System.IO.Path]::Combine($xpackExtractedFolder,$restOfPath)
 						#"$xpackNeededFile"
-						$bAlreadyDefinedInXpack=([regex]::Match($neededDirectory, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success -or (Test-Path -Path $xpackNeededFile))
-						$bAlreadyDefinedInXpackButModified=((Test-Path -Path $xpackNeededFile) -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $xpackNeededFile).hash))
+						#$bAlreadyDefinedInXpack=([regex]::Match($neededDirectory, [regex]::Escape("mods\xpack\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success -or (Test-Path -Path $xpackNeededFile))
+						#$bAlreadyDefinedInXpackButModified=((Test-Path -Path $xpackNeededFile) -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $xpackNeededFile).hash))
+						$bAlreadyDefinedInXpack=(Test-Path -Path $xpackNeededFile)
+						$bAlreadyDefinedInXpackButModified=($bAlreadyDefinedInXpack -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $xpackNeededFile).hash))
 						If ($bAlreadyDefinedInXpack) {
 							$exportFolderSuffix="_xpack"
 						}
@@ -1149,11 +1156,13 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					}
 					$bAlreadyDefinedInBf2=$false
 					$bAlreadyDefinedInBf2ButModified=$false
-					If (($null -ne $bf2ExtractedFolder) -and (Test-Path -Path $bf2ExtractedFolder)) {
+					If ($null -ne $bf2ExtractedFolder) {
 						$bf2NeededFile=[System.IO.Path]::Combine($bf2ExtractedFolder,$restOfPath)
 						#"$bf2NeededFile"
-						$bAlreadyDefinedInBf2=([regex]::Match($neededDirectory,[regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success -or (Test-Path -Path $bf2NeededFile))
-						$bAlreadyDefinedInBf2ButModified=((Test-Path -Path $bf2NeededFile) -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $bf2NeededFile).hash))
+						#$bAlreadyDefinedInBf2=([regex]::Match($neededDirectory,[regex]::Escape("mods\bf2\"),[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success -or (Test-Path -Path $bf2NeededFile))
+						#$bAlreadyDefinedInBf2ButModified=((Test-Path -Path $bf2NeededFile) -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $bf2NeededFile).hash))
+						$bAlreadyDefinedInBf2=(Test-Path -Path $bf2NeededFile)
+						$bAlreadyDefinedInBf2ButModified=($bAlreadyDefinedInBf2 -and ((Get-FileHash $neededFile).hash -ne (Get-FileHash $bf2NeededFile).hash))
 						If ($bAlreadyDefinedInBf2) {
 							$exportFolderSuffix="_bf2"
 						}
