@@ -644,19 +644,45 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.collisionMesh\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
-						$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\Meshes"),"$resRelPath.collisionmesh")
+						If ($resRelPath.Contains("\")) {
+							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\meshes"),"$resRelPath.collisionmesh")
+						}
+						Else {
+							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"meshes"),"$resRelPath.collisionmesh")
+						}
+						If (!(Test-Path -Path $resFile)) {
+							Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.collisionmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+								$resFile=$_.FullName
+							}
+						}
 						$templateFiles+=,$resFile
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.geometry\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
-						#If ($templateType -ieq "SkinnedMesh") { # Does not work since it is not the ObjectTemplate type but the GeometryTemplate type...
-						#	$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\Meshes"),"$resRelPath.skinnedmesh")
-						#}
-						#Else {
-						#	$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\Meshes"),"$resRelPath.bundledmesh")
-						#}
-						$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\Meshes"),"$resRelPath.bundledmesh")
+						# BundledMesh vs. SkinnedMesh, ObjectTemplate vs. GeometryTemplate type...?
+						If ($resRelPath.Contains("\")) {
+							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\meshes"),"$resRelPath.bundledmesh")
+							If (!(Test-Path -Path $resFile)) {
+								$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\meshes"),"$resRelPath.skinnedmesh")
+							}
+						}
+						Else {
+							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"meshes"),"$resRelPath.bundledmesh")
+							If (!(Test-Path -Path $resFile)) {
+								$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"meshes"),"$resRelPath.skinnedmesh")
+							}
+						}
+						If (!(Test-Path -Path $resFile)) {
+							Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.bundledmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+								$resFile=$_.FullName
+							}
+						}
+						If (!(Test-Path -Path $resFile)) {
+							Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.skinnedmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+								$resFile=$_.FullName
+							}
+						}
 						$templateFiles+=,$resFile
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
@@ -679,7 +705,9 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 							$templateFiles+=,$resFile
 						}
 					}
-					# Animations (.inc)...?
+					# Animations (.inc, which call .baf that are often in animations, animations\1p, animations\3p, animations\head folders, maybe also call .ske...)...?
+					# Textures (possibly called in meshes?)...?
+					# Meshes can be anywhere...?
 				}
 
 				# Handling definitions in multiple files... See MergeTemplateMultipleDefinitions but templates sometimes have same name for different types...
@@ -1289,8 +1317,8 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 	#New-Item "$serverFolder" -ItemType directory -Force | Out-Null
 	#New-Item "$clientFolder" -ItemType directory -Force | Out-Null
 
-	# Directory structures containing .tweak and .con, Meshes\*.collisionmesh, ai\*.ai are copied to server...
-	# Directory structures containing Meshes\*.bundledmesh, Meshes\*.skinnedmesh, Textures are copied to client...
+	# Directory structures containing .tweak and .con, meshes\*.collisionmesh, ai\*.ai are copied to server...
+	# Directory structures containing meshes\*.bundledmesh, meshes\*.skinnedmesh, Textures are copied to client...
 	# How to correct wrong directory structures...
 	# Objects vs Menu...
 
