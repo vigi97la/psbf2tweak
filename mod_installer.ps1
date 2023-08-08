@@ -10,14 +10,14 @@
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-##PreProcessVehicles $extractFolder $null $true $true $true $true # Can be very slow (2h) for AIX2 Reality handheld weapons...
+##PreProcessVehicles $extractFolder $null $true $true $true $true $true # Can be very slow (2h) for AIX2 Reality handheld weapons...
 #FindTemplate $extractFolder $null $true $false # To build a template cache
 #MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be slow (1h) for AIX2 Reality...
 #$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
 #$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $false
+#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $false 16
 #. .\MiscFixes.ps1
 #FixVehicleType $exportFolder $true $true $true $true $true $true
 #. .\MiscTweaks.ps1
@@ -352,8 +352,8 @@ function PreProcessIncludesConContent($concontent, $file) {
 
 #. .\mod_installer.ps1
 #$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab"
-#PreProcessVehicles $vehicleToExtract $null $false $true $true $true
-function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bExpandIncludes=$true,[bool]$bOverwrite=$false) {
+#PreProcessVehicles $vehicleToExtract $null $false $true $true $true $true
+function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bExpandIncludes=$true,[bool]$bOverwrite=$false,[bool]$bShowOutput=$true) {
 
 	If (($null -ne $outputFolder) -and ("" -ne $outputFolder)) {
 		New-Item "$outputFolder" -ItemType directory -Force | Out-Null
@@ -376,12 +376,12 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 			}
 
 			If (-not $bSkip) {
-				Write-Output "$file : $vehicleName"
+				If ($bShowOutput) { Write-Output "$file : $vehicleName" }
 
 				$sr=[System.IO.StreamReader]$file
 				$sw=[System.IO.StreamWriter]"$file.tmp"
 				while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
-					$line=$sr.ReadLine()					
+					$line=$sr.ReadLine()
 					if ($null -eq $line) {
 						break
 					}
@@ -408,8 +408,8 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 					New-Item ([System.IO.FileInfo]$outputFile).DirectoryName -ItemType directory -Force | Out-Null
 					Move-Item -Path "$file.tmp" -Destination $outputFile -Force
 				}
-				If ($bOverwrite) { 
-					If (-not (Test-Path -Path "$file.bak")) { 
+				If ($bOverwrite) {
+					If (-not (Test-Path -Path "$file.bak")) {
 						Move-Item -Path $file -Destination "$file.bak" -Force
 					}
 					Move-Item -Path "$file.tmp" -Destination $file -Force
@@ -1091,11 +1091,11 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 #$vehicleToExtract="Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $false
+#ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $false -1
 # $extractedFolder should correspond to the mod where the vehicle comes from, while $bf2ExtractedFolder can be set to the mod where the vehicle should be used (which is typically standard bf2 without modifications).
 # If $bf2ExtractedFolder is set, the vehicle dependencies will be split in separate folders, typically "export" folder for the dependencies that are not available in $bf2ExtractedFolder, "export_bf2" folder for those that are already in $bf2ExtractedFolder, "export_bf2_modified" folder for those that are modifications of existing files in $bf2ExtractedFolder. The files in "export_bf2_modified" folder might need to be manually modified since they might break existing functionalities in $bf2ExtractedFolder.
 # $xpackExtractedFolder is for advanced use, to get more details on where the different dependencies come from.
-function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true) {
+function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true,[int]$maxDependencyLevel=4) {
 
 	If (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (extractedFolder)"
@@ -1149,11 +1149,11 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 			}
 
 			#If ($bHideDefinitionsInCurrentConOrTweak -and ($file -ieq $templateDependencyFile)) {
-			If ($file -ieq $templateDependencyFile) {
-				$ret=,$file
+			If (($file -ieq $templateDependencyFile) -or ($maxDependencyLevel -lt 0)) {
+				$ret=,$templateDependencyFile
 			}
 			Else {
-				$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache)
+				$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache $maxDependencyLevel)
 			}
 			#"$ret"
 			If (($null -eq $ret) -or ("" -eq $ret)) {
@@ -1234,7 +1234,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 								Copy-Item -Path $neededDirectory\..\* -Destination $exportNeededDirectory -Force -Recurse
 								If ($bPreProcessVehicles) {
-									PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false
+									PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false $false
 								}
 							}
 							ElseIf ($bAlwaysCopyContainingFolder -or ((Get-Item $neededDirectory).Basename -ieq (Get-Item $neededFile).Basename)) {
@@ -1246,7 +1246,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 								Copy-Item -Path $neededDirectory\* -Destination $exportNeededDirectory -Force -Recurse
 								If ($bPreProcessVehicles) {
-									PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false
+									PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false $false
 								}
 							}
 							Else {
@@ -1263,7 +1263,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									New-Item $exportNeededDirectory -ItemType directory -Force | Out-Null
 									Copy-Item -Path $nf -Destination $exportNeededFile -Force -Recurse
 									If ($bPreProcessVehicles) {
-										PreProcessVehicles $nf $exportNeededDirectory $true $true $true $false
+										PreProcessVehicles $nf $exportNeededDirectory $true $true $true $false $false
 									}
 								}
 							}
