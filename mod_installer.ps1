@@ -931,29 +931,39 @@ function MergeTemplateMultipleDefinitions($extractedFolder,[bool]$bShowOutput=$t
 }
 
 $callStackCounterFindTemplateDependencies=[int]0
-function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$bUseCache=$true,[int]$maxDependencyLevel=16) {
+$alreadyProcessedTemplateNamesFindTemplateDependencies=$null # How to reset it properly when there are multiple function calls...?
+function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$bUseCache=$true,[int]$maxDependencyLevel=16,[ref]$alreadyProcessedTemplateNames=([ref]$alreadyProcessedTemplateNamesFindTemplateDependencies)) {
 
 	$callStackCounterFindTemplateDependencies++
 	#Write-Host "Begin FindTemplateDependencies $searchedTemplateName" -ForegroundColor Magenta
 
 	$bWarnedSkipping=$false
 
-	$neededFiles=$null
+	If (($null -ne $alreadyProcessedTemplateNames.value) -and ($alreadyProcessedTemplateNames.value -icontains $searchedTemplateName)) {
+		$callStackCounterFindTemplateDependencies--
+		#If ($callStackCounterFindTemplateDependencies -le 0) { $alreadyProcessedTemplateNamesFindTemplateDependencies=$null }
+		#Write-Host "End FindTemplateDependencies $searchedTemplateName" -ForegroundColor Magenta
+		return $null
+	}
+
 	$ret=@(FindTemplate $extractedFolder $searchedTemplateName $bUseCache $false)
 	#Write-Warning "$ret"
 	If (($null -eq $ret) -or ("" -eq $ret)) {
 		$callStackCounterFindTemplateDependencies--
+		#If ($callStackCounterFindTemplateDependencies -le 0) { $alreadyProcessedTemplateNamesFindTemplateDependencies=$null }
 		#Write-Host "End FindTemplateDependencies $searchedTemplateName" -ForegroundColor Magenta
 		return $null
 	}
 	$neededFile=$ret[0]
 	If (($null -eq $neededFile) -or ("" -eq $neededFile)) {
 		$callStackCounterFindTemplateDependencies--
+		#If ($callStackCounterFindTemplateDependencies -le 0) { $alreadyProcessedTemplateNamesFindTemplateDependencies=$null }
 		#Write-Host "End FindTemplateDependencies $searchedTemplateName" -ForegroundColor Magenta
 		return $null
 	}
 	#$regescbackslash=[regex]::Escape("\")
-	$neededFiles+=,$neededFile
+	$alreadyProcessedTemplateNames.value+=,$searchedTemplateName
+	$neededFiles=,$neededFile
 	#Write-Warning "$neededFile"
 	for ($i=1; $i -lt $ret.Count; $i++) {
 		# Detect whether it is a child or file...
@@ -969,20 +979,24 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 		$templateChild=$ret[$i]
 		#Write-Warning "$templateChild"
 		If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
-			If ($templateChild -ieq $searchedTemplateName) {
+			If ($searchedTemplateName -ieq $templateChild) {
 				# Dependency loop...
+				continue
+			}
+			If (($null -ne $alreadyProcessedTemplateNames.value) -and ($alreadyProcessedTemplateNames.value -icontains $templateChild)) {
 				continue
 			}
 			If ($callStackCounterFindTemplateDependencies -ge $maxDependencyLevel) {
 				If (!$bWarnedSkipping) { Write-Warning "FindTemplateDependencies: Skipping deep dependencies possibly due to dependency loop... ($searchedTemplateName)" }
 				$bWarnedSkipping=$true
-				continue
-				##Write-Warning "$neededFiles"
-				#$callStackCounterFindTemplateDependencies--
-				##Write-Host "End FindTemplateDependencies $searchedTemplateName" -ForegroundColor Magenta
-				#return $neededFiles
+				#continue
+				#Write-Warning "$neededFiles"
+				$callStackCounterFindTemplateDependencies--
+				#If ($callStackCounterFindTemplateDependencies -le 0) { $alreadyProcessedTemplateNamesFindTemplateDependencies=$null }
+				#Write-Host "End FindTemplateDependencies $searchedTemplateName" -ForegroundColor Magenta
+				return $neededFiles
 			}
-			$neededChildFiles=@(FindTemplateDependencies $extractedFolder $templateChild $bUseCache $maxDependencyLevel)
+			$neededChildFiles=@(FindTemplateDependencies $extractedFolder $templateChild $bUseCache $maxDependencyLevel ([ref]$alreadyProcessedTemplateNames.value))
 			If (($null -ne $neededChildFiles) -and ("" -ne $neededChildFiles)) {
 				for ($j=0; $j -lt $neededChildFiles.Count; $j++) {
 					$neededChildFile=$neededChildFiles[$j]
@@ -992,41 +1006,59 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 					#Write-Warning "$neededChildFile"
 				}
 			}
+			$alreadyProcessedTemplateNames.value+=$templateChild
 		}
 	}
 	#Write-Warning "$neededFiles"
 	$callStackCounterFindTemplateDependencies--
+	#If ($callStackCounterFindTemplateDependencies -le 0) { $alreadyProcessedTemplateNamesFindTemplateDependencies=$null }
 	#Write-Host "End FindTemplateDependencies $searchedTemplateName" -ForegroundColor Magenta
 	return $neededFiles
 }
 
 $callStackCounterFindFileDependencies=[int]0
-function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int]$maxDependencyLevel=16) {
+$alreadyProcessedFilesFindFileDependencies=$null # How to reset it properly when there are multiple function calls...?
+function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int]$maxDependencyLevel=16,[ref]$alreadyProcessedFiles=([ref]$alreadyProcessedFilesFindFileDependencies)) {
 
 	$callStackCounterFindFileDependencies++
 	#Write-Host "Begin FindFileDependencies $file" -ForegroundColor Magenta
 
 	$bWarnedSkipping=$false
 
-	$neededFiles=$null
-	$neededFiles+=,$file
-
+	If (($null -ne $alreadyProcessedFiles.value) -and ($alreadyProcessedFiles.value -icontains $file)) {
+		$callStackCounterFindFileDependencies--
+		#If ($callStackCounterFindFileDependencies -le 0) { $alreadyProcessedFilesFindFileDependencies=$null }
+		#Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
+		return $null
+		#return $file
+	}
 	If (-not (Test-Path -Path $file)) {
 		$callStackCounterFindFileDependencies--
+		#If ($callStackCounterFindFileDependencies -le 0) { $alreadyProcessedFilesFindFileDependencies=$null }
 		#Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
 		##Write-Error "Error: $file not found"
-		return $neededFiles
+		return $file
 	}
 	If ((([System.IO.FileInfo]$file).Extension -ine ".con") -and (([System.IO.FileInfo]$file).Extension -ine ".tweak") -and (([System.IO.FileInfo]$file).Extension -ine ".ai")) {
 		$callStackCounterFindFileDependencies--
+		#If ($callStackCounterFindFileDependencies -le 0) { $alreadyProcessedFilesFindFileDependencies=$null }
 		#Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
 		##Write-Error "Error: $file has unsupported extension"
-		return $neededFiles
+		return $file
 	}
-
-	If ((Test-Path -Path "$(([System.IO.FileInfo]$file).DirectoryName)\$(([System.IO.FileInfo]$file).BaseName).con") -and (Test-Path -Path "$(([System.IO.FileInfo]$file).DirectoryName)\$(([System.IO.FileInfo]$file).BaseName).tweak")) {
-		$neededFiles="$(([System.IO.FileInfo]$file).DirectoryName)\$(([System.IO.FileInfo]$file).BaseName).con","$(([System.IO.FileInfo]$file).DirectoryName)\$(([System.IO.FileInfo]$file).BaseName).tweak"
+	$testconfile="$(([System.IO.FileInfo]$file).DirectoryName)\$(([System.IO.FileInfo]$file).BaseName).con"
+	$testtweakfile="$(([System.IO.FileInfo]$file).DirectoryName)\$(([System.IO.FileInfo]$file).BaseName).tweak"
+	If ((Test-Path -Path $testconfile) -and (Test-Path -Path $testtweakfile)) {
+		$neededFiles=$testconfile,$testtweakfile
+		# $alreadyProcessedFiles.value might be $null, so need to force initialization as list...
+		$alreadyProcessedFiles.value+=,$testconfile
+		$alreadyProcessedFiles.value+=$testtweakfile
 	}
+	Else {
+		$neededFiles=,$file
+		$alreadyProcessedFiles.value+=,$file
+	}
+	$processedTemplateDependencies=$null
 
 	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
 
@@ -1052,7 +1084,10 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 
 		#Write-Host "$templateDependency" -ForegroundColor White
 
-		$retj=@(FindTemplateDependencies $extractedFolder $templateDependency $bUseCache)
+		If (($null -ne $processedTemplateDependencies) -and ($processedTemplateDependencies -icontains $templateDependency)) {
+			continue
+		}
+		$retj=@(FindTemplateDependencies -extractedFolder $extractedFolder -searchedTemplateName $templateDependency -bUseCache $bUseCache -alreadyProcessedTemplateNames ([ref]$processedTemplateDependencies))
 		#Write-Host "$retj" -ForegroundColor Green
 		If (($null -eq $retj) -or ("" -eq $retj)) {
 			Write-Warning "Template $templateDependency not found"
@@ -1062,6 +1097,9 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 			$templateDependencyFile=$retj[$j]
 			If (($null -ne $templateDependencyFile) -and ("" -ne $templateDependencyFile)) {
 				If (($null -ne $neededFiles) -and ($neededFiles -icontains $templateDependencyFile)) {
+					continue
+				}
+				If (($null -ne $alreadyProcessedFiles.value) -and ($alreadyProcessedFiles.value -icontains $templateDependencyFile)) {
 					continue
 				}
 
@@ -1075,14 +1113,15 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 					continue
 					###Write-Warning "$neededFiles"
 					#$callStackCounterFindFileDependencies--
+					##If ($callStackCounterFindFileDependencies -le 0) { $alreadyProcessedFilesFindFileDependencies=$null }
 					##Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
 					#return $neededFiles
 				}
 
-				$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache $maxDependencyLevel)
+				$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache $maxDependencyLevel ([ref]$alreadyProcessedFiles.value))
 				#Write-Host "$ret" -ForegroundColor DarkGreen
 				If (($null -eq $ret) -or ("" -eq $ret)) {
-					Write-Warning "File $templateDependencyFile not found"
+					Write-Warning "Internal error while processing file $templateDependencyFile"
 					continue
 				}
 				for ($k=0; $k -lt $ret.Count; $k++) {
@@ -1090,6 +1129,7 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 					If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
 						If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile))) {
 							$neededFiles+=$neededFile
+							$alreadyProcessedFiles.value+=$neededFile
 						}
 						#Write-Host "$neededFile" -ForegroundColor White
 					}
@@ -1103,10 +1143,12 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 				Write-Warning "Template $templateDependency has invalid dependencies"
 			}
 		}
+		$processedTemplateDependencies+=,$templateDependency
 	}
 
 	##Write-Warning "$neededFiles"
 	$callStackCounterFindFileDependencies--
+	#If ($callStackCounterFindFileDependencies -le 0) { $alreadyProcessedFilesFindFileDependencies=$null }
 	#Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
 	return $neededFiles
 }
