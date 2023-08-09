@@ -16,7 +16,7 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 			$bSkip=$false
 			#$regexpr="\s*ObjectTemplate.create\s+(PlayerControlObject|GenericFireArm)\s+(\S+)\s*\r?\n" # .con
 			$regexpr="\s*ObjectTemplate.activeSafe\s+(PlayerControlObject|GenericFireArm)\s+(\S+)\s*\r?\n" # .tweak
-			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
+			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Groups.Count -eq 3) {
 				$vehicleName=$m.Groups[2].value
 			}
@@ -27,16 +27,16 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 			If (-not $bSkip) {
 				Write-Output "$file : $vehicleName"
 
-				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), "\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*\r?\n")
+				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)),"\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*\r?\n",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -eq 2) {
 					$vehicleType=[double]$m.Groups[1].value
 				}
 				# VTHeavyTank (0), VTApc (1), VCHelicopter (2), [car (3)], VCAir (4), VTAA (5), VCSea (6)
-				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), "\s*ObjectTemplate.setVehicleType\s+(\S+)\s*\r?\n")
+				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)),"\s*ObjectTemplate.setVehicleType\s+(\S+)\s*\r?\n",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -eq 2) {
 					$vehicleVT=$m.Groups[1].value
 				}
-				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), "\s*ObjectTemplate.vehicleCategory\s+(\S+)\s*\r?\n")
+				$m=[regex]::Match(([System.IO.File]::ReadAllText($file)),"\s*ObjectTemplate.vehicleCategory\s+(\S+)\s*\r?\n",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -eq 2) {
 					$vehicleVC=$m.Groups[1].value
 				}
@@ -85,15 +85,15 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 				$sr=[System.IO.StreamReader]$file
 				$sw=[System.IO.StreamWriter]"$file.tmp"
 				while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
-					$line=$sr.ReadLine()					
+					$line=$sr.ReadLine()
 					if ($null -eq $line) {
 						break
 					}
 
 					#Write-Warning "$line"
-										
+
 					If ($bUseVehiclesDB) {
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*")
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.vehicleType\s+(\d+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 						If ($m.Groups.Count -eq 2) {
 							$newVehicleType=[int][Math]::Floor([double]$vehicleType)
 							If ([double]$newVehicleType -ne [double]$m.Groups[1].value) {
@@ -104,7 +104,7 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 							}
 							Continue
 						}
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.setVehicleType\s+(\S+)\s*")
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.setVehicleType\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 						If ($m.Groups.Count -eq 2) {
 							If (($null -eq $vehicleVT) -and ($null -ne $vehicleVC)) {
 								$sw.WriteLine("ObjectTemplate.vehicleCategory $vehicleVC")
@@ -117,7 +117,7 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 							}
 							Continue
 						}
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleCategory\s+(\S+)\s*")
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleCategory\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 						If ($m.Groups.Count -eq 2) {
 							If (($null -eq $vehicleVC) -and ($null -ne $vehicleVT)) {
 								$sw.WriteLine("ObjectTemplate.setVehicleType $vehicleVT")
@@ -132,7 +132,7 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 						}
 					}
 					If ($bResetSpottedMessage) {
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.Radio.spottedMessage\s+(\S+)\s*")
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.Radio.spottedMessage\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 						If ($m.Groups.Count -eq 2) {
 							$vehicleSpottedMessage=$m.Groups[1].value
 							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
@@ -166,7 +166,7 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 
 						# See xpak_ailraider and others with specific icons, should not change if the file is found...
 
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.typeIcon\s+(\S+)\s*")
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.typeIcon\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 						If ($m.Groups.Count -eq 2) {
 							$vehicleTypeIcon=$m.Groups[1].value
 							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
@@ -195,7 +195,7 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 							}
 							Continue
 						}
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.miniMapIcon\s+(\S+)\s*")
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.miniMapIcon\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 						If ($m.Groups.Count -eq 2) {
 							$vehicleMiniMapIcon=$m.Groups[1].value
 							If (([double]$vehicleType -ge 0) -and ([double]$vehicleType -lt 1)) {
@@ -227,7 +227,7 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 						}
 					}
 					If ($bResetHUDIcons) {
-						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.vehicleIcon\s+(\S+)\s*")
+						$m=[regex]::Match($line, "^\s*ObjectTemplate.vehicleHud.vehicleIcon\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 						If ($m.Groups.Count -eq 2) {
 							$vehicleIcon=$m.Groups[1].value
 							$sw.WriteLine("rem $line")
