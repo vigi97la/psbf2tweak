@@ -17,7 +17,7 @@
 #$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $false 16
+#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $true $false 16
 #. .\MiscFixes.ps1
 #FixVehicleType $exportFolder $true $true $true $true $true $true
 #. .\MiscTweaks.ps1
@@ -1119,11 +1119,11 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 #$vehicleToExtract="Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $false -1
+#ListDependencies $file $extractFolder $exportFolder $true $true $false $null $false $null $false $true $false -1
 # $extractedFolder should correspond to the mod where the vehicle comes from, while $bf2ExtractedFolder can be set to the mod where the vehicle should be used (which is typically standard bf2 without modifications).
 # If $bf2ExtractedFolder is set, the vehicle dependencies will be split in separate folders, typically "export" folder for the dependencies that are not available in $bf2ExtractedFolder, "export_bf2" folder for those that are already in $bf2ExtractedFolder, "export_bf2_modified" folder for those that are modifications of existing files in $bf2ExtractedFolder. The files in "export_bf2_modified" folder might need to be manually modified since they might break existing functionalities in $bf2ExtractedFolder.
 # $xpackExtractedFolder is for advanced use, to get more details on where the different dependencies come from.
-function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessVehicles=$true,[bool]$bAlwaysCopyContainingFolder=$true,[int]$maxDependencyLevel=16) {
+function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessVehicles=$true,[bool]$bAllowExtraFiles=$true,[bool]$bAlwaysCopyContainingFolder=$true,[int]$maxDependencyLevel=16) {
 
 	If (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (extractedFolder)"
@@ -1191,14 +1191,11 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 			for ($k=0; $k -lt $ret.Count; $k++) {
 				$neededFile=$ret[$k]
 				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
-					# Sometimes textures might not have the correct extension (or meshes but due to a limitation of FindTemplate...)...
+					# Sometimes textures might not have the correct extension...
 					If (-not (Test-Path -Path $neededFile)) {
 						$origNeededFile=$neededFile
 						If (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".tga") {
 							$neededFile=($origNeededFile -replace ".tga",".dds")
-						}
-						ElseIf (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".bundledmesh") {
-							$neededFile=($origNeededFile -replace ".bundledmesh",".skinnedmesh")
 						}
 						If (-not (Test-Path -Path $neededFile)) {
 							Write-Error "Error: $origNeededFile not found"
@@ -1253,7 +1250,8 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 						}
 						If (($null -ne $exportFolder) -and ("" -ne $exportFolder)) {
 							New-Item "$exportFolder$exportFolderSuffix" -ItemType directory -Force | Out-Null
-							If ((Get-Item $neededDirectory).Basename -ieq "meshes") {
+							# Should check more in details any additional file if it is already in bf2/xpack...
+							If ($bAllowExtraFiles -and ((Get-Item $neededDirectory).Basename -ieq "meshes") -and ((Get-Item "$neededDirectory\..").Basename -ieq (Get-Item $neededFile).Basename)) {
 								$m=[regex]::Match("$neededDirectory\..", "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 								$restOfPath=$m.Groups[1].value
 								#"$restOfPath"
@@ -1265,7 +1263,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false $false
 								}
 							}
-							ElseIf ($bAlwaysCopyContainingFolder -or ((Get-Item $neededDirectory).Basename -ieq (Get-Item $neededFile).Basename)) {
+							ElseIf ($bAllowExtraFiles -and ($bAlwaysCopyContainingFolder -or ((Get-Item $neededDirectory).Basename -ieq (Get-Item $neededFile).Basename))) {
 								$m=[regex]::Match($neededDirectory, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 								$restOfPath=$m.Groups[1].value
 								#"$restOfPath"
@@ -1278,8 +1276,13 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								}
 							}
 							Else {
-								$neededFileWithoutExtension=[System.IO.Path]::Combine($neededDirectory,(Get-Item $neededFile).Basename)
-								$neededFiles=Get-ChildItem "$neededFileWithoutExtension.*"
+								If ($bAllowExtraFiles) {
+									$neededFileWithoutExtension=[System.IO.Path]::Combine($neededDirectory,(Get-Item $neededFile).Basename)
+									$neededFiles=Get-ChildItem "$neededFileWithoutExtension.*"
+								}
+								Else {
+									$neededFiles=,$neededFile
+								}
 								$neededFiles | ForEach-Object {
 									$nf=$_.FullName
 									$m=[regex]::Match($nf, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
