@@ -1180,56 +1180,66 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 		Write-Warning  "xpackExtractedFolder parameter not available"
 	}
 
-	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
+	#$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
 
-	$lines=@($concontent -split "\r?\n")
-	for ($i=0; $i -lt $lines.Count; $i++) {
-		$line=$lines[$i]
-		#"$line"
+	#$lines=@($concontent -split "\r?\n")
+	#for ($i=0; $i -lt $lines.Count; $i++) {
+	#	$line=$lines[$i]
+	#	#"$line"
 
-		$templateDependency=$null
-		$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-		If ($m.Groups.Count -eq 3) {
-			$templateDependency=$m.Groups[2].value
-		}
-		Else {
-			$m=[regex]::Match($line, "^\s*ObjectTemplate.setObjectTemplate\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-			If ($m.Groups.Count -eq 3) {
-				$templateDependency=$m.Groups[2].value
-			}
-			Else {
-				continue
-			}
-		}
+	#	$templateDependency=$null
+	#	$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+	#	If ($m.Groups.Count -eq 3) {
+	#		$templateDependency=$m.Groups[2].value
+	#	}
+	#	Else {
+	#		$m=[regex]::Match($line, "^\s*ObjectTemplate.setObjectTemplate\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+	#		If ($m.Groups.Count -eq 3) {
+	#			$templateDependency=$m.Groups[2].value
+	#		}
+	#		Else {
+	#			continue
+	#		}
+	#	}
 
-		Write-Host "$templateDependency" -ForegroundColor Cyan
+	#	Write-Host "$templateDependency" -ForegroundColor Cyan
 
-		$retj=@(FindTemplateDependencies $extractedFolder $templateDependency $bUseCache)
-		#"$retj"
-		If (($null -eq $retj) -or ("" -eq $retj)) {
-			Write-Warning "Template $templateDependency not found"
-			continue
-		}
+	#	$retj=@(FindTemplateDependencies $extractedFolder $templateDependency $bUseCache)
+	#	#"$retj"
+	#	If (($null -eq $retj) -or ("" -eq $retj)) {
+	#		Write-Warning "Template $templateDependency not found"
+	#		continue
+	#	}
 
-		for ($j=0; $j -lt $retj.Count; $j++) {
-			$templateDependencyFile=$retj[$j]
-			If (($null -eq $templateDependencyFile) -or ("" -eq $templateDependencyFile)) {
-				Write-Warning "Template $templateDependency has invalid dependencies"
-				continue
-			}
+	#	for ($j=0; $j -lt $retj.Count; $j++) {
+	#		$templateDependencyFile=$retj[$j]
+	#		If (($null -eq $templateDependencyFile) -or ("" -eq $templateDependencyFile)) {
+	#			Write-Warning "Template $templateDependency has invalid dependencies"
+	#			continue
+	#		}
 
-			#If ($bHideDefinitionsInCurrentConOrTweak -and ($file -ieq $templateDependencyFile)) {
-			If (($file -ieq $templateDependencyFile) -or ($maxDependencyLevel -lt 0)) {
-				$ret=,$templateDependencyFile
-			}
-			Else {
-				$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache $maxDependencyLevel)
-			}
+	#		#If ($bHideDefinitionsInCurrentConOrTweak -and ($file -ieq $templateDependencyFile)) {
+	#		If (($file -ieq $templateDependencyFile) -or ($maxDependencyLevel -lt 0)) {
+	#			$ret=,$templateDependencyFile
+	#		}
+	#		Else {
+	#			$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache $maxDependencyLevel)
+	#		}
+	#		#"$ret"
+	#		If (($null -eq $ret) -or ("" -eq $ret)) {
+	#			Write-Warning "$templateDependencyFile not found"
+	#			continue
+	#		}
+
+			$alreadyProcessedFiles=$null
+			$ret=@(FindFileDependencies $extractedFolder $file $bUseCache $maxDependencyLevel ([ref]$alreadyProcessedFiles))
+			$alreadyProcessedFiles=$null
 			#"$ret"
 			If (($null -eq $ret) -or ("" -eq $ret)) {
-				Write-Warning "$templateDependencyFile not found"
-				continue
+				Write-Error "Internal error while processing file $file"
+				return
 			}
+
 			for ($k=0; $k -lt $ret.Count; $k++) {
 				$neededFile=$ret[$k]
 				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
@@ -1288,7 +1298,8 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					}
 					If ((!$bHideDefinitionsInBf2 -or !$bAlreadyDefinedInBf2 -or $bAlreadyDefinedInBf2ButModified) -and (!$bHideDefinitionsInXpack -or !$bAlreadyDefinedInXpack -or $bAlreadyDefinedInXpackButModified)) {
 						If ((!$bHideDefinitionsInCurrentConOrTweak) -or ([System.IO.Path]::Combine((Get-Item $file).DirectoryName,(Get-Item $file).Basename) -ne [System.IO.Path]::Combine($neededDirectory,(Get-Item $neededFile).Basename))) {
-							Write-Output "Template $templateDependency needs $neededFile"
+							#Write-Output "Template $templateDependency needs $neededFile"
+							Write-Output "$neededFile"
 						}
 						If (($null -ne $exportFolder) -and ("" -ne $exportFolder)) {
 							New-Item "$exportFolder$exportFolderSuffix" -ItemType directory -Force | Out-Null
@@ -1344,11 +1355,12 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					}
 				}
 				Else {
-					Write-Warning "Template $templateDependency not found"
+					#Write-Warning "Template $templateDependency not found"
+					Write-Warning "File $file has invalid dependencies"
 				}
 			}
-		}
-	}
+	#	}
+	#}
 }
 
 #. .\mod_installer.ps1
