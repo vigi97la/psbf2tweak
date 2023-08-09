@@ -11,7 +11,7 @@
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
 ##PreProcessVehicles $extractFolder $null $true $true $true $true $true # Can be very slow (2h) for AIX2 Reality handheld weapons...
-#FindTemplate $extractFolder $null $true $false # To build a template cache
+#FindTemplate $extractFolder $null $true $false $false # To build a template cache
 #MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be slow (1h) for AIX2 Reality...
 #$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
 #$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
@@ -517,7 +517,7 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 #	[double]$psi=0
 #}
 
-function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCache=$true,[bool]$bShowOutput=$true) {
+function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCache=$true,[bool]$bShowOutput=$true,[bool]$bEnableSlowSearch=$false) {
 
 	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
@@ -620,16 +620,19 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					If ($m.Groups.Count -eq 3) {
 						$templateChild=$m.Groups[2].value
 						$templateChildren+=,$templateChild
+						continue
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.setObjectTemplate\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
 						$templateChild=$m.Groups[2].value
 						$templateChildren+=,$templateChild
+						continue
 					}
 					$m=[regex]::Match($line, "^\s*aiTemplate.addPlugIn\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$templateChild=$m.Groups[1].value
 						$templateChildren+=,$templateChild
+						continue
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.textureName\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
@@ -640,6 +643,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 							$resFile=[System.IO.Path]::Combine($extractedFolder,"$resRelPath.dds")
 							$templateFiles+=,$resFile
 						}
+						continue
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.collisionMesh\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
@@ -650,12 +654,14 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 						Else {
 							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"meshes"),"$resRelPath.collisionmesh")
 						}
-						If (!(Test-Path -Path $resFile)) {
+						If ($bEnableSlowSearch -and !(Test-Path -Path $resFile)) {
+							Write-Warning "Attempting a slow search of $resRelPath mesh"
 							Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.collisionmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
 								$resFile=$_.FullName
 							}
 						}
 						$templateFiles+=,$resFile
+						continue
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.geometry\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
@@ -666,24 +672,34 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 							If (!(Test-Path -Path $resFile)) {
 								$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\meshes"),"$resRelPath.skinnedmesh")
 							}
+							Else {
+								$templateFiles+=,$resFile
+								continue
+							}
 						}
 						Else {
 							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"meshes"),"$resRelPath.bundledmesh")
 							If (!(Test-Path -Path $resFile)) {
 								$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"meshes"),"$resRelPath.skinnedmesh")
 							}
+							Else {
+								$templateFiles+=,$resFile
+								continue
+							}
 						}
-						If (!(Test-Path -Path $resFile)) {
+						If ($bEnableSlowSearch -and !(Test-Path -Path $resFile)) {
+							Write-Warning "Attempting a slow search of $resRelPath mesh"
 							Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.bundledmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
 								$resFile=$_.FullName
 							}
-						}
-						If (!(Test-Path -Path $resFile)) {
-							Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.skinnedmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
-								$resFile=$_.FullName
+							If (!(Test-Path -Path $resFile)) {
+								Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.skinnedmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+									$resFile=$_.FullName
+								}
 							}
 						}
 						$templateFiles+=,$resFile
+						continue
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
@@ -694,6 +710,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 							$resFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
 							$templateFiles+=,$resFile
 						}
+						continue
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate.(vehicleHud.typeIcon|weaponHud.typeIcon|vehicleHud.miniMapIcon|weaponHud.miniMapIcon|vehicleHud.vehicleIcon|weaponHud.weaponIcon|WarningHud.warningIcon)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
@@ -704,16 +721,13 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 							$resFile=[System.IO.Path]::Combine("$extractedFolder\Menu\HUD\Texture",$resRelPath)
 							$templateFiles+=,$resFile
 						}
+						continue
 					}
 					# Animations (.inc, which call .baf that are often in animations, animations\1p, animations\3p, animations\head folders, maybe also call .ske...)...?
 					# Textures (possibly called in meshes?)...?
 					# Meshes can be anywhere...?
 				}
-
-				# Handling definitions in multiple files... See MergeTemplateMultipleDefinitions but templates sometimes have same name for different types...
-
 			}
-
 		}
 
 		# End of any previous object...
@@ -946,7 +960,7 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 		return $null
 	}
 
-	$ret=@(FindTemplate $extractedFolder $searchedTemplateName $bUseCache $false)
+	$ret=@(FindTemplate $extractedFolder $searchedTemplateName $bUseCache $false $false)
 	#Write-Warning "$ret"
 	If (($null -eq $ret) -or ("" -eq $ret)) {
 		$callStackCounterFindTemplateDependencies--
@@ -1156,7 +1170,7 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\xpack"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-#FindTemplate $extractFolder $null $true $false
+#FindTemplate $extractFolder $null $true $false $false
 #$vehicleToExtract="Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
