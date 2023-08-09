@@ -1257,12 +1257,30 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 				$neededFile=$ret[$k]
 				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
 					# Sometimes textures might not have the correct extension...
-					If (-not (Test-Path -Path $neededFile)) {
+					# Also, FindTemplate has some limitations...
+					If (!(Test-Path -Path $neededFile)) {
 						$origNeededFile=$neededFile
 						If (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".tga") {
 							$neededFile=($origNeededFile -replace ".tga",".dds")
 						}
-						If (-not (Test-Path -Path $neededFile)) {
+						ElseIf (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".collisionmesh") {
+							Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+								$neededFile=$_.FullName
+							}
+						}
+						ElseIf ((([System.IO.FileInfo]$origNeededFile).Extension -ieq ".bundledmesh") -or (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".skinnedmesh")) {
+							$neededFile=($origNeededFile -replace ".bundledmesh",".skinnedmesh")
+							Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+								$neededFile=$_.FullName
+							}
+							If (!(Test-Path -Path $neededFile)) {
+								$neededFile=($origNeededFile -replace ".skinnedmesh",".bundledmesh")
+								Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+									$neededFile=$_.FullName
+								}
+							}
+						}
+						If (!(Test-Path -Path $neededFile)) {
 							Write-Error "Error: $origNeededFile not found"
 							continue
 						}
