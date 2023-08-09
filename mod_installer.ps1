@@ -616,7 +616,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					$templateChildren=$null
 				}
 				ElseIf ($null -ne $templateName) {
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|particleSystemTemplate|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
 						$templateChild=$m.Groups[2].value
 						$templateChildren+=,$templateChild
@@ -1083,7 +1083,7 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 		##Write-Warning "$line"
 
 		$templateDependency=$null
-		$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|particleSystemTemplate|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 3) {
 			$templateDependency=$m.Groups[2].value
 		}
@@ -1201,7 +1201,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 	#	#"$line"
 
 	#	$templateDependency=$null
-	#	$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+	#	$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|particleSystemTemplate|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 	#	If ($m.Groups.Count -eq 3) {
 	#		$templateDependency=$m.Groups[2].value
 	#	}
