@@ -12,7 +12,7 @@
 #ExtractModArchives $modFolder $extractFolder $false $false 1
 ##PreProcessVehicles $extractFolder $null $true $true $true $true $true # Can be very slow (2h) for AIX2 Reality handheld weapons...
 #FindTemplate $extractFolder $null $true $false $false # To build a template cache
-#MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be slow (1h) for AIX2 Reality...
+#MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be slow (2h) for AIX2 Reality...
 #$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
 #$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
@@ -619,9 +619,9 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 			$lines=@($concontent -split "\r?\n")
 			for ($i=0; $i -lt $lines.Count; $i++) {
 				$line=$lines[$i]
-				$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn|animationSystem).(create|createTrigger|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -ne 5) {
-					$m=[regex]::Match($line, "^\s*(aiTemplate|weaponTemplate).create\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*(aiTemplate.create|weaponTemplate.create|animationSystem.createBundle)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				}
 				If (($m.Groups.Count -eq 5) -or ($m.Groups.Count -eq 3)) {
 
@@ -681,6 +681,12 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					$m=[regex]::Match($line, "^\s*aiTemplate.addPlugIn\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$templateChild=$m.Groups[1].value
+						$templateChildren+=,$templateChild
+						continue
+					}
+					$m=[regex]::Match($line, "^\s*animationTrigger.(addBundle|addChild)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 3) {
+						$templateChild=$m.Groups[2].value
 						$templateChildren+=,$templateChild
 						continue
 					}
@@ -761,6 +767,17 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 								# Don't know what to do with variables...
 								continue
 							}
+							$resFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
+							$templateFiles+=,$resFile
+						}
+						continue
+					}
+					$m=[regex]::Match($line, "^\s*animationBundle.addAnimation\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 2) {
+						$resRelPaths=@($m.Groups[1].value -split ",")
+						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
+							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
+							#Write-Warning "$extractedFolder\$resRelPath"
 							$resFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
 							$templateFiles+=,$resFile
 						}
@@ -1139,12 +1156,12 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 
 		$templateDependency=$null
 		$templateDependencyFile=$null
-		$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn|animationSystem).(create|createTrigger|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 5) {
 			$templateDependency=$m.Groups[4].value
 		}
 		Else {
-			$m=[regex]::Match($line, "^\s*(aiTemplate|weaponTemplate).create\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($line, "^\s*(aiTemplate.create|weaponTemplate.create|animationSystem.createBundle)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Groups.Count -eq 3) {
 				$templateDependency=$m.Groups[2].value
 			}
