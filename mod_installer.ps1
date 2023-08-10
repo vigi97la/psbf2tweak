@@ -707,6 +707,10 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
 							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
 							#Write-Warning "$extractedFolder\$resRelPath"
+							If ($resRelPath -ieq "->") {
+								# Don't know what to do with variables...
+								continue
+							}
 							$resFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
 							$templateFiles+=,$resFile
 						}
