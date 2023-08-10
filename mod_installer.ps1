@@ -583,7 +583,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 		If ($bUseCache) {
 			$sw=[System.IO.StreamWriter]$cachefile
 		}
-		Get-ChildItem "$extractedFolder\*" -R -Include *.con,*.tweak,*.ai | ForEach-Object {
+		Get-ChildItem "$extractedFolder\*" -R -Include *.con,*.tweak,*.ai,*.inc | ForEach-Object {
 
 			# End of any previous object...
 			If ($null -ne $templateName) {
@@ -1107,7 +1107,7 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 		##Write-Error "Error: $file not found"
 		return $file
 	}
-	If ((([System.IO.FileInfo]$file).Extension -ine ".con") -and (([System.IO.FileInfo]$file).Extension -ine ".tweak") -and (([System.IO.FileInfo]$file).Extension -ine ".ai")) {
+	If ((([System.IO.FileInfo]$file).Extension -ine ".con") -and (([System.IO.FileInfo]$file).Extension -ine ".tweak") -and (([System.IO.FileInfo]$file).Extension -ine ".ai") -and (([System.IO.FileInfo]$file).Extension -ine ".inc")) {
 		$callStackCounterFindFileDependencies--
 		#Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
 		##Write-Error "Error: $file has unsupported extension"
@@ -1137,9 +1137,8 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 		$line=$lines[$i]
 		##Write-Warning "$line"
 
-		# Should parse also include, run...?
-
 		$templateDependency=$null
+		$templateDependencyFile=$null
 		$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 5) {
 			$templateDependency=$m.Groups[4].value
@@ -1150,8 +1149,56 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 				$templateDependency=$m.Groups[2].value
 			}
 			Else {
+				$templateDependencyFile=GetFileIncludedConLine $line $file
+				If ($null -eq $templateDependencyFile) {
+					$templateDependencyFile=GetFileRunConLine $line $file
+					If ($null -eq $templateDependencyFile) {
+						continue
+					}
+				}
+			}
+		}
+
+		If ($null -ne $templateDependencyFile) {
+			If (($null -ne $neededFiles) -and ($neededFiles -icontains $templateDependencyFile)) {
 				continue
 			}
+			If (($null -ne $alreadyProcessedFiles.value) -and ($alreadyProcessedFiles.value -icontains $templateDependencyFile)) {
+				continue
+			}
+			If ($callStackCounterFindFileDependencies -ge $maxDependencyLevel) {
+				If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $templateDependencyFile))) {
+					$neededFiles+=$templateDependencyFile
+				}
+				#Write-Host "$templateDependencyFile" -ForegroundColor White
+				If (!$bWarnedSkipping) { Write-Warning "FindFileDependencies: Skipping deep dependencies possibly due to dependency loop... ($file)" }
+				$bWarnedSkipping=$true
+				continue
+				###Write-Warning "$neededFiles"
+				#$callStackCounterFindFileDependencies--
+				##Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
+				#return $neededFiles
+			}
+			$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache $maxDependencyLevel $bDisableSharedCallsMemory ([ref]$alreadyProcessedFiles.value))
+			#Write-Host "$ret" -ForegroundColor DarkGreen
+			If (($null -eq $ret) -or ("" -eq $ret)) {
+				Write-Warning "Internal error while processing file $templateDependencyFile"
+				continue
+			}
+			for ($k=0; $k -lt $ret.Count; $k++) {
+				$neededFile=$ret[$k]
+				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
+					If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile))) {
+						$neededFiles+=$neededFile
+						If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=$neededFile }
+					}
+					#Write-Host "$neededFile" -ForegroundColor White
+				}
+				Else {
+					Write-Warning "File $templateDependencyFile has invalid dependencies"
+				}
+			}
+			continue
 		}
 
 		#Write-Host "$templateDependency" -ForegroundColor White
@@ -1174,7 +1221,6 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 				If (($null -ne $alreadyProcessedFiles.value) -and ($alreadyProcessedFiles.value -icontains $templateDependencyFile)) {
 					continue
 				}
-
 				If ($callStackCounterFindFileDependencies -ge $maxDependencyLevel) {
 					If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $templateDependencyFile))) {
 						$neededFiles+=$templateDependencyFile
@@ -1188,7 +1234,6 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 					##Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
 					#return $neededFiles
 				}
-
 				$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache $maxDependencyLevel $bDisableSharedCallsMemory ([ref]$alreadyProcessedFiles.value))
 				#Write-Host "$ret" -ForegroundColor DarkGreen
 				If (($null -eq $ret) -or ("" -eq $ret)) {
@@ -1208,7 +1253,6 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 						Write-Warning "File $templateDependencyFile has invalid dependencies"
 					}
 				}
-
 			}
 			Else {
 				Write-Warning "Template $templateDependency has invalid dependencies"
