@@ -619,9 +619,9 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 			$lines=@($concontent -split "\r?\n")
 			for ($i=0; $i -lt $lines.Count; $i++) {
 				$line=$lines[$i]
-				$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn|animationSystem).(create|createTrigger|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -ne 5) {
-					$m=[regex]::Match($line, "^\s*(aiTemplate.create|weaponTemplate.create|animationSystem.createBundle)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*(aiTemplate|weaponTemplate).create\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				}
 				If (($m.Groups.Count -eq 5) -or ($m.Groups.Count -eq 3)) {
 
@@ -681,12 +681,6 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					$m=[regex]::Match($line, "^\s*aiTemplate.addPlugIn\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$templateChild=$m.Groups[1].value
-						$templateChildren+=,$templateChild
-						continue
-					}
-					$m=[regex]::Match($line, "^\s*animationTrigger.(addBundle|addChild)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-					If ($m.Groups.Count -eq 3) {
-						$templateChild=$m.Groups[2].value
 						$templateChildren+=,$templateChild
 						continue
 					}
@@ -757,7 +751,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 						$templateFiles+=,$resFile
 						continue
 					}
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem|animationSystem|animationSystem1P|animationSystem3P|skeleton|skeleton1P|skeleton3P)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
 						$resRelPaths=@($m.Groups[2].value -split ",")
 						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
@@ -772,20 +766,10 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 						}
 						continue
 					}
-					$m=[regex]::Match($line, "^\s*animationBundle.addAnimation\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-					If ($m.Groups.Count -eq 2) {
-						$resRelPaths=@($m.Groups[1].value -split ",")
-						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
-							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
-							#Write-Warning "$extractedFolder\$resRelPath"
-							$resFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
-							$templateFiles+=,$resFile
-						}
-						continue
-					}
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.(vehicleHud.typeIcon|weaponHud.typeIcon|vehicleHud.miniMapIcon|weaponHud.miniMapIcon|vehicleHud.vehicleIcon|weaponHud.weaponIcon|WarningHud.warningIcon)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-					If ($m.Groups.Count -eq 3) {
-						$resRelPaths=@($m.Groups[2].value -split ",")
+					#$m=[regex]::Match($line, "^\s*ObjectTemplate.(vehicleHud|weaponHud|WarningHud|StrategicObject).(typeIcon|miniMapIcon|vehicleIcon|abilityIcon|spottedIcon|weaponIcon|altWeaponIcon|selectIcon|specialAbilityIcon|crosshairIcon|warningIcon|intactIcon|destroyedIcon)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate.(\S*Hud|\S*Object).(\S*Icon)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 4) {
+						$resRelPaths=@($m.Groups[3].value -split ",")
 						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
 							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
 							#Write-Warning "$extractedFolder\Menu\HUD\Texture\$resRelPath"
@@ -794,7 +778,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 						}
 						continue
 					}
-					# Animations (.inc, which call .baf that are often in animations, animations\1p, animations\3p, animations\head folders, maybe also call .ske...)...?
+					# Animations (.inc) seem to only declare local "templates"...?
 					# Textures (possibly called in meshes?)...?
 					# Meshes can be anywhere...?
 				}
@@ -1156,21 +1140,29 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 
 		$templateDependency=$null
 		$templateDependencyFile=$null
-		$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn|animationSystem).(create|createTrigger|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 5) {
 			$templateDependency=$m.Groups[4].value
 		}
 		Else {
-			$m=[regex]::Match($line, "^\s*(aiTemplate.create|weaponTemplate.create|animationSystem.createBundle)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($line, "^\s*(aiTemplate|weaponTemplate).create\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Groups.Count -eq 3) {
 				$templateDependency=$m.Groups[2].value
 			}
 			Else {
-				$templateDependencyFile=GetFileIncludedConLine $line $file
-				If ($null -eq $templateDependencyFile) {
-					$templateDependencyFile=GetFileRunConLine $line $file
+				$m=[regex]::Match($line, "^\s*animationSystem.createAnimation\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				If ($m.Groups.Count -eq 2) {
+					$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
+					#Write-Warning "$extractedFolder\$resRelPath"
+					$templateDependencyFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
+				}
+				Else {
+					$templateDependencyFile=GetFileIncludedConLine $line $file
 					If ($null -eq $templateDependencyFile) {
-						continue
+						$templateDependencyFile=GetFileRunConLine $line $file
+						If ($null -eq $templateDependencyFile) {
+							continue
+						}
 					}
 				}
 			}
