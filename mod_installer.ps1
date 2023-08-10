@@ -1130,19 +1130,22 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 	$processedTemplateDependencies=$null
 
 	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
+	#$concontent=(ReadConFile $file)
 
 	$lines=@($concontent -split "\r?\n")
 	for ($i=0; $i -lt $lines.Count; $i++) {
 		$line=$lines[$i]
 		##Write-Warning "$line"
 
+		# Should parse also include, run...?
+
 		$templateDependency=$null
-		$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|particleSystemTemplate|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-		If ($m.Groups.Count -eq 3) {
-			$templateDependency=$m.Groups[2].value
+		$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		If ($m.Groups.Count -eq 5) {
+			$templateDependency=$m.Groups[4].value
 		}
 		Else {
-			$m=[regex]::Match($line, "^\s*ObjectTemplate.setObjectTemplate\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($line, "^\s*(aiTemplate|weaponTemplate).create\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Groups.Count -eq 3) {
 				$templateDependency=$m.Groups[2].value
 			}
