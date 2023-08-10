@@ -350,6 +350,56 @@ function PreProcessIncludesConContent($concontent, $file) {
 	return $content
 }
 
+function GetFileIncludedConLine($line, $file) {
+	$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+	If ($m.Groups.Count -ge 2) {
+		return Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
+	}
+	Else {
+		return $null
+	}
+}
+
+function PreProcessRunsConLine($line, $file) {
+	$m=[regex]::Match($line, "^\s*run\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+	if ($m.Groups.Count -ge 2) {
+		$runfile=Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
+		$v_arg1=$m.Groups[3].value
+		$v_arg2=$m.Groups[5].value
+		$v_arg3=$m.Groups[7].value
+		$v_arg4=$m.Groups[9].value
+		$v_arg5=$m.Groups[11].value
+		$v_arg6=$m.Groups[13].value
+		$v_arg7=$m.Groups[15].value
+		$v_arg8=$m.Groups[17].value
+		$v_arg9=$m.Groups[19].value
+		$i=0
+		$runfilecontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $runfile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $runfile) $runfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		return $runfilecontent
+	}
+	else {
+		return $line
+	}
+}
+
+function PreProcessRunsConContent($concontent, $file) {
+	$content=""
+	ForEach ($line in @($concontent -split "\r?\n")) {
+		$content+=(PreProcessRunsConLine $line $file)+"`r`n"
+	}
+	return $content
+}
+
+function GetFileRunConLine($line, $file) {
+	$m=[regex]::Match($line, "^\s*run\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+	If ($m.Groups.Count -ge 2) {
+		return Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
+	}
+	Else {
+		return $null
+	}
+}
+
 #. .\mod_installer.ps1
 #$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab"
 #PreProcessVehicles $vehicleToExtract $null $false $true $true $true $true
