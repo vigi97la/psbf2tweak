@@ -1,23 +1,26 @@
 # DO NOT USE, TEMPORARY
 
 #. .\mod_installer.ps1
-#$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\bf2"
+#$modFolder="C:\tmp\mods\bf2"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-#$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\xpack"
+#$modFolder="C:\tmp\mods\xpack"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-#$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality"
+#$modFolder="C:\tmp\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
 ##PreProcessVehicles $extractFolder $null $true $true $true $true $true # Can be very slow (2h) for AIX2 Reality handheld weapons...
-#FindTemplate $extractFolder $null $true $false $false # To build a template cache
+#FindTemplate $extractFolder $null $false $true $false $false # To build a template cache
 #MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be slow (2h) for AIX2 Reality...
-#$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
-#$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
+##$file="C:\tmp\mods\bf2\extracted\Objects\Vehicles\Land\jep_mec_paratrooper\jep_mec_paratrooper.con"
+##$file="C:\tmp\mods\xpack\extracted\Objects\Vehicles\xpak_vehicles\xpak_atv\xpak_atv.con"
+#$vehicleToExtract="Objects\Vehicles\Land\fr_trk_logistics\fr_trk_logistics.con"
+##$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
+##$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
-#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $true $false 16
+#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $false $false 16
 #. .\MiscFixes.ps1
 #FixVehicleType $exportFolder $true $true $true $true $true $true
 #. .\MiscTweaks.ps1
@@ -352,7 +355,7 @@ function PreProcessConstsConContent($concontent) {
 function PreProcessIncludesConLine($line, $file) {
 	$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 	if ($m.Groups.Count -ge 2) {
-		$includedfile=Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
+		$includedfile=Join-Path (Get-item $file).DirectoryName ($m.Groups[1].value -replace "`"","" -replace "/","\")
 		$v_arg1=$m.Groups[3].value
 		$v_arg2=$m.Groups[5].value
 		$v_arg3=$m.Groups[7].value
@@ -363,7 +366,7 @@ function PreProcessIncludesConLine($line, $file) {
 		$v_arg8=$m.Groups[17].value
 		$v_arg9=$m.Groups[19].value
 		$i=0
-		$includedfilecontent=(PreProcessIncludesConContent (PreProcessIfConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $includedfile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $includedfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		$includedfilecontent=(PreProcessIncludesConContent (PreProcessIfConContent (PreProcessConstsConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $includedfile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9)) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $includedfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 		return $includedfilecontent
 	}
 	else {
@@ -382,7 +385,7 @@ function PreProcessIncludesConContent($concontent, $file) {
 function GetFileIncludedConLine($line, $file) {
 	$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 	If ($m.Groups.Count -ge 2) {
-		return Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
+		return Join-Path (Get-item $file).DirectoryName ($m.Groups[1].value -replace "`"","" -replace "/","\")
 	}
 	Else {
 		return $null
@@ -392,7 +395,7 @@ function GetFileIncludedConLine($line, $file) {
 function PreProcessRunsConLine($line, $file) {
 	$m=[regex]::Match($line, "^\s*run\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 	if ($m.Groups.Count -ge 2) {
-		$runfile=Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
+		$runfile=Join-Path (Get-item $file).DirectoryName ($m.Groups[1].value -replace "`"","" -replace "/","\")
 		$v_arg1=$m.Groups[3].value
 		$v_arg2=$m.Groups[5].value
 		$v_arg3=$m.Groups[7].value
@@ -403,7 +406,7 @@ function PreProcessRunsConLine($line, $file) {
 		$v_arg8=$m.Groups[17].value
 		$v_arg9=$m.Groups[19].value
 		$i=0
-		$runfilecontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $runfile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $runfile) $runfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		$runfilecontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessConstsConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $runfile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9)) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $runfile) $runfile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 		return $runfilecontent
 	}
 	else {
@@ -422,7 +425,7 @@ function PreProcessRunsConContent($concontent, $file) {
 function GetFileRunConLine($line, $file) {
 	$m=[regex]::Match($line, "^\s*run\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 	If ($m.Groups.Count -ge 2) {
-		return Join-Path (Get-item $file).DirectoryName $m.Groups[1].value
+		return Join-Path (Get-item $file).DirectoryName ($m.Groups[1].value -replace "`"","" -replace "/","\")
 	}
 	Else {
 		return $null
@@ -444,8 +447,8 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 		$bStationaryWeapon=[regex]::Match($file, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
 		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
 			$bSkip=$false
-			#$regexpr="\s*ObjectTemplate.create\s+(PlayerControlObject|GenericFireArm)\s+(\S+)\s*\r?\n" # .con
-			$regexpr="\s*ObjectTemplate.activeSafe\s+(PlayerControlObject|GenericFireArm)\s+(\S+)\s*\r?\n" # .tweak
+			#$regexpr="\s*ObjectTemplate.create\s+(PlayerControlObject|GenericFireArm|GenericProjectile)\s+(\S+)\s*\r?\n" # .con
+			$regexpr="\s*ObjectTemplate.activeSafe\s+(PlayerControlObject|GenericFireArm|GenericProjectile)\s+(\S+)\s*\r?\n" # .tweak
 			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr)
 			If ($m.Groups.Count -eq 3) {
 				$vehicleName=$m.Groups[2].value
@@ -524,7 +527,7 @@ function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnor
 
 	# First lines have more priority over the last in ServerArchives.con?
 
-	$archiveregexpr="^\s*fileManager.mountArchive\s+(.+)`.zip\s+(.+)\s*"
+	$archiveregexpr="^\s*fileManager.mountArchive\s+(.+)`\.zip\s+(.+)\s*"
 	$concontent=(PreProcessIncludesConContent (ReadConFile $archivesConFile) $archivesConFile)
 	$lines=@($concontent -split "\r?\n")
 	for ($i=$lines.Count-1; $i -ge 0; $i--) {
@@ -596,7 +599,7 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 #	[double]$psi=0
 #}
 
-function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCache=$true,[bool]$bShowOutput=$true,[bool]$bEnableSlowSearch=$false) {
+function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePreProcessedConFiles=$false,[bool]$bUseCache=$true,[bool]$bShowOutput=$true,[bool]$bEnableSlowSearch=$false) {
 
 	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
@@ -612,7 +615,15 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 		If ($bUseCache) {
 			$sw=[System.IO.StreamWriter]$cachefile
 		}
-		Get-ChildItem "$extractedFolder\*" -R -Include *.con,*.tweak,*.ai,*.inc | ForEach-Object {
+		If ($bUsePreProcessedConFiles) {
+			$fileglob="*.conprocessed","*.aiprocessed"
+		}
+		Else {
+			$fileglob="*.con","*.ai"
+		}
+		#$fileglob="*.con","*.tweak","*.ai","*.inc"
+
+		Get-ChildItem "$extractedFolder\*" -R -Include $fileglob | ForEach-Object {
 
 			# End of any previous object...
 			If ($null -ne $templateName) {
@@ -644,15 +655,23 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 			$templateName=$null
 
 			$file=$_.FullName
-			$concontent=(ReadConFile $file)
+			If ($bUsePreProcessedConFiles) {
+				$concontent=(ReadConFile $file)
+			}
+			Else {
+				$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $file)
+			}
+
 			$lines=@($concontent -split "\r?\n")
 			for ($i=0; $i -lt $lines.Count; $i++) {
 				$line=$lines[$i]
-				$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				#$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				$m=[regex]::Match($line, "^\s*(ObjectTemplate\S*|aiTemplate\S*|weaponTemplate\S*)\.(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -ne 5) {
-					$m=[regex]::Match($line, "^\s*(aiTemplate|weaponTemplate).create\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					#$m=[regex]::Match($line, "^\s*(aiTemplate|weaponTemplate).(create|active|activeSafe)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*(ObjectTemplate\S*|aiTemplate\S*|weaponTemplate\S*)\.(create|active|activeSafe)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				}
-				If (($m.Groups.Count -eq 5) -or ($m.Groups.Count -eq 3)) {
+				If (($m.Groups.Count -eq 5) -or ($m.Groups.Count -eq 4)) {
 
 					# End of any previous object...
 					If ($null -ne $templateName) {
@@ -688,82 +707,98 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 					}
 					Else {
 						$templateType=$m.Groups[1].value
-						$templateName=$m.Groups[2].value
+						$templateName=$m.Groups[3].value
 					}
 					$templateFile=$file
 					$templateFiles=,$file
 					$templateChildren=$null
 				}
 				ElseIf ($null -ne $templateName) {
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|particleSystemTemplate|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-					If ($m.Groups.Count -eq 3) {
-						$templateChild=$m.Groups[2].value
+					#$m=[regex]::Match($line, "^\s*(ObjectTemplate).(setObjectTemplate|armor.addArmorEffect)\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*(ObjectTemplate\S*|aiTemplate\S*|weaponTemplate\S*)\.(\S*Template\S*|\S+\.\S*Template\S*|add\S*|\S+\.add\S*)\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 5) {
+						$templateChild=$m.Groups[4].value
+						If ($null -ne ($templateChild -as [double])) {
+							continue
+						}
 						$templateChildren+=,$templateChild
 						continue
 					}
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.setObjectTemplate\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-					If ($m.Groups.Count -eq 3) {
-						$templateChild=$m.Groups[2].value
+					#$m=[regex]::Match($line, "^\s*(ObjectTemplate).(addTemplate|template|particleSystemTemplate|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate|.vehicleHud.pantingSound|.vehicleHud.injurySound)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*(ObjectTemplate\S*|aiTemplate\S*|weaponTemplate\S*)\.(\S*Template\S*|\S+\.\S*Template\S*|add\S*|\S+\.add\S*|\.vehicleHud\S*Sound)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 4) {
+						$templateChild=$m.Groups[3].value
+						If ($null -ne ($templateChild -as [double])) {
+							continue
+						}
 						$templateChildren+=,$templateChild
 						continue
 					}
-					$m=[regex]::Match($line, "^\s*aiTemplate.addPlugIn\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-					If ($m.Groups.Count -eq 2) {
-						$templateChild=$m.Groups[1].value
-						$templateChildren+=,$templateChild
-						continue
-					}
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.textureName\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					#$m=[regex]::Match($line, "^\s*aiTemplate\.addPlugIn\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					#If ($m.Groups.Count -eq 2) {
+					#	$templateChild=$m.Groups[1].value
+					#	$templateChildren+=,$templateChild
+					#	continue
+					#}
+					#$m=[regex]::Match($line, "^\s*ObjectTemplate.textureName\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					#$m=[regex]::Match($line, "^\s*\S*Template\S*\.\S*texture\S*\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate\.textureName\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$resRelPaths=@($m.Groups[1].value -split ",")
 						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
 							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
 							#Write-Warning "$extractedFolder\$resRelPath.dds"
-							$resFile=[System.IO.Path]::Combine($extractedFolder,"$resRelPath.dds")
+							$resFile=Join-Path $extractedFolder "$resRelPath.dds"
+							#If (!(Test-Path -Path $resFile)) {
+							#	Write-Warning "$resFile not found ($templateFile)"
+							#}
 							$templateFiles+=,$resFile
 						}
 						continue
 					}
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.collisionMesh\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate\.collisionMesh\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
-						If ($resRelPath.Contains("\")) {
-							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\meshes"),"$resRelPath.collisionmesh")
-						}
-						Else {
-							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"meshes"),"$resRelPath.collisionmesh")
+						$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "meshes") "$resRelPath.collisionmesh"
+						If (!(Test-Path -Path $resFile)) {
+							$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "..\$resRelPath\meshes") "$resRelPath.collisionmesh"
+							#If (!(Test-Path -Path $resFile)) {
+							#	Write-Warning "$resFile not found ($templateFile)"
+							#}
 						}
 						If ($bEnableSlowSearch -and !(Test-Path -Path $resFile)) {
 							Write-Warning "Attempting a slow search of $resRelPath mesh"
 							Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.collisionmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
 								$resFile=$_.FullName
 							}
+							If (!(Test-Path -Path $resFile)) {
+								Write-Warning "$resFile not found ($templateFile)"
+							}
 						}
 						$templateFiles+=,$resFile
 						continue
 					}
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.geometry\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate\.geometry\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 2) {
 						$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
 						# BundledMesh vs. SkinnedMesh, ObjectTemplate vs. GeometryTemplate type...?
-						If ($resRelPath.Contains("\")) {
-							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\meshes"),"$resRelPath.bundledmesh")
+						$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "meshes") "$resRelPath.bundledmesh"
+						If (!(Test-Path -Path $resFile)) {
+							$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "meshes") "$resRelPath.skinnedmesh"
 							If (!(Test-Path -Path $resFile)) {
-								$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"..\$resRelPath\meshes"),"$resRelPath.skinnedmesh")
-							}
-							Else {
-								$templateFiles+=,$resFile
-								continue
-							}
-						}
-						Else {
-							$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"meshes"),"$resRelPath.bundledmesh")
-							If (!(Test-Path -Path $resFile)) {
-								$resFile=[System.IO.Path]::Combine([System.IO.Path]::Combine(([System.IO.FileInfo]$templateFile).DirectoryName,"meshes"),"$resRelPath.skinnedmesh")
-							}
-							Else {
-								$templateFiles+=,$resFile
-								continue
+								$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "meshes") "$resRelPath.staticmesh"
+								If (!(Test-Path -Path $resFile)) {
+									$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "..\$resRelPath\meshes") "$resRelPath.bundledmesh"
+									If (!(Test-Path -Path $resFile)) {
+										$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "..\$resRelPath\meshes") "$resRelPath.skinnedmesh"
+										If (!(Test-Path -Path $resFile)) {
+											$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "..\$resRelPath\meshes") "$resRelPath.staticmesh"
+											#If (!(Test-Path -Path $resFile)) {
+											#	Write-Warning "$resFile not found ($templateFile)"
+											#}
+										}
+									}
+								}
 							}
 						}
 						If ($bEnableSlowSearch -and !(Test-Path -Path $resFile)) {
@@ -775,12 +810,22 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 								Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.skinnedmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
 									$resFile=$_.FullName
 								}
+								If (!(Test-Path -Path $resFile)) {
+									Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.staticmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+										$resFile=$_.FullName
+									}
+									If (!(Test-Path -Path $resFile)) {
+										Write-Warning "$resFile not found ($templateFile)"
+									}
+								}
 							}
 						}
 						$templateFiles+=,$resFile
 						continue
 					}
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem|animationSystem|animationSystem1P|animationSystem3P|skeleton|skeleton1P|skeleton3P)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					#$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem|animationSystem|animationSystem1P|animationSystem3P|skeleton|skeleton1P|skeleton3P)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					#$m=[regex]::Match($line, "^\s*\S*Template\S*\.(\S+\.\S*sound\S*|\S*sound\S*|\S+\.\S*animation\S*|\S*animation\S*|\S+\.\S*skeleton\S*|\S*skeleton\S*)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate\.(soundFilename|seatAnimationSystem|animationSystem|animationSystem1P|animationSystem3P|skeleton|skeleton1P|skeleton3P)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					If ($m.Groups.Count -eq 3) {
 						$resRelPaths=@($m.Groups[2].value -split ",")
 						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
@@ -790,19 +835,29 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 								# Don't know what to do with variables...
 								continue
 							}
-							$resFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
+							$resFile=Join-Path $extractedFolder $resRelPath
+							If (!(Test-Path -Path $resFile)) {
+								Write-Warning "$resFile not found ($templateFile)"
+							}
 							$templateFiles+=,$resFile
 						}
 						continue
 					}
 					#$m=[regex]::Match($line, "^\s*ObjectTemplate.(vehicleHud|weaponHud|WarningHud|StrategicObject).(typeIcon|miniMapIcon|vehicleIcon|abilityIcon|spottedIcon|weaponIcon|altWeaponIcon|selectIcon|specialAbilityIcon|crosshairIcon|warningIcon|intactIcon|destroyedIcon)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-					$m=[regex]::Match($line, "^\s*ObjectTemplate.(\S*Hud|\S*Object).(\S*Icon)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-					If ($m.Groups.Count -eq 4) {
-						$resRelPaths=@($m.Groups[3].value -split ",")
+					$m=[regex]::Match($line, "^\s*ObjectTemplate\.([^d]\S+\.[^u3h]\S*Icon)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m.Groups.Count -eq 3) {
+						$resRelPaths=@($m.Groups[2].value -split ",")
 						for ($j=0; $j -lt $resRelPaths.Count; $j++) {
 							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
 							#Write-Warning "$extractedFolder\Menu\HUD\Texture\$resRelPath"
-							$resFile=[System.IO.Path]::Combine("$extractedFolder\Menu\HUD\Texture",$resRelPath)
+							$resFile=Join-Path "$extractedFolder\Menu\HUD\Texture" $resRelPath
+							If ((([System.IO.FileInfo]$resFile).Extension -ine ".dds") -and (([System.IO.FileInfo]$resFile).Extension -ine ".tga")) {
+								Write-Warning "Unexpected Icon: $resRelPath ($templateFile)"
+								continue
+							}
+							#If (!(Test-Path -Path $resFile)) {
+							#	Write-Warning "$resFile not found ($templateFile)"
+							#}
 							$templateFiles+=,$resFile
 						}
 						continue
@@ -847,7 +902,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUseCa
 	}
 	Else {
 		if (($null -eq $cachefile) -or !(Test-Path -Path $cachefile)) {
-			Write-Error "Error: cache_db.csv not found"
+			Write-Error "Error: cache_db.csv not found, please try e.g. FindTemplate $extractedFolder $null to build it"
 			return $null
 		}
 		#$regescbackslash=[regex]::Escape("\")
@@ -1044,7 +1099,7 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 		return $null
 	}
 
-	$ret=@(FindTemplate $extractedFolder $searchedTemplateName $bUseCache $false $false)
+	$ret=@(FindTemplate $extractedFolder $searchedTemplateName $false $bUseCache $false $false)
 	#Write-Warning "$ret"
 	If (($null -eq $ret) -or ("" -eq $ret)) {
 		$callStackCounterFindTemplateDependencies--
@@ -1107,13 +1162,14 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 			$alreadyProcessedTemplateNames.value+=$templateChild
 		}
 	}
-	#Write-Warning "$neededFiles"
 	$callStackCounterFindTemplateDependencies--
 	#If ($callStackCounterFindTemplateDependencies -le 0) { $alreadyProcessedTemplateNames.value=$null }
 	#Write-Host "End FindTemplateDependencies $searchedTemplateName" -ForegroundColor Magenta
+	#Write-Warning "$neededFiles"
 	return $neededFiles
 }
 
+#FindFileDependencies $extractFolder $file $true 16 $false
 $callStackCounterFindFileDependencies=[int]0
 $alreadyProcessedFilesFindFileDependencies=$null # How to reset it properly when there are multiple function calls...?
 function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int]$maxDependencyLevel=16,[bool]$bDisableSharedCallsMemory=$true,[ref]$alreadyProcessedFiles=([ref]$alreadyProcessedFilesFindFileDependencies)) {
@@ -1132,35 +1188,64 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 		#return $file
 	}
 	If (-not (Test-Path -Path $file)) {
+		$neededFiles=,$file
+		If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=,$file }
 		$callStackCounterFindFileDependencies--
 		#Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
 		##Write-Error "Error: $file not found"
-		return $file
+		##Write-Warning "$neededFiles"
+		return $neededFiles
+	}
+	If ((([System.IO.FileInfo]$file).Extension -ieq ".bundledmesh") -or (([System.IO.FileInfo]$file).Extension -ieq ".skinnedmesh") -or (([System.IO.FileInfo]$file).Extension -ieq ".staticmesh")) {
+		$neededFiles=,$file
+		If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=,$file }
+		$regexpr="(objects\S+|common\S+)\.(dds|tga)[^oc]" # [^oc] is an unknown byte that separates the paths...
+		$m=[regex]::Matches(([System.IO.File]::ReadAllText($file)),$regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		If ($null -ne $m) {
+			for ($i=0; $i -lt $m.Count; $i++) {
+				#"$($m[$i])"
+				$tmp=@($m[$i] -split "\.(dds|tga)[^oc]")
+				#"$tmp"
+				for ($j=0; $j -lt $tmp.Count; $j+=2) {
+					If (($null -ne $tmp[$j]) -and ("" -ne $tmp[$j]) -and ($null -ne $tmp[$j+1]) -and ("" -ne $tmp[$j+1])) {
+						#"$($tmp[$j]).$($tmp[$j+1])"
+						$resRelPath=("$($tmp[$j]).$($tmp[$j+1])" -replace "`"","" -replace "/","\")
+						#Write-Warning "$extractedFolder\$resRelPath"
+						$neededFile=Join-Path $extractedFolder $resRelPath
+						If (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile)) {
+							continue
+						}
+						If (($null -ne $alreadyProcessedFiles.value) -and ($alreadyProcessedFiles.value -icontains $neededFile)) {
+							continue
+						}
+						$neededFiles+=$neededFile
+						If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=$neededFile }
+						#Write-Host "$neededFile" -ForegroundColor White
+					}
+				}
+			}
+		}
+		$callStackCounterFindFileDependencies--
+		#Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
+		##Write-Warning "$neededFiles"
+		return $neededFiles
 	}
 	If ((([System.IO.FileInfo]$file).Extension -ine ".con") -and (([System.IO.FileInfo]$file).Extension -ine ".tweak") -and (([System.IO.FileInfo]$file).Extension -ine ".ai") -and (([System.IO.FileInfo]$file).Extension -ine ".inc")) {
+		$neededFiles=,$file
+		If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=,$file }
 		$callStackCounterFindFileDependencies--
 		#Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
 		##Write-Error "Error: $file has unsupported extension"
-		return $file
+		##Write-Warning "$neededFiles"
+		return $neededFiles
 	}
-	$testconfile="$(([System.IO.FileInfo]$file).DirectoryName)\$(([System.IO.FileInfo]$file).BaseName).con"
-	$testtweakfile="$(([System.IO.FileInfo]$file).DirectoryName)\$(([System.IO.FileInfo]$file).BaseName).tweak"
-	If ((Test-Path -Path $testconfile) -and (Test-Path -Path $testtweakfile)) {
-		$neededFiles=$testconfile,$testtweakfile
-		If (!$bDisableSharedCallsMemory) {
-			# $alreadyProcessedFiles.value might be $null, so need to force initialization as list...
-			$alreadyProcessedFiles.value+=,$testconfile
-			$alreadyProcessedFiles.value+=$testtweakfile
-		}
-	}
-	Else {
-		$neededFiles=,$file
-		If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=,$file }
-	}
+
+	$neededFiles=,$file
+	If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=,$file }
 	$processedTemplateDependencies=$null
 
-	$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
-	#$concontent=(ReadConFile $file)
+	#$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
+	$concontent=(PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))
 
 	$lines=@($concontent -split "\r?\n")
 	for ($i=0; $i -lt $lines.Count; $i++) {
@@ -1169,21 +1254,22 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 
 		$templateDependency=$null
 		$templateDependencyFile=$null
-		$m=[regex]::Match($line, "^\s*(ObjectTemplate|aiTemplatePlugIn).(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+
+		$m=[regex]::Match($line, "^\s*(ObjectTemplate\S*|aiTemplate\S*|weaponTemplate\S*)\.(create|active|activeSafe)\s+(\S+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 5) {
 			$templateDependency=$m.Groups[4].value
 		}
 		Else {
-			$m=[regex]::Match($line, "^\s*(aiTemplate|weaponTemplate).create\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-			If ($m.Groups.Count -eq 3) {
-				$templateDependency=$m.Groups[2].value
+			$m=[regex]::Match($line, "^\s*(ObjectTemplate\S*|aiTemplate\S*|weaponTemplate\S*)\.(create|active|activeSafe)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			If ($m.Groups.Count -eq 4) {
+				$templateDependency=$m.Groups[3].value
 			}
 			Else {
-				$m=[regex]::Match($line, "^\s*animationSystem.createAnimation\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				$m=[regex]::Match($line, "^\s*animationSystem\.createAnimation\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m.Groups.Count -eq 2) {
 					$resRelPath=($m.Groups[1].value -replace "`"","" -replace "/","\")
 					#Write-Warning "$extractedFolder\$resRelPath"
-					$templateDependencyFile=[System.IO.Path]::Combine($extractedFolder,$resRelPath)
+					$templateDependencyFile=Join-Path $extractedFolder $resRelPath
 				}
 				Else {
 					$templateDependencyFile=GetFileIncludedConLine $line $file
@@ -1226,10 +1312,14 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 			for ($k=0; $k -lt $ret.Count; $k++) {
 				$neededFile=$ret[$k]
 				If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
-					If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile))) {
-						$neededFiles+=$neededFile
-						If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=$neededFile }
+					If (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile)) {
+						continue
 					}
+					If (($null -ne $alreadyProcessedFiles.value) -and ($alreadyProcessedFiles.value -icontains $neededFile)) {
+						continue
+					}
+					$neededFiles+=$neededFile
+					If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=$neededFile }
 					#Write-Host "$neededFile" -ForegroundColor White
 				}
 				Else {
@@ -1281,10 +1371,14 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 				for ($k=0; $k -lt $ret.Count; $k++) {
 					$neededFile=$ret[$k]
 					If (($null -ne $neededFile) -and ("" -ne $neededFile)) {
-						If (-not (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile))) {
-							$neededFiles+=$neededFile
-							If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=$neededFile }
+						If (($null -ne $neededFiles) -and ($neededFiles -icontains $neededFile)) {
+							continue
 						}
+						If (($null -ne $alreadyProcessedFiles.value) -and ($alreadyProcessedFiles.value -icontains $neededFile)) {
+							continue
+						}
+						$neededFiles+=$neededFile
+						If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=$neededFile }
 						#Write-Host "$neededFile" -ForegroundColor White
 					}
 					Else {
@@ -1299,9 +1393,9 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 		$processedTemplateDependencies+=,$templateDependency
 	}
 
-	##Write-Warning "$neededFiles"
 	$callStackCounterFindFileDependencies--
 	#Write-Host "End FindFileDependencies $file" -ForegroundColor Magenta
+	##Write-Warning "$neededFiles"
 	return $neededFiles
 }
 
@@ -1309,7 +1403,7 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\xpack"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-#FindTemplate $extractFolder $null $true $false $false
+#FindTemplate $extractFolder $null $false $true $false $false
 #$vehicleToExtract="Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
@@ -1332,57 +1426,6 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 		Write-Warning  "xpackExtractedFolder parameter not available"
 	}
 
-	#$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
-
-	#$lines=@($concontent -split "\r?\n")
-	#for ($i=0; $i -lt $lines.Count; $i++) {
-	#	$line=$lines[$i]
-	#	#"$line"
-
-	#	$templateDependency=$null
-	#	$m=[regex]::Match($line, "^\s*ObjectTemplate.(addTemplate|template|particleSystemTemplate|projectileTemplate|tracerTemplate|detonation.endEffectTemplate|target.targetObjectTemplate|aiTemplate)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-	#	If ($m.Groups.Count -eq 3) {
-	#		$templateDependency=$m.Groups[2].value
-	#	}
-	#	Else {
-	#		$m=[regex]::Match($line, "^\s*ObjectTemplate.setObjectTemplate\s+(\d+)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-	#		If ($m.Groups.Count -eq 3) {
-	#			$templateDependency=$m.Groups[2].value
-	#		}
-	#		Else {
-	#			continue
-	#		}
-	#	}
-
-	#	Write-Host "$templateDependency" -ForegroundColor Cyan
-
-	#	$retj=@(FindTemplateDependencies $extractedFolder $templateDependency $bUseCache)
-	#	#"$retj"
-	#	If (($null -eq $retj) -or ("" -eq $retj)) {
-	#		Write-Warning "Template $templateDependency not found"
-	#		continue
-	#	}
-
-	#	for ($j=0; $j -lt $retj.Count; $j++) {
-	#		$templateDependencyFile=$retj[$j]
-	#		If (($null -eq $templateDependencyFile) -or ("" -eq $templateDependencyFile)) {
-	#			Write-Warning "Template $templateDependency has invalid dependencies"
-	#			continue
-	#		}
-
-	#		#If ($bHideDefinitionsInCurrentConOrTweak -and ($file -ieq $templateDependencyFile)) {
-	#		If (($file -ieq $templateDependencyFile) -or ($maxDependencyLevel -lt 0)) {
-	#			$ret=,$templateDependencyFile
-	#		}
-	#		Else {
-	#			$ret=@(FindFileDependencies $extractedFolder $templateDependencyFile $bUseCache $maxDependencyLevel)
-	#		}
-	#		#"$ret"
-	#		If (($null -eq $ret) -or ("" -eq $ret)) {
-	#			Write-Warning "$templateDependencyFile not found"
-	#			continue
-	#		}
-
 			$alreadyProcessedFiles=$null
 			$ret=@(FindFileDependencies $extractedFolder $file $bUseCache $maxDependencyLevel $false ([ref]$alreadyProcessedFiles))
 			$alreadyProcessedFiles=$null
@@ -1400,22 +1443,28 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					If (!(Test-Path -Path $neededFile)) {
 						$origNeededFile=$neededFile
 						If (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".tga") {
-							$neededFile=($origNeededFile -replace ".tga",".dds")
+							$neededFile=($origNeededFile -replace [regex]::Escape(".tga"),".dds")
 						}
 						ElseIf (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".collisionmesh") {
 							Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
 								$neededFile=$_.FullName
 							}
 						}
-						ElseIf ((([System.IO.FileInfo]$origNeededFile).Extension -ieq ".bundledmesh") -or (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".skinnedmesh")) {
-							$neededFile=($origNeededFile -replace ".bundledmesh",".skinnedmesh")
+						ElseIf ((([System.IO.FileInfo]$origNeededFile).Extension -ieq ".bundledmesh") -or (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".skinnedmesh") -or (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".staticmesh")) {
+							$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".bundledmesh")
 							Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
 								$neededFile=$_.FullName
 							}
 							If (!(Test-Path -Path $neededFile)) {
-								$neededFile=($origNeededFile -replace ".skinnedmesh",".bundledmesh")
+								$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".skinnedmesh")
 								Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
 									$neededFile=$_.FullName
+								}
+								If (!(Test-Path -Path $neededFile)) {
+									$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".staticmesh")
+									Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+										$neededFile=$_.FullName
+									}
 								}
 							}
 						}
@@ -1529,8 +1578,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					Write-Warning "File $file has invalid dependencies"
 				}
 			}
-	#	}
-	#}
+
 }
 
 #. .\mod_installer.ps1
@@ -1545,7 +1593,7 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 	#New-Item "$clientFolder" -ItemType directory -Force | Out-Null
 
 	# Directory structures containing .tweak and .con, meshes\*.collisionmesh, ai\*.ai are copied to server...
-	# Directory structures containing meshes\*.bundledmesh, meshes\*.skinnedmesh, Textures are copied to client...
+	# Directory structures containing meshes\*.bundledmesh, meshes\*.skinnedmesh, meshes\*.staticmesh, Textures are copied to client...
 	# How to correct wrong directory structures...
 	# Objects vs Menu...
 
