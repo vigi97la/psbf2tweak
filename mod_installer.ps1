@@ -320,6 +320,35 @@ function PreProcessArgsConContent($concontent, $v_arg1, $v_arg2, $v_arg3, $v_arg
 	return $content
 }
 
+#$file="U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleconst.tweak"
+#PreProcessConstsConContent (ReadConFile $file)
+function PreProcessConstsConContent($concontent) {
+	$constNames=$null
+	$constValues=$null
+
+	$content=""
+	ForEach ($line in @($concontent -split "\r?\n")) {
+
+		# null...?
+
+		# const numbers, strings...?
+		$m=[regex]::Match($line,"^\s*const\s+(\S+)\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		If ($m.Groups.Count -ge 3) {
+			$constNames+=,$m.Groups[1].value
+			$constValues+=,$m.Groups[2].value
+		}
+		ElseIf ($null -ne $constNames) {
+			for ($i=0;$i -lt $constNames.Count;$i++) {
+				$regescconstName=[regex]::Escape($constNames[$i])
+				$line=$line -replace $regescconstName,$constValues[$i]
+			}
+		}
+
+		$content+=$line+"`r`n"
+	}
+	Return $content
+}
+
 function PreProcessIncludesConLine($line, $file) {
 	$m=[regex]::Match($line, "^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 	if ($m.Groups.Count -ge 2) {
