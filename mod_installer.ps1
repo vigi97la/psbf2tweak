@@ -888,6 +888,10 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 								continue
 							}
 							$resFile=Join-Path $extractedFolder $resRelPath
+							If (([System.IO.FileInfo]$resFile).Extension -ieq "") {
+								# Don't know what to do with variables...
+								continue
+							}
 							If (!(Test-Path -Path $resFile)) {
 								Write-Warning "$resFile not found ($templateFile)"
 							}
