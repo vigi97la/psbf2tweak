@@ -1553,7 +1553,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									$neededFiles=Get-ChildItem "$neededFileWithoutExtension.*"
 								}
 								Else {
-									$neededFiles=,$neededFile
+									$neededFiles=Get-ChildItem $neededFile
 								}
 								$neededFiles | ForEach-Object {
 									$nf=$_.FullName
