@@ -553,6 +553,18 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 	}
 }
 
+function PreProcessConFiles($folder) {
+	Get-ChildItem "$folder" -R -Include "*.con","*.ai" | ForEach-Object {
+		$file=$_.FullName
+		#iii=0
+		#$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		$sw=[System.IO.StreamWriter]"$file`preprocessed"
+		$sw.Write($concontent)
+		$sw.close()
+	}
+}
+
 function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnoreZipOutsideModFolder=$false,[int]$extractMode=0) {
 
 	if (($null -eq $archivesConFile) -or !(Test-Path -Path $archivesConFile)) {
@@ -668,7 +680,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 			$sw=[System.IO.StreamWriter]$cachefile
 		}
 		If ($bUsePreProcessedConFiles) {
-			$fileglob="*.conprocessed","*.aiprocessed"
+			$fileglob="*.conpreprocessed","*.aipreprocessed"
 		}
 		Else {
 			$fileglob="*.con","*.ai"
@@ -711,7 +723,9 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 				$concontent=(ReadConFile $file)
 			}
 			Else {
-				$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (ReadConFile $file) $file) $file)
+				#iii=0
+				#$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+				$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 			}
 
 			$lines=@($concontent -split "\r?\n")
@@ -1300,8 +1314,11 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 	If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=,$file }
 	$processedTemplateDependencies=$null
 
-	#$concontent=(PreProcessIncludesConContent (ReadConFile $file) $file)
-	$concontent=(PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))
+	# Here we need to keep include and run statements...
+
+	#iii=0
+	#$concontent=(PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition")# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+	$concontent=(PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine")))# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 
 	$lines=@($concontent -split "\r?\n")
 	for ($i=0; $i -lt $lines.Count; $i++) {
