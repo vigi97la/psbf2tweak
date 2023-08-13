@@ -20,6 +20,7 @@
 ##$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
+##ListDependencies $file $extractFolder $exportFolder $true $true $false $modFolder\..\bf2\extracted $false $modFolder\..\xpack\extracted $true $false $false 16
 #ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $false $false 16
 #. .\MiscFixes.ps1
 #FixVehicleType $exportFolder $true $true $true $true $true $true
@@ -533,8 +534,9 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 				$sr.close()
 				If (($null -ne $outputFolder) -and ("" -ne $outputFolder)) {
 					# Should remove $objectsFolder from the path in $file and add the rest at the end of the desired folder...
-					$regesc=[regex]::Escape($objectsFolder)
-					$m=[regex]::Match($file, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($objectsFolder -ieq $file) { $regesc=[regex]::Escape(([System.IO.FileInfo]$objectsFolder).DirectoryName) }
+					Else { $regesc=[regex]::Escape($objectsFolder) }
+					$m=[regex]::Match($file, "$regesc\\?(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					$restOfPath=$m.Groups[1].value
 					#"$restOfPath"
 					$outputFile=[System.IO.Path]::Combine($outputFolder,$restOfPath)
@@ -1552,7 +1554,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 					# Should remove $extractedFolder from the path in $neededFile and add the rest at the end of the desired folder...
 					$neededDirectory=(Get-Item $neededFile).DirectoryName
 					$regesc=[regex]::Escape($extractedFolder)
-					$m=[regex]::Match($neededFile, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					$m=[regex]::Match($neededFile, "$regesc\\?(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 					$restOfPath=$m.Groups[1].value
 					#"$restOfPath"
 					$exportFolderSuffix=""
@@ -1597,10 +1599,10 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 							New-Item "$exportFolder$exportFolderSuffix" -ItemType directory -Force | Out-Null
 							# Should check more in details any additional file if it is already in bf2/xpack...
 							If ($bAllowExtraFiles -and ((Get-Item $neededDirectory).Basename -ieq "meshes") -and ((Get-Item "$neededDirectory\..").Basename -ieq (Get-Item $neededFile).Basename)) {
-								$m=[regex]::Match("$neededDirectory\..", "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+								$m=[regex]::Match("$neededDirectory\..", "$regesc\\?(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 								$restOfPath=$m.Groups[1].value
 								#"$restOfPath"
-								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder+$exportFolderSuffix,$restOfPath)
+								$exportNeededDirectory=[System.IO.Path]::Combine("$exportFolder$exportFolderSuffix",$restOfPath)
 								#"$exportNeededDirectory"
 								New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 								Copy-Item -Path $neededDirectory\..\* -Destination $exportNeededDirectory -Force -Recurse
@@ -1609,10 +1611,10 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								}
 							}
 							ElseIf ($bAllowExtraFiles -and ($bAlwaysCopyContainingFolder -or ((Get-Item $neededDirectory).Basename -ieq (Get-Item $neededFile).Basename))) {
-								$m=[regex]::Match($neededDirectory, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+								$m=[regex]::Match($neededDirectory, "$regesc\\?(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 								$restOfPath=$m.Groups[1].value
 								#"$restOfPath"
-								$exportNeededDirectory=[System.IO.Path]::Combine($exportFolder+$exportFolderSuffix,$restOfPath)
+								$exportNeededDirectory=[System.IO.Path]::Combine("$exportFolder$exportFolderSuffix",$restOfPath)
 								#"$exportNeededDirectory"
 								New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 								Copy-Item -Path $neededDirectory\* -Destination $exportNeededDirectory -Force -Recurse
@@ -1630,10 +1632,10 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								}
 								$neededFiles | ForEach-Object {
 									$nf=$_.FullName
-									$m=[regex]::Match($nf, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+									$m=[regex]::Match($nf, "$regesc\\?(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 									$restOfPath=$m.Groups[1].value
 									#"$restOfPath"
-									$exportNeededFile=[System.IO.Path]::Combine($exportFolder+$exportFolderSuffix,$restOfPath)
+									$exportNeededFile=[System.IO.Path]::Combine("$exportFolder$exportFolderSuffix",$restOfPath)
 									#"$exportNeededFile"
 									$exportNeededDirectory=([System.IO.FileInfo]$exportNeededFile).DirectoryName
 									New-Item $exportNeededDirectory -ItemType directory -Force | Out-Null
@@ -1678,7 +1680,7 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 		#"$file"
 		If (-not (Test-Path -Path "$file" -PathType Container)) {
 			$regesc=[regex]::Escape($originalFolder)
-			$m=[regex]::Match($file, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($file, "$regesc\\?(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			$restOfPath=$m.Groups[1].value
 			#"$restOfPath"
 			$newPath=[System.IO.Path]::Combine($serverFolder,$restOfPath)
@@ -1697,7 +1699,7 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 		#"$file"
 		If (-not (Test-Path -Path "$file" -PathType Container)) {
 			$regesc=[regex]::Escape($originalFolder)
-			$m=[regex]::Match($file, "$regesc\\(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$m=[regex]::Match($file, "$regesc\\?(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			$restOfPath=$m.Groups[1].value
 			#"$restOfPath"
 			$newPath=[System.IO.Path]::Combine($clientFolder,$restOfPath)
