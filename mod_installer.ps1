@@ -334,9 +334,9 @@ function PreProcessConstsConContent($concontent) {
 
 		# null...?
 
-		# const numbers, strings...?
+		# numbers, strings...?
 		$m=[regex]::Match($line,"^\s*const\s+(\S+)\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-		If ($m.Groups.Count -ge 3) {
+		If ($m.Groups.Count -eq 3) {
 			$constNames+=,$m.Groups[1].value
 			$constValues+=,$m.Groups[2].value
 		}
@@ -344,6 +344,49 @@ function PreProcessConstsConContent($concontent) {
 			for ($i=0;$i -lt $constNames.Count;$i++) {
 				$regescconstName=[regex]::Escape($constNames[$i])
 				$line=$line -replace $regescconstName,$constValues[$i]
+			}
+		}
+
+		$content+=$line+"`r`n"
+	}
+	Return $content
+}
+
+function PreProcessVarsConContent($concontent) {
+	$varNames=$null
+	$varValues=$null
+	$bVarArrowAssignments=$null
+
+	$content=""
+	ForEach ($line in @($concontent -split "\r?\n")) {
+
+		# null...?
+
+		# numbers, strings...?
+
+		# Only variables initialized with a constant and until an operator "->" is found will be replaced by their initial value, or constant value set by "=" operator...
+
+		$m=[regex]::Match($line,"^\s*var\s+(\S+)\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		If ($m.Groups.Count -eq 3) {
+			$varNames+=,$m.Groups[1].value
+			$varValues+=,$m.Groups[2].value
+			$bVarArrowAssignments+=,$false
+		}
+		ElseIf ($null -ne $varNames) {
+			for ($i=0;$i -lt $varNames.Count;$i++) {
+				$regescvarName=[regex]::Escape($varNames[$i])
+				$m2=[regex]::Match($line,"^\s*$regescvarName\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				If ($m2.Groups.Count -eq 2) {
+					$varValues[$i]=$m2.Groups[1].value
+					$bVarArrowAssignments[$i]=$false
+				}
+				Else {
+					$m3=[regex]::Match($line,"\s*->\s*$regescvarName\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+					If ($m3.Groups.Count -eq 2) {
+						$bVarArrowAssignments[$i]=$true
+					}
+					ElseIf (!$bVarArrowAssignments[$i]) { $line=$line -replace $regescvarName,$varValues[$i] }
+				}
 			}
 		}
 
