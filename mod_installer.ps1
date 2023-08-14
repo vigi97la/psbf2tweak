@@ -34,21 +34,22 @@
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
 function ReadConFile($file) {
-	$content=""
 	If (-not (Test-Path -Path "$file")) {
 		Write-Warning "$file not found"
-		return $content
+		return ""
 	}
-	$sr=[System.IO.StreamReader]$file
-	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
-		$line=$sr.ReadLine()
-		if ($null -eq $line) {
-			break
-		}
-		$content+=$line+"`r`n"
-	}
-	$sr.close()
-	return $content
+	#$content=""
+	#$sr=[System.IO.StreamReader]$file
+	#while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+	#	$line=$sr.ReadLine()
+	#	if ($null -eq $line) {
+	#		break
+	#	}
+	#	$content+=$line+"`r`n"
+	#}
+	#$sr.close()
+	#return $content
+	Return [System.IO.File]::ReadAllLines($file)
 }
 
 #. .\mod_installer.ps1
