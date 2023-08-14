@@ -1326,12 +1326,14 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 	If ((([System.IO.FileInfo]$file).Extension -ieq ".bundledmesh") -or (([System.IO.FileInfo]$file).Extension -ieq ".skinnedmesh") -or (([System.IO.FileInfo]$file).Extension -ieq ".staticmesh")) {
 		$neededFiles=,$file
 		If (!$bDisableSharedCallsMemory) { $alreadyProcessedFiles.value+=,$file }
-		$regexpr="(objects\p{IsBasicLatin}+\.dds[^oc]|common\p{IsBasicLatin}+\.dds[^oc]|objects\p{IsBasicLatin}+\.tga[^oc]|common\p{IsBasicLatin}+\.tga[^oc])"
-		$m=[regex]::Matches(([System.IO.File]::ReadAllText($file)),$regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		$legalpathchar = "[\\/a-zA-Z\d\.\-'_\s\(\)&,%\[\];\!\$\+@~=#]"
+		$regexpr="(objects$legalpathchar+\.dds.|common$legalpathchar+\.dds.|objects$legalpathchar+\.tga.|common$legalpathchar+\.tga.)"
+		$m=[regex]::Matches(([System.IO.File]::ReadAllText($file) -creplace "[\n\r\0]"),$regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($null -ne $m) {
 			for ($i=0; $i -lt $m.Count; $i++) {
 				#"$($m[$i])"
-				$tmp=@($m[$i] -split "\.(dds|tga)[^oc]") -creplace "[\n\r\0]"
+				#""
+				$tmp=@($m[$i] -split "\.(dds|tga).")
 				#"$tmp"
 				for ($j=0; $j -lt $tmp.Count; $j+=2) {
 					If (($null -ne $tmp[$j]) -and ("" -ne $tmp[$j]) -and ($null -ne $tmp[$j+1]) -and ("" -ne $tmp[$j+1])) {
