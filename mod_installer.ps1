@@ -525,7 +525,7 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 					#Write-Warning "$line"
 
 					If ($bExpandIncludes) {
-						$sw.WriteLine((PreProcessIncludesConLine $line $file))
+						$sw.WriteLine((PreProcessIncludesConLine $line $file) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n")
 						Continue
 					}
 
@@ -559,7 +559,7 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 function PreProcessConFiles($folder) {
 	Get-ChildItem "$folder" -R -Include "*.con","*.ai" | ForEach-Object {
 		$file=$_.FullName
-		#iii=0
+		#$iii=0
 		#$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 		$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 		$sw=[System.IO.StreamWriter]"$file`preprocessed"
@@ -726,7 +726,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 				$concontent=(ReadConFile $file)
 			}
 			Else {
-				#iii=0
+				#$iii=0
 				#$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 				$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 			}
@@ -1319,7 +1319,7 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 
 	# Here we need to keep include and run statements...
 
-	#iii=0
+	#$iii=0
 	#$concontent=(PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition")# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 	$concontent=(PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine")))# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 
