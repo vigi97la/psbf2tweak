@@ -1,4 +1,4 @@
-# DO NOT USE, TEMPORARY
+# VEHICLE EXTRACTOR
 
 #. .\mod_installer.ps1
 #$modFolder="C:\tmp\mods\bf2"
@@ -10,9 +10,10 @@
 #$modFolder="C:\tmp\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-##PreProcessVehicles $extractFolder $null $true $true $true $true $true # Can be very slow (2h) for AIX2 Reality handheld weapons...
-#FindTemplate $extractFolder $null $false $true $false $false # To build a template cache
-#MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be slow (2h) for AIX2 Reality...
+#Get-ChildItem -Path $extractFolder -File -Recurse | ForEach { $_.IsReadOnly = $false }
+#PreProcessVehicles $extractFolder $null $true $true $true $true $true # To make vehicles from a mod closer to originals, can be very slow (2h) for AIX2 Reality...
+#FindTemplate $extractFolder $null $false $true $false $false # To build a template cache, can be very slow (2h) for AIX2 Reality...
+#MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be very slow (2h) for AIX2 Reality...
 ##$file="C:\tmp\mods\bf2\extracted\Objects\Vehicles\Land\jep_mec_paratrooper\jep_mec_paratrooper.con"
 ##$file="C:\tmp\mods\xpack\extracted\Objects\Vehicles\xpak_vehicles\xpak_atv\xpak_atv.con"
 #$vehicleToExtract="Objects\Vehicles\Land\fr_trk_logistics\fr_trk_logistics.con"
@@ -20,16 +21,44 @@
 ##$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
-##ListDependencies $file $extractFolder $exportFolder $true $true $false $modFolder\..\bf2\extracted $false $modFolder\..\xpack\extracted $true $false $false 16
-#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $false $false 16
-#. .\MiscFixes.ps1
-#FixVehicleType $exportFolder $true $true $true $true $true $true
-#. .\MiscTweaks.ps1
-#DontClearTeamOnExitUpdate $exportFolder 0 $true $true
-#DelayToUseUpdate $exportFolder 0 $true $true
+##ListDependencies $file $extractFolder $exportFolder $true $true $false $modFolder\..\bf2\extracted $false $modFolder\..\xpack\extracted $true $false $false 32
+#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $true $false 32 # To export the files needed by the vehicle, can be very slow (1h) for AIX2 Reality...
+#New-Item $exportFolder"\..\ve" -ItemType directory -Force | Out-Null
+#If (Test-Path -Path $exportFolder"_bf2") {
+#	SplitToServerAndClientFolders $exportFolder"_bf2" $exportFolder"_bf2"\server $exportFolder"_bf2"\client
+#	Copy-Item -Path $exportFolder"_bf2"\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#}
+#If (Test-Path -Path $exportFolder"_xpack") {
+#	SplitToServerAndClientFolders $exportFolder"_xpack" $exportFolder"_xpack"\server $exportFolder"_xpack"\client
+#	Copy-Item -Path $exportFolder"_xpack"\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#}
+#If (Test-Path -Path $exportFolder"_bf2_modified") {
+#	SplitToServerAndClientFolders $exportFolder"_bf2_modified" $exportFolder"_bf2_modified"\server $exportFolder"_bf2_modified"\client
+#	Copy-Item -Path $exportFolder"_bf2_modified"\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#}
+#If (Test-Path -Path $exportFolder"_xpack_modified") {
+#	SplitToServerAndClientFolders $exportFolder"_xpack_modified" $exportFolder"_xpack_modified"\server $exportFolder"_xpack_modified"\client
+#	Copy-Item -Path $exportFolder"_xpack_modified"\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#}
 #SplitToServerAndClientFolders $exportFolder $exportFolder\server $exportFolder\client
-#SplitToServerAndClientFolders $exportFolder"_bf2_modified" $exportFolder"_bf2_modified"\server $exportFolder"_bf2_modified"\client
-#SplitToServerAndClientFolders $exportFolder"_xpack_modified" $exportFolder"_xpack_modified"\server $exportFolder"_xpack_modified"\client
+#Copy-Item -Path $exportFolder\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#. .\MiscFixes.ps1
+#FixVehicleType $exportFolder"\..\ve" $true $true $true $true $true $true
+#. .\MiscTweaks.ps1
+#DontClearTeamOnExitUpdate $exportFolder"\..\ve" 0 $true $true
+##DelayToUseUpdate $exportFolder"\..\ve" 0 $true $true
+#& 7z a -y "$exportFolder\..\ve\veobjectsserver.zip" "$exportFolder\..\ve\server\objects\*"
+#& 7z a -y "$exportFolder\..\ve\veobjectsclient.zip" "$exportFolder\..\ve\client\objects\*"
+#& 7z a -y "$exportFolder\..\ve\vemenuserver.zip" "$exportFolder\..\ve\server\menu\*"
+#& 7z a -y "$exportFolder\..\ve\vemenuclient.zip" "$exportFolder\..\ve\client\menu\*"
+#& 7z a -y "$exportFolder\..\ve\vecommonserver.zip" "$exportFolder\..\ve\server\common\*"
+#& 7z a -y "$exportFolder\..\ve\vecommonclient.zip" "$exportFolder\..\ve\client\common\*"
+#& 7z a -y "$exportFolder\..\ve\vefontsserver.zip" "$exportFolder\..\ve\server\fonts\*"
+#& 7z a -y "$exportFolder\..\ve\vefontsclient.zip" "$exportFolder\..\ve\client\fonts\*"
+#& 7z a -y "$exportFolder\..\ve\veshadersserver.zip" "$exportFolder\..\ve\server\shaders\*"
+#& 7z a -y "$exportFolder\..\ve\veshadersclient.zip" "$exportFolder\..\ve\client\shaders\*"
+#& 7z a -y "$exportFolder\..\ve\vescriptsserver.zip" "$exportFolder\..\ve\server\scripts\*"
+#& 7z a -y "$exportFolder\..\ve\vescriptsclient.zip" "$exportFolder\..\ve\client\scripts\*"
 
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 
@@ -556,9 +585,10 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 	}
 }
 
-function PreProcessConFiles($folder) {
+function PreProcessConFiles($folder,[bool]$bShowOutput=$true) {
 	Get-ChildItem "$folder" -R -Include "*.con","*.ai" | ForEach-Object {
 		$file=$_.FullName
+		If ($bShowOutput) { Write-Output "$file" }
 		#$iii=0
 		#$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
 		$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
@@ -1158,7 +1188,7 @@ function MergeTemplateMultipleDefinitions($extractedFolder,[bool]$bShowOutput=$t
 
 $callStackCounterFindTemplateDependencies=[int]0
 #$alreadyProcessedTemplateNamesFindTemplateDependencies=$null # How to reset it properly when there are multiple function calls...?
-function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$bUseCache=$true,[int]$maxDependencyLevel=16,[ref]$alreadyProcessedTemplateNames) {
+function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$bUseCache=$true,[int]$maxDependencyLevel=32,[ref]$alreadyProcessedTemplateNames) {
 
 	$callStackCounterFindTemplateDependencies++
 	#Write-Host "Begin FindTemplateDependencies $searchedTemplateName" -ForegroundColor Magenta
@@ -1242,10 +1272,10 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 	return $neededFiles
 }
 
-#FindFileDependencies $extractFolder $file $true 16 $false
+#FindFileDependencies $extractFolder $file $true 32 $false
 $callStackCounterFindFileDependencies=[int]0
 $alreadyProcessedFilesFindFileDependencies=$null # How to reset it properly when there are multiple function calls...?
-function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int]$maxDependencyLevel=16,[bool]$bDisableSharedCallsMemory=$true,[ref]$alreadyProcessedFiles=([ref]$alreadyProcessedFilesFindFileDependencies)) {
+function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int]$maxDependencyLevel=32,[bool]$bDisableSharedCallsMemory=$true,[ref]$alreadyProcessedFiles=([ref]$alreadyProcessedFilesFindFileDependencies)) {
 
 	$callStackCounterFindFileDependencies++
 	#Write-Host "Begin FindFileDependencies $file" -ForegroundColor Magenta
@@ -1487,7 +1517,7 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 # $extractedFolder should correspond to the mod where the vehicle comes from, while $bf2ExtractedFolder can be set to the mod where the vehicle should be used (which is typically standard bf2 without modifications).
 # If $bf2ExtractedFolder is set, the vehicle dependencies will be split in separate folders, typically "export" folder for the dependencies that are not available in $bf2ExtractedFolder, "export_bf2" folder for those that are already in $bf2ExtractedFolder, "export_bf2_modified" folder for those that are modifications of existing files in $bf2ExtractedFolder. The files in "export_bf2_modified" folder might need to be manually modified since they might break existing functionalities in $bf2ExtractedFolder.
 # $xpackExtractedFolder is for advanced use, to get more details on where the different dependencies come from.
-function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessVehicles=$true,[bool]$bAllowExtraFiles=$true,[bool]$bAlwaysCopyContainingFolder=$true,[int]$maxDependencyLevel=16) {
+function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessVehicles=$true,[bool]$bAllowExtraFiles=$true,[bool]$bAlwaysCopyContainingFolder=$true,[int]$maxDependencyLevel=32) {
 
 	If (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (extractedFolder)"
