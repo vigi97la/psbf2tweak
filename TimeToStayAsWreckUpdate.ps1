@@ -4,7 +4,7 @@ function TimeToStayAsWreckUpdate($objectsFolder, [int]$time=10, [bool]$bIncludeS
 		$bVehicle=[regex]::Match($_.FullName, "(.*Vehicles.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
 		$bStationaryWeapon=[regex]::Match($_.FullName, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
 		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
-			$regexpr="(?<=ObjectTemplate.armor.timeToStayAsWreck)(\s+)(-?\d+)"
+			$regexpr="(?<=ObjectTemplate.armor.timeToStayAsWreck)(\s+)([+-]?(\d*\.)?\d+)"
 			$m=[regex]::Match((Get-Content $_.FullName), $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 			If ($m.Success) {
 				$val=[int]($m.Groups[2].value)
