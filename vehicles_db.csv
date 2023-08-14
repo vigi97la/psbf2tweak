@@ -111,6 +111,7 @@ uaz_technical;3;;MEC,MECSF,Spetz,Chinsurgent,MEInsurgent;0;;0;0;0;0;0;0;0;1;0;0;
 usapc_m2a3;1;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;bots might not use correctly HJ8 unless Coaxial_mg_mec/Coaxial_browning is disabled?;https://www.moddb.com/games/battlefield-2/addons/usapc-m2a3;
 ustank_m1a3;0;;US,SEAL,EU,SAS;0;;0;0;0;0;0;0;0;1;1;0;0;0;0;0;;;;
 P4_ASPIC;3;;EU;0;;0;0;0;0;0;0;0;0;1;0;1;0;0;1;;wrong missile a.t.m.;;https://en.wikipedia.org/wiki/Peugeot_P4
+fr_trk_logistics;3;;EU;1;;0;0;0;0;0;0;0;0;0;0;0;0;0;1;;;;
 fr_apc_vab;3;;EU;1;;0;0;0;0;0;0;0;0;0;1;1;0;0;1;;;;https://en.wikipedia.org/wiki/V%C3%A9hicule_de_l%27Avant_Blind%C3%A9
 VBCI;1.2;;EU;0;;0;0;0;0;0;0;0;1;0;1;0;0;0;1;;;;https://en.wikipedia.org/wiki/VBCI
 fr_tnk_amx10rc_bf2;1;;EU;1;;0;0;0;0;0;0;0;1;1;1;0;0;0;1;;;;https://en.wikipedia.org/wiki/AMX-10_RC
