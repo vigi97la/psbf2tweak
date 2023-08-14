@@ -1136,26 +1136,50 @@ function MergeTemplateMultipleDefinitions($extractedFolder,[bool]$bShowOutput=$t
 				$tmpTemplateType=$templateTypeList[$j]
 				$tmpTemplateChildren=$templateChildrenList[$j]
 				$tmpTemplateFiles=$templateFilesList[$j]
+				$bAddTmpTemplateFirst=$false
 				If ($templateType -ine $tmpTemplateType) {
 					Write-Warning "Multiple definitions of $templateName with a different type ($templateType vs. $tmpTemplateType)"
-					$templateType=$tmpTemplateType
+					If (($templateType -ieq "ObjectTemplate") -or ($templateType -ieq "aiTemplate") -or ($templateType -ieq "weaponTemplate")) {
+						$bAddTmpTemplateFirst=$true
+						$templateType=$tmpTemplateType
+					}
 				}
 				Else {
 					If ($bShowOutput) { Write-Output "Multiple definitions of $templateType $templateName" }
 				}
 				If (($null -ne $tmpTemplateChildren) -and ("" -ne $tmpTemplateChildren)) {
-					for ($k=0; $k -lt $tmpTemplateChildren.Count; $k++) {
-						$tmpTemplateChild=$tmpTemplateChildren[$k]
-						If (-not (($null -ne $templateChildren) -and ($templateChildren -icontains $tmpTemplateChild))) {
-							$templateChildren+=,$tmpTemplateChild
+					If ($bAddTmpTemplateFirst) {
+						for ($k=$tmpTemplateChildren.Count-1; $k -ge 0; $k--) {
+							$tmpTemplateChild=$tmpTemplateChildren[$k]
+							If (-not (($null -ne $templateChildren) -and ($templateChildren -icontains $tmpTemplateChild))) {
+								$templateChildren=(,$tmpTemplateChild)+$templateChildren
+							}
+						}
+					}
+					Else {
+						for ($k=0; $k -lt $tmpTemplateChildren.Count; $k++) {
+							$tmpTemplateChild=$tmpTemplateChildren[$k]
+							If (-not (($null -ne $templateChildren) -and ($templateChildren -icontains $tmpTemplateChild))) {
+								$templateChildren+=,$tmpTemplateChild
+							}
 						}
 					}
 				}
 				If (($null -ne $tmpTemplateFiles) -and ("" -ne $tmpTemplateFiles)) {
-					for ($k=0; $k -lt $tmpTemplateFiles.Count; $k++) {
-						$tmpTemplateFile=$tmpTemplateFiles[$k]
-						If (-not (($null -ne $templateFiles) -and ($templateFiles -icontains $tmpTemplateFile))) {
-							$templateFiles+=,$tmpTemplateFile
+					If ($bAddTmpTemplateFirst) {
+						for ($k=$tmpTemplateFiles.Count-1; $k -ge 0; $k--) {
+							$tmpTemplateFile=$tmpTemplateFiles[$k]
+							If (-not (($null -ne $templateFiles) -and ($templateFiles -icontains $tmpTemplateFile))) {
+								$templateFiles=(,$tmpTemplateFile)+$templateFiles
+							}
+						}
+					}
+					Else {
+						for ($k=0; $k -lt $tmpTemplateFiles.Count; $k++) {
+							$tmpTemplateFile=$tmpTemplateFiles[$k]
+							If (-not (($null -ne $templateFiles) -and ($templateFiles -icontains $tmpTemplateFile))) {
+								$templateFiles+=,$tmpTemplateFile
+							}
 						}
 					}
 				}
