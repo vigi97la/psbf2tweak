@@ -10,15 +10,16 @@
 #$modFolder="C:\tmp\mods\aix2_reality"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
+## Should apply patches if any...
 #Get-ChildItem -Path $extractFolder -File -Recurse | ForEach { $_.IsReadOnly = $false }
-#PreProcessVehicles $extractFolder $null $true $true $true $true $true # To make vehicles from a mod closer to originals, can be very slow (2h) for AIX2 Reality...
+##PreProcessTweakFiles $extractFolder $null $true $false # To make vehicle, weapons, projectiles .tweak from a mod closer to originals, can be slow (30 min) for AIX2 Reality...
 #FindTemplate $extractFolder $null $false $true $false $false # To build a template cache, can be very slow (2h) for AIX2 Reality...
 #MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be very slow (2h) for AIX2 Reality...
 ##$file="C:\tmp\mods\bf2\extracted\Objects\Vehicles\Land\jep_mec_paratrooper\jep_mec_paratrooper.con"
 ##$file="C:\tmp\mods\xpack\extracted\Objects\Vehicles\xpak_vehicles\xpak_atv\xpak_atv.con"
 #$vehicleToExtract="Objects\Vehicles\Land\fr_trk_logistics\fr_trk_logistics.con"
 ##$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
-##$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc.con" # Then also for fr_tnk_leclerc_bf2...
+##$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc_bf2"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
 ##ListDependencies $file $extractFolder $exportFolder $true $true $false $modFolder\..\bf2\extracted $false $modFolder\..\xpack\extracted $true $false $false 32
@@ -549,9 +550,9 @@ function GetFileRunConLine($line, $file) {
 	}
 }
 
-#. .\mod_installer.ps1
-#$vehicleToExtract="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\aix2_reality\objects_server\Vehicles\Land\fr_apc_vab"
-#PreProcessVehicles $vehicleToExtract $null $false $true $true $true $true
+#
+#DEPRECATED: Use PreProcessTweakFiles to get files closer to original Battlefield 2...
+#
 function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeStationaryWeapons=$false,[bool]$bIncludeAll=$false,[bool]$bExpandIncludes=$true,[bool]$bOverwrite=$false,[bool]$bShowOutput=$true) {
 
 	If (($null -ne $outputFolder) -and ("" -ne $outputFolder)) {
@@ -615,6 +616,38 @@ function PreProcessVehicles($objectsFolder,$outputFolder=$null,[bool]$bIncludeSt
 					Move-Item -Path "$file.tmp" -Destination $file -Force
 				}
 			}
+		}
+	}
+}
+
+function PreProcessTweakFiles($objectsFolder,$outputFolder=$null,[bool]$bOverwrite=$false,[bool]$bShowOutput=$true) {
+	If (($null -ne $outputFolder) -and ("" -ne $outputFolder)) {
+		New-Item "$outputFolder" -ItemType directory -Force | Out-Null
+	}
+	Get-ChildItem "$objectsFolder" -R -Include "*.tweak","*.ai","*.inc" | ForEach-Object {
+		$file=$_.FullName
+		If ($bShowOutput) { Write-Output "$file" }
+		$concontent=(PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (ReadConFile $file))) $file) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		$sw=[System.IO.StreamWriter]"$file.tmp"
+		$sw.Write($concontent)
+		$sw.close()
+		If (($null -ne $outputFolder) -and ("" -ne $outputFolder)) {
+			# Should remove $objectsFolder from the path in $file and add the rest at the end of the desired folder...
+			If ($objectsFolder -ieq $file) { $regesc=[regex]::Escape(([System.IO.FileInfo]$objectsFolder).DirectoryName) }
+			Else { $regesc=[regex]::Escape($objectsFolder) }
+			$m=[regex]::Match($file, "$regesc\\?(.+)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			$restOfPath=$m.Groups[1].value
+			#"$restOfPath"
+			$outputFile=[System.IO.Path]::Combine($outputFolder,$restOfPath)
+			#"$outputFile"
+			New-Item ([System.IO.FileInfo]$outputFile).DirectoryName -ItemType directory -Force | Out-Null
+			Move-Item -Path "$file.tmp" -Destination $outputFile -Force
+		}
+		If ($bOverwrite) {
+			If (-not (Test-Path -Path "$file.bak")) {
+				Move-Item -Path $file -Destination "$file.bak" -Force
+			}
+			Move-Item -Path "$file.tmp" -Destination $file -Force
 		}
 	}
 }
@@ -1577,7 +1610,7 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 # $extractedFolder should correspond to the mod where the vehicle comes from, while $bf2ExtractedFolder can be set to the mod where the vehicle should be used (which is typically standard bf2 without modifications).
 # If $bf2ExtractedFolder is set, the vehicle dependencies will be split in separate folders, typically "export" folder for the dependencies that are not available in $bf2ExtractedFolder, "export_bf2" folder for those that are already in $bf2ExtractedFolder, "export_bf2_modified" folder for those that are modifications of existing files in $bf2ExtractedFolder. The files in "export_bf2_modified" folder might need to be manually modified since they might break existing functionalities in $bf2ExtractedFolder.
 # $xpackExtractedFolder is for advanced use, to get more details on where the different dependencies come from.
-function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessVehicles=$true,[bool]$bAllowExtraFiles=$true,[bool]$bAlwaysCopyContainingFolder=$true,[int]$maxDependencyLevel=32) {
+function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUseCache=$true,[bool]$bHideDefinitionsInCurrentConOrTweak=$true,[bool]$bHideDefinitionsInBf2=$false,$bf2ExtractedFolder=$null,[bool]$bHideDefinitionsInXpack=$false,$xpackExtractedFolder=$null,[bool]$bPreProcessTweakFiles=$true,[bool]$bAllowExtraFiles=$true,[bool]$bAlwaysCopyContainingFolder=$true,[int]$maxDependencyLevel=32) {
 
 	If (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (extractedFolder)"
@@ -1697,8 +1730,8 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								#"$exportNeededDirectory"
 								New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 								Copy-Item -Path $neededDirectory\..\* -Destination $exportNeededDirectory -Force -Recurse
-								If ($bPreProcessVehicles) {
-									PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false $false
+								If ($bPreProcessTweakFiles) {
+									PreProcessTweakFiles $neededDirectory $exportNeededDirectory $false $false
 								}
 							}
 							ElseIf ($bAllowExtraFiles -and ($bAlwaysCopyContainingFolder -or ((Get-Item $neededDirectory).Basename -ieq (Get-Item $neededFile).Basename))) {
@@ -1709,8 +1742,8 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 								#"$exportNeededDirectory"
 								New-Item "$exportNeededDirectory" -ItemType directory -Force | Out-Null
 								Copy-Item -Path $neededDirectory\* -Destination $exportNeededDirectory -Force -Recurse
-								If ($bPreProcessVehicles) {
-									PreProcessVehicles $neededDirectory $exportNeededDirectory $true $true $true $false $false
+								If ($bPreProcessTweakFiles) {
+									PreProcessTweakFiles $neededDirectory $exportNeededDirectory $false $false
 								}
 							}
 							Else {
@@ -1731,8 +1764,8 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 									$exportNeededDirectory=([System.IO.FileInfo]$exportNeededFile).DirectoryName
 									New-Item $exportNeededDirectory -ItemType directory -Force | Out-Null
 									Copy-Item -Path $nf -Destination $exportNeededFile -Force -Recurse
-									If ($bPreProcessVehicles) {
-										PreProcessVehicles $nf $exportNeededDirectory $true $true $true $false $false
+									If ($bPreProcessTweakFiles) {
+										PreProcessTweakFiles $nf $exportNeededDirectory $false $false
 									}
 								}
 							}
