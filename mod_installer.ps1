@@ -204,11 +204,13 @@ function cbInsideFalseCondition($concontent, $i, $line, $params) {
 #PreProcessIfConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleapc.tweak") ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition"
 function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOtherCode, $cbInsideTrueCondition, $cbInsideFalseCondition) {
 	$content=""
-	$ifregexpr="^\s*if\s*"
-	$ifcondregexpr="^\s*if\s+(\S*)\s*==\s*(\S*)\s*"
-	#$ifcondregexpr=[regex]::new("^\s*if\s+(\S*)\s*==\s*(\S*)\s*","Compiled, IgnoreCase, CultureInvariant")
-	$elseIfregexpr="^\s*elseIf\s*"
-	$elseIfcondregexpr="^\s*elseIf\s+(\S*)\s*==\s*(\S*)\s*"
+	$ifregexpr="^\s*if\s+"
+	#$ifeqregexpr=[regex]::new("^\s*if\s+(\S*)\s*==\s*(\S*)\s*","Compiled, IgnoreCase, CultureInvariant")
+	$ifeqregexpr="^\s*if\s+(\S*)\s*==\s*(\S*)\s*"
+	$ifneregexpr="^\s*if\s+(\S*)\s*!=\s*(\S*)\s*"
+	$elseifregexpr="^\s*elseIf\s+"
+	$elseifeqregexpr="^\s*elseIf\s+(\S*)\s*==\s*(\S*)\s*"
+	$elseifneregexpr="^\s*elseIf\s+(\S*)\s*!=\s*(\S*)\s*"
 	$elseregexpr="^\s*else\s*"
 	$endifregexpr="^\s*endIf\s*"
 	$bInsideCondition=$false
@@ -219,8 +221,8 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 		$line=$lines[$i.value]
 
 		if ($bInsideCondition) {
-			$m=[regex]::Match($line, $elseIfcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-			if (($m.Groups.Count -eq 3)) {
+			$m=[regex]::Match($line, $elseifeqregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if ($m.Groups.Count -eq 3) {
 
 				$params=$content
 				$content=& $cbConditionCode $concontent $i.value $line $params
@@ -230,6 +232,22 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 					Continue
 				}
 				if ((-not $bFoundTrueCondition) -and ($m.Groups[1].value -ieq $m.Groups[2].value)) {
+					$bInsideTrueCondition=$true
+					$bFoundTrueCondition=$true
+				}
+				Continue
+			}
+			$m=[regex]::Match($line, $elseifneregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+			if ($m.Groups.Count -eq 3) {
+
+				$params=$content
+				$content=& $cbConditionCode $concontent $i.value $line $params
+
+				if ($bInsideTrueCondition) {
+					$bInsideTrueCondition=$false
+					Continue
+				}
+				if ((-not $bFoundTrueCondition) -and ($m.Groups[1].value -ine $m.Groups[2].value)) {
 					$bInsideTrueCondition=$true
 					$bFoundTrueCondition=$true
 				}
@@ -265,41 +283,40 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 			if ($bInsideTrueCondition) {
 
 				# If multiple conditions inside...
-				$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-				#$m=$ifcondregexpr.Match($line)
-				if (($m.Groups.Count -eq 3)) {
+				$m=[regex]::Match($line, $ifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				if ($m.Success) {
 					$contentblock=$lines | Select-Object -Index ($i.value..($lines.Count-1)) # $concontent starting at $i.value line (so it includes the if)
 					$iblock=0
 					$content+=PreProcessIfConContent $contentblock ([ref]$iblock) $cbConditionCode $cbOtherCode $cbInsideTrueCondition $cbInsideFalseCondition
 					$i.value+=($iblock-1) # Does not include the endIf that made PreProcessIfConContent return
+					Continue
 				}
-				else {
-					$params=$content
-					$content=& $cbInsideTrueCondition $concontent $i.value $line $params
-				}
+
+				$params=$content
+				$content=& $cbInsideTrueCondition $concontent $i.value $line $params
+
 			}
 			else {
 
 				# If multiple conditions inside...
-				$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-				#$m=$ifcondregexpr.Match($line)
-				if (($m.Groups.Count -eq 3)) {
+				$m=[regex]::Match($line, $ifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				if ($m.Success) {
 					$contentblock=$lines | Select-Object -Index ($i.value..($lines.Count-1)) # $concontent starting at $i.value line (so it includes the if)
 					$iblock=0
 					$content+=PreProcessIfConContent $contentblock ([ref]$iblock) $cbInsideFalseCondition $cbInsideFalseCondition $cbInsideFalseCondition $cbInsideFalseCondition
 					$i.value+=($iblock-1) # Does not include the endIf that made PreProcessIfConContent return
+					Continue
 				}
-				else {
-					$params=$content
-					$content=& $cbInsideFalseCondition $concontent $i.value $line $params
-				}
+
+				$params=$content
+				$content=& $cbInsideFalseCondition $concontent $i.value $line $params
 
 			}
 			Continue
 		}
-		$m=[regex]::Match($line, $ifcondregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-		#$m=$ifcondregexpr.Match($line)
-		if (($m.Groups.Count -eq 3)) {
+		#$m=$ifeqregexpr.Match($line)
+		$m=[regex]::Match($line, $ifeqregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if ($m.Groups.Count -eq 3) {
 
 			$params=$content
 			$content=& $cbConditionCode $concontent $i.value $line $params
@@ -313,9 +330,24 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 			}
 			Continue
 		}
+		$m=[regex]::Match($line, $ifneregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		if ($m.Groups.Count -eq 3) {
+
+			$params=$content
+			$content=& $cbConditionCode $concontent $i.value $line $params
+
+			$bInsideCondition=$true
+			$bInsideTrueCondition=$false
+			$bFoundTrueCondition=$false
+			if ($m.Groups[1].value -ine $m.Groups[2].value) {
+				$bInsideTrueCondition=$true
+				$bFoundTrueCondition=$true
+			}
+			Continue
+		}
 
 		# If multiple conditions inside...
-		If ([regex]::Match($line, $elseIfregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Groups.Count -eq 3) {
+		If ([regex]::Match($line, $elseifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
 			break
 		}
 		elseIf ([regex]::Match($line, $elseregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
@@ -324,10 +356,9 @@ function PreProcessIfConContent($concontent, [ref]$i, $cbConditionCode, $cbOther
 		elseIf ([regex]::Match($line, $endifregexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
 			break
 		}
-		else {
-			$params=$content
-			$content=& $cbOtherCode $concontent $i.value $line $params
-		}
+
+		$params=$content
+		$content=& $cbOtherCode $concontent $i.value $line $params
 
 	}
 	return $content
