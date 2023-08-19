@@ -128,7 +128,7 @@ function cbOutsideCommentLine($concontent, $i, $line, $params) {
 }
 
 #. .\mod_installer.ps1
-#(PreProcessCommentsConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleparams.con") "cbInsideCommentLine" "cbOutsideCommentLine") -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+#(PreProcessCommentsConContent (ReadConFile "U:\Other data\Games\Battlefield 2\Personal mods\Mod DB\originals\aix2real\simpleparams.con") "cbInsideCommentLine" "cbOutsideCommentLine") -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
 function PreProcessCommentsConContent($concontent, $cbInsideCommentLine, $cbOutsideCommentLine) {
 	$content=""
 	$remregexpr="^\s*rem\s+(.*)\s*" # To skip lines beginning with a comment.
@@ -480,7 +480,7 @@ function PreProcessIncludesConLine($line, $file) {
 		$v_arg8=$m.Groups[17].value
 		$v_arg9=$m.Groups[19].value
 		$i=0
-		$includedFileContent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $includedFile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9))) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $includedFile) $includedFile)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		$includedFileContent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $includedFile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9))) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $includedFile) $includedFile)# -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
 		return $includedFileContent
 	}
 	else {
@@ -524,8 +524,8 @@ function PreProcessRunsConLine($line, $file) {
 		$v_arg8=$m.Groups[17].value
 		$v_arg9=$m.Groups[19].value
 		#$i=0
-		#$runFileContent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $runFile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9))) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $runFile) $runFile) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
-		$runFileContent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $runFile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9))) $runFile) $runFile)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		#$runFileContent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $runFile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9))) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $runFile) $runFile) -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
+		$runFileContent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $runFile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9))) $runFile) $runFile)# -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
 		return $runFileContent
 	}
 	else {
@@ -628,7 +628,7 @@ function PreProcessTweakFiles($objectsFolder,$outputFolder=$null,[bool]$bOverwri
 	Get-ChildItem "$objectsFolder" -R -Include "*.tweak","*.ai","*.inc" | ForEach-Object {
 		$file=$_.FullName
 		If ($bShowOutput) { Write-Output "$file" }
-		$concontent=(PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (ReadConFile $file))) $file) -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		$concontent=(PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (ReadConFile $file))) $file) -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
 		$sw=[System.IO.StreamWriter]"$file.tmp"
 		$sw.Write($concontent)
 		$sw.close()
@@ -658,8 +658,8 @@ function PreProcessConFiles($folder,[bool]$bShowOutput=$true) {
 		$file=$_.FullName
 		If ($bShowOutput) { Write-Output "$file" }
 		#$iii=0
-		#$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
-		$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+		#$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $file) $file)# -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
+		$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) $file) $file)# -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
 		$sw=[System.IO.StreamWriter]"$file`preprocessed"
 		$sw.Write($concontent)
 		$sw.close()
@@ -825,8 +825,8 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 			}
 			Else {
 				#$iii=0
-				#$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
-				$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) $file) $file)# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+				#$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $file) $file)# -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
+				$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) $file) $file)# -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
 			}
 
 			$lines=@($concontent -split "\r?\n")
@@ -1614,8 +1614,8 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 	# Here we need to keep include and run statements...
 
 	#$iii=0
-	#$concontent=(PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition")# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
-	$concontent=(PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine")))# -replace "\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n","`r`n"
+	#$concontent=(PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine"))) ([ref]$iii) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition")# -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
+	$concontent=(PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $file) "cbInsideCommentLine" "cbOutsideCommentLine")))# -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
 
 	$lines=@($concontent -split "\r?\n")
 	for ($i=0; $i -lt $lines.Count; $i++) {
