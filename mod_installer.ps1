@@ -14,7 +14,8 @@
 #Get-ChildItem -Path $extractFolder -File -Recurse | ForEach { $_.IsReadOnly = $false }
 ##PreProcessTweakFiles $extractFolder $null $true $false # To make vehicle, weapons, projectiles .tweak from a mod closer to originals, can be slow (30 min) for AIX2 Reality...
 #FindTemplate $extractFolder $null $false $true $false $false # To build a template cache, can be very slow (2h) for AIX2 Reality...
-#MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache to attempt to solve some problems, can be very slow (2h) for AIX2 Reality...
+#MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache, can be very slow (2h) for AIX2 Reality...
+##CorrectTemplateDefinitions $extractFolder $false $true $false # Post-processing of the template cache to attempt to correct missing files, can be very slow if auto correction is enabled...
 ##$file="C:\tmp\mods\bf2\extracted\Objects\Vehicles\Land\jep_mec_paratrooper\jep_mec_paratrooper.con"
 ##$file="C:\tmp\mods\xpack\extracted\Objects\Vehicles\xpak_vehicles\xpak_atv\xpak_atv.con"
 #$vehicleToExtract="Objects\Vehicles\Land\fr_trk_logistics\fr_trk_logistics.con"
@@ -1275,6 +1276,176 @@ function MergeTemplateMultipleDefinitions($extractedFolder,[bool]$bShowOutput=$t
 		Move-Item -Path $cachefile -Destination "$cachefile.bak" -Force
 	}
 	Move-Item -Path $tmpcachefile -Destination $cachefile -Force
+}
+
+function CorrectTemplateDefinitions($extractedFolder,[bool]$bSkipGeometryMeshesSearch=$false,[bool]$bDoNotCorrect=$false,[bool]$bShowOutput=$true) {
+
+	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
+		Write-Error "Error: Invalid parameter (objectsFolder)"
+		return
+	}
+	$cachefile="$extractedFolder\cache_db.csv"
+	if (($null -eq $cachefile) -or !(Test-Path -Path $cachefile)) {
+		Write-Error "Error: cache_db.csv not found"
+		return
+	}
+
+	$missingFilesList=$null
+	$correctedFilesList=$null
+
+	$tmpcachefile="$extractedFolder\cache_db.csv.tmp"
+
+	#$regescbackslash=[regex]::Escape("\")
+	$sr=[System.IO.StreamReader]$cachefile
+	If (!$bDoNotCorrect) { $sw=[System.IO.StreamWriter]$tmpcachefile }
+	while (($null -ne $sr) -and (-not $sr.EndOfStream)) {
+		$line=$sr.ReadLine()
+		$cols=($line -split ";")
+		$templateName=$cols[0]
+		$templateType=$cols[1]
+		$templateFile=$cols[2]
+		$templateChildren=$null
+		for ($i=2; $i -lt $cols.Count; $i++) {
+			# Detect whether it is a child or file...
+			#if ([regex]::Match($cols[$i],$regescbackslash,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success) {
+			If ($cols[$i].Contains("\")) {
+				break
+			}
+			$templateChild=$cols[$i]
+			If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
+				$templateChildren+=,$templateChild
+			}
+		}
+		$templateFiles=$null
+		for (; $i -lt $cols.Count; $i++) {
+			$templateFile=$cols[$i]
+			If (($null -ne $templateFile) -and ("" -ne $templateFile)) {
+				$templateFiles+=,$templateFile
+			}
+		}
+		$templateFile=$templateFiles[0]
+		If ($bShowOutput) { Write-Output "$templateType $templateName ($templateFile)" }
+
+		If (!$bDoNotCorrect) { $sw.Write("$templateName;$templateType") }
+		foreach ($element in $templateChildren) {
+			If (($null -ne $element) -and ("" -ne $element)) {
+				If (!$bDoNotCorrect) { $sw.Write(";$element") }
+			}
+		}
+		foreach ($element in $templateFiles) {
+			If (($null -ne $element) -and ("" -ne $element)) {
+				$neededFile=$element
+				$bSearch=$false
+				# Sometimes textures might not have the correct extension...
+				# Also, FindTemplate has some limitations...
+				# Otherwise, maybe there is a problem in the mod files...
+				If (!(Test-Path -Path $neededFile)) {
+					$origNeededFile=$neededFile
+					If ($bDoNotCorrect -or ($bSkipGeometryMeshesSearch -and ((([System.IO.FileInfo]$neededFile).Extension -ieq ".bundledmesh") -or (([System.IO.FileInfo]$neededFile).Extension -ieq ".skinnedmesh") -or (([System.IO.FileInfo]$neededFile).Extension -ieq ".staticmesh")))) {
+						Write-Warning "$neededFile might have wrong path, name or extension"
+					}
+					Else {
+						$bSearch=$true
+						for ($i=0;$i -lt $missingFilesList.Count;$i++) {
+							If ($origNeededFile -ieq $missingFilesList[$i]) {
+								$bSearch=$false
+								If ($missingFilesList[$i] -ieq $correctedFilesList[$i]) {
+									Write-Error "Error: $origNeededFile not found"
+									break
+								}
+								$neededFile=$correctedFilesList[$i]
+								$element=$neededFile
+								break
+							}
+						}
+					}
+				}
+				If ($bSearch) {
+					If ((([System.IO.FileInfo]$origNeededFile).Extension -ieq ".tga") -or (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".dds")) {
+						$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".dds")
+						If (!(Test-Path -Path $neededFile)) {
+							Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+								$neededFile=$_.FullName
+							}
+							If (!(Test-Path -Path $neededFile)) {
+								$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".tga")
+								Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+									$neededFile=$_.FullName
+								}
+							}
+						}
+					}
+					ElseIf ((([System.IO.FileInfo]$origNeededFile).Extension -ieq ".ogg") -or (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".wav")) {
+						$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".wav")
+						If (!(Test-Path -Path $neededFile)) {
+							Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+								$neededFile=$_.FullName
+							}
+							If (!(Test-Path -Path $neededFile)) {
+								$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".ogg")
+								Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+									$neededFile=$_.FullName
+								}
+							}
+						}
+					}
+					ElseIf (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".collisionmesh") {
+						Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+							$neededFile=$_.FullName
+						}
+					}
+					ElseIf ((([System.IO.FileInfo]$origNeededFile).Extension -ieq ".bundledmesh") -or (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".skinnedmesh") -or (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".staticmesh")) {
+						$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".bundledmesh")
+						If (!(Test-Path -Path $neededFile)) {
+							Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+								$neededFile=$_.FullName
+							}
+							If (!(Test-Path -Path $neededFile)) {
+								$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".skinnedmesh")
+								Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+									$neededFile=$_.FullName
+								}
+								If (!(Test-Path -Path $neededFile)) {
+									$neededFile=($origNeededFile -replace [regex]::Escape(([System.IO.FileInfo]$origNeededFile).Extension),".staticmesh")
+									Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+										$neededFile=$_.FullName
+									}
+								}
+							}
+						}
+					}
+					Else {
+						Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
+							$neededFile=$_.FullName
+						}
+					}
+					If (!(Test-Path -Path $neededFile)) {
+						Write-Error "Error: $origNeededFile not found"
+						$missingFilesList+=,$origNeededFile
+						$correctedFilesList+=,$origNeededFile
+					}
+					Else {
+						Write-Warning "$origNeededFile not found but $neededFile found"
+						$missingFilesList+=,$origNeededFile
+						$correctedFilesList+=,$neededFile
+						$element=$neededFile
+					}
+				}
+				If (!$bDoNotCorrect) { $sw.Write(";$element") }
+			}
+		}
+		If (!$bDoNotCorrect) { $sw.WriteLine() }
+		$templateFile=$templateFiles[0]
+	}
+	If (!$bDoNotCorrect) { $sw.close() }
+	$sr.close()
+
+	If (!$bDoNotCorrect) {
+		If (-not (Test-Path -Path "$cachefile.bak")) {
+			Move-Item -Path $cachefile -Destination "$cachefile.bak" -Force
+		}
+		Move-Item -Path $tmpcachefile -Destination $cachefile -Force
+	}
 }
 
 $callStackCounterFindTemplateDependencies=[int]0
