@@ -397,7 +397,8 @@ function PreProcessConstsConContent($concontent) {
 		# null...?
 
 		# numbers, strings...?
-		$m=[regex]::Match($line,"^\s*const\s+(\S+)\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		#$m=[regex]::Match($line,"^\s*const\s+(\S+)\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		$m=[regex]::Match($line,"^\s*const\s+(\S+)\s*=\s*(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 3) {
 			$constNames+=,$m.Groups[1].value
 			$constValues+=,$m.Groups[2].value
@@ -428,7 +429,8 @@ function PreProcessVarsConContent($concontent) {
 
 		# Only variables initialized with a constant and until an operator "->" is found will be replaced by their initial value, or constant value set by "=" operator...
 
-		$m=[regex]::Match($line,"^\s*var\s+(\S+)\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		#$m=[regex]::Match($line,"^\s*var\s+(\S+)\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+		$m=[regex]::Match($line,"^\s*var\s+(\S+)\s*=\s*(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 		If ($m.Groups.Count -eq 3) {
 			$varNames+=,$m.Groups[1].value
 			$varValues+=,$m.Groups[2].value
@@ -437,7 +439,8 @@ function PreProcessVarsConContent($concontent) {
 		ElseIf ($null -ne $varNames) {
 			for ($i=0;$i -lt $varNames.Count;$i++) {
 				$regescvarName=[regex]::Escape($varNames[$i])
-				$m2=[regex]::Match($line,"^\s*$regescvarName\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				#$m2=[regex]::Match($line,"^\s*$regescvarName\s*=\s*([+-]?([0-9]*\.)?[0-9]+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
+				$m2=[regex]::Match($line,"^\s*$regescvarName\s*=\s*(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
 				If ($m2.Groups.Count -eq 2) {
 					$varValues[$i]=$m2.Groups[1].value
 					$bVarArrowAssignments[$i]=$false
