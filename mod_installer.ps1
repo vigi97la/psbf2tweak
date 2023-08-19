@@ -1772,6 +1772,9 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 						If (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".tga") {
 							$neededFile=($origNeededFile -replace [regex]::Escape(".tga"),".dds")
 						}
+						ElseIf (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".ogg") {
+							$neededFile=($origNeededFile -replace [regex]::Escape(".ogg"),".wav")
+						}
 						ElseIf (([System.IO.FileInfo]$origNeededFile).Extension -ieq ".collisionmesh") {
 							Get-ChildItem -Path $extractedFolder -Filter ([System.IO.FileInfo]$neededFile).Name -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
 								$neededFile=$_.FullName
