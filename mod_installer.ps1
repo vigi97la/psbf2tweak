@@ -1161,14 +1161,14 @@ function MergeTemplateMultipleDefinitions($extractedFolder,[bool]$bShowOutput=$t
 				break
 			}
 			$templateChild=$cols[$i]
-			If (($null -ne $templateChild) -and ("" -ne $templateChild)) {
+			If (($null -ne $templateChild) -and ("" -ne $templateChild) -and -not (($null -ne $templateChildren) -and ($templateChildren -icontains $templateChild))) {
 				$templateChildren+=,$templateChild
 			}
 		}
 		$templateFiles=$null
 		for (; $i -lt $cols.Count; $i++) {
 			$templateFile=$cols[$i]
-			If (($null -ne $templateFile) -and ("" -ne $templateFile)) {
+			If (($null -ne $templateFile) -and ("" -ne $templateFile) -and -not (($null -ne $templateFiles) -and ($templateFiles -icontains $templateFile))) {
 				$templateFiles+=,$templateFile
 			}
 		}
