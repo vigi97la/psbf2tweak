@@ -13,7 +13,7 @@
 ## Should apply patches if any...
 #Get-ChildItem -Path $extractFolder -File -Recurse | ForEach { $_.IsReadOnly = $false }
 ##PreProcessTweakFiles $extractFolder $null $true $false # To make vehicle, weapons, projectiles .tweak from a mod closer to originals, can be slow (30 min) for AIX2 Reality...
-#FindTemplate $extractFolder $null $false $true $false $false # To build a template cache, can be very slow (2h) for AIX2 Reality...
+#FindTemplate $extractFolder $null $false $true $false # To build a template cache, can be slow (30 min) for AIX2 Reality...
 #MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache, can be very slow (2h) for AIX2 Reality...
 ##CorrectTemplateDefinitions $extractFolder $false $true $false # Post-processing of the template cache to attempt to correct missing files, can be very slow if auto correction is enabled...
 ##$file="C:\tmp\mods\bf2\extracted\Objects\Vehicles\Land\jep_mec_paratrooper\jep_mec_paratrooper.con"
@@ -764,7 +764,7 @@ function ExtractModArchives($modFolder,$extractFolder=$modFolder,[bool]$bIgnoreC
 #	[double]$psi=0
 #}
 
-function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePreProcessedConFiles=$false,[bool]$bUseCache=$true,[bool]$bShowOutput=$true,[bool]$bEnableSlowSearch=$false) {
+function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePreProcessedConFiles=$false,[bool]$bUseCache=$true,[bool]$bShowOutput=$true) {
 
 	if (($null -eq $extractedFolder) -or !(Test-Path -Path $extractedFolder)) {
 		Write-Error "Error: Invalid parameter (objectsFolder)"
@@ -916,9 +916,6 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 							$resRelPath=($resRelPaths[$j] -replace "`"","" -replace "/","\")
 							#Write-Warning "$extractedFolder\$resRelPath.dds"
 							$resFile=Join-Path $extractedFolder "$resRelPath.dds"
-							#If (!(Test-Path -Path $resFile)) {
-							#	Write-Warning "$resFile not found ($templateFile)"
-							#}
 							$templateFiles+=,$resFile
 						}
 						continue
@@ -929,18 +926,6 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 						$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "meshes") "$resRelPath.collisionmesh"
 						If (!(Test-Path -Path $resFile)) {
 							$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "..\$resRelPath\meshes") "$resRelPath.collisionmesh"
-							#If (!(Test-Path -Path $resFile)) {
-							#	Write-Warning "$resFile not found ($templateFile)"
-							#}
-						}
-						If ($bEnableSlowSearch -and !(Test-Path -Path $resFile)) {
-							Write-Warning "Attempting a slow search of $resRelPath mesh"
-							Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.collisionmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
-								$resFile=$_.FullName
-							}
-							If (!(Test-Path -Path $resFile)) {
-								Write-Warning "$resFile not found ($templateFile)"
-							}
 						}
 						$templateFiles+=,$resFile
 						continue
@@ -960,29 +945,7 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 										$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "..\$resRelPath\meshes") "$resRelPath.skinnedmesh"
 										If (!(Test-Path -Path $resFile)) {
 											$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "..\$resRelPath\meshes") "$resRelPath.staticmesh"
-											#If (!(Test-Path -Path $resFile)) {
-											#	Write-Warning "$resFile not found ($templateFile)"
-											#}
 										}
-									}
-								}
-							}
-						}
-						If ($bEnableSlowSearch -and !(Test-Path -Path $resFile)) {
-							Write-Warning "Attempting a slow search of $resRelPath mesh"
-							Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.bundledmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
-								$resFile=$_.FullName
-							}
-							If (!(Test-Path -Path $resFile)) {
-								Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.skinnedmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
-									$resFile=$_.FullName
-								}
-								If (!(Test-Path -Path $resFile)) {
-									Get-ChildItem -Path $extractedFolder -Filter "$resRelPath.staticmesh" -Recurse -ErrorAction SilentlyContinue -Force | ForEach-Object {
-										$resFile=$_.FullName
-									}
-									If (!(Test-Path -Path $resFile)) {
-										Write-Warning "$resFile not found ($templateFile)"
 									}
 								}
 							}
@@ -1007,9 +970,6 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 								# Don't know what to do with variables...
 								continue
 							}
-							If (!(Test-Path -Path $resFile)) {
-								Write-Warning "$resFile not found ($templateFile)"
-							}
 							$templateFiles+=,$resFile
 						}
 						continue
@@ -1026,9 +986,6 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 								Write-Warning "Unexpected Icon: $resRelPath ($templateFile)"
 								continue
 							}
-							#If (!(Test-Path -Path $resFile)) {
-							#	Write-Warning "$resFile not found ($templateFile)"
-							#}
 							$templateFiles+=,$resFile
 						}
 						continue
@@ -1464,7 +1421,7 @@ function FindTemplateDependencies($extractedFolder,$searchedTemplateName,[bool]$
 		return $null
 	}
 
-	$ret=@(FindTemplate $extractedFolder $searchedTemplateName $false $bUseCache $false $false)
+	$ret=@(FindTemplate $extractedFolder $searchedTemplateName $false $bUseCache $false)
 	#Write-Warning "$ret"
 	If (($null -eq $ret) -or ("" -eq $ret)) {
 		$callStackCounterFindTemplateDependencies--
@@ -1773,7 +1730,7 @@ function FindFileDependencies($extractedFolder,$file,[bool]$bUseCache=$true,[int
 #$modFolder="U:\Progs\EA Games\Battlefield 2 AIX2 Reality\mods\xpack"
 #$extractFolder="$modFolder\extracted"
 #ExtractModArchives $modFolder $extractFolder $false $false 1
-#FindTemplate $extractFolder $null $false $true $false $false
+#FindTemplate $extractFolder $null $false $true $false
 #$vehicleToExtract="Objects\Vehicles\Land\aav_tunguska\aav_tunguska.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
