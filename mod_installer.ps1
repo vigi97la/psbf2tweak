@@ -984,6 +984,9 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 							$resFile=Join-Path "$extractedFolder\Menu\HUD\Texture" $resRelPath
 							If ((([System.IO.FileInfo]$resFile).Extension -ine ".dds") -and (([System.IO.FileInfo]$resFile).Extension -ine ".tga")) {
 								Write-Warning "Unexpected Icon: $resRelPath ($templateFile)"
+								If (([System.IO.FileInfo]$resFile).Extension -ieq "") {
+									$resFile=Join-Path "$extractedFolder\Menu\HUD\Texture" "$resRelPath.tga"
+								}
 								continue
 							}
 							$templateFiles+=,$resFile
