@@ -693,7 +693,7 @@ function ExtractModArchivesConFile($archivesConFile,$extractFolder,[bool]$bIgnor
 	# First lines have more priority over the last in ServerArchives.con?
 
 	$archiveregexpr="^\s*fileManager.mountArchive\s+(.+)`\.zip\s+(.+)\s*"
-	$concontent=(PreProcessIncludesConContent (ReadConFile $archivesConFile) $archivesConFile)
+	$concontent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessCommentsConContent (ReadConFile $archivesConFile) "cbInsideCommentLine" "cbOutsideCommentLine"))) $archivesConFile) $archivesConFile) -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
 	$lines=@($concontent -split "\r?\n")
 	for ($i=$lines.Count-1; $i -ge 0; $i--) {
 		$line=$lines[$i]
