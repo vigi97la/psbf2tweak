@@ -14,11 +14,10 @@ function FixVehicleType($objectsFolder,[bool]$bUseVehiclesDB=$true,[bool]$bInclu
 		$bStationaryWeapon=[regex]::Match($file, "(.*Weapons\\stationary.*)",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant").Success
 		If (($bVehicle) -or ($bStationaryWeapon -and $bIncludeStationaryWeapons) -or ($bIncludeAll)) {
 			$bSkip=$false
-			#$regexpr="\s*ObjectTemplate.create\s+(PlayerControlObject|GenericFireArm)\s+(\S+)\s*\r?\n" # .con
-			$regexpr="\s*ObjectTemplate.activeSafe\s+(PlayerControlObject|GenericFireArm)\s+(\S+)\s*\r?\n" # .tweak
+			$regexpr="\s*ObjectTemplate.(create|active|activeSafe)\s+(PlayerControlObject|GenericFireArm)\s+(\S+)\s*\r?\n" # .tweak
 			$m=[regex]::Match(([System.IO.File]::ReadAllText($file)), $regexpr,[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
-			If ($m.Groups.Count -eq 3) {
-				$vehicleName=$m.Groups[2].value
+			If ($m.Groups.Count -eq 4) {
+				$vehicleName=$m.Groups[3].value
 			}
 			Else {
 				$bSkip=$true
