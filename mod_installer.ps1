@@ -13,37 +13,38 @@
 ## Should apply patches if any...
 #Get-ChildItem -Path $extractFolder -File -Recurse | ForEach { $_.IsReadOnly = $false }
 ##PreProcessTweakFiles $extractFolder $null $true $false # To make vehicle, weapons, projectiles .tweak from a mod closer to originals, can be slow (30 min) for AIX2 Reality...
-#FindTemplate $extractFolder $null $false $true $false # To build a template cache, can be slow (30 min) for AIX2 Reality...
-#MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache, can be very slow (2h) for AIX2 Reality...
+#FindTemplate $extractFolder $null $false $true $false # To build a template cache, can be slow (1h) for AIX2 Reality, Project Reality...
+#MergeTemplateMultipleDefinitions $extractFolder $false # Post-processing of the template cache, can be very slow (2-3h) for AIX2 Reality, Project Reality...
 ##CorrectTemplateDefinitions $extractFolder $false $true $false # Post-processing of the template cache to attempt to correct missing files, can be very slow if auto correction is enabled...
 ##$file="C:\tmp\mods\bf2\extracted\Objects\Vehicles\Land\jep_mec_paratrooper\jep_mec_paratrooper.con"
 ##$file="C:\tmp\mods\xpack\extracted\Objects\Vehicles\xpak_vehicles\xpak_atv\xpak_atv.con"
 #$vehicleToExtract="Objects\Vehicles\Land\fr_trk_logistics\fr_trk_logistics.con"
 ##$vehicleToExtract="Objects\Vehicles\Land\fr_apc_vab\fr_apc_vab.con"
-##$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc\fr_tnk_leclerc_bf2"
+##$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_amx10rc_bf2\fr_tnk_amx10rc_bf2.con"
+##$vehicleToExtract="Objects\Vehicles\Land\fr_tnk_leclerc_bf2\fr_tnk_leclerc_bf2.con"
 #$file=(Get-Item "$modFolder\extracted\$vehicleToExtract").FullName
 #$exportFolder="$modFolder\export"
 ##ListDependencies $file $extractFolder $exportFolder $true $true $false $modFolder\..\bf2\extracted $false $modFolder\..\xpack\extracted $true $false $false 32
-#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $true $false 32 # To export the files needed by the vehicle, can be very slow (1h) for AIX2 Reality...
+#ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $false $false 32 # To export the files needed by the vehicle, can be very slow (1h) for AIX2 Reality, Project Reality...
 #New-Item $exportFolder"\..\ve" -ItemType directory -Force | Out-Null
 #If (Test-Path -Path $exportFolder"_bf2") {
 #	SplitToServerAndClientFolders $exportFolder"_bf2" $exportFolder"_bf2"\server $exportFolder"_bf2"\client
-#	Copy-Item -Path $exportFolder"_bf2"\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#	Copy-Item -Path $exportFolder"_bf2"\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #}
 #If (Test-Path -Path $exportFolder"_xpack") {
 #	SplitToServerAndClientFolders $exportFolder"_xpack" $exportFolder"_xpack"\server $exportFolder"_xpack"\client
-#	Copy-Item -Path $exportFolder"_xpack"\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#	Copy-Item -Path $exportFolder"_xpack"\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #}
 #If (Test-Path -Path $exportFolder"_bf2_modified") {
 #	SplitToServerAndClientFolders $exportFolder"_bf2_modified" $exportFolder"_bf2_modified"\server $exportFolder"_bf2_modified"\client
-#	Copy-Item -Path $exportFolder"_bf2_modified"\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#	Copy-Item -Path $exportFolder"_bf2_modified"\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #}
 #If (Test-Path -Path $exportFolder"_xpack_modified") {
 #	SplitToServerAndClientFolders $exportFolder"_xpack_modified" $exportFolder"_xpack_modified"\server $exportFolder"_xpack_modified"\client
-#	Copy-Item -Path $exportFolder"_xpack_modified"\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#	Copy-Item -Path $exportFolder"_xpack_modified"\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #}
 #SplitToServerAndClientFolders $exportFolder $exportFolder\server $exportFolder\client
-#Copy-Item -Path $exportFolder\* -Destination $exportFolder"\..\ve" -Force -Recurse
+#Copy-Item -Path $exportFolder\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #. .\MiscFixes.ps1
 #FixVehicleType $exportFolder"\..\ve" $true $true $true $true $true $true
 #. .\MiscTweaks.ps1
