@@ -28,22 +28,22 @@
 #ListDependencies $file $extractFolder $exportFolder $true $true $true $modFolder\..\bf2\extracted $true $modFolder\..\xpack\extracted $true $false $false 32 # To export the files needed by the vehicle, can be very slow (1h) for AIX2 Reality, Project Reality...
 #New-Item $exportFolder"\..\ve" -ItemType directory -Force | Out-Null
 #If (Test-Path -Path $exportFolder"_bf2") {
-#	SplitToServerAndClientFolders $exportFolder"_bf2" $exportFolder"_bf2"\server $exportFolder"_bf2"\client
+#	SplitToServerAndClientFolders $exportFolder"_bf2" $exportFolder"_bf2"\server $exportFolder"_bf2"\client $true
 #	Copy-Item -Path $exportFolder"_bf2"\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #}
 #If (Test-Path -Path $exportFolder"_xpack") {
-#	SplitToServerAndClientFolders $exportFolder"_xpack" $exportFolder"_xpack"\server $exportFolder"_xpack"\client
+#	SplitToServerAndClientFolders $exportFolder"_xpack" $exportFolder"_xpack"\server $exportFolder"_xpack"\client $true
 #	Copy-Item -Path $exportFolder"_xpack"\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #}
 #If (Test-Path -Path $exportFolder"_bf2_modified") {
-#	SplitToServerAndClientFolders $exportFolder"_bf2_modified" $exportFolder"_bf2_modified"\server $exportFolder"_bf2_modified"\client
+#	SplitToServerAndClientFolders $exportFolder"_bf2_modified" $exportFolder"_bf2_modified"\server $exportFolder"_bf2_modified"\client $true
 #	Copy-Item -Path $exportFolder"_bf2_modified"\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #}
 #If (Test-Path -Path $exportFolder"_xpack_modified") {
-#	SplitToServerAndClientFolders $exportFolder"_xpack_modified" $exportFolder"_xpack_modified"\server $exportFolder"_xpack_modified"\client
+#	SplitToServerAndClientFolders $exportFolder"_xpack_modified" $exportFolder"_xpack_modified"\server $exportFolder"_xpack_modified"\client $true
 #	Copy-Item -Path $exportFolder"_xpack_modified"\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #}
-#SplitToServerAndClientFolders $exportFolder $exportFolder\server $exportFolder\client
+#SplitToServerAndClientFolders $exportFolder $exportFolder\server $exportFolder\client $true
 #Copy-Item -Path $exportFolder\* -Destination $exportFolder"\..\ve" -Exclude *.bak -Force -Recurse
 #. .\MiscFixes.ps1
 #FixVehicleType $exportFolder"\..\ve" $true $true $true $true $true $true
@@ -1917,7 +1917,7 @@ function ListDependencies($file,$extractedFolder,$exportFolder=$null,[bool]$bUse
 
 #. .\mod_installer.ps1
 #SplitToServerAndClientFolders C:\Users\Administrator\Downloads\Objects C:\Users\Administrator\Downloads\Objects_server C:\Users\Administrator\Downloads\Objects_client
-function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFolder,[bool]$bOverwrite=$false) {
+function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFolder,[bool]$bCopyInsteadOfMove=$false,[bool]$bOverwrite=$false) {
 
 	if (($null -eq $originalFolder) -or !(Test-Path -Path $originalFolder)) {
 		Write-Error "Error: Invalid parameter ($originalFolder)"
@@ -1946,10 +1946,10 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 			#"$newPath"
 			New-Item (split-path -parent $newPath) -ItemType directory -Force | Out-Null
 			If ($bOverwrite) {
-				Move-Item -Path "$file" -Destination "$newPath" -Force
+				If ($bCopyInsteadOfMove) { Copy-Item -Path "$file" -Destination "$newPath" -Force } Else { Move-Item -Path "$file" -Destination "$newPath" -Force }
 			}
 			Else {
-				Move-Item -Path "$file" -Destination "$newPath"
+				If ($bCopyInsteadOfMove) { Copy-Item -Path "$file" -Destination "$newPath" } Else { Move-Item -Path "$file" -Destination "$newPath" }
 			}
 		}
 	}
@@ -1965,10 +1965,10 @@ function SplitToServerAndClientFolders($originalFolder,$serverFolder,$clientFold
 			#"$newPath"
 			New-Item (split-path -parent $newPath) -ItemType directory -Force | Out-Null
 			If ($bOverwrite) {
-				Move-Item -Path "$file" -Destination "$newPath" -Force
+				If ($bCopyInsteadOfMove) { Copy-Item -Path "$file" -Destination "$newPath" -Force } Else { Move-Item -Path "$file" -Destination "$newPath" -Force }
 			}
 			Else {
-				Move-Item -Path "$file" -Destination "$newPath"
+				If ($bCopyInsteadOfMove) { Copy-Item -Path "$file" -Destination "$newPath" } Else { Move-Item -Path "$file" -Destination "$newPath" }
 			}
 		}
 	}
