@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 public class VehicleExtractor
 {
@@ -42,7 +43,7 @@ public class VehicleExtractor
                         break;
                     }
                     string templateChild = cols[i];
-                    if (!string.IsNullOrEmpty(templateChild) && !templateChildren.Contains(templateChild))
+                    if (!string.IsNullOrEmpty(templateChild) && !templateChildren.Contains(templateChild, StringComparer.InvariantCultureIgnoreCase))
                     {
                         templateChildren.Add(templateChild);
                     }
@@ -51,7 +52,7 @@ public class VehicleExtractor
                 for (; i < cols.Length; i++)
                 {
                     templateFile = cols[i];
-                    if (!string.IsNullOrEmpty(templateFile) && !templateFiles.Contains(templateFile))
+                    if (!string.IsNullOrEmpty(templateFile) && !templateFiles.Contains(templateFile, StringComparer.InvariantCultureIgnoreCase))
                     {
                         templateFiles.Add(templateFile);
                     }
@@ -121,7 +122,7 @@ public class VehicleExtractor
                                 for (int k = tmpTemplateChildren.Count - 1; k >= 0; k--)
                                 {
                                     string tmpTemplateChild = tmpTemplateChildren[k];
-                                    if (!templateChildren.Contains(tmpTemplateChild))
+                                    if (!templateChildren.Contains(tmpTemplateChild, StringComparer.InvariantCultureIgnoreCase))
                                     {
                                         templateChildren.Insert(0, tmpTemplateChild);
                                     }
@@ -131,7 +132,7 @@ public class VehicleExtractor
                             {
                                 foreach (string tmpTemplateChild in tmpTemplateChildren)
                                 {
-                                    if (!templateChildren.Contains(tmpTemplateChild))
+                                    if (!templateChildren.Contains(tmpTemplateChild, StringComparer.InvariantCultureIgnoreCase))
                                     {
                                         templateChildren.Add(tmpTemplateChild);
                                     }
@@ -145,7 +146,7 @@ public class VehicleExtractor
                                 for (int k = tmpTemplateFiles.Count - 1; k >= 0; k--)
                                 {
                                     string tmpTemplateFile = tmpTemplateFiles[k];
-                                    if (!templateFiles.Contains(tmpTemplateFile))
+                                    if (!templateFiles.Contains(tmpTemplateFile, StringComparer.InvariantCultureIgnoreCase))
                                     {
                                         templateFiles.Insert(0, tmpTemplateFile);
                                     }
@@ -155,7 +156,7 @@ public class VehicleExtractor
                             {
                                 foreach (string tmpTemplateFile in tmpTemplateFiles)
                                 {
-                                    if (!templateFiles.Contains(tmpTemplateFile))
+                                    if (!templateFiles.Contains(tmpTemplateFile, StringComparer.InvariantCultureIgnoreCase))
                                     {
                                         templateFiles.Add(tmpTemplateFile);
                                     }
