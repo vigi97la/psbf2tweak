@@ -929,6 +929,10 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 							$resFile=Join-Path (Join-Path ([System.IO.FileInfo]$templateFile).DirectoryName "..\$resRelPath\meshes") "$resRelPath.collisionmesh"
 						}
 						$templateFiles+=,$resFile
+						If (([System.IO.FileInfo]$resFile).Name -ine $templateName) {
+							$templateChild=([System.IO.FileInfo]$resFile).Name
+							$templateChildren+=,$templateChild
+						}
 						continue
 					}
 					$m=[regex]::Match($line, "^\s*ObjectTemplate\.geometry\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
@@ -952,6 +956,10 @@ function FindTemplate($extractedFolder,$searchedTemplateName=$null,[bool]$bUsePr
 							}
 						}
 						$templateFiles+=,$resFile
+						If (([System.IO.FileInfo]$resFile).Name -ine $templateName) {
+							$templateChild=([System.IO.FileInfo]$resFile).Name
+							$templateChildren+=,$templateChild
+						}
 						continue
 					}
 					#$m=[regex]::Match($line, "^\s*ObjectTemplate.(soundFilename|seatAnimationSystem|animationSystem|animationSystem1P|animationSystem3P|skeleton|skeleton1P|skeleton3P)\s+(\S+)\s*",[Text.RegularExpressions.RegexOptions]"IgnoreCase, CultureInvariant")
