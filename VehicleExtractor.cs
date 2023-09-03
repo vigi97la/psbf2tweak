@@ -141,7 +141,246 @@ public class VehicleExtractor
         return content;
     }
 
+    public static string PreProcessIfConContent(string concontent, ref int i, Func<string, int, string, string, string> cbConditionCode, Func<string, int, string, string, string> cbOtherCode, Func<string, int, string, string, string> cbInsideTrueCondition, Func<string, int, string, string, string> cbInsideFalseCondition)
+    {
+        string content = "";
+        string ifregexpr = "^\\s*if\\s+";
+        string ifeqregexpr = "^\\s*if\\s+(\\S*)\\s*==\\s*(\\S*)\\s*";
+        string ifneregexpr = "^\\s*if\\s+(\\S*)\\s*!=\\s*(\\S*)\\s*";
+        string elseifregexpr = "^\\s*elseIf\\s+";
+        string elseifeqregexpr = "^\\s*elseIf\\s+(\\S*)\\s*==\\s*(\\S*)\\s*";
+        string elseifneregexpr = "^\\s*elseIf\\s+(\\S*)\\s*!=\\s*(\\S*)\\s*";
+        string elseregexpr = "^\\s*else\\s*";
+        string endifregexpr = "^\\s*endIf\\s*";
+        bool bInsideCondition = false;
+        bool bInsideTrueCondition = false;
+        bool bFoundTrueCondition = false;
+        string[] lines = Regex.Split(concontent, "\\r?\\n");
+        for (i = 0; i < lines.Length; i++)
+        {
+            string line = lines[i];
+            if (bInsideCondition)
+            {
+                Match m =
+                    Regex.Match(line,
+                                elseifeqregexpr,
+                                RegexOptions.IgnoreCase |
+                                RegexOptions.CultureInvariant);
+                if (m.Groups.Count == 3)
+                {
 
+                    content =
+                        cbConditionCode(concontent,
+                                        i,
+                                        line,
+                                        content);
+
+                    if (bInsideTrueCondition)
+                    {
+                        bInsideTrueCondition = false;
+                        continue;
+                    }
+                    if ((!bFoundTrueCondition) &&
+                        (m.Groups[1].Value.Equals(m.Groups[2].Value)))
+                    {
+                        bInsideTrueCondition = true;
+                        bFoundTrueCondition = true;
+                    }
+                    continue;
+                }
+                m =
+                    Regex.Match(line,
+                                elseifneregexpr,
+                                RegexOptions.IgnoreCase |
+                                RegexOptions.CultureInvariant);
+                if (m.Groups.Count == 3)
+                {
+
+                    content =
+                        cbConditionCode(concontent,
+                                        i,
+                                        line,
+                                        content);
+
+                    if (bInsideTrueCondition)
+                    {
+                        bInsideTrueCondition = false;
+                        continue;
+                    }
+                    if ((!bFoundTrueCondition) &&
+                        (!m.Groups[1].Value.Equals(m.Groups[2].Value)))
+                    {
+                        bInsideTrueCondition = true;
+                        bFoundTrueCondition = true;
+                    }
+                    continue;
+                }
+                m =
+                    Regex.Match(line,
+                                elseregexpr,
+                                RegexOptions.IgnoreCase |
+                                RegexOptions.CultureInvariant);
+                if (m.Success)
+                {
+
+                    content =
+                        cbConditionCode(concontent,
+                                        i,
+                                        line,
+                                        content);
+
+                    if (bInsideTrueCondition)
+                    {
+                        bInsideTrueCondition = false;
+                        continue;
+                    }
+                    if (!bFoundTrueCondition)
+                    {
+                        bInsideTrueCondition = true;
+                        bFoundTrueCondition = true;
+                    }
+                    continue;
+                }
+                m =
+                    Regex.Match(line,
+                                endifregexpr,
+                                RegexOptions.IgnoreCase |
+                                RegexOptions.CultureInvariant);
+                if (m.Success)
+                {
+
+                    content =
+                        cbConditionCode(concontent,
+                                        i,
+                                        line,
+                                        content);
+
+                    bInsideCondition = false;
+                    bInsideTrueCondition = false;
+                    bFoundTrueCondition = false;
+                    continue;
+                }
+                if (bInsideTrueCondition)
+                {
+
+                    // If multiple conditions inside...
+                    m =
+                       Regex.Match(line,
+                                   ifregexpr,
+                                   RegexOptions.IgnoreCase |
+                                   RegexOptions.CultureInvariant);
+                    if (m.Success)
+                    {
+                        // Get the content block starting at the current line
+                        string[] contentBlock = new List<string>(lines).GetRange(i, lines.Length - i).ToArray();
+                        int iblock = 0;
+                        content += PreProcessIfConContent(string.Join(Environment.NewLine, contentBlock), ref iblock, cbConditionCode, cbOtherCode, cbInsideTrueCondition, cbInsideFalseCondition);
+                        i += (iblock - 1);
+                        continue;
+                    }
+
+                    content =
+                        cbInsideTrueCondition(concontent,
+                                              i,
+                                              line,
+                                              content);
+
+                }
+                else
+                {
+
+                    // If multiple conditions inside...
+                    m =
+                       Regex.Match(line,
+                                   ifregexpr,
+                                   RegexOptions.IgnoreCase |
+                                   RegexOptions.CultureInvariant);
+                    if (m.Success)
+                    {
+                        // Get the content block starting at the current line
+                        string[] contentBlock = new List<string>(lines).GetRange(i, lines.Length - i).ToArray();
+                        int iblock = 0;
+                        content += PreProcessIfConContent(string.Join(Environment.NewLine, contentBlock), ref iblock, cbInsideFalseCondition, cbInsideFalseCondition, cbInsideFalseCondition, cbInsideFalseCondition);
+                        i += (iblock - 1);
+                        continue;
+                    }
+
+                    content =
+                        cbInsideFalseCondition(concontent,
+                                               i,
+                                               line,
+                                               content);
+
+                }
+            }
+            Match m2 =
+               Regex.Match(line,
+                           ifeqregexpr,
+                           RegexOptions.IgnoreCase |
+                           RegexOptions.CultureInvariant);
+            if (m2.Groups.Count == 3)
+            {
+
+                content =
+                   cbConditionCode(concontent,
+                                   i,
+                                   line,
+                                   content);
+
+                bInsideCondition = true;
+                bInsideTrueCondition = false;
+                bFoundTrueCondition = false;
+                if (m2.Groups[1].Value.Equals(m2.Groups[2].Value))
+                {
+                    bInsideTrueCondition = true;
+                    bFoundTrueCondition = true;
+                }
+                continue;
+            }
+            m2 =
+                Regex.Match(line,
+                            ifneregexpr,
+                            RegexOptions.IgnoreCase |
+                            RegexOptions.CultureInvariant);
+            if (m2.Groups.Count == 3)
+            {
+
+                content =
+                    cbConditionCode(concontent,
+                                    i,
+                                    line,
+                                    content);
+
+                bInsideCondition = true;
+                bInsideTrueCondition = false;
+                bFoundTrueCondition = false;
+                if (!m2.Groups[1].Value.Equals(m2.Groups[2].Value))
+                {
+                    bInsideTrueCondition = true;
+                    bFoundTrueCondition = true;
+                }
+                continue;
+            }
+
+            // If multiple conditions inside...
+            if (Regex.Match(line, elseifregexpr, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant).Success)
+            {
+                break;
+            }
+            else if (Regex.Match(line, elseregexpr, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant).Success)
+            {
+                break;
+            }
+            else if (Regex.Match(line, endifregexpr, RegexOptions.IgnoreCase | RegexOptions.CultureInvariant).Success)
+            {
+                break;
+            }
+
+            content = cbOtherCode(concontent, i, line, content);
+
+        }
+        return content;
+    }
 
     public static string PreProcessArgsConContent(string concontent, string v_arg1, string v_arg2, string v_arg3, string v_arg4, string v_arg5, string v_arg6, string v_arg7, string v_arg8, string v_arg9)
     {
@@ -243,6 +482,46 @@ public class VehicleExtractor
         return content;
     }
 
+    public static string PreProcessIncludesConLine(string line, string file)
+    {
+        Match m = Regex.Match(line, @"^\s*include\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        if (m.Groups.Count >= 2)
+        {
+            string resRelPath = m.Groups[1].Value;
+            string includedFile = Path.Combine(new FileInfo(file).DirectoryName, resRelPath);
+            if (new FileInfo(includedFile).Extension.Equals("", StringComparison.OrdinalIgnoreCase))
+            {
+                includedFile = includedFile + ".con";
+            }
+            string v_arg1 = m.Groups[3].Value;
+            string v_arg2 = m.Groups[5].Value;
+            string v_arg3 = m.Groups[7].Value;
+            string v_arg4 = m.Groups[9].Value;
+            string v_arg5 = m.Groups[11].Value;
+            string v_arg6 = m.Groups[13].Value;
+            string v_arg7 = m.Groups[15].Value;
+            string v_arg8 = m.Groups[17].Value;
+            string v_arg9 = m.Groups[19].Value;
+            int i = 0;
+            string includedFileContent = PreProcessRunsConContent(PreProcessIncludesConContent(PreProcessIfConContent(PreProcessVarsConContent(PreProcessConstsConContent(PreProcessArgsConContent(PreProcessCommentsConContent(ReadConFile(includedFile), cbInsideCommentLine, cbOutsideCommentLine), v_arg1, v_arg2, v_arg3, v_arg4, v_arg5, v_arg6, v_arg7, v_arg8, v_arg9))), ref i, cbConditionCode, cbOtherCode, cbInsideTrueCondition, cbInsideFalseCondition), includedFile), includedFile);
+            return includedFileContent;
+        }
+        else
+        {
+            return line;
+        }
+    }
+
+    public static string PreProcessIncludesConContent(string concontent, string file)
+    {
+        string content = "";
+        foreach (string line in concontent.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None))
+        {
+            content += PreProcessIncludesConLine(line, file) + "\r\n";
+        }
+        return content;
+    }
+
     public static string GetFileIncludedConLine(string line, string file)
     {
         Match m =
@@ -257,6 +536,48 @@ public class VehicleExtractor
         {
             return null;
         }
+    }
+
+    public static string PreProcessRunsConLine(string line, string file)
+    {
+        Match m = Regex.Match(line, @"^\s*run\s+(\S+)(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?(\s+)?(\S+)?\s*", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        if (m.Groups.Count >= 2)
+        {
+            string resRelPath = m.Groups[1].Value.Replace("`", "").Replace("/", @"\");
+            string runFile = Path.Combine(new FileInfo(file).DirectoryName, resRelPath);
+            if (new FileInfo(runFile).Extension.Equals("", StringComparison.OrdinalIgnoreCase))
+            {
+                runFile = runFile + ".con";
+            }
+            string v_arg1 = m.Groups[3].Value;
+            string v_arg2 = m.Groups[5].Value;
+            string v_arg3 = m.Groups[7].Value;
+            string v_arg4 = m.Groups[9].Value;
+            string v_arg5 = m.Groups[11].Value;
+            string v_arg6 = m.Groups[13].Value;
+            string v_arg7 = m.Groups[15].Value;
+            string v_arg8 = m.Groups[17].Value;
+            string v_arg9 = m.Groups[19].Value;
+
+            //int i=0
+            //string runFileContent=(PreProcessRunsConContent (PreProcessIncludesConContent (PreProcessIfConContent (PreProcessVarsConContent (PreProcessConstsConContent (PreProcessArgsConContent (PreProcessCommentsConContent (ReadConFile $runFile) "cbInsideCommentLine" "cbOutsideCommentLine") $v_arg1 $v_arg2 $v_arg3 $v_arg4 $v_arg5 $v_arg6 $v_arg7 $v_arg8 $v_arg9))) ([ref]$i) "cbConditionCode" "cbOtherCode" "cbInsideTrueCondition" "cbInsideFalseCondition") $runFile) $runFile) -replace "\s*\r?\n\s*\r?\n\s*\r?\n\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n?\s*\r?\n\s*\r?\n?\s*\r?\n?","`r`n`r`n"
+            string runFileContent = PreProcessRunsConContent(PreProcessIncludesConContent(PreProcessVarsConContent(PreProcessConstsConContent(PreProcessArgsConContent(PreProcessCommentsConContent(ReadConFile(runFile), cbInsideCommentLine, cbOutsideCommentLine), v_arg1, v_arg2, v_arg3, v_arg4, v_arg5, v_arg6, v_arg7, v_arg8, v_arg9))), runFile), runFile);
+            return runFileContent;
+        }
+        else
+        {
+            return line;
+        }
+    }
+
+    public static string PreProcessRunsConContent(string concontent, string file)
+    {
+        string content = "";
+        foreach (string line in concontent.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None))
+        {
+            content += PreProcessRunsConLine(line, file) + "\r\n";
+        }
+        return content;
     }
 
     public static string GetFileRunConLine(string line, string file)
